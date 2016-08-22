@@ -5,9 +5,6 @@ package com.dfc.www.private_access.admin.backend;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.dfc.www.private_access.admin.backend.Daily_Qty_add;
-import com.dfc.www.private_access.admin.backend.final_product_balance;
-import com.dfc.www.private_access.admin.backend.Cash_Account;
 import java.awt.FlowLayout;
 
 /**
@@ -42,17 +39,19 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setLayout(null);
 
-        jButton1.setText("Product Add");
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Add Product");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(280, 90, 140, 50);
+        jButton1.setBounds(180, 20, 230, 40);
 
         jButton3.setText("Final Product Blance");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +60,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(570, 90, 140, 50);
+        jButton3.setBounds(560, 20, 140, 50);
 
         jButton2.setText("Daily Qty Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +69,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(430, 90, 130, 50);
+        jButton2.setBounds(420, 20, 130, 50);
 
         Cash.setText("Cash");
         Cash.addActionListener(new java.awt.event.ActionListener() {
@@ -79,13 +78,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Cash);
-        Cash.setBounds(720, 90, 140, 50);
+        Cash.setBounds(710, 20, 140, 50);
 
         jPanel2.setLayout(null);
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 170, 1024, 480);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Final.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/dfc_st_backgroundImage.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1030, 700);
 
@@ -93,11 +92,11 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         pack();
