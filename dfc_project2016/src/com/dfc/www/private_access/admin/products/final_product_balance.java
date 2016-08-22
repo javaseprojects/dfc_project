@@ -1,4 +1,4 @@
-package com.dfc.www.private_access.admin.backend;
+package com.dfc.www.private_access.admin.products;
 
 
 public class final_product_balance extends javax.swing.JPanel {
