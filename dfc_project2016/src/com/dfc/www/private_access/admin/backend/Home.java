@@ -1,13 +1,13 @@
-package com.dfc.www.private_access.admin.cash_account;
+package com.dfc.www.private_access.admin.backend;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.dfc.www.private_access.admin.cash_account.Daily_Qty_add;
-import com.dfc.www.private_access.admin.cash_account.final_product_balance;
-import com.dfc.www.private_access.admin.cash_account.Cash_Account;
+import com.dfc.www.private_access.admin.backend.Daily_Qty_add;
+import com.dfc.www.private_access.admin.backend.final_product_balance;
+import com.dfc.www.private_access.admin.backend.Cash_Account;
 import java.awt.FlowLayout;
 
 /**

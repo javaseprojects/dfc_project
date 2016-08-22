@@ -1,15 +1,24 @@
-package com.dfc.www.private_access.admin.cash_account;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.dfc.www.private_access.admin.backend;
+
+
+import java.sql.ResultSet;
 
 /**
  *
  * @author Buwaneka
  */
-public class Daily_Qty_add extends javax.swing.JPanel {
+public class Product extends javax.swing.JPanel {
 
     /**
      * Creates new form Test_Pannel
      */
-    public Daily_Qty_add() {
+    public Product() {
         initComponents();
     }
 
@@ -23,20 +32,32 @@ public class Daily_Qty_add extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        txtPid = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPname = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
         txtPid1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_product = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txtPid2 = new javax.swing.JTextField();
 
         jPanel1.setLayout(null);
+
+        txtPid.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPidActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPid);
+        txtPid.setBounds(160, 320, 310, 50);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Item Code :");
@@ -44,9 +65,9 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jLabel1.setBounds(30, 40, 100, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Date :");
+        jLabel2.setText("Unit Price :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 250, 120, 50);
+        jLabel2.setBounds(30, 320, 130, 50);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -58,10 +79,42 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jPanel1.add(txtPname);
         txtPname.setBounds(160, 110, 310, 50);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Category :");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(30, 180, 100, 50);
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(160, 250, 310, 50);
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 110, 130, 50);
+
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
+        jComboBox2.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox2);
+        jComboBox2.setBounds(160, 180, 310, 50);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Sub Category :");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(30, 250, 130, 50);
 
         txtPid1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,19 +128,24 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Search");
         jButton1.setPreferredSize(new java.awt.Dimension(73, 50));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
-        jButton1.setBounds(70, 390, 120, 50);
+        jButton1.setBounds(80, 390, 120, 50);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item Code", "Product name", "Category", "Sub Category", "Quantity"
+                "Item Code", "Product name", "Category", "Sub Category", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -100,30 +158,16 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jScrollPane1.setBounds(500, 40, 500, 400);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Add Quantity");
+        jButton2.setText("Add Product");
         jButton2.setPreferredSize(new java.awt.Dimension(73, 50));
         jPanel1.add(jButton2);
-        jButton2.setBounds(330, 390, 140, 50);
+        jButton2.setBounds(340, 390, 130, 50);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Update");
         jButton3.setPreferredSize(new java.awt.Dimension(73, 50));
         jPanel1.add(jButton3);
-        jButton3.setBounds(200, 390, 120, 50);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Quantity :");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 180, 130, 50);
-
-        txtPid2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPid2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPid2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPid2);
-        txtPid2.setBounds(160, 180, 310, 50);
+        jButton3.setBounds(210, 390, 120, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,32 +181,51 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPidActionPerformed
+
     private void txtPnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPnameActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void txtPid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPid1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPid1ActionPerformed
 
-    private void txtPid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPid2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPid2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_product;
+    private javax.swing.JTextField txtPid;
     private javax.swing.JTextField txtPid1;
-    private javax.swing.JTextField txtPid2;
     private javax.swing.JTextField txtPname;
     // End of variables declaration//GEN-END:variables
 }

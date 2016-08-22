@@ -240,7 +240,7 @@ public class MC_DB {
     }
 
     /////////////////////////////////////////////////////////
-    public static void main(String[] args) {
-        MC_DB.add_data_WithColumns("test","id,fname,lname,age", "5,'deeA','surA',10");
-    }
+//    public static void main(String[] args) {
+//        MC_DB.add_data_WithColumns("test","id,fname,lname,age", "5,'deeA','surA',10");
+//    }
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.dfc.www.private_access.admin.cash_account;
+package com.dfc.www.private_access.admin.backend;
 
 /**
  *
