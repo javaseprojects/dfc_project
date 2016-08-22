@@ -6,7 +6,7 @@
 
 package com.dfc.www.private_access.admin.cash_account;
 
-import com.softidea.www.public_connection.MC_DB;
+
 import java.sql.ResultSet;
 
 /**
@@ -203,9 +203,9 @@ public class Product extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        ResultSet search_dataOne = MC_DB.search_dataOne("customer", "customer_nic", "943341583V");
         
-        MC_DB.
+        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
