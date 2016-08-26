@@ -35,7 +35,7 @@ public class MC_DB {
 
         try {
 
-            input = new FileInputStream("C:\\Softidea_Creation\\db_pro.properties");
+            input = new FileInputStream("C:\\FSC\\db_pro.properties");
 
             // load a properties file
             prop.load(input);
