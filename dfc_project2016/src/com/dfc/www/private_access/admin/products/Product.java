@@ -47,6 +47,9 @@ public class Product extends javax.swing.JPanel {
         tbl_product = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
 
         jPanel1.setLayout(null);
 
@@ -57,17 +60,17 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPid);
-        txtPid.setBounds(160, 320, 310, 50);
+        txtPid.setBounds(160, 330, 310, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Item Code :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 40, 100, 50);
+        jLabel1.setBounds(30, 30, 100, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Unit Price :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 320, 130, 50);
+        jLabel2.setBounds(30, 330, 130, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -77,12 +80,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPname);
-        txtPname.setBounds(160, 110, 310, 50);
+        txtPname.setBounds(160, 90, 310, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Category :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 180, 100, 50);
+        jLabel3.setBounds(30, 150, 100, 40);
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
@@ -93,12 +96,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(160, 250, 310, 50);
+        jComboBox1.setBounds(160, 210, 310, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 110, 130, 50);
+        jLabel4.setBounds(30, 90, 130, 40);
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
@@ -109,12 +112,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(160, 180, 310, 50);
+        jComboBox2.setBounds(160, 150, 310, 40);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Sub Category :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(30, 250, 130, 50);
+        jLabel5.setBounds(30, 210, 130, 40);
 
         txtPid1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +126,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPid1);
-        txtPid1.setBounds(160, 40, 310, 50);
+        txtPid1.setBounds(160, 30, 310, 40);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Search");
@@ -141,11 +144,11 @@ public class Product extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item Code", "Product name", "Category", "Sub Category", "Price"
+                "Item Code", "Product name", "Category", "Sub Category", "Size", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -155,7 +158,7 @@ public class Product extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(500, 40, 500, 400);
+        jScrollPane1.setBounds(500, 20, 500, 440);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add Product");
@@ -168,6 +171,38 @@ public class Product extends javax.swing.JPanel {
         jButton3.setPreferredSize(new java.awt.Dimension(73, 50));
         jPanel1.add(jButton3);
         jButton3.setBounds(210, 390, 120, 50);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Size :");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(30, 270, 120, 40);
+
+        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
+        jComboBox3.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox3);
+        jComboBox3.setBounds(160, 270, 310, 40);
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(20, 20, 470, 440);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -209,6 +244,10 @@ public class Product extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -216,12 +255,15 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_product;
     private javax.swing.JTextField txtPid;

@@ -35,18 +35,19 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtPid2 = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Item Code :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 40, 100, 50);
+        jLabel1.setBounds(30, 40, 100, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Date :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 250, 120, 50);
+        jLabel2.setBounds(30, 260, 120, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -56,12 +57,12 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPname);
-        txtPname.setBounds(160, 110, 310, 50);
+        txtPname.setBounds(160, 110, 310, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 110, 130, 50);
+        jLabel4.setBounds(30, 110, 130, 40);
 
         txtPid1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +71,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPid1);
-        txtPid1.setBounds(160, 40, 310, 50);
+        txtPid1.setBounds(160, 40, 310, 40);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Search");
@@ -114,7 +115,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Quantity :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 180, 130, 50);
+        jLabel3.setBounds(30, 190, 130, 40);
 
         txtPid2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid2.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +124,9 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPid2);
-        txtPid2.setBounds(160, 180, 310, 50);
+        txtPid2.setBounds(160, 180, 310, 40);
+        jPanel1.add(jDateChooser1);
+        jDateChooser1.setBounds(160, 250, 310, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -154,6 +157,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -150,18 +150,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void CashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CashActionPerformed
-        try {
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
-            Cash_Account ca = new Cash_Account();
-            ca.setVisible(true);
-            jPanel2.add(ca);
-            jPanel2.updateUI();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        
     }//GEN-LAST:event_CashActionPerformed
 
     /**
