@@ -146,6 +146,7 @@ public class user_login extends javax.swing.JFrame {
 
         
         
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
