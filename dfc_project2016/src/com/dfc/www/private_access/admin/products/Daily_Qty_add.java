@@ -47,7 +47,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Date :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 260, 120, 40);
+        jLabel2.setBounds(30, 250, 120, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -115,7 +115,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Quantity :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 190, 130, 40);
+        jLabel3.setBounds(30, 180, 130, 40);
 
         txtPid2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid2.addActionListener(new java.awt.event.ActionListener() {
