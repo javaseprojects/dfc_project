@@ -34,6 +34,7 @@ public class Home extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         Cash = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,7 +61,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(560, 20, 140, 50);
+        jButton3.setBounds(550, 20, 130, 30);
 
         jButton2.setText("Daily Qty Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +70,16 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(420, 20, 130, 50);
+        jButton2.setBounds(420, 20, 130, 30);
+
+        jButton5.setText("Cate & Sub Category");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5);
+        jButton5.setBounds(863, 20, 150, 30);
 
         Cash.setText("Cash");
         Cash.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +88,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Cash);
-        Cash.setBounds(710, 20, 140, 50);
+        Cash.setBounds(690, 20, 120, 30);
 
         jPanel2.setLayout(null);
         jPanel1.add(jPanel2);
@@ -150,8 +160,19 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void CashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CashActionPerformed
-        
+
     }//GEN-LAST:event_CashActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        try {
+            Category_Reg cat = new Category_Reg(this, true);
+            cat.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,6 +214,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

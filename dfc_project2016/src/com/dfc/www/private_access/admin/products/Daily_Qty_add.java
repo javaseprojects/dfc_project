@@ -39,15 +39,15 @@ public class Daily_Qty_add extends javax.swing.JPanel {
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Item Code :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 40, 100, 40);
+        jLabel1.setBounds(60, 90, 100, 40);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Date :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 250, 120, 40);
+        jLabel2.setBounds(60, 300, 120, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -57,12 +57,12 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPname);
-        txtPname.setBounds(160, 110, 310, 40);
+        txtPname.setBounds(180, 160, 390, 40);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 110, 130, 40);
+        jLabel4.setBounds(60, 160, 130, 40);
 
         txtPid1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid1.addActionListener(new java.awt.event.ActionListener() {
@@ -71,13 +71,13 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPid1);
-        txtPid1.setBounds(160, 40, 310, 40);
+        txtPid1.setBounds(180, 90, 390, 40);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Search");
         jButton1.setPreferredSize(new java.awt.Dimension(73, 50));
         jPanel1.add(jButton1);
-        jButton1.setBounds(70, 390, 120, 50);
+        jButton1.setBounds(210, 390, 120, 50);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,24 +98,24 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(500, 40, 500, 400);
+        jScrollPane1.setBounds(650, 60, 680, 400);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add Quantity");
         jButton2.setPreferredSize(new java.awt.Dimension(73, 50));
         jPanel1.add(jButton2);
-        jButton2.setBounds(330, 390, 140, 50);
+        jButton2.setBounds(480, 390, 140, 50);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Update");
         jButton3.setPreferredSize(new java.awt.Dimension(73, 50));
         jPanel1.add(jButton3);
-        jButton3.setBounds(200, 390, 120, 50);
+        jButton3.setBounds(350, 390, 120, 50);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Quantity :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 180, 130, 40);
+        jLabel3.setBounds(60, 230, 130, 40);
 
         txtPid2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPid2.addActionListener(new java.awt.event.ActionListener() {
@@ -124,19 +124,19 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPid2);
-        txtPid2.setBounds(160, 180, 310, 40);
+        txtPid2.setBounds(180, 230, 390, 40);
         jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(160, 250, 310, 40);
+        jDateChooser1.setBounds(180, 300, 390, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

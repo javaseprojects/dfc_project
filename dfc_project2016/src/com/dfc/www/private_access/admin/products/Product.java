@@ -32,7 +32,7 @@ public class Product extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtPid = new javax.swing.JTextField();
+        txtBuyingPrice = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPname = new javax.swing.JTextField();
@@ -41,36 +41,38 @@ public class Product extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        txtPid1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtItemcode = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_product = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
+        txtUnitPrice = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtSellingPrice = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPanel1.setLayout(null);
 
-        txtPid.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPid.addActionListener(new java.awt.event.ActionListener() {
+        txtBuyingPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtBuyingPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPidActionPerformed(evt);
+                txtBuyingPriceActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPid);
-        txtPid.setBounds(160, 330, 310, 40);
+        jPanel1.add(txtBuyingPrice);
+        txtBuyingPrice.setBounds(170, 320, 200, 40);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Item Code :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 30, 100, 40);
+        jLabel1.setBounds(40, 170, 100, 40);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Unit Price :");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Buying Price :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 330, 130, 40);
+        jLabel2.setBounds(40, 320, 130, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -80,12 +82,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPname);
-        txtPname.setBounds(160, 90, 310, 40);
+        txtPname.setBounds(170, 220, 200, 40);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Category :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 150, 100, 40);
+        jLabel3.setBounds(40, 20, 100, 40);
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
@@ -96,12 +98,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(160, 210, 310, 40);
+        jComboBox1.setBounds(170, 70, 200, 40);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 90, 130, 40);
+        jLabel4.setBounds(40, 220, 130, 40);
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
@@ -112,43 +114,33 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(160, 150, 310, 40);
+        jComboBox2.setBounds(170, 20, 200, 40);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Sub Category :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(30, 210, 130, 40);
+        jLabel5.setBounds(40, 70, 130, 40);
 
-        txtPid1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPid1.addActionListener(new java.awt.event.ActionListener() {
+        txtItemcode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtItemcode.setEnabled(false);
+        txtItemcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPid1ActionPerformed(evt);
+                txtItemcodeActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPid1);
-        txtPid1.setBounds(160, 30, 310, 40);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setPreferredSize(new java.awt.Dimension(73, 50));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(80, 390, 120, 50);
+        jPanel1.add(txtItemcode);
+        txtItemcode.setBounds(170, 170, 200, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item Code", "Product name", "Category", "Sub Category", "Size", "Price"
+                "Category", "Sub Category", "Size", "Item Code", "Product name", "Unit Price", "Buying Price", "Selling Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -158,24 +150,12 @@ public class Product extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(500, 20, 500, 440);
+        jScrollPane1.setBounds(380, 20, 630, 460);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Add Product");
-        jButton2.setPreferredSize(new java.awt.Dimension(73, 50));
-        jPanel1.add(jButton2);
-        jButton2.setBounds(340, 390, 130, 50);
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Update");
-        jButton3.setPreferredSize(new java.awt.Dimension(73, 50));
-        jPanel1.add(jButton3);
-        jButton3.setBounds(210, 390, 120, 50);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Size :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(30, 270, 120, 40);
+        jLabel6.setBounds(40, 120, 120, 40);
 
         jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
@@ -186,39 +166,60 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox3);
-        jComboBox3.setBounds(160, 270, 310, 40);
+        jComboBox3.setBounds(170, 120, 200, 40);
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        txtUnitPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtUnitPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnitPriceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtUnitPrice);
+        txtUnitPrice.setBounds(170, 270, 200, 40);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Unit Price :");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(40, 270, 130, 40);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(20, 20, 470, 440);
+        txtSellingPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSellingPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSellingPriceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtSellingPrice);
+        txtSellingPrice.setBounds(170, 370, 200, 40);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Selling Price :");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(40, 370, 130, 40);
+
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(760, 200, 73, 23);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Add");
+        jPanel1.add(jButton2);
+        jButton2.setBounds(223, 423, 140, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPidActionPerformed
+    private void txtBuyingPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuyingPriceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPidActionPerformed
+    }//GEN-LAST:event_txtBuyingPriceActionPerformed
 
     private void txtPnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPnameActionPerformed
         // TODO add your handling code here:
@@ -232,27 +233,26 @@ public class Product extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void txtPid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPid1ActionPerformed
+    private void txtItemcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemcodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPid1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        
-        
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_txtItemcodeActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
+    private void txtUnitPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnitPriceActionPerformed
+
+    private void txtSellingPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSellingPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSellingPriceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -262,12 +262,15 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_product;
-    private javax.swing.JTextField txtPid;
-    private javax.swing.JTextField txtPid1;
+    private javax.swing.JTextField txtBuyingPrice;
+    private javax.swing.JTextField txtItemcode;
     private javax.swing.JTextField txtPname;
+    private javax.swing.JTextField txtSellingPrice;
+    private javax.swing.JTextField txtUnitPrice;
     // End of variables declaration//GEN-END:variables
 }
