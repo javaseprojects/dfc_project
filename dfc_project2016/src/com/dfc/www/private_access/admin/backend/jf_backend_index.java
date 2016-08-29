@@ -1,5 +1,6 @@
 package com.dfc.www.private_access.admin.backend;
 
+import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
@@ -383,7 +384,7 @@ public class jf_backend_index extends javax.swing.JFrame {
             try {
                 jp_adminMainPanel.removeAll();
                 jp_adminMainPanel.setLayout(new FlowLayout());
-                jp_admin_privilageManagment ai = new jp_admin_privilageManagment();
+                jp_admin_cashManagement ai = new jp_admin_cashManagement();
                 ai.setVisible(true);
                 jp_adminMainPanel.add(ai);
                 jp_adminMainPanel.updateUI();
