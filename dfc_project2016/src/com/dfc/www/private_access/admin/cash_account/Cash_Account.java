@@ -1,5 +1,3 @@
-
-
 package com.dfc.www.private_access.admin.cash_account;
 
 import com.fsc.www.db.MC_DB;
@@ -7,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-
 
 
 public class Cash_Account extends javax.swing.JPanel {
@@ -19,14 +16,14 @@ public class Cash_Account extends javax.swing.JPanel {
         setCurrentDate();
     }
     
-    //set current date
+    //set current date---------------------------------------
     public void setCurrentDate(){
         dt_start.setDate(new Date());
         dt_end.setDate(new Date());
     }
-    //set current date
+    //set current date---------------------------------------
     
-    //load cash details by date selected
+    //load cash details by date selected---------------------
     public void loadCashData(String startDate,String endDate){
         dtm = (DefaultTableModel)tbl_cash_account.getModel();
         dtm.setRowCount(0);
@@ -45,10 +42,10 @@ public class Cash_Account extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    //load cash details by date selected
+    //load cash details by date selected---------------------
     
     
-    //load investments
+    //load investments---------------------------------------
     public void loadInvestments(){
         try {
             rs=null;
@@ -60,10 +57,10 @@ public class Cash_Account extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    //load investments
+    //load investments--------------------------------------
     
     
-    //load incomes
+    //load incomes------------------------------------------
     public void loadIncomes(){
         try {
             rs=null;
@@ -75,7 +72,7 @@ public class Cash_Account extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    //load incomes
+    //load incomes------------------------------------------
     
     //load expenses
     public void loadExpenses(){
@@ -89,9 +86,9 @@ public class Cash_Account extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-   //load expenses
+   //load expenses-----------------------------------------
     
-    //profit calculation
+    //profit calculation-----------------------------------
     public void profitCalculator(){
         try {
             double invest = Double.parseDouble(lbl_investments.getText());
@@ -103,7 +100,7 @@ public class Cash_Account extends javax.swing.JPanel {
         }
     }
 
-    //profit calculation
+    //profit calculation-----------------------------------
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
