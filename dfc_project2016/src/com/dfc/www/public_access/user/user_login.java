@@ -7,9 +7,13 @@ package com.dfc.www.public_access.user;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.fsc.www.db.MC_DB;
+import com.javav.fsc.zone.EmailValidator;
 import com.sun.awt.AWTUtilities;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,8 +27,13 @@ public class user_login extends javax.swing.JFrame {
     /**
      * Creates new form user_login
      */
+    String username, password;
+    EmailValidator emailV = new EmailValidator();
+    ResultSet rs_username, rs_password;
+
     public user_login() {
         initComponents();
+        tf_useremail.grabFocus();
 
     }
 
@@ -74,6 +83,16 @@ public class user_login extends javax.swing.JFrame {
 
         tf_useremail.setBackground(new java.awt.Color(250, 250, 250));
         tf_useremail.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        tf_useremail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_useremailActionPerformed(evt);
+            }
+        });
+        tf_useremail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_useremailKeyReleased(evt);
+            }
+        });
         jPanel1.add(tf_useremail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 300, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
@@ -133,8 +152,15 @@ public class user_login extends javax.swing.JFrame {
         jLabel3.setText("POS SYSTEM");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 280, 70));
 
+        pf_password.setEditable(false);
         pf_password.setBackground(new java.awt.Color(250, 250, 250));
         pf_password.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        pf_password.setEnabled(false);
+        pf_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pf_passwordKeyReleased(evt);
+            }
+        });
         jPanel1.add(pf_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 300, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, -1));
@@ -145,41 +171,58 @@ public class user_login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String username = tf_useremail.getText().toLowerCase();
-        String password = new String(pf_password.getPassword());
+        username = tf_useremail.getText().toLowerCase();
+        password = new String(pf_password.getPassword());
 
-        new Thread(() -> {
-            try {
-                ResultSet rs_username = MC_DB.search_dataOne("user_account", "username", username);
-                ResultSet rs_password = MC_DB.search_dataOne("user_account", "password", password);
-
-                boolean flag_u = false;
-                boolean flag_p = false;
-
-                if (rs_password.next()) {
-                    flag_p = true;
-                    System.out.println("OK2");
-                }else{
-                    JOptionPane.showMessageDialog(this, "You entered password is invalid");
-                }
-                
-                if (rs_username.next()) {
-                    flag_u = true;
-                    System.out.println("OK1");
-                }
-
-                
-
-                can_login(flag_u, flag_p);
-                System.out.println("OK3");
-
-            } catch (SQLException ex) {
-                Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }).start();
-
-
+        md_logincheck(username, password);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tf_useremailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_useremailActionPerformed
+
+
+    }//GEN-LAST:event_tf_useremailActionPerformed
+
+    private void tf_useremailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_useremailKeyReleased
+        username = tf_useremail.getText().toLowerCase();
+        if (tf_useremail.getText().length() <= 100) {
+            if (!username.isEmpty()) {
+                boolean emailISvalidate = emailV.validate(username);
+                if (emailISvalidate) {
+
+                    tf_useremail.setBackground(new Color(0, 230, 118));
+                    pf_password.setEditable(true);
+                    pf_password.setEnabled(true);
+                } else {
+                    tf_useremail.setBackground(new Color(255, 82, 82));
+                    pf_password.setEditable(false);
+                    pf_password.setEnabled(false);
+                }
+            } else {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    pf_password.grabFocus();
+                }
+            }
+        } else {
+            evt.consume();
+            tf_useremail.setBackground(new Color(244, 67, 54));
+            pf_password.setEditable(false);
+            pf_password.setEnabled(false);
+
+        }
+
+
+    }//GEN-LAST:event_tf_useremailKeyReleased
+
+    private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
+
+        if (!Arrays.toString(pf_password.getPassword()).isEmpty()) {
+            if (pf_password.getPassword().length >= 8) {
+                
+            }
+        }
+
+
+    }//GEN-LAST:event_pf_passwordKeyReleased
 
     /**
      * @param args the command line arguments
@@ -229,24 +272,65 @@ public class user_login extends javax.swing.JFrame {
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JTextField tf_useremail;
     // End of variables declaration//GEN-END:variables
+boolean result;
 
     private boolean can_login(boolean pass_u, boolean pass_p) {
 
-        boolean result;
-
         if (pass_u && pass_p) {
             result = true;
-            jf_backend_index admin = new jf_backend_index();
-            admin.setVisible(true);
-            admin.setAlwaysOnTop(true);
-            this.dispose();
-            JOptionPane.showMessageDialog(this, "Administrator is logined!");
+            md_success_login(result);
 
         } else {
             result = false;
         }
 
         return result;
+    }
+
+    private void md_success_login(boolean fresult) {
+
+        if (fresult) {
+            new Thread(() -> {
+                jf_backend_index admin = new jf_backend_index();
+                admin.setVisible(true);
+                admin.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(this, "Administrator is logined!");
+                this.dispose();
+            }).start();
+        }
+
+    }
+
+    private void md_logincheck(String username, String password) {
+
+        new Thread(() -> {
+            try {
+                rs_username = MC_DB.search_dataOne("user_account", "username", username);
+                rs_password = MC_DB.search_dataOne("user_account", "password", password);
+
+                boolean flag_u = false;
+                boolean flag_p = false;
+
+                if (rs_password.next()) {
+                    flag_p = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "You entered password is invalid");
+                }
+
+                if (rs_username.next()) {
+                    flag_u = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Your entered user email is invalied!");
+                }
+
+                can_login(flag_u, flag_p);
+                System.out.println("OK3");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
+
     }
 
 }

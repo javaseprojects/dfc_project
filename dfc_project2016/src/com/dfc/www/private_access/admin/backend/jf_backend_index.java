@@ -1,6 +1,7 @@
 package com.dfc.www.private_access.admin.backend;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -15,6 +16,7 @@ public class jf_backend_index extends javax.swing.JFrame {
      */
     public jf_backend_index() {
         initComponents();
+        li_adminSettings.setVisible(false);
     }
 
     /**
@@ -34,8 +36,21 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jp_adminMainPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        li_adminSettings = new javax.swing.JList();
         jPanel9 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -146,45 +161,117 @@ public class jf_backend_index extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, 720, 1370, 50));
 
-        jPanel4.setBackground(new java.awt.Color(158, 158, 158));
-        jPanel4.setMaximumSize(new java.awt.Dimension(1366, 670));
-        jPanel4.setMinimumSize(new java.awt.Dimension(1366, 670));
+        jp_adminMainPanel.setBackground(new java.awt.Color(158, 158, 158));
+        jp_adminMainPanel.setMaximumSize(new java.awt.Dimension(1366, 670));
+        jp_adminMainPanel.setMinimumSize(new java.awt.Dimension(1366, 670));
+        jp_adminMainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        li_adminSettings.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "My Account", "Logout" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(li_adminSettings);
+
+        jp_adminMainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 220, -1));
 
         jPanel9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jPanel9MouseMoved(evt);
             }
         });
+        jPanel9.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton1.setText("Privilage Managment");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jButton1, "card2");
+
+        jp_adminMainPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 240, 170));
+
+        jPanel10.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel10MouseMoved(evt);
+            }
+        });
+        jPanel10.setLayout(new java.awt.CardLayout());
+
+        jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton2.setText("POS Managment");
+        jPanel10.add(jButton2, "card2");
+
+        jp_adminMainPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 240, 170));
+
+        jPanel11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel11MouseMoved(evt);
+            }
+        });
+        jPanel11.setLayout(new java.awt.CardLayout());
+
+        jButton3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton3.setText("Invoice Managment");
+        jPanel11.add(jButton3, "card2");
+
+        jp_adminMainPanel.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 240, 170));
+
+        jPanel12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel12MouseMoved(evt);
+            }
+        });
+        jPanel12.setLayout(new java.awt.CardLayout());
+
+        jButton4.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton4.setText("Cash Managment");
+        jPanel12.add(jButton4, "card2");
+
+        jp_adminMainPanel.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 50, 240, 170));
+
+        jPanel13.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel13MouseMoved(evt);
+            }
+        });
+        jPanel13.setLayout(new java.awt.CardLayout());
+
+        jButton5.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton5.setText("Report Managment");
+        jPanel13.add(jButton5, "card2");
+
+        jp_adminMainPanel.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 240, 170));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 760, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+
+        jp_adminMainPanel.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 760, 400));
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1234, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(509, Short.MAX_VALUE))
-        );
+        jp_adminMainPanel.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 480, 240, 150));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1366, 670));
+        jPanel1.add(jp_adminMainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1366, 670));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,6 +359,40 @@ public class jf_backend_index extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jPanel9MouseMoved
 
+    private void jPanel10MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel10MouseMoved
+
+    private void jPanel11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel11MouseMoved
+
+    private void jPanel12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel12MouseMoved
+
+    private void jPanel13MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel13MouseMoved
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+         new Thread(() -> {
+            try {
+                jp_adminMainPanel.removeAll();
+                jp_adminMainPanel.setLayout(new FlowLayout());
+                jp_admin_privilageManagment ai = new jp_admin_privilageManagment();
+                ai.setVisible(true);
+                jp_adminMainPanel.add(ai);
+                jp_adminMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,15 +427,28 @@ public class jf_backend_index extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JPanel jp_adminMainPanel;
+    private javax.swing.JList li_adminSettings;
     // End of variables declaration//GEN-END:variables
 }
