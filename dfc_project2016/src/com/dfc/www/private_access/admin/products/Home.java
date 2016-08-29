@@ -170,8 +170,14 @@ public class Home extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         try {
-            Category_Reg cat = new Category_Reg(this, true);
-            cat.setVisible(true);
+
+            jPanel2.removeAll();
+            jPanel2.setLayout(new FlowLayout());
+            Add_Cat_And_SubCat Adc = new Add_Cat_And_SubCat();
+            Adc.setVisible(true);
+            jPanel2.add(Adc);
+            jPanel2.updateUI();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

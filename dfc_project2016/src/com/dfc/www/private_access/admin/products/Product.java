@@ -62,17 +62,17 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtBuyingPrice);
-        txtBuyingPrice.setBounds(170, 320, 200, 40);
+        txtBuyingPrice.setBounds(170, 340, 200, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Item Code :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 170, 100, 40);
+        jLabel1.setBounds(40, 190, 100, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Buying Price :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(40, 320, 130, 40);
+        jLabel2.setBounds(40, 340, 130, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -82,12 +82,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPname);
-        txtPname.setBounds(170, 220, 200, 40);
+        txtPname.setBounds(170, 240, 200, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Category :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(40, 20, 100, 40);
+        jLabel3.setBounds(40, 40, 100, 40);
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
@@ -98,12 +98,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(170, 70, 200, 40);
+        jComboBox1.setBounds(170, 90, 200, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(40, 220, 130, 40);
+        jLabel4.setBounds(40, 240, 130, 40);
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
@@ -114,12 +114,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(170, 20, 200, 40);
+        jComboBox2.setBounds(170, 40, 200, 40);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Sub Category :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(40, 70, 130, 40);
+        jLabel5.setBounds(40, 90, 130, 40);
 
         txtItemcode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtItemcode.setEnabled(false);
@@ -129,7 +129,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtItemcode);
-        txtItemcode.setBounds(170, 170, 200, 40);
+        txtItemcode.setBounds(170, 190, 200, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,12 +150,12 @@ public class Product extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(380, 20, 630, 460);
+        jScrollPane1.setBounds(380, 20, 960, 460);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Size :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(40, 120, 120, 40);
+        jLabel6.setBounds(40, 140, 120, 40);
 
         jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
@@ -166,7 +166,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jComboBox3);
-        jComboBox3.setBounds(170, 120, 200, 40);
+        jComboBox3.setBounds(170, 140, 200, 40);
 
         txtUnitPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtUnitPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -175,12 +175,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtUnitPrice);
-        txtUnitPrice.setBounds(170, 270, 200, 40);
+        txtUnitPrice.setBounds(170, 290, 200, 40);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Unit Price :");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(40, 270, 130, 40);
+        jLabel7.setBounds(40, 290, 130, 40);
 
         txtSellingPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtSellingPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -189,12 +189,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtSellingPrice);
-        txtSellingPrice.setBounds(170, 370, 200, 40);
+        txtSellingPrice.setBounds(170, 390, 200, 40);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Selling Price :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(40, 370, 130, 40);
+        jLabel8.setBounds(40, 390, 130, 40);
 
         jButton1.setText("jButton1");
         jPanel1.add(jButton1);
@@ -203,13 +203,13 @@ public class Product extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add");
         jPanel1.add(jButton2);
-        jButton2.setBounds(223, 423, 140, 40);
+        jButton2.setBounds(220, 440, 140, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
