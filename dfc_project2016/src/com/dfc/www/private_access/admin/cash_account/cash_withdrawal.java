@@ -104,7 +104,7 @@ public class cash_withdrawal extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lbl_tot_withdraw = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1024, 480));
+        setPreferredSize(new java.awt.Dimension(1366, 670));
 
         jPanel1.setLayout(null);
 
@@ -142,7 +142,7 @@ public class cash_withdrawal extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_withdraw);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(490, 20, 520, 450);
+        jScrollPane1.setBounds(490, 20, 860, 640);
 
         txt_amount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +188,7 @@ public class cash_withdrawal extends javax.swing.JPanel {
         jButton2.setBounds(329, 281, 132, 41);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 20, 470, 340);
+        jPanel2.setBounds(10, 20, 470, 530);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -223,17 +223,17 @@ public class cash_withdrawal extends javax.swing.JPanel {
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 370, 470, 100);
+        jPanel3.setBounds(10, 560, 470, 100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
