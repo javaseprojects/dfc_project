@@ -7,11 +7,11 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Cash_Account extends javax.swing.JPanel {
+public class jp_admin_cashManagement extends javax.swing.JPanel {
 
     DefaultTableModel dtm;
     ResultSet rs;
-    public Cash_Account() {
+    public jp_admin_cashManagement() {
         initComponents();
         setCurrentDate();
     }

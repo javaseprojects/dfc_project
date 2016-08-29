@@ -5,21 +5,20 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
-public class cash_withdrawal extends javax.swing.JPanel {
+public class jp_admin_withdrawManagement extends javax.swing.JPanel {
 
     DefaultTableModel dtm;
     ResultSet rs;
     Vector v;
     int userID = 0;
 
-    public cash_withdrawal() {
+    public jp_admin_withdrawManagement() {
         initComponents();
-        loadAdministrators();
+        //loadAdministrators();
     }
 
     //load administrators to combo box--------------------------
     public void loadAdministrators() {
-        if (userID != 0) {
             v = new Vector();
             try {
                 rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM user_account WHERE user_type='admin'");
@@ -30,7 +29,6 @@ public class cash_withdrawal extends javax.swing.JPanel {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
     }
     //load administrators to combo box----------------------------
 

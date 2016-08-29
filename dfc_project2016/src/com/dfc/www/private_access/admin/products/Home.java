@@ -1,7 +1,7 @@
 package com.dfc.www.private_access.admin.products;
 
-import com.dfc.www.private_access.admin.cash_account.Cash_Account;
-import com.dfc.www.private_access.admin.cash_account.cash_withdrawal;
+import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
+import com.dfc.www.private_access.admin.cash_account.jp_admin_withdrawManagement;
 import java.awt.FlowLayout;
 
 public class Home extends javax.swing.JFrame {
@@ -155,7 +155,7 @@ public class Home extends javax.swing.JFrame {
         try {
             jPanel2.removeAll();
             jPanel2.setLayout(new FlowLayout());
-            Cash_Account ca = new Cash_Account();
+            jp_admin_cashManagement ca = new jp_admin_cashManagement();
             ca.setVisible(true);
             jPanel2.add(ca);
             jPanel2.updateUI();
@@ -183,7 +183,7 @@ public class Home extends javax.swing.JFrame {
         try {
             jPanel2.removeAll();
             jPanel2.setLayout(new FlowLayout());
-            cash_withdrawal cw = new cash_withdrawal();
+            jp_admin_withdrawManagement cw = new jp_admin_withdrawManagement();
             cw.setVisible(true);
             jPanel2.add(cw);
             jPanel2.updateUI();
