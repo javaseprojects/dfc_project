@@ -38,7 +38,6 @@ public class Home extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         Cash = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -91,13 +90,10 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(Cash);
         Cash.setBounds(690, 20, 120, 30);
 
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(null);
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 170, 1024, 480);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/dfc_st_backgroundImage.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1366, 768);
+        jPanel2.setBounds(0, 70, 1366, 670);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,7 +225,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
