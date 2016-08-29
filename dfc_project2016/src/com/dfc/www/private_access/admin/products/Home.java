@@ -5,6 +5,7 @@ package com.dfc.www.private_access.admin.products;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.dfc.www.private_access.admin.cash_account.Cash_Account;
 import java.awt.FlowLayout;
 
 /**
@@ -96,17 +97,17 @@ public class Home extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/dfc_st_backgroundImage.png"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1030, 700);
+        jLabel1.setBounds(0, 0, 1366, 768);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
 
         pack();
@@ -161,6 +162,19 @@ public class Home extends javax.swing.JFrame {
 
     private void CashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CashActionPerformed
 
+        try {
+            jPanel2.removeAll();
+            jPanel2.setLayout(new FlowLayout());
+            Cash_Account ca = new Cash_Account();
+            ca.setVisible(true);
+            jPanel2.add(ca);
+            jPanel2.updateUI();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
     }//GEN-LAST:event_CashActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
