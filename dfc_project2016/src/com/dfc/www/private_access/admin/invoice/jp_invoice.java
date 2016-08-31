@@ -182,6 +182,7 @@ public class jp_invoice extends javax.swing.JPanel {
         bt_number_0.setBounds(990, 290, 80, 80);
 
         li_itemname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        li_itemname.setToolTipText("");
         li_itemname.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 li_itemnameMouseClicked(evt);
@@ -190,7 +191,7 @@ public class jp_invoice extends javax.swing.JPanel {
         sp_itemname.setViewportView(li_itemname);
 
         jPanel1.add(sp_itemname);
-        sp_itemname.setBounds(300, 90, 260, 120);
+        sp_itemname.setBounds(300, 90, 260, 90);
 
         tbl_item.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -491,7 +492,7 @@ public class jp_invoice extends javax.swing.JPanel {
             String df_2 = dft.format(date);
 
             new Thread(() -> {
-                rs_getuserid = MC_DB.search_dataOne("user_account", "full_name", "Deepal suranga");
+                rs_getuserid = MC_DB.search_dataOne("user_account", "username", "Deepal suranga");
             }).start();
 
             while (rs_getuserid.next()) {
@@ -581,18 +582,18 @@ public class jp_invoice extends javax.swing.JPanel {
             new Thread(() -> {
                 try {
                     try {
-                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '" + Integer.parseInt(tf_item_code.getText()) + "%'");
+                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '" + tf_item_code.getText()+ "'");
                     } catch (SQLException ex) {
-                        Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
+                        Vector v = new Vector();
 
                     while (rs_load_item_name.next()) {
-                        Vector v = new Vector();
                         v.add(rs_load_item_name.getString("item_name"));
-                        li_itemname.setListData(v);
                     }
+                        li_itemname.setListData(v);
                 } catch (SQLException ex) {
-                    Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }).start();
         } catch (Exception e) {
