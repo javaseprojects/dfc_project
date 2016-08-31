@@ -22,9 +22,9 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
             v = new Vector();
             try {
                 rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM user_account WHERE user_type='admin'");
-                while (rs.next()) {
+                if (rs.next()) {
                     v.add(rs.getString("full_name"));
-                    cbo_admin.addItem(v);
+                    lbl_admin.setText(rs.getString("full_name"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,18 +86,18 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cbo_admin = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_withdraw = new javax.swing.JTable();
         txt_amount = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_withdrawal = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lbl_admin = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbl_tot_withdraw = new javax.swing.JLabel();
@@ -105,16 +105,6 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1366, 670));
 
         jPanel1.setLayout(null);
-
-        cbo_admin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cbo_admin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Malinda Senanayake" }));
-        cbo_admin.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbo_adminItemStateChanged(evt);
-            }
-        });
-        jPanel1.add(cbo_admin);
-        cbo_admin.setBounds(200, 30, 270, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Description :");
@@ -150,11 +140,6 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         jPanel1.add(txt_amount);
         txt_amount.setBounds(200, 90, 270, 40);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Select Administrator :");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 40, 180, 22);
-
         txt_withdrawal.setColumns(20);
         txt_withdrawal.setRows(5);
         jScrollPane2.setViewportView(txt_withdrawal);
@@ -170,6 +155,11 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(null);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Administrator :");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(10, 20, 130, 22);
+
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Print");
         jPanel2.add(jButton1);
@@ -184,6 +174,11 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         });
         jPanel2.add(jButton2);
         jButton2.setBounds(329, 281, 132, 41);
+
+        lbl_admin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_admin.setText("Malinda Senanayake");
+        jPanel2.add(lbl_admin);
+        lbl_admin.setBounds(190, 20, 170, 22);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 20, 470, 530);
@@ -244,29 +239,20 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void cbo_adminItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_adminItemStateChanged
-
-        setUserId(cbo_admin.getSelectedItem().toString());
-        if(userID!=0){
-            viewWithdrawalByAdministrator();
-        }
-        
-    }//GEN-LAST:event_cbo_adminItemStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox cbo_admin;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_admin;
     private javax.swing.JLabel lbl_tot_withdraw;
     private javax.swing.JTable tbl_withdraw;
     private javax.swing.JTextField txt_amount;

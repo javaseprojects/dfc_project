@@ -1,5 +1,6 @@
 package com.dfc.www.private_access.admin.products;
 
+import com.dfc.www.private_access.admin.cash_account.add_investment;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_withdrawManagement;
 import java.awt.FlowLayout;
@@ -9,8 +10,14 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
+        loadInvestment();
     }
 
+    public void loadInvestment(){
+        add_investment ai = new add_investment();
+        ai.setVisible(true);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
