@@ -15,6 +15,21 @@ public class User_Home extends javax.swing.JFrame {
         loadInvestment();
     }
 
+    public User_Home(String email) {
+        initComponents();
+        loadInvestment();
+
+        jf_backend_index.us_fullname = email;
+        try {
+
+            lb_main_userNameLOAD.setText("");
+            lb_main_userNameLOAD.setText(email);
+
+        } catch (Exception e) {
+        }
+
+    }
+
     public void loadInvestment() {
         add_investment ai = new add_investment();
         ai.setVisible(true);
