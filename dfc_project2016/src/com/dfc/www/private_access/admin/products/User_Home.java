@@ -1,5 +1,7 @@
 package com.dfc.www.private_access.admin.products;
 
+import com.dfc.www.private_access.admin.backend.jf_backend_index;
+import static com.dfc.www.private_access.admin.backend.jf_backend_index.lb_main_administratorNameLOAD;
 import com.dfc.www.private_access.admin.cash_account.add_investment;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_withdrawManagement;
@@ -11,13 +13,25 @@ public class User_Home extends javax.swing.JFrame {
     public User_Home() {
         initComponents();
         setLocationRelativeTo(null);
-        //loadInvestment();
+        loadInvestment();
     }
-
-//    public void loadInvestment(){
-//        add_investment ai = new add_investment();
-//        ai.setVisible(true);
-//    }
+    public User_Home(String email) {
+        initComponents();
+        
+        jf_backend_index.us_fullname=email;
+        try {
+           
+                lb_main_userNameLOAD.setText("");
+                lb_main_userNameLOAD.setText(email);
+            
+        } catch (Exception e) {
+        }
+        
+    }
+    public void loadInvestment(){
+        add_investment ai = new add_investment();
+        ai.setVisible(true);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -32,6 +46,7 @@ public class User_Home extends javax.swing.JFrame {
         jp_userMainPanel = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         bt_invoice = new javax.swing.JButton();
+        lb_main_userNameLOAD = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -106,6 +121,10 @@ public class User_Home extends javax.swing.JFrame {
         });
         jPanel1.add(bt_invoice);
         bt_invoice.setBounds(20, 30, 100, 23);
+
+        lb_main_userNameLOAD.setText("jLabel1");
+        jPanel1.add(lb_main_userNameLOAD);
+        lb_main_userNameLOAD.setBounds(1210, 20, 120, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,5 +302,6 @@ public class User_Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jp_userMainPanel;
+    public static javax.swing.JLabel lb_main_userNameLOAD;
     // End of variables declaration//GEN-END:variables
 }

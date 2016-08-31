@@ -2,13 +2,15 @@ package com.dfc.www.private_access.admin.cash_account;
 
 import com.fsc.www.db.MC_DB;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class jp_admin_withdrawManagement extends javax.swing.JPanel {
 
     DefaultTableModel dtm;
-    ResultSet rs;
     Vector v;
     int userID = 0;
 
@@ -17,47 +19,30 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         //loadAdministrators();
     }
 
-    //load administrators to combo box--------------------------
-    public void loadAdministrators() {
-            v = new Vector();
-            try {
-                rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM user_account WHERE user_type='admin'");
-                if (rs.next()) {
-                    v.add(rs.getString("full_name"));
-                    lbl_admin.setText(rs.getString("full_name"));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
-    //load administrators to combo box----------------------------
 
-    //get Admin Id
-    public void setUserId(String fullname) {
-        try {
-            rs = null;
-            rs = MC_DB.myConnection().createStatement().executeQuery("SELECT user_account_id FROM user_account WHERE full_name='" + fullname + "'");
-            if (rs.next()) {
-                userID = rs.getInt("user_account_id");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    //get Admin Id------------------------------------------------
-
+    ResultSet rs_viewWithdrawalByAdministrator;
     //view withdrawal by Administrator----------------------------
     public void viewWithdrawalByAdministrator() {
+        
         try {
-            this.rs = null;
+            
             dtm = (DefaultTableModel) tbl_withdraw.getModel();
             dtm.setRowCount(0);
-            this.rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM expense WHERE user_account_id='" + userID + "'");
-            while (this.rs.next()) {
+            
+            
+            new Thread(() -> {
+                try {
+                    rs_viewWithdrawalByAdministrator = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM expense WHERE user_account_id='" + userID + "'");
+                } catch (SQLException ex) {
+                   
+                }
+            }).start();
+            
+            while (rs_viewWithdrawalByAdministrator.next()) {
                 Vector v = new Vector();
-                v.add(this.rs.getDouble("expense_cost"));
-                v.add(this.rs.getString("expense_date"));
-                v.add(this.rs.getString("description"));
+                v.add(this.rs_viewWithdrawalByAdministrator.getDouble("expense_cost"));
+                v.add(this.rs_viewWithdrawalByAdministrator.getString("expense_date"));
+                v.add(this.rs_viewWithdrawalByAdministrator.getString("description"));
                 dtm.addRow(v);
             }
         } catch (Exception e) {
@@ -67,12 +52,20 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
     //view withdrawal by Administrator------------------------------
 
 //get withdrawal amount count--------------------------------------
+    ResultSet rs_withdraw_Total;
     public void getWithdrawTotal() {
         if (userID != 0) {
+            new Thread(() -> {
+                try {
+                    rs_withdraw_Total= MC_DB.myConnection().createStatement().executeQuery("SELECT COUNT(expense_cost) AS expenseCount FROM expense WHERE user_account_id='" + userID + "'");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }).start();
             try {
-                rs = MC_DB.myConnection().createStatement().executeQuery("SELECT COUNT(expense_cost) AS expenseCount FROM expense WHERE user_account_id='" + userID + "'");
-                if (rs.next()) {
-                    lbl_tot_withdraw.setText(rs.getDouble("expenseCount") + "0");
+                 
+                if (rs_withdraw_Total.next()) {
+                    lbl_tot_withdraw.setText(rs_withdraw_Total.getDouble("expenseCount") + "0");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,18 +79,16 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_withdraw = new javax.swing.JTable();
-        txt_amount = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txt_withdrawal = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        lbl_admin = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_amount = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_withdrawal = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbl_tot_withdraw = new javax.swing.JLabel();
@@ -105,11 +96,6 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1366, 670));
 
         jPanel1.setLayout(null);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Description :");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 160, 140, 22);
 
         tbl_withdraw.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,33 +118,8 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(490, 20, 860, 640);
 
-        txt_amount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_amountActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txt_amount);
-        txt_amount.setBounds(200, 90, 270, 40);
-
-        txt_withdrawal.setColumns(20);
-        txt_withdrawal.setRows(5);
-        jScrollPane2.setViewportView(txt_withdrawal);
-
-        jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(200, 150, 270, 120);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Enter Amount :");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 100, 140, 22);
-
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(null);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Administrator :");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(10, 20, 130, 22);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Print");
@@ -175,10 +136,30 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
         jPanel2.add(jButton2);
         jButton2.setBounds(329, 281, 132, 41);
 
-        lbl_admin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_admin.setText("Malinda Senanayake");
-        jPanel2.add(lbl_admin);
-        lbl_admin.setBounds(190, 20, 170, 22);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Enter Amount :");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(10, 30, 140, 22);
+
+        txt_amount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_amountActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txt_amount);
+        txt_amount.setBounds(190, 20, 270, 40);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Description :");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(10, 90, 140, 22);
+
+        txt_withdrawal.setColumns(20);
+        txt_withdrawal.setRows(5);
+        jScrollPane2.setViewportView(txt_withdrawal);
+
+        jPanel2.add(jScrollPane2);
+        jScrollPane2.setBounds(190, 80, 270, 120);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 20, 470, 530);
@@ -246,13 +227,11 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbl_admin;
     private javax.swing.JLabel lbl_tot_withdraw;
     private javax.swing.JTable tbl_withdraw;
     private javax.swing.JTextField txt_amount;
