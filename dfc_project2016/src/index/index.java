@@ -138,11 +138,11 @@ public class index extends javax.swing.JFrame {
         try {
             new Thread(() -> {
                 try {
-                    for (int i = 0; i < 302; i++) {
+                    for (int i = 0; i < 202; i++) {
                         
 //
 //
-                        if (i == 301) {
+                        if (i == 201) {
                             user_login user = new user_login();
                             index.this.dispose();
                             //user.setIconImage(CreateImagesss("/FormatFactoryicon100.png").getImage());

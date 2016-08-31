@@ -1,8 +1,12 @@
 package com.dfc.www.private_access.admin.backend;
 
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
+import com.dfc.www.public_access.user.user_login;
+import com.fsc.www.db.MC_DB;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,9 +17,24 @@ public class jf_backend_index extends javax.swing.JFrame {
     /**
      * Creates new form jf_backend_index
      */
+    
+    public static String us_fullname;
     public jf_backend_index() {
         initComponents();
 
+    }
+    public jf_backend_index(String email) {
+        initComponents();
+        
+        jf_backend_index.us_fullname=email;
+        try {
+           
+                lb_main_administratorNameLOAD.setText("");
+                lb_main_administratorNameLOAD.setText(email);
+            
+        } catch (Exception e) {
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +48,9 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
+        lb_main_administratorNameLOAD = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jp_adminMainPanel = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -76,6 +98,11 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jPanel6MouseMoved(evt);
+            }
+        });
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel6MouseReleased(evt);
             }
         });
 
@@ -135,6 +162,31 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 25, -1, -1));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 35));
+
+        lb_main_administratorNameLOAD.setForeground(new java.awt.Color(255, 255, 255));
+        lb_main_administratorNameLOAD.setText("WelCome Administrator");
+        jPanel2.add(lb_main_administratorNameLOAD, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, 210, 30));
+
+        jPanel4.setBackground(new java.awt.Color(145, 145, 145));
+        jPanel4.setLayout(new java.awt.CardLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("X");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel2MouseReleased(evt);
+            }
+        });
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jLabel2KeyReleased(evt);
+            }
+        });
+        jPanel4.add(jLabel2, "card2");
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 0, 50, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 50));
 
@@ -393,8 +445,31 @@ public class jf_backend_index extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }).start();
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jPanel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseReleased
+
+
+    }//GEN-LAST:event_jPanel6MouseReleased
+
+    private void jLabel2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyReleased
+
+
+    }//GEN-LAST:event_jLabel2KeyReleased
+
+    private void jLabel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseReleased
+
+        int out = JOptionPane.showConfirmDialog(this, "You Want to logout here?", "Conform!", JOptionPane.YES_NO_OPTION);
+
+        if (out == JOptionPane.YES_OPTION) {
+            user_login ul = new user_login();
+            ul.setVisible(true);
+            this.dispose();
+        }
+
+
+    }//GEN-LAST:event_jLabel2MouseReleased
 
     /**
      * @param args the command line arguments
@@ -436,6 +511,7 @@ public class jf_backend_index extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -445,11 +521,13 @@ public class jf_backend_index extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     public static javax.swing.JPanel jp_adminMainPanel;
+    public static javax.swing.JLabel lb_main_administratorNameLOAD;
     // End of variables declaration//GEN-END:variables
 }

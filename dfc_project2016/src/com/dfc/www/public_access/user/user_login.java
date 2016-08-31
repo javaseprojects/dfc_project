@@ -8,6 +8,7 @@ package com.dfc.www.public_access.user;
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.EmailValidator;
+import com.javav.fsc.zone.PasswordValidator;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -47,7 +48,7 @@ public class user_login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tf_useremail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bt_loginaccess = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -100,18 +101,23 @@ public class user_login extends javax.swing.JFrame {
         jLabel2.setText("User Password:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 300, 30));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
-        jButton1.setText("LOGIN HERE");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        bt_loginaccess.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        bt_loginaccess.setForeground(new java.awt.Color(255, 255, 255));
+        bt_loginaccess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
+        bt_loginaccess.setText("LOGIN HERE");
+        bt_loginaccess.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bt_loginaccess.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
+        bt_loginaccess.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_loginaccessMouseClicked(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 300, 40));
+        bt_loginaccess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_loginaccessActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bt_loginaccess, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 300, 40));
 
         jPanel3.setBackground(new java.awt.Color(255, 87, 34));
 
@@ -169,13 +175,10 @@ public class user_login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bt_loginaccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginaccessActionPerformed
 
-        username = tf_useremail.getText().toLowerCase();
-        password = new String(pf_password.getPassword());
-
-        md_logincheck(username, password);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        md_hi_login();
+    }//GEN-LAST:event_bt_loginaccessActionPerformed
 
     private void tf_useremailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_useremailActionPerformed
 
@@ -183,6 +186,7 @@ public class user_login extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_useremailActionPerformed
 
     private void tf_useremailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_useremailKeyReleased
+
         username = tf_useremail.getText().toLowerCase();
         if (tf_useremail.getText().length() <= 100) {
             if (!username.isEmpty()) {
@@ -192,15 +196,18 @@ public class user_login extends javax.swing.JFrame {
                     tf_useremail.setBackground(new Color(0, 230, 118));
                     pf_password.setEditable(true);
                     pf_password.setEnabled(true);
+
+                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                        pf_password.grabFocus();
+                    }
+
                 } else {
                     tf_useremail.setBackground(new Color(255, 82, 82));
                     pf_password.setEditable(false);
                     pf_password.setEnabled(false);
                 }
             } else {
-                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    pf_password.grabFocus();
-                }
+
             }
         } else {
             evt.consume();
@@ -213,16 +220,34 @@ public class user_login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tf_useremailKeyReleased
 
+    PasswordValidator pv = new PasswordValidator();
     private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
 
         if (!Arrays.toString(pf_password.getPassword()).isEmpty()) {
             if (pf_password.getPassword().length >= 8) {
-                
+                password = Arrays.toString(pf_password.getPassword());
+                if (pv.validate(password)) {
+                    pf_password.setBackground(new Color(0, 230, 118));
+
+                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                        bt_loginaccess.doClick();
+                    }
+                }
+
             }
         }
 
 
     }//GEN-LAST:event_pf_passwordKeyReleased
+
+    private void bt_loginaccessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_loginaccessMouseClicked
+
+        username = tf_useremail.getText().toLowerCase();
+        password = new String(pf_password.getPassword());
+
+        md_logincheck(username, password);
+
+    }//GEN-LAST:event_bt_loginaccessMouseClicked
 
     /**
      * @param args the command line arguments
@@ -258,7 +283,7 @@ public class user_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bt_loginaccess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,7 +297,17 @@ public class user_login extends javax.swing.JFrame {
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JTextField tf_useremail;
     // End of variables declaration//GEN-END:variables
-boolean result;
+
+    private void md_hi_login() {
+
+        username = tf_useremail.getText().toLowerCase();
+        password = new String(pf_password.getPassword());
+
+        md_logincheck(username, password);
+
+    }
+
+    boolean result;
 
     private boolean can_login(boolean pass_u, boolean pass_p) {
 
@@ -285,20 +320,6 @@ boolean result;
         }
 
         return result;
-    }
-
-    private void md_success_login(boolean fresult) {
-
-        if (fresult) {
-            new Thread(() -> {
-                jf_backend_index admin = new jf_backend_index();
-                admin.setVisible(true);
-                admin.setAlwaysOnTop(true);
-                //JOptionPane.showMessageDialog(this, "Administrator is logined!");
-                this.dispose();
-            }).start();
-        }
-
     }
 
     private void md_logincheck(String username, String password) {
@@ -330,6 +351,20 @@ boolean result;
                 Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
+
+    }
+
+    private void md_success_login(boolean fresult) {
+
+        if (fresult) {
+            new Thread(() -> {
+                jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
+                admin.setVisible(true);
+                admin.setAlwaysOnTop(true);
+                //JOptionPane.showMessageDialog(this, "Administrator is logined!");
+                this.dispose();
+            }).start();
+        }
 
     }
 
