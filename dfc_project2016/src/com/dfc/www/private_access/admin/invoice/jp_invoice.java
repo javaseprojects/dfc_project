@@ -8,10 +8,14 @@ package com.dfc.www.private_access.admin.invoice;
 import com.fsc.www.db.MC_DB;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,8 +30,9 @@ public class jp_invoice extends javax.swing.JPanel {
     public jp_invoice() {
         initComponents();
         tf_item_code.grabFocus();
+        sp_itemname.setVisible(false);
     }
-    
+
     String invoice_no = "";
 
     /**
@@ -54,6 +59,8 @@ public class jp_invoice extends javax.swing.JPanel {
         bt_number_1 = new javax.swing.JButton();
         bt_enter = new javax.swing.JButton();
         bt_number_0 = new javax.swing.JButton();
+        sp_itemname = new javax.swing.JScrollPane();
+        li_itemname = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_item = new javax.swing.JTable();
         jButton12 = new javax.swing.JButton();
@@ -173,6 +180,17 @@ public class jp_invoice extends javax.swing.JPanel {
         bt_number_0.setText("0");
         jPanel1.add(bt_number_0);
         bt_number_0.setBounds(990, 290, 80, 80);
+
+        li_itemname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        li_itemname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                li_itemnameMouseClicked(evt);
+            }
+        });
+        sp_itemname.setViewportView(li_itemname);
+
+        jPanel1.add(sp_itemname);
+        sp_itemname.setBounds(300, 90, 260, 120);
 
         tbl_item.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -367,29 +385,47 @@ public class jp_invoice extends javax.swing.JPanel {
     private void tf_item_codeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_item_codeKeyReleased
 
         try {
-            if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            sp_itemname.setVisible(true);
+            md_loadItemName();
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                 tf_qty.grabFocus();
+                sp_itemname.setVisible(false);
+                tf_qty.selectAll();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_tf_item_codeKeyReleased
 
     private void tf_qtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_qtyKeyReleased
-        
+
         try {
-            if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                 md_setItemTable();
                 tf_item_code.grabFocus();
+                tf_item_code.selectAll();
+
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_tf_qtyKeyReleased
+
+    private void li_itemnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_li_itemnameMouseClicked
+
+        try {
+            md_loadTF_Item();
+            sp_itemname.setVisible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_li_itemnameMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -430,6 +466,8 @@ public class jp_invoice extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_available_qty;
     private javax.swing.JLabel lb_item;
+    private javax.swing.JList li_itemname;
+    private javax.swing.JScrollPane sp_itemname;
     private javax.swing.JTable tbl_invoice;
     private javax.swing.JTable tbl_item;
     private javax.swing.JTextField tf_invoice_no;
@@ -440,6 +478,9 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //................create invoice no - start.....................................................
     //....IN-0001-160830-001
+    ResultSet rs_getuserid;
+    ResultSet rs_last_invoiceno;
+
     public void md_createInvoiceNo() {
         try {
             int u_id1 = 0;
@@ -449,22 +490,30 @@ public class jp_invoice extends javax.swing.JPanel {
             DateFormat dft = new SimpleDateFormat("yyMMdd");
             String df_2 = dft.format(date);
 
-            ResultSet rs_getuserid = MC_DB.search_dataOne("user_account", "full_name", "Deepal suranga");
+            new Thread(() -> {
+                rs_getuserid = MC_DB.search_dataOne("user_account", "full_name", "Deepal suranga");
+            }).start();
 
             while (rs_getuserid.next()) {
                 u_id1 = rs_getuserid.getInt("user_account_id");
             }
-            
-            ResultSet rs_last_invoiceno = MC_DB.myConnection().createStatement().executeQuery("SELECT LAST(invoice_no) FROM invoice");
-            
-            if(rs_last_invoiceno.next()){
+
+            new Thread(() -> {
+                try {
+                    rs_last_invoiceno = MC_DB.myConnection().createStatement().executeQuery("SELECT LAST(invoice_no) FROM invoice");
+                } catch (SQLException ex) {
+                    Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }).start();
+
+            if (rs_last_invoiceno.next()) {
                 String last_invoiceno = rs_last_invoiceno.getNString("invoice_no");
-                last_invoiceno_ar = last_invoiceno.split("-");    
+                last_invoiceno_ar = last_invoiceno.split("-");
             }
-            
-            if(last_invoiceno_ar[1].equals(df_2)){
-                invoiceno3 = Integer.parseInt(last_invoiceno_ar[0])+1;
-            }else{
+
+            if (last_invoiceno_ar[1].equals(df_2)) {
+                invoiceno3 = Integer.parseInt(last_invoiceno_ar[0]) + 1;
+            } else {
                 invoiceno3 = 001;
             }
 
@@ -476,22 +525,41 @@ public class jp_invoice extends javax.swing.JPanel {
     //................create invoice no - end.......................................................
 
     //................set item table - start........................................................
-    public void md_setItemTable() {
-        try {
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code='" + Integer.parseInt(tf_item_code.getText()) + "'");
-            DefaultTableModel dt = (DefaultTableModel)tbl_item.getModel();
-            while(rs.next()){
-                Vector v = new Vector();
-                v.add(dt.getRowCount()+1);
-                v.add(tf_item_code.getText());
-                v.add(rs.getString("item_name"));
-                v.add(rs.getDouble("selling_price"));
-                v.add(tf_qty.getText());
-                v.add(Double.parseDouble(rs.getString("selling_price"))*Integer.parseInt(tf_qty.getText()));
-                dt.addRow(v);
-                
-            }
+    ResultSet rs_itemtable = null;
 
+    public void md_setItemTable() {
+
+        try {
+
+            new Thread(() -> {
+                try {
+                    try {
+                        rs_itemtable = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code='" + Integer.parseInt(tf_item_code.getText()) + "'");
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    DefaultTableModel dt = (DefaultTableModel) tbl_item.getModel();
+                    while (rs_itemtable.next()) {
+                        try {
+                            Vector v = new Vector();
+                            v.add(dt.getRowCount() + 1);
+                            v.add(tf_item_code.getText());
+                            v.add(rs_itemtable.getString("item_name"));
+                            v.add(rs_itemtable.getDouble("selling_price"));
+                            v.add(tf_qty.getText());
+                            v.add(Double.parseDouble(rs_itemtable.getString("selling_price")) * Double.parseDouble(tf_qty.getText()));
+                            dt.addRow(v);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -499,10 +567,55 @@ public class jp_invoice extends javax.swing.JPanel {
     //................set item table  end..........................................................
 
     //..................set table item qty - start.................................................
-    public void md_setTableItemQty(){
+    public void md_setTableItemQty() {
         DefaultTableModel dt = (DefaultTableModel) tbl_item.getModel();
-        
+
     }
     //..................set table item qty - end.................................................
-    
+
+    //......................item name loade from jlist - start...............................................
+    ResultSet rs_load_item_name;
+
+    public void md_loadItemName() {
+        try {
+            new Thread(() -> {
+                try {
+                    try {
+                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '" + Integer.parseInt(tf_item_code.getText()) + "%'");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    while (rs_load_item_name.next()) {
+                        Vector v = new Vector();
+                        v.add(rs_load_item_name.getString("item_name"));
+                        li_itemname.setListData(v);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //......................item name loade from jlist - end.................................................
+
+    //......................item code loade from tf_item - start...............................................
+    ResultSet rs_load_tf_item;
+
+    public void md_loadTF_Item() {
+        try {
+            new Thread(() -> {
+                rs_load_tf_item = MC_DB.search_dataOne("item", "item_name", li_itemname.getSelectedValue().toString());
+            }).start();
+
+            while (rs_load_tf_item.next()) {
+                tf_item_code.setText(rs_load_tf_item.getInt("item_code") + "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //......................item code loade from tf_item - end.................................................
 }
