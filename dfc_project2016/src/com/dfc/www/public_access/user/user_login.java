@@ -354,7 +354,7 @@ public class user_login extends javax.swing.JFrame {
                 if ("1".equals(stattus)) {
 
                     //User_Home admin = new User_Home(tf_useremail.getText().toLowerCase().trim());
-                    User_Home admin = new User_Home();
+                    User_Home admin = new User_Home(tf_useremail.getText().toLowerCase());
                     admin.setVisible(true);
                     admin.setAlwaysOnTop(true);
                     //JOptionPane.showMessageDialog(this, "Administrator is logined!");
