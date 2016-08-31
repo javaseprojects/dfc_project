@@ -223,29 +223,32 @@ public class user_login extends javax.swing.JFrame {
     PasswordValidator pv = new PasswordValidator();
     private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
 
-        if (!Arrays.toString(pf_password.getPassword()).isEmpty()) {
-            if (pf_password.getPassword().length >= 8) {
-                password = Arrays.toString(pf_password.getPassword());
-                if (pv.validate(password)) {
-                    pf_password.setBackground(new Color(0, 230, 118));
-
-                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                        bt_loginaccess.doClick();
-                    }
-                }
-
-            }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            md_hi_login();
         }
 
+//        if (!Arrays.toString(pf_password.getPassword()).isEmpty()) {
+//            if (pf_password.getPassword().length >= 8) {
+//                password = Arrays.toString(pf_password.getPassword());
+//                if (pv.validate(password)) {
+//                    pf_password.setBackground(new Color(0, 230, 118));
+//                     
+//                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//                        bt_loginaccess.doClick();
+//                    }
+//                }
+//
+//            }
+//        }
 
     }//GEN-LAST:event_pf_passwordKeyReleased
 
     private void bt_loginaccessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_loginaccessMouseClicked
 
-        username = tf_useremail.getText().toLowerCase();
-        password = new String(pf_password.getPassword());
-
-        md_logincheck(username, password);
+//        username = tf_useremail.getText().toLowerCase();
+//        password = new String(pf_password.getPassword());
+//
+//        md_logincheck(username, password);
 
     }//GEN-LAST:event_bt_loginaccessMouseClicked
 
@@ -333,12 +336,14 @@ public class user_login extends javax.swing.JFrame {
                 boolean flag_p = false;
 
                 if (rs_password.next()) {
+
                     flag_p = true;
                 } else {
                     JOptionPane.showMessageDialog(this, "You entered password is invalid");
                 }
 
                 if (rs_username.next()) {
+
                     flag_u = true;
                 } else {
                     JOptionPane.showMessageDialog(this, "Your entered user email is invalied!");
@@ -346,6 +351,8 @@ public class user_login extends javax.swing.JFrame {
 
                 can_login(flag_u, flag_p);
                 System.out.println("OK3");
+                rs_password.close();
+                rs_username.close();
 
             } catch (SQLException ex) {
                 Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
@@ -355,15 +362,35 @@ public class user_login extends javax.swing.JFrame {
     }
 
     private void md_success_login(boolean fresult) {
-
+        int staus = 0;
         if (fresult) {
-            new Thread(() -> {
-                jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
-                admin.setVisible(true);
-                admin.setAlwaysOnTop(true);
-                //JOptionPane.showMessageDialog(this, "Administrator is logined!");
-                this.dispose();
-            }).start();
+            try {
+                new Thread(() -> {
+                    rs_username = MC_DB.search_dataOne("user_account", "username", tf_useremail.getText().trim().toLowerCase());
+
+                }).start();
+                if (rs_username.next()) {
+                    staus = rs_username.getInt("status");
+                }
+                if (staus == 1) {
+
+                     jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
+                    admin.setVisible(true);
+                    admin.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(this, "Administrator is logined!");
+                    this.dispose();
+                    
+                } else if (staus == 9) {
+                    jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
+                    admin.setVisible(true);
+                    admin.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(this, "Administrator is logined!");
+                    this.dispose();
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

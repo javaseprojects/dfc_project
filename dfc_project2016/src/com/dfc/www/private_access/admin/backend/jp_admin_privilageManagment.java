@@ -7,6 +7,7 @@ package com.dfc.www.private_access.admin.backend;
 
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.PasswordValidator;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -29,6 +30,9 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         initComponents();
         new Thread(() -> {
             md_tbLoadAdmin();
+        }).start();
+        new Thread(() -> {
+            md_tbLoadUser();
         }).start();
     }
 
@@ -78,17 +82,29 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Full Name:");
 
+        tf_fullname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_fullnameKeyReleased(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Con-password:");
+        jLabel4.setText("Confirm password");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Contact Number:");
+
+        tf_contact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_contactKeyReleased(evt);
+            }
+        });
 
         bt_saveSystemUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bt_saveSystemUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,15 +118,38 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
             }
         });
 
+        pf_conpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pf_conpasswordKeyReleased(evt);
+            }
+        });
+
+        pf_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pf_passwordKeyReleased(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("User Email:");
+
+        tf_useremail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_useremailKeyReleased(evt);
+            }
+        });
 
         cb_selectType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cb_selectType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "User" }));
         cb_selectType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_selectTypeItemStateChanged(evt);
+            }
+        });
+        cb_selectType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cb_selectTypeKeyReleased(evt);
             }
         });
 
@@ -211,7 +250,6 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tb_loadAdmin);
 
-        tb_loadUser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "System Users", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         tb_loadUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -245,12 +283,12 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(bt_saveSystemUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -291,54 +329,87 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+     int staus = 9;
     private void cb_selectTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_selectTypeItemStateChanged
 
-        bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString());
+       
+        if (cb_selectType.getSelectedIndex() == 0) {
+            staus = 9;
+        } else if (cb_selectType.getSelectedIndex() == 1) {
+            staus = 1;
+        }
+         bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString()+" "+staus);
 
     }//GEN-LAST:event_cb_selectTypeItemStateChanged
 
     PasswordValidator pv = new PasswordValidator();
     private void bt_saveSystemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveSystemUserActionPerformed
-        String pass_1 = new String(pf_password.getPassword());
-        String pass_2 = new String(pf_conpassword.getPassword());
-        int staus = 0000;
-        if (!(tf_useremail.getText().isEmpty() && tf_fullname.getText().isEmpty() && tf_contact.getText().isEmpty() && pass_2.isEmpty())) {
-
-            try {
-                ResultSet rs_haveAccount = MC_DB.search_dataAll("user_account", "username", tf_useremail.getText());
-
-//                while (rs_haveAccount.next()) {
-//                    boolean next = rs_haveAccount.next();
-//                    
-//                }
-                if (rs_haveAccount.first() != true) {
-
-                    if (pass_1 == null ? pass_2 == null : pass_2.equals(pass_1)) {
-
-                    }
-                    if (cb_selectType.getSelectedIndex() == 0) {
-                        staus = 0011;
-                    } else {
-                        staus = 0001;
-                    }
-
-                    MC_DB.insert_data("INSERT INTO `user_account` (`user_type`,`full_name`,`username`,`password`,`contact`,`status`) VALUES ('" + cb_selectType.getSelectedItem().toString() + "','" + tf_fullname.getText().trim() + "','" + tf_useremail.getText().trim().toLowerCase() + "','" + pass_2.trim() + "','" + tf_contact.getText().trim() + "','"+staus+"');");
-                }
-                JOptionPane.showMessageDialog(this, tf_fullname.getText()+" Successfully Add the system");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, cb_selectType.getSelectedItem()+" Not Add the system");
-            }
-
-        } else {
-
-        }
-
+        md_savesystemUser();
     }//GEN-LAST:event_bt_saveSystemUserActionPerformed
 
     private void bt_saveSystemUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveSystemUser1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_saveSystemUser1ActionPerformed
+
+    private void tf_useremailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_useremailKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            cb_selectType.grabFocus();
+            //cb_selectType.setFocusable(true);
+        }
+
+    }//GEN-LAST:event_tf_useremailKeyReleased
+
+    private void cb_selectTypeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cb_selectTypeKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tf_fullname.grabFocus();
+            //cb_selectType.setFocusable(true);
+        }
+
+    }//GEN-LAST:event_cb_selectTypeKeyReleased
+
+    private void tf_fullnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_fullnameKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pf_password.grabFocus();
+            //cb_selectType.setFocusable(true);
+        }
+
+    }//GEN-LAST:event_tf_fullnameKeyReleased
+
+    private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pf_conpassword.grabFocus();
+            //cb_selectType.setFocusable(true);
+        }
+
+    }//GEN-LAST:event_pf_passwordKeyReleased
+
+    private void pf_conpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_conpasswordKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            tf_contact.grabFocus();
+            //cb_selectType.setFocusable(true);
+        }
+
+    }//GEN-LAST:event_pf_conpasswordKeyReleased
+
+    private void tf_contactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_contactKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            int conform = JOptionPane.showConfirmDialog(this, "Are you sure ?", "Conform Message", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (conform == JOptionPane.YES_OPTION) {
+                bt_saveSystemUser.doClick();
+                md_clearAll();
+            }
+
+        }
+
+
+    }//GEN-LAST:event_tf_contactKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -371,23 +442,88 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void md_tbLoadAdmin() {
-        
+
         try {
-            DefaultTableModel dtm=(DefaultTableModel) tb_loadAdmin.getModel();
+            DefaultTableModel dtm = (DefaultTableModel) tb_loadAdmin.getModel();
             ResultSet rs_loadAdmin = MC_DB.search_dataOne("user_account", "user_type", "Administrator");
+            dtm.setRowCount(0);
             while (rs_loadAdmin.next()) {
-                Vector v=new Vector();
+                Vector v = new Vector();
                 v.add(rs_loadAdmin.getString("full_name"));
                 v.add(rs_loadAdmin.getString("username"));
                 v.add(rs_loadAdmin.getString("contact"));
                 v.add("**********");
                 dtm.addRow(v);
-               
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(jp_admin_privilageManagment.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+    }
+
+    private void md_tbLoadUser() {
+
+        try {
+            DefaultTableModel dtm = (DefaultTableModel) tb_loadUser.getModel();
+            ResultSet rs_loadAdmin = MC_DB.search_dataOne("user_account", "user_type", "User");
+            dtm.setRowCount(0);
+            while (rs_loadAdmin.next()) {
+                Vector v = new Vector();
+                v.add(rs_loadAdmin.getString("full_name"));
+                v.add(rs_loadAdmin.getString("username"));
+                v.add(rs_loadAdmin.getString("contact"));
+                v.add("**********");
+                dtm.addRow(v);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(jp_admin_privilageManagment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void md_clearAll() {
+
+        tf_useremail.setText("");
+        cb_selectType.setSelectedIndex(0);
+        tf_fullname.setText("");
+        pf_password.setText("");
+        pf_conpassword.setText("");
+        tf_contact.setText("");
+
+    }
+
+    private void md_savesystemUser() {
+
+        String pass_1 = new String(pf_password.getPassword());
+        String pass_2 = new String(pf_conpassword.getPassword());
+
+        if (!(tf_useremail.getText().isEmpty() && tf_fullname.getText().isEmpty() && tf_contact.getText().isEmpty() && pass_2.isEmpty())) {
+
+            try {
+                ResultSet rs_haveAccount = MC_DB.search_dataAll("user_account", "username", tf_useremail.getText());
+                if (rs_haveAccount.first() != true) {
+
+//                    if (pass_1 == null ? pass_2 == null : pass_2.equals(pass_1)) {
+//
+//                    }
+                    MC_DB.insert_data("INSERT INTO `user_account` (`user_type`,`full_name`,`username`,`password`,`contact`,`status`) VALUES ('" + cb_selectType.getSelectedItem().toString() + "','" + tf_fullname.getText().trim() + "','" + tf_useremail.getText().trim().toLowerCase() + "','" + pass_2.trim() + "','" + tf_contact.getText().trim() + "','" + staus + "');");
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "This user id already exists!");
+
+                }
+                JOptionPane.showMessageDialog(this, tf_fullname.getText() + " Successfully Add the system");
+                md_tbLoadAdmin();
+                md_tbLoadUser();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, cb_selectType.getSelectedItem() + " Not Add the system");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Request Field is Empty!");
+        }
+
     }
 }
