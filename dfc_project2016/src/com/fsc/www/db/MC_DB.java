@@ -127,16 +127,17 @@ public class MC_DB {
         return null;
     }
 
-    public static void update_data(String SqlQuery) {
-
+    public static ResultSet search_dataQuery(String SqlQuery) {
+        ResultSet executeQuery = null;
         try {
             Statement statement = MC_DB.myConnection().createStatement();
-            statement.executeUpdate(SqlQuery);
+            executeQuery = statement.executeQuery(SqlQuery);
         } catch (SQLException ex) {
             Logger.getLogger(MC_DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return executeQuery;
     }
+
     public static void insert_data(String SqlQuery) {
 
         try {

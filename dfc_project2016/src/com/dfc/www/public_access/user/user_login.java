@@ -6,6 +6,7 @@
 package com.dfc.www.public_access.user;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
+import com.dfc.www.private_access.admin.products.User_Home;
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.EmailValidator;
 import com.javav.fsc.zone.PasswordValidator;
@@ -30,7 +31,7 @@ public class user_login extends javax.swing.JFrame {
      */
     String username, password;
     EmailValidator emailV = new EmailValidator();
-    ResultSet rs_username, rs_password;
+    ResultSet rs_username, rs_password, rs_status;
 
     public user_login() {
         initComponents();
@@ -177,7 +178,14 @@ public class user_login extends javax.swing.JFrame {
 
     private void bt_loginaccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginaccessActionPerformed
 
-        md_hi_login();
+        new Thread(() -> {
+            bt_loginaccess.setText("Please Wait!");
+        }).start();
+        new Thread(() -> {
+            md_hi_login();
+        }).start();
+
+
     }//GEN-LAST:event_bt_loginaccessActionPerformed
 
     private void tf_useremailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_useremailActionPerformed
@@ -224,7 +232,13 @@ public class user_login extends javax.swing.JFrame {
     private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            md_hi_login();
+
+            new Thread(() -> {
+                bt_loginaccess.setText("Please Wait!");
+            }).start();
+            new Thread(() -> {
+                md_hi_login();
+            }).start();
         }
 
 //        if (!Arrays.toString(pf_password.getPassword()).isEmpty()) {
@@ -245,6 +259,7 @@ public class user_login extends javax.swing.JFrame {
 
     private void bt_loginaccessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_loginaccessMouseClicked
 
+        //bt_loginaccess.setText("");
 //        username = tf_useremail.getText().toLowerCase();
 //        password = new String(pf_password.getPassword());
 //
@@ -316,7 +331,49 @@ public class user_login extends javax.swing.JFrame {
 
         if (pass_u && pass_p) {
             result = true;
-            md_success_login(result);
+            String stattus = "";
+///////////////////////////////////////////////////////////////////////////////////////            
+            
+            try {
+
+                try {
+                    //rs_username = MC_DB.search_dataOne("user_account", "username", tf_useremail.getText().trim().toLowerCase());
+
+                    rs_status = MC_DB.search_dataQuery("SELECT `status` FROM `user_account` WHERE `username`='" + tf_useremail.getText().trim().toLowerCase() + "'");
+
+                    if (rs_status.next()) {
+                        stattus = rs_status.getString("status");
+                        //staus = Integer.parseInt(rs_status.getString("status"));
+                       
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                
+                if ("1".equals(stattus)) {
+
+                    //User_Home admin = new User_Home(tf_useremail.getText().toLowerCase().trim());
+                    User_Home admin = new User_Home();
+                    admin.setVisible(true);
+                    admin.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(this, "Administrator is logined!");
+                    this.dispose();
+
+                } else if ("9".equals(stattus)) {
+                    jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
+                    admin.setVisible(true);
+                    admin.setAlwaysOnTop(true);
+                    //JOptionPane.showMessageDialog(this, "Administrator is logined!");
+                    this.dispose();
+                }
+
+            } catch (Exception ex) {
+                Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+//////////////////////////////////////////////////////////////////////////////////////////            
+            
 
         } else {
             result = false;
@@ -327,72 +384,43 @@ public class user_login extends javax.swing.JFrame {
 
     private void md_logincheck(String username, String password) {
 
-        new Thread(() -> {
-            try {
-                rs_username = MC_DB.search_dataOne("user_account", "username", username);
-                rs_password = MC_DB.search_dataOne("user_account", "password", password);
+        try {
+            //new Thread(() -> {
+            rs_username = MC_DB.search_dataOne("user_account", "username", username);
+            //}).start();
+            //new Thread(() -> {
+            rs_password = MC_DB.search_dataOne("user_account", "password", password);
+            //}).start();
+            boolean flag_u = false;
+            boolean flag_p = false;
 
-                boolean flag_u = false;
-                boolean flag_p = false;
+            if (rs_password.next()) {
 
-                if (rs_password.next()) {
-
-                    flag_p = true;
-                } else {
-                    JOptionPane.showMessageDialog(this, "You entered password is invalid");
-                }
-
-                if (rs_username.next()) {
-
-                    flag_u = true;
-                } else {
-                    JOptionPane.showMessageDialog(this, "Your entered user email is invalied!");
-                }
-
-                can_login(flag_u, flag_p);
-                System.out.println("OK3");
-                rs_password.close();
-                rs_username.close();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+                flag_p = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "You entered password is invalid");
+                bt_loginaccess.setText("LOGIN HERE");
             }
-        }).start();
 
-    }
+            if (rs_username.next()) {
 
-    private void md_success_login(boolean fresult) {
-        int staus = 0;
-        if (fresult) {
-            try {
-                new Thread(() -> {
-                    rs_username = MC_DB.search_dataOne("user_account", "username", tf_useremail.getText().trim().toLowerCase());
-
-                }).start();
-                if (rs_username.next()) {
-                    staus = rs_username.getInt("status");
-                }
-                if (staus == 1) {
-
-                     jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
-                    admin.setVisible(true);
-                    admin.setAlwaysOnTop(true);
-                    //JOptionPane.showMessageDialog(this, "Administrator is logined!");
-                    this.dispose();
-                    
-                } else if (staus == 9) {
-                    jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
-                    admin.setVisible(true);
-                    admin.setAlwaysOnTop(true);
-                    //JOptionPane.showMessageDialog(this, "Administrator is logined!");
-                    this.dispose();
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+                flag_u = true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Your entered user email is invalied!");
+                 bt_loginaccess.setText("LOGIN HERE");
             }
+
+            can_login(flag_u, flag_p);
+            System.out.println("OK3");
+            rs_password.close();
+            rs_username.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+
+    
 
 }
