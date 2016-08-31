@@ -12,27 +12,14 @@ public class User_Home extends javax.swing.JFrame {
 
     public User_Home() {
         initComponents();
-        setLocationRelativeTo(null);
         loadInvestment();
     }
-    public User_Home(String email) {
-        initComponents();
-        
-        jf_backend_index.us_fullname=email;
-        try {
-           
-                lb_main_userNameLOAD.setText("");
-                lb_main_userNameLOAD.setText(email);
-            
-        } catch (Exception e) {
-        }
-        
-    }
-    public void loadInvestment(){
+
+    public void loadInvestment() {
         add_investment ai = new add_investment();
         ai.setVisible(true);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,21 +226,21 @@ public class User_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void bt_invoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_invoiceActionPerformed
-  
-        new Thread(() -> {
-           try {
-               jp_userMainPanel.removeAll();
-               jp_userMainPanel.setLayout(new FlowLayout());
-               jp_invoice ai = new jp_invoice();
-               ai.setVisible(true);
-               jp_userMainPanel.add(ai);
-               jp_userMainPanel.updateUI();
 
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }).start();
-        
+        new Thread(() -> {
+            try {
+                jp_userMainPanel.removeAll();
+                jp_userMainPanel.setLayout(new FlowLayout());
+                jp_invoice ai = new jp_invoice();
+                ai.setVisible(true);
+                jp_userMainPanel.add(ai);
+                jp_userMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }//GEN-LAST:event_bt_invoiceActionPerformed
 
     /**
