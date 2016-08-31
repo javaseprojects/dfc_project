@@ -3,11 +3,12 @@ package com.dfc.www.private_access.admin.products;
 import com.dfc.www.private_access.admin.cash_account.add_investment;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_withdrawManagement;
+import com.dfc.www.private_access.admin.invoice.jp_invoice;
 import java.awt.FlowLayout;
 
-public class Home extends javax.swing.JFrame {
+public class User_Home extends javax.swing.JFrame {
 
-    public Home() {
+    public User_Home() {
         initComponents();
         setLocationRelativeTo(null);
         //loadInvestment();
@@ -28,8 +29,9 @@ public class Home extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         Cash = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jp_userMainPanel = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
+        bt_invoice = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -82,10 +84,10 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(Cash);
         Cash.setBounds(690, 20, 120, 30);
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setLayout(null);
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 70, 1366, 670);
+        jp_userMainPanel.setBackground(new java.awt.Color(204, 204, 204));
+        jp_userMainPanel.setLayout(null);
+        jPanel1.add(jp_userMainPanel);
+        jp_userMainPanel.setBounds(0, 70, 1366, 670);
 
         jButton4.setText("Withdrawal");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +97,15 @@ public class Home extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4);
         jButton4.setBounds(1020, 20, 170, 30);
+
+        bt_invoice.setText("Invoice");
+        bt_invoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_invoiceActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bt_invoice);
+        bt_invoice.setBounds(20, 30, 100, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,12 +124,12 @@ public class Home extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
+            jp_userMainPanel.removeAll();
+            jp_userMainPanel.setLayout(new FlowLayout());
             Product st = new Product();
             st.setVisible(true);
-            jPanel2.add(st);
-            jPanel2.updateUI();
+            jp_userMainPanel.add(st);
+            jp_userMainPanel.updateUI();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,12 +139,12 @@ public class Home extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
+            jp_userMainPanel.removeAll();
+            jp_userMainPanel.setLayout(new FlowLayout());
             Daily_Qty_add Dq = new Daily_Qty_add();
             Dq.setVisible(true);
-            jPanel2.add(Dq);
-            jPanel2.updateUI();
+            jp_userMainPanel.add(Dq);
+            jp_userMainPanel.updateUI();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,12 +155,12 @@ public class Home extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         try {
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
+            jp_userMainPanel.removeAll();
+            jp_userMainPanel.setLayout(new FlowLayout());
             final_product_balance Bal = new final_product_balance();
             Bal.setVisible(true);
-            jPanel2.add(Bal);
-            jPanel2.updateUI();
+            jp_userMainPanel.add(Bal);
+            jp_userMainPanel.updateUI();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,12 +171,12 @@ public class Home extends javax.swing.JFrame {
     private void CashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CashActionPerformed
 
         try {
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
+            jp_userMainPanel.removeAll();
+            jp_userMainPanel.setLayout(new FlowLayout());
             jp_admin_cashManagement ca = new jp_admin_cashManagement();
             ca.setVisible(true);
-            jPanel2.add(ca);
-            jPanel2.updateUI();
+            jp_userMainPanel.add(ca);
+            jp_userMainPanel.updateUI();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,12 +189,12 @@ public class Home extends javax.swing.JFrame {
 
         try {
 
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
+            jp_userMainPanel.removeAll();
+            jp_userMainPanel.setLayout(new FlowLayout());
             Add_Cat_And_SubCat Adc = new Add_Cat_And_SubCat();
             Adc.setVisible(true);
-            jPanel2.add(Adc);
-            jPanel2.updateUI();
+            jp_userMainPanel.add(Adc);
+            jp_userMainPanel.updateUI();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -194,12 +205,12 @@ public class Home extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         try {
-            jPanel2.removeAll();
-            jPanel2.setLayout(new FlowLayout());
+            jp_userMainPanel.removeAll();
+            jp_userMainPanel.setLayout(new FlowLayout());
             jp_admin_withdrawManagement cw = new jp_admin_withdrawManagement();
             cw.setVisible(true);
-            jPanel2.add(cw);
-            jPanel2.updateUI();
+            jp_userMainPanel.add(cw);
+            jp_userMainPanel.updateUI();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,6 +218,24 @@ public class Home extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void bt_invoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_invoiceActionPerformed
+  
+        new Thread(() -> {
+           try {
+               jp_userMainPanel.removeAll();
+               jp_userMainPanel.setLayout(new FlowLayout());
+               jp_invoice ai = new jp_invoice();
+               ai.setVisible(true);
+               jp_userMainPanel.add(ai);
+               jp_userMainPanel.updateUI();
+
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }).start();
+        
+    }//GEN-LAST:event_bt_invoiceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,32 +254,34 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new User_Home().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cash;
+    private javax.swing.JButton bt_invoice;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jp_userMainPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,12 +18,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sajeewa
  */
-public class invoice extends javax.swing.JPanel {
+public class jp_invoice extends javax.swing.JPanel {
 
     /**
      * Creates new form invoice
      */
-    public invoice() {
+    public jp_invoice() {
         initComponents();
         tf_item_code.grabFocus();
     }
@@ -233,6 +233,11 @@ public class invoice extends javax.swing.JPanel {
         jScrollPane2.setBounds(10, 100, 280, 390);
 
         tf_qty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_qty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_qtyKeyReleased(evt);
+            }
+        });
         jPanel1.add(tf_qty);
         tf_qty.setBounds(750, 50, 230, 40);
 
@@ -363,13 +368,28 @@ public class invoice extends javax.swing.JPanel {
 
         try {
             if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-                md_setItemTable();
+                tf_qty.grabFocus();
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         
     }//GEN-LAST:event_tf_item_codeKeyReleased
+
+    private void tf_qtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_qtyKeyReleased
+        
+        try {
+            if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+                md_setItemTable();
+                tf_item_code.grabFocus();
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_tf_qtyKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -458,14 +478,14 @@ public class invoice extends javax.swing.JPanel {
     //................set item table - start........................................................
     public void md_setItemTable() {
         try {
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code='" + tf_item_code.getText() + "'");
+            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code='" + Integer.parseInt(tf_item_code.getText()) + "'");
             DefaultTableModel dt = (DefaultTableModel)tbl_item.getModel();
             while(rs.next()){
                 Vector v = new Vector();
                 v.add(dt.getRowCount()+1);
                 v.add(tf_item_code.getText());
                 v.add(rs.getString("item_name"));
-                v.add(rs.getString("selling_price"));
+                v.add(rs.getDouble("selling_price"));
                 v.add(tf_qty.getText());
                 v.add(Double.parseDouble(rs.getString("selling_price"))*Integer.parseInt(tf_qty.getText()));
                 dt.addRow(v);
