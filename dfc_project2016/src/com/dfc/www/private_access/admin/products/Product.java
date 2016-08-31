@@ -8,6 +8,7 @@ package com.dfc.www.private_access.admin.products;
 import com.fsc.www.db.MC_DB;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Product extends javax.swing.JPanel {
     int Subcatid;
     String Id2;
     String Id1;
+    int CatidForsave;
 
     /**
      * Creates new form Test_Pannel
@@ -52,8 +54,6 @@ public class Product extends javax.swing.JPanel {
         tbl_product = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jComboBox3_Size = new javax.swing.JComboBox();
-        txtUnitPrice = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         txtSellingPrice = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -68,7 +68,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtBuyingPrice);
-        txtBuyingPrice.setBounds(160, 340, 210, 40);
+        txtBuyingPrice.setBounds(160, 290, 210, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Item Code :");
@@ -78,7 +78,7 @@ public class Product extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Buying Price :");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(40, 340, 130, 40);
+        jLabel2.setBounds(40, 290, 130, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -96,7 +96,7 @@ public class Product extends javax.swing.JPanel {
         jLabel3.setBounds(40, 40, 100, 40);
 
         jComboBox1_SubCat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1_SubCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
+        jComboBox1_SubCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Sub Category~" }));
         jComboBox1_SubCat.setPreferredSize(new java.awt.Dimension(56, 50));
         jComboBox1_SubCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class Product extends javax.swing.JPanel {
         jLabel4.setBounds(40, 240, 130, 40);
 
         jComboBox2_Cat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2_Cat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
+        jComboBox2_Cat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Category~" }));
         jComboBox2_Cat.setPreferredSize(new java.awt.Dimension(56, 50));
         jComboBox2_Cat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +164,7 @@ public class Product extends javax.swing.JPanel {
         jLabel6.setBounds(40, 140, 120, 40);
 
         jComboBox3_Size.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox3_Size.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
+        jComboBox3_Size.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Size~" }));
         jComboBox3_Size.setPreferredSize(new java.awt.Dimension(56, 50));
         jComboBox3_Size.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,20 +174,6 @@ public class Product extends javax.swing.JPanel {
         jPanel1.add(jComboBox3_Size);
         jComboBox3_Size.setBounds(160, 140, 210, 40);
 
-        txtUnitPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtUnitPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUnitPriceActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtUnitPrice);
-        txtUnitPrice.setBounds(160, 290, 210, 40);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Unit Price :");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(40, 290, 130, 40);
-
         txtSellingPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtSellingPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,12 +181,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtSellingPrice);
-        txtSellingPrice.setBounds(160, 390, 210, 40);
+        txtSellingPrice.setBounds(160, 340, 210, 40);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Selling Price :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(40, 390, 130, 40);
+        jLabel8.setBounds(40, 340, 130, 40);
 
         jButton1.setText("jButton1");
         jPanel1.add(jButton1);
@@ -208,6 +194,11 @@ public class Product extends javax.swing.JPanel {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(220, 440, 140, 40);
 
@@ -360,13 +351,50 @@ public class Product extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox3_SizeActionPerformed
 
-    private void txtUnitPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUnitPriceActionPerformed
-
     private void txtSellingPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSellingPriceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSellingPriceActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        try {
+
+            new Thread(() -> {
+
+                try {
+
+                    ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM category WHERE category_name = '" + jComboBox2_Cat.getSelectedItem() + "' ");
+                    while (rs.next()) {
+                        CatidForsave = Integer.parseInt(rs.getString("category_id"));
+                    }
+                    /////////////////////////////////////////////////////////////////////////////////////                
+                    MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item(category_id,item_code,item_name,buying_price,selling_price,status)VALUES('" + CatidForsave + "' "
+                            + ", '" + txtItemcode.getText() + "' "
+                            + ", '" + txtPname.getText() + "' "
+                            + ", '" + Double.parseDouble(txtBuyingPrice.getText()) + "' "
+                            + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
+
+                    jComboBox2_Cat.setSelectedIndex(0);
+                    jComboBox1_SubCat.setSelectedIndex(0);
+                    jComboBox3_Size.setSelectedIndex(0);
+                    txtItemcode.setText("");
+                    txtPname.setText("");
+                    txtBuyingPrice.setText("");
+                    txtSellingPrice.setText("");
+
+                    JOptionPane.showMessageDialog(this, "Saved");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }).start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -381,7 +409,6 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -390,7 +417,6 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JTextField txtItemcode;
     private javax.swing.JTextField txtPname;
     private javax.swing.JTextField txtSellingPrice;
-    private javax.swing.JTextField txtUnitPrice;
     // End of variables declaration//GEN-END:variables
 
     void load_Cat_to_Combobox() {
