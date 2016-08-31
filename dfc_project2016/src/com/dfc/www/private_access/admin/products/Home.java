@@ -10,13 +10,13 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
-        loadInvestment();
+        //loadInvestment();
     }
 
-    public void loadInvestment(){
-        add_investment ai = new add_investment();
-        ai.setVisible(true);
-    }
+//    public void loadInvestment(){
+//        add_investment ai = new add_investment();
+//        ai.setVisible(true);
+//    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

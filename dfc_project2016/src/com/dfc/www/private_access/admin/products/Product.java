@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.dfc.www.private_access.admin.products;
 
-
+import com.fsc.www.db.MC_DB;
 import java.sql.ResultSet;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -15,11 +15,17 @@ import java.sql.ResultSet;
  */
 public class Product extends javax.swing.JPanel {
 
+    int catid;
+    int Subcatid;
+    String Id2;
+    String Id1;
+
     /**
      * Creates new form Test_Pannel
      */
     public Product() {
         initComponents();
+        load_Cat_to_Combobox();
     }
 
     /**
@@ -37,15 +43,15 @@ public class Product extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox1_SubCat = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox2_Cat = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         txtItemcode = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_product = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboBox3_Size = new javax.swing.JComboBox();
         txtUnitPrice = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtSellingPrice = new javax.swing.JTextField();
@@ -62,7 +68,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtBuyingPrice);
-        txtBuyingPrice.setBounds(170, 340, 200, 40);
+        txtBuyingPrice.setBounds(160, 340, 210, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Item Code :");
@@ -82,39 +88,39 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtPname);
-        txtPname.setBounds(170, 240, 200, 40);
+        txtPname.setBounds(160, 240, 210, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Category :");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(40, 40, 100, 40);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(56, 50));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1_SubCat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1_SubCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Sub Category" }));
+        jComboBox1_SubCat.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox1_SubCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboBox1_SubCatActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(170, 90, 200, 40);
+        jPanel1.add(jComboBox1_SubCat);
+        jComboBox1_SubCat.setBounds(160, 90, 210, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Product Name :");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(40, 240, 130, 40);
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
-        jComboBox2.setPreferredSize(new java.awt.Dimension(56, 50));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox2_Cat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox2_Cat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Category" }));
+        jComboBox2_Cat.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox2_Cat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jComboBox2_CatActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(170, 40, 200, 40);
+        jPanel1.add(jComboBox2_Cat);
+        jComboBox2_Cat.setBounds(160, 40, 210, 40);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Sub Category :");
@@ -129,7 +135,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtItemcode);
-        txtItemcode.setBounds(170, 190, 200, 40);
+        txtItemcode.setBounds(160, 190, 210, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,16 +163,16 @@ public class Product extends javax.swing.JPanel {
         jPanel1.add(jLabel6);
         jLabel6.setBounds(40, 140, 120, 40);
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
-        jComboBox3.setPreferredSize(new java.awt.Dimension(56, 50));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox3_Size.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox3_Size.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
+        jComboBox3_Size.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox3_Size.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                jComboBox3_SizeActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox3);
-        jComboBox3.setBounds(170, 140, 200, 40);
+        jPanel1.add(jComboBox3_Size);
+        jComboBox3_Size.setBounds(160, 140, 210, 40);
 
         txtUnitPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtUnitPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +181,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtUnitPrice);
-        txtUnitPrice.setBounds(170, 290, 200, 40);
+        txtUnitPrice.setBounds(160, 290, 210, 40);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Unit Price :");
@@ -189,7 +195,7 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jPanel1.add(txtSellingPrice);
-        txtSellingPrice.setBounds(170, 390, 200, 40);
+        txtSellingPrice.setBounds(160, 390, 210, 40);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Selling Price :");
@@ -225,21 +231,134 @@ public class Product extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPnameActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jComboBox1_SubCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_SubCatActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+        try {
+
+            if (!jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")) {
+
+                new Thread(() -> {
+                    try {
+////////////////////////////////////////////////Seach Category Id for Genarate Item Code///////////
+                        ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM category WHERE category_name ='" + jComboBox2_Cat.getSelectedItem() + "'  ");
+                        while (rs1.next()) {
+                            catid = Integer.parseInt(rs1.getString("category_id"));
+                            Id1 = "" + catid;
+                        }
+
+                        if (catid < 10) {
+                            Id1 = "0" + catid;
+
+                        }
+
+                        if (jComboBox1_SubCat.getSelectedIndex() != 0) {
+                            ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category WHERE sub_category ='" + jComboBox1_SubCat.getSelectedItem() + "'  ");
+                            while (rs2.next()) {
+                                Subcatid = Integer.parseInt(rs2.getString("sub_cat_id"));
+                                Id2 = "" + Subcatid;
+                            }
+                            if (Subcatid < 10) {
+                                Id2 = "0" + Subcatid;
+
+                            }
+                        }
+
+                        ////////////////////////////////////////////////////////////////////////////////
+                        txtItemcode.setText(Id1 + "" + Id2);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
+            } else {
+                txtItemcode.setText("");
+
+            }
+///////////////////////////////////////////////////////////
+
+            if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")
+                    && !jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")) {
+                txtPname.setText("");
+                String scat = jComboBox1_SubCat.getSelectedItem().toString();
+                String cat = jComboBox2_Cat.getSelectedItem().toString();
+
+                txtPname.setText(scat + " " + cat);
+
+            }
+
+        } catch (NullPointerException n) {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jComboBox1_SubCatActionPerformed
+
+    private void jComboBox2_CatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2_CatActionPerformed
+        try {
+            String a = "";
+            if (jComboBox2_Cat.getSelectedIndex() != 0 || jComboBox1_SubCat.getSelectedIndex() != 0) {
+                txtItemcode.setText("");
+            }
+
+            if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")) {
+
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_id FROM category WHERE category_name= '" + jComboBox2_Cat.getSelectedItem() + "' ");
+                while (rs.next()) {
+                    a = rs.getString("category_id");
+                }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_category FROM sub_category WHERE category_id = '" + a + "' ");
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox1_SubCat.getModel();
+                dcm.removeAllElements();
+                dcm.addElement("~Select Sub category~");
+                while (rs1.next()) {
+
+                    dcm.addElement(rs1.getString("sub_category"));
+                }
+
+                if (jComboBox2_Cat.getSelectedItem().equals("Pastry")) {
+                    // DefaultComboBoxModel dcm2 = (DefaultComboBoxModel) jComboBox3_Size.getModel();
+                    jComboBox3_Size.setSelectedIndex(0);
+                    jComboBox3_Size.setEnabled(false);
+                } else {
+                    jComboBox3_Size.setEnabled(true);
+                    load_Size_to_combobox();
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jComboBox2_CatActionPerformed
 
     private void txtItemcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemcodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtItemcodeActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    private void jComboBox3_SizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3_SizeActionPerformed
+        try {
+            if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")
+                    && !jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")
+                    && !jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                txtPname.setText("");
+                String Size = jComboBox3_Size.getSelectedItem().toString();
+                String scat = jComboBox1_SubCat.getSelectedItem().toString();
+                String cat = jComboBox2_Cat.getSelectedItem().toString();
+
+                txtPname.setText(Size + " " + scat + " " + cat);
+
+            }
+
+        } catch (NullPointerException n) {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jComboBox3_SizeActionPerformed
 
     private void txtUnitPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitPriceActionPerformed
         // TODO add your handling code here:
@@ -253,9 +372,9 @@ public class Product extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox1_SubCat;
+    private javax.swing.JComboBox jComboBox2_Cat;
+    private javax.swing.JComboBox jComboBox3_Size;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,4 +392,67 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JTextField txtSellingPrice;
     private javax.swing.JTextField txtUnitPrice;
     // End of variables declaration//GEN-END:variables
+
+    void load_Cat_to_Combobox() {
+
+        new Thread(() -> {
+
+            try {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category");
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox2_Cat.getModel();
+
+                while (rs.next()) {
+                    dcm.addElement((rs.getString("category_name")));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }).start();
+
+    }
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    void load_subcat_to_combobox() {
+
+        new Thread(() -> {
+
+            try {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_category FROM sub_category");
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox1_SubCat.getModel();
+
+                while (rs.next()) {
+                    dcm.addElement((rs.getString("sub_category")));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }).start();
+
+    }
+
+    void load_Size_to_combobox() {
+
+        new Thread(() -> {
+
+            try {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT size FROM size");
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox3_Size.getModel();
+                dcm.removeAllElements();
+                dcm.addElement("~Select Size~");
+                while (rs.next()) {
+                    dcm.addElement((rs.getString("size")));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }).start();
+
+    }
+
 }
