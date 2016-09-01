@@ -6,6 +6,7 @@
 package com.dfc.www.public_access.user;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
+import com.dfc.www.private_access.admin.cash_account.add_investment;
 import com.dfc.www.private_access.admin.products.User_Home;
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.EmailValidator;
@@ -333,7 +334,7 @@ public class user_login extends javax.swing.JFrame {
             result = true;
             String stattus = "";
 ///////////////////////////////////////////////////////////////////////////////////////            
-            
+
             try {
 
                 try {
@@ -344,19 +345,19 @@ public class user_login extends javax.swing.JFrame {
                     if (rs_status.next()) {
                         stattus = rs_status.getString("status");
                         //staus = Integer.parseInt(rs_status.getString("status"));
-                       
+
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                
                 if ("1".equals(stattus)) {
 
                     //User_Home admin = new User_Home(tf_useremail.getText().toLowerCase().trim());
-                    User_Home admin = new User_Home(tf_useremail.getText().toLowerCase());
-                    admin.setVisible(true);
-                    admin.setAlwaysOnTop(true);
+                    add_investment user = new add_investment(tf_useremail.getText().toLowerCase());
+
+                    user.setVisible(true);
+                    user.setAlwaysOnTop(true);
                     //JOptionPane.showMessageDialog(this, "Administrator is logined!");
                     this.dispose();
 
@@ -373,8 +374,6 @@ public class user_login extends javax.swing.JFrame {
             }
 
 //////////////////////////////////////////////////////////////////////////////////////////            
-            
-
         } else {
             result = false;
         }
@@ -407,7 +406,7 @@ public class user_login extends javax.swing.JFrame {
                 flag_u = true;
             } else {
                 JOptionPane.showMessageDialog(this, "Your entered user email is invalied!");
-                 bt_loginaccess.setText("LOGIN HERE");
+                bt_loginaccess.setText("LOGIN HERE");
             }
 
             can_login(flag_u, flag_p);
@@ -420,7 +419,5 @@ public class user_login extends javax.swing.JFrame {
         }
 
     }
-
-    
 
 }
