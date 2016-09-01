@@ -390,10 +390,10 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     PasswordValidator pv = new PasswordValidator();
     private void bt_saveSystemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveSystemUserActionPerformed
-       // new Thread(() -> {
+        // new Thread(() -> {
         //if (new String(pf_password.getPassword()) == new String(pf_conpassword.getPassword())) {
-        md_savesystemUser();
-            //}
+            md_savesystemUser();
+        //}
 
         // }).start();
     }//GEN-LAST:event_bt_saveSystemUserActionPerformed
