@@ -1,6 +1,7 @@
 package com.dfc.www.private_access.admin.cash_account;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
+import com.dfc.www.private_access.admin.products.User_Home;
 import static com.dfc.www.private_access.admin.products.User_Home.lb_main_userNameLOAD;
 import com.fsc.www.db.MC_DB;
 import java.awt.event.ActionEvent;
@@ -14,9 +15,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-
 public class add_investment extends javax.swing.JFrame {
-public static String us_fullname;
+
+    public static String us_fullname;
     String C_Time, C_Date;
 
     public add_investment() {
@@ -270,8 +271,8 @@ public static String us_fullname;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        add_investment ai = new add_investment(lbl_looged_user.getText());
-        ai.setVisible(true);
+        User_Home uh = new User_Home(lbl_looged_user.getText());
+        uh.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -282,9 +283,8 @@ public static String us_fullname;
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
 
-        
-        add_investment ai = new add_investment(lbl_looged_user.getText());
-        ai.setVisible(true);
+        User_Home uh = new User_Home(lbl_looged_user.getText());
+        uh.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
