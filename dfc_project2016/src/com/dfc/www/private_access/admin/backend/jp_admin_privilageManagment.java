@@ -7,6 +7,7 @@ package com.dfc.www.private_access.admin.backend;
 
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.PasswordValidator;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,10 +58,10 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         tf_useremail = new javax.swing.JTextField();
         cb_selectType = new javax.swing.JComboBox();
-        jLabel8 = new javax.swing.JLabel();
+        lb_viewPasswordStatus = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lb_viewconPasswordStatus = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_loadAdmin = new javax.swing.JTable();
@@ -172,7 +173,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setText("A-Z a-z 1-9 #@$% Only ");
+        lb_viewPasswordStatus.setText("A-Z a-z 1-9 #@$% Only ");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,7 +183,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("S");
 
-        jLabel10.setText("A-Z a-z 1-9 #@$% Only ");
+        lb_viewconPasswordStatus.setText("A-Z a-z 1-9 #@$% Only ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,12 +208,12 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bt_saveSystemUser, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lb_viewPasswordStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lb_viewconPasswordStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -238,7 +239,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addComponent(pf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(lb_viewPasswordStatus)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +247,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addComponent(pf_conpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
+                    .addComponent(lb_viewconPasswordStatus)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,7 +390,12 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     PasswordValidator pv = new PasswordValidator();
     private void bt_saveSystemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveSystemUserActionPerformed
+       // new Thread(() -> {
+        //if (new String(pf_password.getPassword()) == new String(pf_conpassword.getPassword())) {
         md_savesystemUser();
+            //}
+
+        // }).start();
     }//GEN-LAST:event_bt_saveSystemUserActionPerformed
 
     private void bt_saveSystemUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveSystemUser1ActionPerformed
@@ -416,11 +422,11 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     private void tf_fullnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_fullnameKeyReleased
 
-        if (tf_fullname.getText().length()>=100) {
+        if (tf_fullname.getText().length() >= 100) {
             evt.consume();
             System.out.println("conSSS");
         }
-        
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             pf_password.grabFocus();
             //cb_selectType.setFocusable(true);
@@ -428,7 +434,17 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tf_fullnameKeyReleased
 
+    PasswordValidator pvc = new PasswordValidator();
+
+    //String pass=null;
     private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
+
+        if (pvc.validate(new String(pf_password.getPassword())) == true) {
+            lb_viewPasswordStatus.setForeground(new Color(118, 255, 3));
+            //System.out.println("password check! : " + new String(pf_password.getPassword()));
+        } else {
+            lb_viewPasswordStatus.setForeground(new Color(255, 0, 0));
+        }
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             pf_conpassword.grabFocus();
@@ -438,6 +454,13 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     }//GEN-LAST:event_pf_passwordKeyReleased
 
     private void pf_conpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_conpasswordKeyReleased
+
+        if (pvc.validate(new String(pf_password.getPassword())) == true) {
+            lb_viewconPasswordStatus.setForeground(new Color(118, 255, 3));
+            //System.out.println("password check! : " + new String(pf_password.getPassword()));
+        } else {
+            lb_viewconPasswordStatus.setForeground(new Color(255, 0, 0));
+        }
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             tf_contact.grabFocus();
@@ -471,8 +494,8 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
             try {
                 ResultSet rs_getpassword = MC_DB.search_dataOne("user_account", "username", data_email.toLowerCase());
-                String password=rs_getpassword.getString("password");
-                
+                String password = rs_getpassword.getString("password");
+
             } catch (SQLException ex) {
                 Logger.getLogger(jp_admin_privilageManagment.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -483,10 +506,10 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     private void tf_contactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_contactKeyTyped
 
-        if (tf_contact.getText().length()<=10) {
+        if (tf_contact.getText().length() >= 10) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_tf_contactKeyTyped
 
 
@@ -496,7 +519,6 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     private javax.swing.JComboBox cb_selectType;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -505,12 +527,13 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lb_viewPasswordStatus;
+    private javax.swing.JLabel lb_viewconPasswordStatus;
     private javax.swing.JPasswordField pf_conpassword;
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JTable tb_loadAdmin;

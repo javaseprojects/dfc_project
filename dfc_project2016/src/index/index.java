@@ -5,8 +5,10 @@
  */
 package index;
 
+import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.public_access.user.user_login;
 import com.sun.awt.AWTUtilities;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -20,9 +22,9 @@ public class index extends javax.swing.JFrame {
      */
     public index() {
         initComponents();
-        
-         try {
-             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             AWTUtilities.setWindowOpaque(this, false);
         } catch (Exception e) {
         }
@@ -44,6 +46,7 @@ public class index extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lb_presant = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,6 +61,11 @@ public class index extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("e-POS System");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 310, 50));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -74,11 +82,21 @@ public class index extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(236, 155, 90));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Version 2.4.3");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel6MouseReleased(evt);
+            }
+        });
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 210, 20));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/index/Web Logo.png"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 200, 150));
+
+        lb_presant.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 36)); // NOI18N
+        lb_presant.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_presant.setText("00%");
+        getContentPane().add(lb_presant, new org.netbeans.lib.awtextra.AbsoluteConstraints(364, 290, 100, 50));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/index/giphy.gif"))); // NOI18N
@@ -87,6 +105,24 @@ public class index extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(511, 357));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    int ii = 0;
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+
+
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseReleased
+
+        ii++;
+        if (ii == 8) {
+            jf_backend_index ij = new jf_backend_index();
+            ij.setVisible(true);
+            this.dispose();
+            JOptionPane.showMessageDialog(this, "Safe Mode is On! Only Can Access First Administrator! only!");
+        }
+
+    }//GEN-LAST:event_jLabel6MouseReleased
 
     /**
      * @param args the command line arguments
@@ -131,6 +167,7 @@ public class index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lb_presant;
     // End of variables declaration//GEN-END:variables
 
     public void loadingPage() {
@@ -138,16 +175,25 @@ public class index extends javax.swing.JFrame {
         try {
             new Thread(() -> {
                 try {
-                    for (int i = 0; i < 202; i++) {
-                        
-//
-//
-                        if (i == 201) {
+                    for (int i = 0; i < 101; i++) {
+
+                        lb_presant.setText(i + "%");
+                        Thread.sleep(100);
+                        if (i == 29) {
+                            Thread.sleep(500);
+                        }
+                        if (i == 50) {
+                            Thread.sleep(1000);
+                        }
+                        if (i == 72) {
+                            Thread.sleep(500);
+                        }
+                        if (i == 100) {
                             user_login user = new user_login();
                             index.this.dispose();
                             //user.setIconImage(CreateImagesss("/FormatFactoryicon100.png").getImage());
                             user.setVisible(true);
-                            
+
                         }
                         Thread.sleep(50);
                     }

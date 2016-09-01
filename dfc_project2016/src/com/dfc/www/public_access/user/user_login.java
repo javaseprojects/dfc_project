@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -36,6 +37,13 @@ public class user_login extends javax.swing.JFrame {
 
     public user_login() {
         initComponents();
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            AWTUtilities.setWindowOpaque(this, false);
+        } catch (Exception e) {
+        }
+
         tf_useremail.grabFocus();
 
     }
@@ -86,6 +94,9 @@ public class user_login extends javax.swing.JFrame {
 
         tf_useremail.setBackground(new java.awt.Color(250, 250, 250));
         tf_useremail.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        tf_useremail.setMaximumSize(new java.awt.Dimension(300, 40));
+        tf_useremail.setMinimumSize(new java.awt.Dimension(300, 40));
+        tf_useremail.setPreferredSize(new java.awt.Dimension(300, 40));
         tf_useremail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_useremailActionPerformed(evt);
@@ -164,6 +175,9 @@ public class user_login extends javax.swing.JFrame {
         pf_password.setBackground(new java.awt.Color(250, 250, 250));
         pf_password.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         pf_password.setEnabled(false);
+        pf_password.setMaximumSize(new java.awt.Dimension(300, 40));
+        pf_password.setMinimumSize(new java.awt.Dimension(300, 40));
+        pf_password.setPreferredSize(new java.awt.Dimension(300, 40));
         pf_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 pf_passwordKeyReleased(evt);
@@ -232,14 +246,41 @@ public class user_login extends javax.swing.JFrame {
     PasswordValidator pv = new PasswordValidator();
     private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (pv.validate(new String(pf_password.getPassword())) == true) {
+            pf_password.setBackground(new Color(0, 230, 118));
+            //System.out.println("password check! : " + new String(pf_password.getPassword()));
+            //=======================================================
 
-            new Thread(() -> {
-                bt_loginaccess.setText("Please Wait!");
-            }).start();
-            new Thread(() -> {
-                md_hi_login();
-            }).start();
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+                new Thread(() -> {
+                    try {
+                        while (true) {
+                            bt_loginaccess.setText("Please Wait!");
+                            Thread.sleep(500);
+                            bt_loginaccess.setText("Please Wait!.");
+                            Thread.sleep(700);
+                            bt_loginaccess.setText("Please Wait!..");
+                            Thread.sleep(1000);
+                            bt_loginaccess.setText("Please Wait!..");
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }).start();
+                new Thread(() -> {
+
+                    if (pv.validate(new String(pf_password.getPassword()))) {
+                        md_hi_login();
+                    }
+
+                }).start();
+            }
+
+            //=======================================================
+        } else {
+            pf_password.setBackground(new Color(255, 0, 0));
         }
 
 //        if (!Arrays.toString(pf_password.getPassword()).isEmpty()) {

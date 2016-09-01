@@ -3,10 +3,12 @@ package com.dfc.www.private_access.admin.backend;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.public_access.user.user_login;
 import com.fsc.www.db.MC_DB;
+import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -17,24 +19,39 @@ public class jf_backend_index extends javax.swing.JFrame {
     /**
      * Creates new form jf_backend_index
      */
-    
     public static String us_fullname;
+
     public jf_backend_index() {
+        
+        
         initComponents();
 
-    }
-    public jf_backend_index(String email) {
-        initComponents();
-        
-        jf_backend_index.us_fullname=email;
         try {
-           
-                lb_main_administratorNameLOAD.setText("");
-                lb_main_administratorNameLOAD.setText(email);
-            
+             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            AWTUtilities.setWindowOpaque(this, false);
         } catch (Exception e) {
         }
         
+    }
+
+    public jf_backend_index(String email) {
+        initComponents();
+
+        try {
+             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            AWTUtilities.setWindowOpaque(this, false);
+        } catch (Exception e) {
+        }
+        
+        jf_backend_index.us_fullname = email;
+        try {
+
+            lb_main_administratorNameLOAD.setText("");
+            lb_main_administratorNameLOAD.setText(email);
+
+        } catch (Exception e) {
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +107,9 @@ public class jf_backend_index extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jPanel5MouseExited(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel5MouseReleased(evt);
+            }
         });
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -126,6 +146,11 @@ public class jf_backend_index extends javax.swing.JFrame {
                 jPanel7MouseMoved(evt);
             }
         });
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel7MouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -147,6 +172,11 @@ public class jf_backend_index extends javax.swing.JFrame {
                 jPanel8MouseMoved(evt);
             }
         });
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel8MouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -163,9 +193,11 @@ public class jf_backend_index extends javax.swing.JFrame {
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 35));
 
-        lb_main_administratorNameLOAD.setForeground(new java.awt.Color(255, 255, 255));
+        lb_main_administratorNameLOAD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_main_administratorNameLOAD.setForeground(new java.awt.Color(0, 204, 255));
+        lb_main_administratorNameLOAD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_main_administratorNameLOAD.setText("WelCome Administrator");
-        jPanel2.add(lb_main_administratorNameLOAD, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 10, 210, 30));
+        jPanel2.add(lb_main_administratorNameLOAD, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, 240, 30));
 
         jPanel4.setBackground(new java.awt.Color(145, 145, 145));
         jPanel4.setLayout(new java.awt.CardLayout());
@@ -450,6 +482,9 @@ public class jf_backend_index extends javax.swing.JFrame {
 
     private void jPanel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseReleased
 
+        this.dispose();
+        jf_backend_index jp = new jf_backend_index(lb_main_administratorNameLOAD.getText());
+        jp.setVisible(true);
 
     }//GEN-LAST:event_jPanel6MouseReleased
 
@@ -470,6 +505,30 @@ public class jf_backend_index extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jLabel2MouseReleased
+
+    private void jPanel7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseReleased
+
+        this.dispose();
+        jf_backend_index jp = new jf_backend_index(lb_main_administratorNameLOAD.getText());
+        jp.setVisible(true);
+
+    }//GEN-LAST:event_jPanel7MouseReleased
+
+    private void jPanel8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseReleased
+
+        this.dispose();
+        jf_backend_index jp = new jf_backend_index(lb_main_administratorNameLOAD.getText());
+        jp.setVisible(true);
+
+    }//GEN-LAST:event_jPanel8MouseReleased
+
+    private void jPanel5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseReleased
+
+        this.dispose();
+        jf_backend_index jp = new jf_backend_index(lb_main_administratorNameLOAD.getText());
+        jp.setVisible(true);
+
+    }//GEN-LAST:event_jPanel5MouseReleased
 
     /**
      * @param args the command line arguments

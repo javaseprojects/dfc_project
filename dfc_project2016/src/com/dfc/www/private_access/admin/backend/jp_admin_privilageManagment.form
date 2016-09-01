@@ -68,7 +68,7 @@
                               <Component id="jLabel3" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                               <Component id="bt_saveSystemUser" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel8" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lb_viewPasswordStatus" min="-2" pref="200" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel7" min="-2" pref="23" max="-2" attributes="0"/>
                               </Group>
@@ -76,7 +76,7 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel10" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="lb_viewconPasswordStatus" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel9" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
@@ -106,7 +106,7 @@
                   <Component id="pf_password" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_viewPasswordStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -115,7 +115,7 @@
                   <Component id="pf_conpassword" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_viewconPasswordStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="9" max="32767" attributes="0"/>
@@ -315,7 +315,7 @@
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cb_selectTypeKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lb_viewPasswordStatus">
           <Properties>
             <Property name="text" type="java.lang.String" value="A-Z a-z 1-9 #@$% Only "/>
           </Properties>
@@ -342,7 +342,7 @@
             <Property name="text" type="java.lang.String" value="S"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="lb_viewconPasswordStatus">
           <Properties>
             <Property name="text" type="java.lang.String" value="A-Z a-z 1-9 #@$% Only "/>
           </Properties>
