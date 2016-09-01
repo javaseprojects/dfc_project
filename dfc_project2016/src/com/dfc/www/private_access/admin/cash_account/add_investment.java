@@ -271,9 +271,10 @@ public class add_investment extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        this.dispose();
         User_Home uh = new User_Home(lbl_looged_user.getText());
         uh.setVisible(true);
-        this.dispose();
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -283,9 +284,10 @@ public class add_investment extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
 
+        this.dispose();
         User_Home uh = new User_Home(lbl_looged_user.getText());
         uh.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
