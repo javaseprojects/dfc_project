@@ -12,12 +12,12 @@ public class User_Home extends javax.swing.JFrame {
 
     public User_Home() {
         initComponents();
-        loadInvestment();
+       // loadInvestment();
     }
 
     public User_Home(String email) {
         initComponents();
-        loadInvestment();
+       // loadInvestment();
 
         jf_backend_index.us_fullname = email;
         try {
@@ -30,10 +30,10 @@ public class User_Home extends javax.swing.JFrame {
 
     }
 
-    public void loadInvestment() {
-        add_investment ai = new add_investment();
-        ai.setVisible(true);
-    }
+//    public void loadInvestment() {
+//        add_investment ai = new add_investment();
+//        ai.setVisible(true);
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

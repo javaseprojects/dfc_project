@@ -6,6 +6,7 @@ import static com.dfc.www.private_access.admin.products.User_Home.lb_main_userNa
 import com.fsc.www.db.MC_DB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ public class add_investment extends javax.swing.JFrame {
 
     public static String us_fullname;
     String C_Time, C_Date;
+    int ADMIN_USER_ID, MAX_INVSET_ID, MAX_CASH_ID;
 
     public add_investment() {
         initComponents();
@@ -62,46 +64,40 @@ public class add_investment extends javax.swing.JFrame {
     }
     //get Current Date and Time
 
-    //get logged user id
-    public int getUserId(String u_mail) {
+    //administrator login checking
+    public void getUsPw() {
         try {
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT user_account_id FROM user_account WHERE username='" + u_mail + "'");
-            if (rs.next()) {
-                return rs.getInt("user_account_id");
-            } else {
-                return 0;
+            String userName = txt_username.getText();
+            String userPassword = txt_password.getText();
+
+            ResultSet rs_username = MC_DB.search_dataOne("user_account", "username", userName);
+            ResultSet rs_password = MC_DB.search_dataOne("user_account", "password", userPassword);
+
+            if (rs_username.next() && rs_password.next()) {
+                String user_type = rs_username.getString("user_type");
+                if (user_type.equals("Administrator")) {
+
+                    ADMIN_USER_ID = rs_username.getInt("user_account_id");
+
+                    JOptionPane.showMessageDialog(this, userName + " Administrator login successfully Confirmed", "Information Message", JOptionPane.INFORMATION_MESSAGE);
+
+                    txt_invest_amount.setEnabled(true);
+                    txt_invest_amount.grabFocus();
+                    btn_payment.setEnabled(true);
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return 0;
-        }
-    }
-    //get logged user id
-
-    //add investment
-    public void addInvestment(double investmnet) {
-        int confirm = JOptionPane.showConfirmDialog(this, "Do you want to this Payment", "Payment Confirmation", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            int uid = (getUserId(jf_backend_index.lb_main_administratorNameLOAD.getText()));
-            if (uid != 0) {
-                try {
-                    MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO investment (invest_amount,credited_amount,invest_date,invest_time,status,user_account_id) VALUES ('" + investmnet + "','" + investmnet + "','" + C_Date + "','" + C_Time + "','1','" + uid + "')");
-                    // JOptionPane.showMessageDialog(this, "Payment has been succssfully added","Success Information",JOptionPane.INFORMATION_MESSAGE)s;
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
 
     }
-    //add investment
 
+    //administrator login checking
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txt_password = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -109,8 +105,9 @@ public class add_investment extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         lbl_looged_user = new javax.swing.JLabel();
         lbl_user_mail = new javax.swing.JLabel();
+        txt_password = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_payment = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txt_invest_amount = new javax.swing.JTextField();
 
@@ -118,8 +115,6 @@ public class add_investment extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 127, 0));
-
-        txt_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,7 +155,13 @@ public class add_investment extends javax.swing.JFrame {
         lbl_looged_user.setText("Logged User :");
 
         lbl_user_mail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_user_mail.setText("malindasepcjt@gmail.com");
+        lbl_user_mail.setText("Logged User :");
+
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,28 +172,28 @@ public class add_investment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lbl_looged_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_user_mail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbl_user_mail)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_username, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_looged_user)
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_looged_user)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_user_mail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbl_user_mail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_looged_user)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,22 +201,23 @@ public class add_investment extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(25, 25, 25))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 87, 34));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
-        jButton1.setText("Add Payment");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_payment.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_payment.setForeground(new java.awt.Color(255, 255, 255));
+        btn_payment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
+        btn_payment.setText("Add Payment");
+        btn_payment.setEnabled(false);
+        btn_payment.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_payment.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
+        btn_payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_paymentActionPerformed(evt);
             }
         });
 
@@ -235,7 +237,7 @@ public class add_investment extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(txt_invest_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -246,7 +248,7 @@ public class add_investment extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_invest_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -265,30 +267,37 @@ public class add_investment extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(320, 483));
+        setSize(new java.awt.Dimension(320, 465));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_paymentActionPerformed
 
-        this.dispose();
-        User_Home uh = new User_Home(lbl_looged_user.getText());
-        uh.setVisible(true);
-        
+        addInvestmentPayment();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_btn_paymentActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+        getUsPw();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
 
         this.dispose();
-        User_Home uh = new User_Home(lbl_looged_user.getText());
-        uh.setVisible(true);
-        
+        new User_Home(lbl_looged_user.getText()).setVisible(true);
+
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void txt_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            getUsPw();
+        }
+
+    }//GEN-LAST:event_txt_passwordKeyReleased
 
     /**
      * @param args the command line arguments
@@ -326,7 +335,7 @@ public class add_investment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_payment;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -337,7 +346,78 @@ public class add_investment extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_looged_user;
     private javax.swing.JLabel lbl_user_mail;
     private javax.swing.JTextField txt_invest_amount;
-    private javax.swing.JTextField txt_password;
+    private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
+
+    private void addInvestmentPayment() {
+        if (!txt_invest_amount.getText().isEmpty()) {
+            double investment_payment = Double.parseDouble(txt_invest_amount.getText());
+            String description = txt_username.getText() + " INVESTED";
+            try {
+                //saving investment payment to the investment table
+                new Thread(() -> {
+                    try {
+                        MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO investment (invest_amount,credited_amount,invest_date,invest_time,status,user_account_id) VALUES ('" + investment_payment + "','" + investment_payment + "','" + C_Date + "','" + C_Time + "','1','" + ADMIN_USER_ID + "')");
+                        System.out.println("Investment Save Query Excuted");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+//                }).start();
+                    //saving investment payment to the investment table
+
+                    //get max investment id from the investment table
+//                new Thread(() -> {
+                    try {
+                        ResultSet rs_max_invest = MC_DB.myConnection().createStatement().executeQuery("SELECT MAX(investment_id) AS maxInvestID FROM investment");
+                        if (rs_max_invest.next()) {
+                            this.MAX_INVSET_ID = rs_max_invest.getInt("maxInvestID");
+                            System.out.println("Investment Max Id Query Executed");
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+//                }).start();
+                    //get max investment id from the investment table
+
+                    //saving the investment payment to the cash account
+//                new Thread(() -> {
+                    MC_DB.insert_data("INSERT INTO cash_account (cash_amount,status,cash_date,description) VALUES ('" + investment_payment + "','1','" + C_Date + "','" + description + "')");
+                    System.out.println("Cash Account Query Executed");
+//                }).start();
+                    //saving the investment payment to the cash account
+
+                    //get max cash id from the cash table
+//                new Thread(() -> {
+                    try {
+                        ResultSet rs_max_cash_id = MC_DB.myConnection().createStatement().executeQuery("SELECT MAX(cash_id) AS maxCashID FROM cash_account");
+                        if (rs_max_cash_id.next()) {
+                            this.MAX_CASH_ID = rs_max_cash_id.getInt("maxCashID");
+                            System.out.println("Max Cash id Query Executed");
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+//                }).start();
+                    //get max cash id from the cash table
+
+                    //save data cash and investment associate table
+//                new Thread(() -> {
+                    MC_DB.insert_data("INSERT INTO cash_account_has_investment (cash_id,investment_id,amount) VALUES ('" + this.MAX_CASH_ID + "','" + this.MAX_INVSET_ID + "','" + investment_payment + "')");
+                    System.out.println("Cash-Investment Associate Query Executed");
+//                }).start();
+                    //save data cash and investment associate table
+                }).start();
+
+                this.dispose();
+                User_Home uh = new User_Home(lbl_looged_user.getText());
+                uh.setVisible(true);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Amount found,Please enter valid amount", "Warning Message", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 }
