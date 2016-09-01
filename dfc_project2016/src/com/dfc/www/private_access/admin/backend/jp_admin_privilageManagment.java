@@ -10,20 +10,18 @@ import com.javav.fsc.zone.PasswordValidator;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
+/*
  * @author deepalsuranga
  */
 public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
-    /**
+    /*
      * Creates new form jp_admin_privilageManagment
      */
     public jp_admin_privilageManagment() {
@@ -69,8 +67,11 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_loadUser = new javax.swing.JTable();
         bt_saveSystemUser1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tf_emailShow = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+        tf_passwordShow = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(245, 123, 70));
 
@@ -82,6 +83,9 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Full Name:");
 
+        tf_fullname.setMaximumSize(new java.awt.Dimension(300, 40));
+        tf_fullname.setMinimumSize(new java.awt.Dimension(300, 40));
+        tf_fullname.setPreferredSize(new java.awt.Dimension(300, 40));
         tf_fullname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_fullnameKeyReleased(evt);
@@ -100,9 +104,15 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Contact Number:");
 
+        tf_contact.setMaximumSize(new java.awt.Dimension(300, 40));
+        tf_contact.setMinimumSize(new java.awt.Dimension(300, 40));
+        tf_contact.setPreferredSize(new java.awt.Dimension(300, 40));
         tf_contact.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_contactKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_contactKeyTyped(evt);
             }
         });
 
@@ -118,12 +128,18 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
             }
         });
 
+        pf_conpassword.setMaximumSize(new java.awt.Dimension(300, 40));
+        pf_conpassword.setMinimumSize(new java.awt.Dimension(300, 40));
+        pf_conpassword.setPreferredSize(new java.awt.Dimension(300, 40));
         pf_conpassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 pf_conpasswordKeyReleased(evt);
             }
         });
 
+        pf_password.setMaximumSize(new java.awt.Dimension(300, 40));
+        pf_password.setMinimumSize(new java.awt.Dimension(300, 40));
+        pf_password.setPreferredSize(new java.awt.Dimension(300, 40));
         pf_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 pf_passwordKeyReleased(evt);
@@ -134,6 +150,9 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("User Email:");
 
+        tf_useremail.setMaximumSize(new java.awt.Dimension(300, 40));
+        tf_useremail.setMinimumSize(new java.awt.Dimension(300, 40));
+        tf_useremail.setPreferredSize(new java.awt.Dimension(300, 40));
         tf_useremail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_useremailKeyReleased(evt);
@@ -175,15 +194,15 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                     .addComponent(cb_selectType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_useremail)
+                            .addComponent(tf_useremail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tf_fullname)
-                            .addComponent(pf_password)
+                            .addComponent(tf_fullname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pf_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pf_conpassword)
+                            .addComponent(pf_conpassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tf_contact)
+                            .addComponent(tf_contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bt_saveSystemUser, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,6 +277,11 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 "Full Name", "Email", "Contact", "Password"
             }
         ));
+        tb_loadUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_loadUserMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_loadUser);
 
         bt_saveSystemUser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -272,7 +296,15 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Email Address:");
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Active", "Deactive" }));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Password:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,13 +312,19 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(tf_emailShow))
                         .addGap(18, 18, 18)
-                        .addComponent(bt_saveSystemUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tf_passwordShow, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bt_saveSystemUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -297,13 +335,23 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(bt_saveSystemUser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_saveSystemUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_emailShow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_passwordShow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -314,31 +362,28 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
      int staus = 9;
     private void cb_selectTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_selectTypeItemStateChanged
 
-       
         if (cb_selectType.getSelectedIndex() == 0) {
             staus = 9;
         } else if (cb_selectType.getSelectedIndex() == 1) {
             staus = 1;
         }
-         bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString()+" "+staus);
+        bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString() + " " + staus);
 
     }//GEN-LAST:event_cb_selectTypeItemStateChanged
 
@@ -371,6 +416,11 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     private void tf_fullnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_fullnameKeyReleased
 
+        if (tf_fullname.getText().length()>=100) {
+            evt.consume();
+            System.out.println("conSSS");
+        }
+        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             pf_password.grabFocus();
             //cb_selectType.setFocusable(true);
@@ -411,6 +461,34 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tf_contactKeyReleased
 
+    private void tb_loadUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_loadUserMouseClicked
+
+        DefaultTableModel dtm = (DefaultTableModel) tb_loadUser.getModel();
+        //tb_loadUser.getSelectedRow();
+        String data_email = (String) dtm.getValueAt(tb_loadUser.getSelectedRow(), 1);
+
+        new Thread(() -> {
+
+            try {
+                ResultSet rs_getpassword = MC_DB.search_dataOne("user_account", "username", data_email.toLowerCase());
+                String password=rs_getpassword.getString("password");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(jp_admin_privilageManagment.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
+
+
+    }//GEN-LAST:event_tb_loadUserMouseClicked
+
+    private void tf_contactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_contactKeyTyped
+
+        if (tf_contact.getText().length()<=10) {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_tf_contactKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_saveSystemUser;
@@ -419,6 +497,8 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -431,13 +511,14 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPasswordField pf_conpassword;
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JTable tb_loadAdmin;
     private javax.swing.JTable tb_loadUser;
     private javax.swing.JTextField tf_contact;
+    private javax.swing.JTextField tf_emailShow;
     private javax.swing.JTextField tf_fullname;
+    private javax.swing.JTextField tf_passwordShow;
     private javax.swing.JTextField tf_useremail;
     // End of variables declaration//GEN-END:variables
 
