@@ -21,17 +21,18 @@ public class add_investment extends javax.swing.JFrame {
     public static String us_fullname;
     String C_Time, C_Date;
     int ADMIN_USER_ID, MAX_INVSET_ID, MAX_CASH_ID;
+    boolean ADMIN_LOGGED_STATUS;
 
     public add_investment() {
         initComponents();
         this.setAlwaysOnTop(true);
-        showTime();
-        getCurrentDate();
     }
 
     public add_investment(String email) {
         initComponents();
-
+        showTime();
+        getCurrentDate();
+        txt_username.grabFocus();
         add_investment.us_fullname = email;
         try {
 
@@ -81,9 +82,10 @@ public class add_investment extends javax.swing.JFrame {
 
                     JOptionPane.showMessageDialog(this, userName + " Administrator login successfully Confirmed", "Information Message", JOptionPane.INFORMATION_MESSAGE);
 
+                    ADMIN_LOGGED_STATUS = true;
                     txt_invest_amount.setEnabled(true);
-                    txt_invest_amount.grabFocus();
                     btn_payment.setEnabled(true);
+                    txt_invest_amount.grabFocus();
                 }
             }
         } catch (SQLException ex) {
@@ -91,7 +93,6 @@ public class add_investment extends javax.swing.JFrame {
         }
 
     }
-
     //administrator login checking
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -121,6 +122,11 @@ public class add_investment extends javax.swing.JFrame {
         jLabel2.setText("Username :");
 
         txt_username.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_usernameKeyReleased(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(255, 0, 0));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -227,6 +233,14 @@ public class add_investment extends javax.swing.JFrame {
 
         txt_invest_amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_invest_amount.setEnabled(false);
+        txt_invest_amount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_invest_amountKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_invest_amountKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -273,7 +287,14 @@ public class add_investment extends javax.swing.JFrame {
 
     private void btn_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_paymentActionPerformed
 
-        addInvestmentPayment();
+        if (this.ADMIN_LOGGED_STATUS) {
+            int confirm_response = JOptionPane.showConfirmDialog(this, "Do you want to add this " + txt_invest_amount.getText() + " payment?", "Payment Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirm_response == JOptionPane.YES_OPTION) {
+                addInvestmentPayment();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Login as Administrator", "Warining Message", JOptionPane.WARNING_MESSAGE);
+        }
 
 
     }//GEN-LAST:event_btn_paymentActionPerformed
@@ -298,6 +319,38 @@ public class add_investment extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txt_passwordKeyReleased
+
+    private void txt_usernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_password.grabFocus();
+        }
+
+    }//GEN-LAST:event_txt_usernameKeyReleased
+
+    private void txt_invest_amountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_invest_amountKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            if (this.ADMIN_LOGGED_STATUS) {
+                int confirm_response = JOptionPane.showConfirmDialog(this, "Do you want to add this " + txt_invest_amount.getText() + " payment?", "Payment Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (confirm_response == JOptionPane.YES_OPTION) {
+                    addInvestmentPayment();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Login as Administrator", "Warining Message", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txt_invest_amountKeyReleased
+
+    private void txt_invest_amountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_invest_amountKeyTyped
+
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txt_invest_amountKeyTyped
 
     /**
      * @param args the command line arguments
@@ -355,6 +408,7 @@ public class add_investment extends javax.swing.JFrame {
             double investment_payment = Double.parseDouble(txt_invest_amount.getText());
             String description = txt_username.getText() + " INVESTED";
             try {
+
                 //saving investment payment to the investment table
                 new Thread(() -> {
                     try {
@@ -407,11 +461,10 @@ public class add_investment extends javax.swing.JFrame {
                     System.out.println("Cash-Investment Associate Query Executed");
 //                }).start();
                     //save data cash and investment associate table
+                    this.dispose();
+                    User_Home uh = new User_Home(lbl_looged_user.getText());
+                    uh.setVisible(true);
                 }).start();
-
-                this.dispose();
-                User_Home uh = new User_Home(lbl_looged_user.getText());
-                uh.setVisible(true);
 
             } catch (Exception e) {
                 e.printStackTrace();
