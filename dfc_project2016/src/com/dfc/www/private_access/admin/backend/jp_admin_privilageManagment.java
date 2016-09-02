@@ -270,6 +270,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tb_loadAdmin);
 
+        tb_loadUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_loadUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -297,11 +298,15 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
             }
         });
 
+        tf_emailShow.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Email Address:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Active", "Deactive" }));
+
+        tf_passwordShow.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -338,20 +343,19 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_saveSystemUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tf_emailShow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tf_passwordShow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_emailShow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_passwordShow, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -376,15 +380,15 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-     int staus = 9;
+     String staus = "Active";
     private void cb_selectTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_selectTypeItemStateChanged
 
-        if (cb_selectType.getSelectedIndex() == 0) {
-            staus = 9;
-        } else if (cb_selectType.getSelectedIndex() == 1) {
-            staus = 1;
-        }
-        bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString() + " " + staus);
+//        if (cb_selectType.getSelectedIndex() == 0) {
+//            staus = "Active";
+//        } else if (cb_selectType.getSelectedIndex() == 1) {
+//            staus = "Deactive";
+//        }
+       // bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString() + " " + staus);
 
     }//GEN-LAST:event_cb_selectTypeItemStateChanged
 
@@ -392,7 +396,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
     private void bt_saveSystemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveSystemUserActionPerformed
         // new Thread(() -> {
         //if (new String(pf_password.getPassword()) == new String(pf_conpassword.getPassword())) {
-            md_savesystemUser();
+        md_savesystemUser();
         //}
 
         // }).start();
@@ -489,12 +493,15 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) tb_loadUser.getModel();
         //tb_loadUser.getSelectedRow();
         String data_email = (String) dtm.getValueAt(tb_loadUser.getSelectedRow(), 1);
-
+        tf_emailShow.setText(data_email);
         new Thread(() -> {
 
             try {
                 ResultSet rs_getpassword = MC_DB.search_dataOne("user_account", "username", data_email.toLowerCase());
-                String password = rs_getpassword.getString("password");
+                if (rs_getpassword.first()) {
+                    String password = rs_getpassword.getString("password");
+                    tf_passwordShow.setText(password);
+                }
 
             } catch (SQLException ex) {
                 Logger.getLogger(jp_admin_privilageManagment.class.getName()).log(Level.SEVERE, null, ex);

@@ -381,10 +381,10 @@ public class user_login extends javax.swing.JFrame {
                 try {
                     //rs_username = MC_DB.search_dataOne("user_account", "username", tf_useremail.getText().trim().toLowerCase());
 
-                    rs_status = MC_DB.search_dataQuery("SELECT `status` FROM `user_account` WHERE `username`='" + tf_useremail.getText().trim().toLowerCase() + "'");
+                    rs_status = MC_DB.search_dataQuery("SELECT `user_type` FROM `user_account` WHERE `username`='" + tf_useremail.getText().trim().toLowerCase() + "'");
 
                     if (rs_status.next()) {
-                        stattus = rs_status.getString("status");
+                        stattus = rs_status.getString("user_type");
                         //staus = Integer.parseInt(rs_status.getString("status"));
 
                     }
@@ -392,7 +392,7 @@ public class user_login extends javax.swing.JFrame {
                     Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if ("1".equals(stattus)) {
+                if ("User".equals(stattus)) {
 
                     //User_Home admin = new User_Home(tf_useremail.getText().toLowerCase().trim());
                     add_investment user = new add_investment(tf_useremail.getText().toLowerCase());
@@ -402,7 +402,7 @@ public class user_login extends javax.swing.JFrame {
                     //JOptionPane.showMessageDialog(this, "Administrator is logined!");
                     this.dispose();
 
-                } else if ("9".equals(stattus)) {
+                } else if ("Administrator".equals(stattus)) {
                     jf_backend_index admin = new jf_backend_index(tf_useremail.getText().toLowerCase());
                     admin.setVisible(true);
                     admin.setAlwaysOnTop(true);
