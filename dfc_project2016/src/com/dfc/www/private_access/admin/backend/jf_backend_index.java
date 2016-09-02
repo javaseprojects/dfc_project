@@ -2,47 +2,43 @@ package com.dfc.www.private_access.admin.backend;
 
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.public_access.user.user_login;
-import com.fsc.www.db.MC_DB;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-/**
- *
+/*
  * @author deepalsuranga
  */
 public class jf_backend_index extends javax.swing.JFrame {
 
-    /**
+    /*c
      * Creates new form jf_backend_index
      */
     public static String us_fullname;
 
     public jf_backend_index() {
-        
-        
+
         initComponents();
 
         try {
-             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             AWTUtilities.setWindowOpaque(this, false);
         } catch (Exception e) {
         }
-        
+
     }
 
     public jf_backend_index(String email) {
         initComponents();
 
         try {
-             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             AWTUtilities.setWindowOpaque(this, false);
         } catch (Exception e) {
         }
-        
+
         jf_backend_index.us_fullname = email;
         try {
 
@@ -82,6 +78,9 @@ public class jf_backend_index extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -237,7 +236,7 @@ public class jf_backend_index extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, 740, 1370, 30));
 
-        jp_adminMainPanel.setBackground(new java.awt.Color(158, 158, 158));
+        jp_adminMainPanel.setBackground(new java.awt.Color(230, 74, 25));
         jp_adminMainPanel.setMaximumSize(new java.awt.Dimension(1366, 670));
         jp_adminMainPanel.setMinimumSize(new java.awt.Dimension(1366, 670));
         jp_adminMainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -250,7 +249,20 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel9.setLayout(new java.awt.CardLayout());
 
         jButton1.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
         jButton1.setText("Privilage Managment");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton1MouseMoved(evt);
+            }
+        });
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -268,7 +280,20 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel10.setLayout(new java.awt.CardLayout());
 
         jButton2.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
         jButton2.setText("POS Managment");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton2MouseMoved(evt);
+            }
+        });
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton2MouseExited(evt);
+            }
+        });
         jPanel10.add(jButton2, "card2");
 
         jp_adminMainPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 240, 170));
@@ -281,7 +306,20 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel11.setLayout(new java.awt.CardLayout());
 
         jButton3.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
         jButton3.setText("Invoice Managment");
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton3MouseMoved(evt);
+            }
+        });
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton3MouseExited(evt);
+            }
+        });
         jPanel11.add(jButton3, "card2");
 
         jp_adminMainPanel.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 240, 170));
@@ -294,7 +332,20 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel12.setLayout(new java.awt.CardLayout());
 
         jButton4.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
         jButton4.setText("Cash Managment");
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton4MouseMoved(evt);
+            }
+        });
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton4MouseExited(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -312,10 +363,25 @@ public class jf_backend_index extends javax.swing.JFrame {
         jPanel13.setLayout(new java.awt.CardLayout());
 
         jButton5.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
         jButton5.setText("Report Managment");
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton5MouseMoved(evt);
+            }
+        });
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton5MouseExited(evt);
+            }
+        });
         jPanel13.add(jButton5, "card2");
 
         jp_adminMainPanel.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 240, 170));
+
+        jPanel14.setBackground(new java.awt.Color(255, 112, 67));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -330,6 +396,8 @@ public class jf_backend_index extends javax.swing.JFrame {
 
         jp_adminMainPanel.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 760, 400));
 
+        jPanel15.setBackground(new java.awt.Color(66, 66, 66));
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -338,10 +406,55 @@ public class jf_backend_index extends javax.swing.JFrame {
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 210, Short.MAX_VALUE)
+        );
+
+        jp_adminMainPanel.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 430, 240, 210));
+
+        jPanel16.setBackground(new java.awt.Color(66, 66, 66));
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        jp_adminMainPanel.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 480, 240, 150));
+        jp_adminMainPanel.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 240, 240, -1));
+
+        jPanel17.setBackground(new java.awt.Color(66, 66, 66));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 210, Short.MAX_VALUE)
+        );
+
+        jp_adminMainPanel.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 430, 240, -1));
+
+        jPanel18.setBackground(new java.awt.Color(66, 66, 66));
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        jp_adminMainPanel.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 240, 240, -1));
 
         jPanel1.add(jp_adminMainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1366, 690));
 
@@ -530,6 +643,66 @@ public class jf_backend_index extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanel5MouseReleased
 
+    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
+
+        jButton1.setForeground(new Color(255, 87, 34));
+
+    }//GEN-LAST:event_jButton1MouseMoved
+
+    private void jButton2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseMoved
+
+        jButton2.setForeground(new Color(255, 87, 34));
+
+    }//GEN-LAST:event_jButton2MouseMoved
+
+    private void jButton3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseMoved
+
+        jButton3.setForeground(new Color(255, 87, 34));
+
+    }//GEN-LAST:event_jButton3MouseMoved
+
+    private void jButton4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseMoved
+
+        jButton4.setForeground(new Color(255, 87, 34));
+
+    }//GEN-LAST:event_jButton4MouseMoved
+
+    private void jButton5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseMoved
+
+        jButton5.setForeground(new Color(255, 87, 34));
+
+    }//GEN-LAST:event_jButton5MouseMoved
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+
+        jButton1.setForeground(new Color(255, 255, 255));
+
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
+
+        jButton2.setForeground(new Color(255, 255, 255));
+
+    }//GEN-LAST:event_jButton2MouseExited
+
+    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
+
+        jButton3.setForeground(new Color(255, 255, 255));
+
+    }//GEN-LAST:event_jButton3MouseExited
+
+    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
+
+        jButton4.setForeground(new Color(255, 255, 255));
+
+    }//GEN-LAST:event_jButton4MouseExited
+
+    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
+
+        jButton5.setForeground(new Color(255, 255, 255));
+
+    }//GEN-LAST:event_jButton5MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -541,7 +714,7 @@ public class jf_backend_index extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -578,6 +751,9 @@ public class jf_backend_index extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
