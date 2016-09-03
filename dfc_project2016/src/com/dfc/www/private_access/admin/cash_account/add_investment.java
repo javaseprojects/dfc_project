@@ -408,7 +408,6 @@ public class add_investment extends javax.swing.JFrame {
             double investment_payment = Double.parseDouble(txt_invest_amount.getText());
             String description = txt_username.getText() + " INVESTED";
             try {
-
                 //saving investment payment to the investment table
                 new Thread(() -> {
                     try {
@@ -419,7 +418,6 @@ public class add_investment extends javax.swing.JFrame {
                     }
 //                }).start();
                     //saving investment payment to the investment table
-
                     //get max investment id from the investment table
 //                new Thread(() -> {
                     try {
