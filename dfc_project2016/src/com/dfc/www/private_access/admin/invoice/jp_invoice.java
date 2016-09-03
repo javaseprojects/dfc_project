@@ -5,8 +5,10 @@
  */
 package com.dfc.www.private_access.admin.invoice;
 
+import com.dfc.www.private_access.admin.products.User_Home;
 import com.fsc.www.db.MC_DB;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -29,8 +31,8 @@ public class jp_invoice extends javax.swing.JPanel {
      */
     public jp_invoice() {
         initComponents();
-        tf_item_code.grabFocus();
         sp_itemname.setVisible(false);
+        tf_item_code.grabFocus();
     }
 
     String invoice_no = "";
@@ -481,7 +483,6 @@ public class jp_invoice extends javax.swing.JPanel {
     //....IN-0001-160830-001
     ResultSet rs_getuserid;
     ResultSet rs_last_invoiceno;
-
     public void md_createInvoiceNo() {
         try {
             int u_id1 = 0;
@@ -492,7 +493,7 @@ public class jp_invoice extends javax.swing.JPanel {
             String df_2 = dft.format(date);
 
             new Thread(() -> {
-                rs_getuserid = MC_DB.search_dataOne("user_account", "username", "Deepal suranga");
+                rs_getuserid = MC_DB.search_dataOne("user_account", "username", User_Home.lb_main_userNameLOAD.getText());
             }).start();
 
             while (rs_getuserid.next()) {
@@ -527,7 +528,6 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //................set item table - start........................................................
     ResultSet rs_itemtable = null;
-
     public void md_setItemTable() {
 
         try {
@@ -576,22 +576,22 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //......................item name loade from jlist - start...............................................
     ResultSet rs_load_item_name;
-
     public void md_loadItemName() {
         try {
             new Thread(() -> {
                 try {
                     try {
-                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '" + tf_item_code.getText()+ "'");
+                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '%" + tf_item_code.getText()+ "%'");
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                        Vector v = new Vector();
+                        DefaultListModel dlm = new DefaultListModel();
 
                     while (rs_load_item_name.next()) {
-                        v.add(rs_load_item_name.getString("item_name"));
+                        dlm.addElement(rs_load_item_name.getString("item_name"));
                     }
-                        li_itemname.setListData(v);
+                    li_itemname.setModel(dlm);
+                        
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -604,7 +604,6 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //......................item code loade from tf_item - start...............................................
     ResultSet rs_load_tf_item;
-
     public void md_loadTF_Item() {
         try {
             new Thread(() -> {
@@ -619,4 +618,28 @@ public class jp_invoice extends javax.swing.JPanel {
         }
     }
     //......................item code loade from tf_item - end.................................................
+
+    //..............................Key pad - start............................................................
+    public void md_keyPad(java.awt.event.KeyEvent evt){
+        try {
+            if(evt.getKeyCode() == KeyEvent.VK_1){
+                addKeyListener((KeyListener) bt_number_1);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //..............................Key pad - end................................................................
+
+    //................................set available qty from label - start................................................
+    public void md_setAvailableQty(){
+        try {
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //................................set available qty from label - end..................................................
 }
+
