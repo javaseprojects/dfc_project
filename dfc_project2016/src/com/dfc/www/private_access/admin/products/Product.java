@@ -69,7 +69,6 @@ public class Product extends javax.swing.JPanel {
         jComboBox3_Size = new javax.swing.JComboBox();
         txtSellingPrice = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jPanel1.setLayout(null);
@@ -226,10 +225,6 @@ public class Product extends javax.swing.JPanel {
         jLabel8.setText("Selling Price :");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(40, 340, 130, 40);
-
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(760, 200, 73, 23);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add");
@@ -589,18 +584,19 @@ public class Product extends javax.swing.JPanel {
                                 + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
 
                         /////////////////////////data Save to item_has_size table ////////   
+                        // if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                        int itemid = 0;
+                        int Sizeid = 0;
+
+                        //Get Item Id
+                        ResultSet rss = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code= '" + txtItemcode.getText() + "' ");
+
+                        while (rss.next()) {
+                            itemid = Integer.parseInt(rss.getString("item_id"));
+                        }
+
+                        //Get Size Id
                         if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
-                            int itemid = 0;
-                            int Sizeid = 0;
-
-                            //Get Item Id
-                            ResultSet rss = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code= '" + txtItemcode.getText() + "' ");
-
-                            while (rss.next()) {
-                                itemid = Integer.parseInt(rss.getString("item_id"));
-                            }
-
-                            //Get Size Id
                             ResultSet rss1 = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM size WHERE size= '" + jComboBox3_Size.getSelectedItem() + "' ");
 
                             while (rss1.next()) {
@@ -609,18 +605,17 @@ public class Product extends javax.swing.JPanel {
 
                             //Save item_has_size table
                             MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_size(item_id,idsize)VALUES('" + itemid + "', '" + Sizeid + "')");
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            ResultSet rss2 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM sub_category WHERE sub_category= '" + jComboBox1_SubCat.getSelectedItem() + "' ");
-
-                            while (rss2.next()) {
-                                Subid = Integer.parseInt(rss2.getString("sub_cat_id"));
-                            }
-
-                            //////////////////////////
-                            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_sub_category(item_id,sub_cat_id)VALUES('" + itemid + "','" + Subcatid + "')");
-
                         }
 
+                        ResultSet rss2 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM sub_category WHERE sub_category= '" + jComboBox1_SubCat.getSelectedItem() + "' ");
+
+                        while (rss2.next()) {
+                            Subid = Integer.parseInt(rss2.getString("sub_cat_id"));
+
+                            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_sub_category(item_id,sub_cat_id)VALUES('" + itemid + "','" + Subcatid + "')");
+                        }
+
+                        // }
                         jComboBox2_Cat.setSelectedItem("~Select Category~");
                         jComboBox1_SubCat.setSelectedItem("~Select Sub Category~");
                         jComboBox3_Size.setSelectedItem("~Select Size~");
@@ -628,6 +623,7 @@ public class Product extends javax.swing.JPanel {
                         txtPname.setText("");
                         txtBuyingPrice.setText("");
                         txtSellingPrice.setText("");
+                        jButton2.setEnabled(false);
 
                         JOptionPane.showMessageDialog(this, "Saved");
                         load_All_data_to_table();
@@ -689,6 +685,10 @@ public class Product extends javax.swing.JPanel {
                 }
 
             }
+
+            if (evt.getKeyCode() == 10) {
+                txtSellingPrice.grabFocus();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -734,6 +734,9 @@ public class Product extends javax.swing.JPanel {
 
                 }
 
+            }
+            if (evt.getKeyCode() == 10) {
+                jButton2.grabFocus();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -823,7 +826,6 @@ public class Product extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1_SubCat;
     private javax.swing.JComboBox jComboBox2_Cat;

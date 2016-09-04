@@ -231,13 +231,14 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                         v.add(s);
                         jList1.setListData(v);
                         if (txtCatName.getText().toLowerCase().equals(s.toLowerCase())) {
-                            System.out.println(txtCatName.getText().toLowerCase().equals(s.toLowerCase()));
+
                             jButton1.setEnabled(false);
                         } else {
 
                             System.out.println(txtCatName.getText().toLowerCase().equals(s.toLowerCase()));
                             jButton1.setEnabled(true);
                             addData_to_List();
+
                         }
                     }
 
@@ -262,6 +263,10 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                     jButton1.setEnabled(true);
                 }
 
+            }
+
+            if (evt.getKeyCode() == 10) {
+                jButton1.grabFocus();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -355,6 +360,9 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                             System.out.println(txtSubcatogery.getText().toLowerCase().equals(s.toLowerCase()));
                             jButton2.setEnabled(true);
                             addData_to_SubCat_List();
+
+                           
+
                         }
                     }
 
@@ -379,6 +387,10 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                     jButton2.setEnabled(true);
                 }
 
+            }
+
+            if (evt.getKeyCode() == 10) {
+                jButton2.grabFocus();
             }
         } catch (Exception e) {
             e.printStackTrace();
