@@ -1,16 +1,37 @@
 package com.dfc.www.private_access.admin.products;
 
+import com.fsc.www.db.MC_DB;
+import java.awt.Toolkit;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Buwaneka
  */
 public class Daily_Qty_add extends javax.swing.JPanel {
 
+    String date;
+
+    int ItemId;
+
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar cal = Calendar.getInstance();
+    String Sys_Year[] = dateFormat.format(cal.getTime()).split("-");
+
     /**
      * Creates new form Test_Pannel
      */
     public Daily_Qty_add() {
         initComponents();
+        CheckDate();
+        Data_Load_Table();
+        jButton2.setEnabled(false);
     }
 
     /**
@@ -27,15 +48,13 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPname = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtPid1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtItemCode = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_product = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtPid2 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtQty = new javax.swing.JTextField();
+        setDate_Label = new javax.swing.JLabel();
 
         jPanel1.setLayout(null);
 
@@ -56,6 +75,11 @@ public class Daily_Qty_add extends javax.swing.JPanel {
                 txtPnameActionPerformed(evt);
             }
         });
+        txtPname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPnameKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtPname);
         txtPname.setBounds(180, 160, 390, 40);
 
@@ -64,20 +88,22 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(60, 160, 130, 40);
 
-        txtPid1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPid1.addActionListener(new java.awt.event.ActionListener() {
+        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtItemCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPid1ActionPerformed(evt);
+                txtItemCodeActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPid1);
-        txtPid1.setBounds(180, 90, 390, 40);
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.setPreferredSize(new java.awt.Dimension(73, 50));
-        jPanel1.add(jButton1);
-        jButton1.setBounds(210, 390, 120, 50);
+        txtItemCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtItemCodeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtItemCodeKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtItemCode);
+        txtItemCode.setBounds(180, 90, 390, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,30 +129,40 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Add Quantity");
         jButton2.setPreferredSize(new java.awt.Dimension(73, 50));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(480, 390, 140, 50);
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Update");
-        jButton3.setPreferredSize(new java.awt.Dimension(73, 50));
-        jPanel1.add(jButton3);
-        jButton3.setBounds(350, 390, 120, 50);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Quantity :");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(60, 230, 130, 40);
 
-        txtPid2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPid2.addActionListener(new java.awt.event.ActionListener() {
+        txtQty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtQty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPid2ActionPerformed(evt);
+                txtQtyActionPerformed(evt);
             }
         });
-        jPanel1.add(txtPid2);
-        txtPid2.setBounds(180, 230, 390, 40);
-        jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(180, 300, 390, 40);
+        txtQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtQtyKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQtyKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtQty);
+        txtQty.setBounds(180, 230, 390, 40);
+
+        setDate_Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        setDate_Label.setText(" System Date");
+        jPanel1.add(setDate_Label);
+        setDate_Label.setBounds(180, 290, 390, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -140,33 +176,295 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    void CheckDate() {
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(cal.getInstance().getTime());
+        setDate_Label.setText(date);
+    }
+
+
     private void txtPnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPnameActionPerformed
 
-    private void txtPid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPid1ActionPerformed
+    private void txtItemCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemCodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPid1ActionPerformed
+    }//GEN-LAST:event_txtItemCodeActionPerformed
 
-    private void txtPid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPid2ActionPerformed
+    private void txtQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPid2ActionPerformed
+    }//GEN-LAST:event_txtQtyActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        try {
+
+            new Thread(() -> {
+
+                try {
+
+                    int x = 0;
+                    int y = 0;
+                    //Load Item Id
+
+                    ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
+                    while (rs.next()) {
+                        x = 1;
+                        ItemId = Integer.parseInt(rs.getString("item_id"));
+                    }
+
+                    if (x == 1) {
+
+                        int c = 0;
+                        ResultSet RS23 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE item_id = '" + ItemId + "' && stock_date = '" + setDate_Label.getText() + "' ");
+                        while (RS23.next()) {
+                            c = 10;
+                            String s = RS23.getString("qty");
+                        }
+
+                        if (c == 10) {
+
+                            int qty = 0;
+                            ResultSet rs3 = MC_DB.myConnection().createStatement().executeQuery(" SELECT qty FROM stock_log WHERE item_id = '" + ItemId + "'  ");
+
+                            while (rs3.next()) {
+                                qty = Integer.parseInt(rs3.getString("qty"));
+                            }
+
+                            MC_DB.myConnection().createStatement().executeUpdate("UPDATE stock_log  SET qty =  '" + (qty + Integer.parseInt(txtQty.getText())) + "'  WHERE item_id = '" + ItemId + "'");
+                            txtItemCode.setText("");
+                            txtPname.setText("");
+                            txtQty.setText("");
+                            JOptionPane.showMessageDialog(this, "Update Stock...!!");
+                            Data_Load_Table();
+                        } else {
+                            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO stock_log(item_id,qty,stock_date)VALUES('" + ItemId + "' "
+                                    + ", '" + Integer.parseInt(txtQty.getText()) + "'"
+                                    + ", '" + setDate_Label.getText() + "' )");
+
+                            txtItemCode.setText("");
+                            txtPname.setText("");
+                            txtQty.setText("");
+                            JOptionPane.showMessageDialog(this, "Save Sucess...!!");
+                            Data_Load_Table();
+
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Sorry Item Code Inavlide...!!");
+                        txtPname.setText("");
+                        txtQty.setText("");
+                        txtItemCode.setText("");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                ////////////////////////////////////////////
+                // 
+            }).start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtItemCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtItemCodeKeyTyped
+
+        try {
+            char c = evt.getKeyChar();
+            if (!Character.isDigit(c)) {
+                evt.consume();
+                Toolkit.getDefaultToolkit().beep();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_txtItemCodeKeyTyped
+
+    private void txtItemCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtItemCodeKeyReleased
+
+        try {
+
+            //Button Validation
+            if (txtItemCode.getText().length() == 0) {
+                jButton2.setEnabled(false);
+            } else {
+                if (txtItemCode.getText().length() != 0
+                        && txtPname.getText().length() != 0
+                        && txtQty.getText().length() != 0) {
+
+                    jButton2.setEnabled(true);
+                }
+
+            }
+
+            String Item_Name = "";
+            int i = 0;
+
+            if (evt.getKeyCode() == 10) {
+/// Load Item Name to item Name Text Filed
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
+                while (rs.next()) {
+                    i = 1;
+                    Item_Name = rs.getString("item_name");
+                }
+
+                if (i == 1) {
+                    txtPname.setText(Item_Name);
+                } else {
+                    txtPname.setText("");
+                    txtQty.setText("");
+                    txtItemCode.setText("");
+                    JOptionPane.showMessageDialog(this, "Sorry Item Code Is Invalide");
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_txtItemCodeKeyReleased
+
+    private void txtQtyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyTyped
+
+        try {
+            char c = evt.getKeyChar();
+            if (!Character.isDigit(c)) {
+                evt.consume();
+                Toolkit.getDefaultToolkit().beep();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_txtQtyKeyTyped
+
+    private void txtPnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPnameKeyReleased
+
+        try {
+            //Button Validation
+            if (txtPname.getText().length() == 0) {
+                jButton2.setEnabled(false);
+            } else {
+                if (txtItemCode.getText().length() != 0
+                        && txtPname.getText().length() != 0
+                        && txtQty.getText().length() != 0) {
+
+                    jButton2.setEnabled(true);
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_txtPnameKeyReleased
+
+    private void txtQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyReleased
+
+        try {
+            //Button Validation
+            if (txtQty.getText().length() == 0) {
+                jButton2.setEnabled(false);
+            } else {
+                if (txtItemCode.getText().length() != 0
+                        && txtPname.getText().length() != 0
+                        && txtQty.getText().length() != 0) {
+
+                    jButton2.setEnabled(true);
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_txtQtyKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel setDate_Label;
     private javax.swing.JTable tbl_product;
-    private javax.swing.JTextField txtPid1;
-    private javax.swing.JTextField txtPid2;
+    private javax.swing.JTextField txtItemCode;
     private javax.swing.JTextField txtPname;
+    private javax.swing.JTextField txtQty;
     // End of variables declaration//GEN-END:variables
+
+    void Data_Load_Table() {
+
+        try {
+
+            new Thread(() -> {
+
+                try {
+
+                    ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE stock_date = '" + setDate_Label.getText() + "' ");
+                    DefaultTableModel dtm = (DefaultTableModel) tbl_product.getModel();
+                    dtm.setRowCount(0);
+                    String catid = "";
+                    while (rs.next()) {
+
+                        Vector v = new Vector();
+
+/////////////////Load Item Code,Item Name
+                        ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_id = '" + rs.getString("item_id") + "' ");
+                        while (rs1.next()) {
+
+                            v.add(rs1.getString("item_code"));
+                            v.add(rs1.getString("item_name"));
+                            catid = rs1.getString("category_id");
+
+                        }
+/////////////////Load Category
+                        ResultSet rs12 = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category WHERE category_id = '" + catid + "' ");
+                        while (rs12.next()) {
+                            v.add(rs12.getString("category_name"));
+                        }
+///////////////////Load Sub Category                        
+
+                        ResultSet rs13 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM item_has_sub_category WHERE item_id = '" + rs.getString("item_id") + "' ");
+                        while (rs13.next()) {
+                            ///Get Sub cat name By Using Loaded Sub cat id   
+                            ResultSet rs14 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_category FROM sub_category WHERE sub_cat_id= '" + rs13.getString("sub_cat_id") + "' ");
+                            while (rs14.next()) {
+                                v.add(rs14.getString("sub_category"));
+                            }
+
+                        }
+
+                        v.add(rs.getString("qty"));
+                        dtm.addRow(v);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }).start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

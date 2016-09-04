@@ -254,7 +254,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
 ////////////////////////////////////////////////////////////////////////////////////////////////
         try {
             ///////////////////////////////Check Text Fileds Values is empty?//////////////////////////////////////////////
-            if (txtCatName.getText().length() == 0) {
+            if (txtCatName.getText().isEmpty()) {
                 jButton1.setEnabled(false);
             } else {
 
