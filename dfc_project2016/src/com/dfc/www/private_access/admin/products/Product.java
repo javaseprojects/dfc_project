@@ -156,7 +156,7 @@ public class Product extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(380, 20, 960, 460);
+        jScrollPane1.setBounds(380, 30, 960, 450);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Size :");

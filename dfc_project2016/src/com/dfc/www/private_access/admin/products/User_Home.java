@@ -123,7 +123,7 @@ public class User_Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(bt_invoice);
-        bt_invoice.setBounds(20, 30, 100, 23);
+        bt_invoice.setBounds(10, 23, 110, 40);
 
         lb_main_userNameLOAD.setText("jLabel1");
         jPanel1.add(lb_main_userNameLOAD);
