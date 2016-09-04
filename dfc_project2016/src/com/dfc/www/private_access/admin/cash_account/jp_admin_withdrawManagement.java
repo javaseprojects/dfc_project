@@ -459,7 +459,7 @@ public class jp_admin_withdrawManagement extends javax.swing.JPanel {
                     ex.printStackTrace();
                 }
 
-                MC_DB.insert_data("INSERT INTO cash_account (cash_amount,status,cash_date,description) VALUES ('" + withdraw_amount + "','1','" + C_Date + "','" + withdraw_des + "')");
+                MC_DB.insert_data("INSERT INTO cash_account (cash_amount,cash_type,status,cash_date,description) VALUES ('" + withdraw_amount + "','Expense','1','" + C_Date + "','" + withdraw_des + "')");
                 System.out.println("Cash Account Query Executed");
 
                 try {

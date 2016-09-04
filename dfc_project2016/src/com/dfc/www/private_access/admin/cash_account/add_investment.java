@@ -434,7 +434,7 @@ public class add_investment extends javax.swing.JFrame {
 
                     //saving the investment payment to the cash account
 //                new Thread(() -> {
-                    MC_DB.insert_data("INSERT INTO cash_account (cash_amount,status,cash_date,description) VALUES ('" + investment_payment + "','1','" + C_Date + "','" + description + "')");
+                    MC_DB.insert_data("INSERT INTO cash_account (cash_amount,cash_type,status,cash_date,description) VALUES ('" + investment_payment + "','Investment','1','" + C_Date + "','" + description + "')");
                     System.out.println("Cash Account Query Executed");
 //                }).start();
                     //saving the investment payment to the cash account
