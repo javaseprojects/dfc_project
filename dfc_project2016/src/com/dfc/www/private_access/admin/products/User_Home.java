@@ -49,6 +49,7 @@ public class User_Home extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         bt_invoice = new javax.swing.JButton();
         lb_main_userNameLOAD = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -127,6 +128,17 @@ public class User_Home extends javax.swing.JFrame {
         lb_main_userNameLOAD.setText("jLabel1");
         jPanel1.add(lb_main_userNameLOAD);
         lb_main_userNameLOAD.setBounds(1210, 20, 120, 30);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("X");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(1340, 10, 20, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,6 +270,12 @@ public class User_Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bt_invoiceActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+      
+        this.dispose();
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -302,6 +320,7 @@ public class User_Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jp_userMainPanel;
     public static javax.swing.JLabel lb_main_userNameLOAD;
