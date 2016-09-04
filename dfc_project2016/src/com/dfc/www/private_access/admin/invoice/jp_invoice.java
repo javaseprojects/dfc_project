@@ -75,7 +75,7 @@ public class jp_invoice extends javax.swing.JPanel {
         tf_payment = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lb_available_qty = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lb_bil_total = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -178,6 +178,7 @@ public class jp_invoice extends javax.swing.JPanel {
         jPanel1.add(bt_enter);
         bt_enter.setBounds(1080, 290, 170, 80);
 
+        bt_number_0.setBackground(new java.awt.Color(51, 51, 51));
         bt_number_0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         bt_number_0.setText("0");
         jPanel1.add(bt_number_0);
@@ -276,10 +277,10 @@ public class jp_invoice extends javax.swing.JPanel {
         jPanel1.add(lb_available_qty);
         lb_available_qty.setBounds(580, 50, 160, 40);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("0.00");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(1110, 510, 230, 40);
+        lb_bil_total.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lb_bil_total.setText("0.00");
+        jPanel1.add(lb_bil_total);
+        lb_bil_total.setBounds(1110, 510, 230, 40);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("0.00");
@@ -391,6 +392,7 @@ public class jp_invoice extends javax.swing.JPanel {
             sp_itemname.setVisible(true);
             md_loadItemName();
             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                md_setAvailableQty();
                 tf_qty.grabFocus();
                 sp_itemname.setVisible(false);
                 tf_qty.selectAll();
@@ -410,6 +412,8 @@ public class jp_invoice extends javax.swing.JPanel {
                 tf_item_code.grabFocus();
                 tf_item_code.selectAll();
 
+            }else if(evt.getKeyCode() == KeyEvent.VK_TAB){
+                md_createBillTotal();
             }
 
         } catch (Exception e) {
@@ -421,6 +425,7 @@ public class jp_invoice extends javax.swing.JPanel {
     private void li_itemnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_li_itemnameMouseClicked
 
         try {
+            tf_item_code.selectAll();
             md_loadTF_Item();
             sp_itemname.setVisible(false);
         } catch (Exception e) {
@@ -459,7 +464,6 @@ public class jp_invoice extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -468,6 +472,7 @@ public class jp_invoice extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_available_qty;
+    private javax.swing.JLabel lb_bil_total;
     private javax.swing.JLabel lb_item;
     private javax.swing.JList li_itemname;
     private javax.swing.JScrollPane sp_itemname;
@@ -483,6 +488,7 @@ public class jp_invoice extends javax.swing.JPanel {
     //....IN-0001-160830-001
     ResultSet rs_getuserid;
     ResultSet rs_last_invoiceno;
+
     public void md_createInvoiceNo() {
         try {
             int u_id1 = 0;
@@ -528,6 +534,7 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //................set item table - start........................................................
     ResultSet rs_itemtable = null;
+
     public void md_setItemTable() {
 
         try {
@@ -576,22 +583,23 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //......................item name loade from jlist - start...............................................
     ResultSet rs_load_item_name;
+
     public void md_loadItemName() {
         try {
             new Thread(() -> {
                 try {
                     try {
-                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '%" + tf_item_code.getText()+ "%'");
+                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '%" + tf_item_code.getText() + "%'");
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                        DefaultListModel dlm = new DefaultListModel();
+                    DefaultListModel dlm = new DefaultListModel();
 
                     while (rs_load_item_name.next()) {
                         dlm.addElement(rs_load_item_name.getString("item_name"));
                     }
                     li_itemname.setModel(dlm);
-                        
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -604,6 +612,7 @@ public class jp_invoice extends javax.swing.JPanel {
 
     //......................item code loade from tf_item - start...............................................
     ResultSet rs_load_tf_item;
+
     public void md_loadTF_Item() {
         try {
             new Thread(() -> {
@@ -620,12 +629,12 @@ public class jp_invoice extends javax.swing.JPanel {
     //......................item code loade from tf_item - end.................................................
 
     //..............................Key pad - start............................................................
-    public void md_keyPad(java.awt.event.KeyEvent evt){
+    public void md_keyPad(java.awt.event.KeyEvent evt) {
         try {
-            if(evt.getKeyCode() == KeyEvent.VK_1){
+            if (evt.getKeyCode() == KeyEvent.VK_1) {
                 addKeyListener((KeyListener) bt_number_1);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -633,13 +642,47 @@ public class jp_invoice extends javax.swing.JPanel {
     //..............................Key pad - end................................................................
 
     //................................set available qty from label - start................................................
-    public void md_setAvailableQty(){
+    ResultSet rs_setavailableqty;
+
+    public void md_setAvailableQty() {
         try {
-            
+            new Thread(() -> {
+
+                try {
+                    rs_setavailableqty = MC_DB.myConnection().createStatement().executeQuery("SELECT stock_log.qty FROM item INNER JOIN item.item_id = stock_log.item_id WHERE item.item_code='" + tf_item_code.getText() + "'");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+                try {
+                    while (rs_setavailableqty.next()) {
+                        lb_available_qty.setText(rs_setavailableqty.getInt("qty") + "");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     //................................set available qty from label - end..................................................
-}
+    
+    //................................create bill total & item qty - start................................................
+    public void md_createBillTotal(){
+        double grand_total=0;
+        DefaultTableModel dt = (DefaultTableModel) tbl_invoice.getModel();
+        for(int x=0;x<dt.getRowCount();x++){
+            grand_total+=Double.parseDouble((String) dt.getValueAt(x, 5));
+        }
+        lb_bil_total.setText(grand_total+"");
+        
+    }
+    //................................create bill total & item qty - end..................................................
 
+    //................................save invoice table - start.........................................................
+    ResultSet rs_save_invoice;
+    public void md_saveInvoice(){
+    }
+    //................................save invoice table - end...........................................................
+}
