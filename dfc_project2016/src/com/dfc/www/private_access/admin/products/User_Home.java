@@ -45,7 +45,6 @@ public class User_Home extends javax.swing.JFrame {
 
         jf_backend_index.us_fullname = email;
         try {
-
             lb_main_userNameLOAD.setText("");
             lb_main_userNameLOAD.setText(email);
 
