@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -177,7 +178,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     void CheckDate() {
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(cal.getInstance().getTime());
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         setDate_Label.setText(date);
     }
     
