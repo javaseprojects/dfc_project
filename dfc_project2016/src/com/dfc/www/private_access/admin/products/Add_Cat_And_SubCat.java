@@ -8,7 +8,10 @@ package com.dfc.www.private_access.admin.products;
 import com.fsc.www.db.MC_DB;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -135,7 +138,15 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             new String [] {
                 "Category Id", "Catgory Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -166,6 +177,11 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Category~" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -256,7 +272,15 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             new String [] {
                 "Category", "Sub Category"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -466,8 +490,6 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                             jButton2.setEnabled(true);
                             addData_to_SubCat_List();
 
-                           
-
                         }
                     }
 
@@ -501,6 +523,12 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_txtSubcatogeryKeyReleased
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+
+       
+
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -574,32 +602,30 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
         }).start();
 
     }
+    ResultSet rs_loadCat = null;
 
     void load_Categories_to_Subcat_combobox() {
-
-        new Thread(() -> {
-
-            try {
-
-                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category");
-                DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox1.getModel();
-
-                while (rs.next()) {
-                    dcm.addElement((rs.getString("category_name")));
+        try {
+            new Thread(() -> {
+                try {
+                    rs_loadCat = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
+            }).start();
+            DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox1.getModel();
+            dcm.removeAllElements();
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            while (rs_loadCat.next()) {
+                dcm.addElement((rs_loadCat.getString("category_name")));
             }
-
-        }).start();
-
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     void add_Tabel_Subcat() {
-
         new Thread(() -> {
-
             try {
 
 //            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category.category_name,sub_category.sub_category FROM sub_category INNER JOIN category");
@@ -627,19 +653,15 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                     }
                     v.add(rs.getString("sub_category"));
                     dtm.addRow(v);
-
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }).start();
 
     }
 
     void addData_to_SubCat_List() {
-
         new Thread(() -> {
             try {
                 ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category");
@@ -648,16 +670,30 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                 while (rs.next()) {
                     v.add(rs.getString("sub_category"));
                     jList2.setListData(v);
-
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
-
         }).start();
 
     }
+
+    //set sub category list
+    private void setSubCategoryList(String Category) {
+        new Thread(() -> {
+            try {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT  `sub_category`.`sub_category` FROM `sub_category` INNER JOIN `category` ON `sub_category`.`category_id`=`category`.`category_id` WHERE `category`.`category_name`='" + Category + "'");
+                Vector v = new Vector();
+                jList2.removeAll();
+                while (rs.next()) {
+                    v.add(rs.getString("sub_category"));
+                    jList2.setListData(v);
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }).start();
+    }
+    //set sub category list
 
 }
