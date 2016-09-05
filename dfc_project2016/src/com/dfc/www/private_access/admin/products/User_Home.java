@@ -78,9 +78,10 @@ public class User_Home extends javax.swing.JFrame {
         jPanel1.add(jp_userMainPanel);
         jp_userMainPanel.setBounds(0, 70, 1366, 670);
 
+        lb_main_userNameLOAD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_main_userNameLOAD.setText("jLabel1");
         jPanel1.add(lb_main_userNameLOAD);
-        lb_main_userNameLOAD.setBounds(1210, 20, 120, 30);
+        lb_main_userNameLOAD.setBounds(1140, 20, 190, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
