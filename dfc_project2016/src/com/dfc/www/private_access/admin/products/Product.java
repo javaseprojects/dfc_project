@@ -53,114 +53,27 @@ public class Product extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtBuyingPrice = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPname = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1_SubCat = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox2_Cat = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        txtItemcode = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_product = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3_Size = new javax.swing.JComboBox();
-        txtSellingPrice = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        txtSellingPrice = new javax.swing.JTextField();
+        txtBuyingPrice = new javax.swing.JTextField();
+        txtPname = new javax.swing.JTextField();
+        txtItemcode = new javax.swing.JTextField();
+        jComboBox3_Size = new javax.swing.JComboBox();
+        jComboBox1_SubCat = new javax.swing.JComboBox();
+        jComboBox2_Cat = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(255, 127, 0));
         jPanel1.setLayout(null);
-
-        txtBuyingPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtBuyingPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuyingPriceActionPerformed(evt);
-            }
-        });
-        txtBuyingPrice.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuyingPriceKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuyingPriceKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtBuyingPrice);
-        txtBuyingPrice.setBounds(160, 290, 210, 40);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Item Code :");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 190, 100, 40);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Buying Price :");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(40, 290, 130, 40);
-
-        txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPname.setEnabled(false);
-        txtPname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPnameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPname);
-        txtPname.setBounds(160, 240, 210, 40);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Category :");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(40, 40, 100, 40);
-
-        jComboBox1_SubCat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1_SubCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Sub Category~" }));
-        jComboBox1_SubCat.setPreferredSize(new java.awt.Dimension(56, 50));
-        jComboBox1_SubCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1_SubCatActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox1_SubCat);
-        jComboBox1_SubCat.setBounds(160, 90, 210, 40);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Item Name :");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(40, 240, 130, 40);
-
-        jComboBox2_Cat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2_Cat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Category~" }));
-        jComboBox2_Cat.setPreferredSize(new java.awt.Dimension(56, 50));
-        jComboBox2_Cat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2_CatActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox2_Cat);
-        jComboBox2_Cat.setBounds(160, 40, 210, 40);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Sub Category :");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(40, 90, 130, 40);
-
-        txtItemcode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtItemcode.setEnabled(false);
-        txtItemcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtItemcodeActionPerformed(evt);
-            }
-        });
-        txtItemcode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtItemcodeKeyReleased(evt);
-            }
-        });
-        jPanel1.add(txtItemcode);
-        txtItemcode.setBounds(160, 190, 210, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,30 +94,39 @@ public class Product extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(380, 30, 960, 450);
+        jScrollPane1.setBounds(460, 20, 900, 630);
+
+        jPanel2.setBackground(new java.awt.Color(255, 87, 34));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Category :");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Sub Category :");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Size :");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(40, 140, 120, 40);
 
-        jComboBox3_Size.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox3_Size.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Size~" }));
-        jComboBox3_Size.setPreferredSize(new java.awt.Dimension(56, 50));
-        jComboBox3_Size.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jComboBox3_SizeMousePressed(evt);
-            }
-        });
-        jComboBox3_Size.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3_SizeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox3_Size);
-        jComboBox3_Size.setBounds(160, 140, 210, 40);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Item Code :");
 
-        txtSellingPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Item Name :");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Buying Price :");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Selling Price :");
+
+        txtSellingPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSellingPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSellingPriceActionPerformed(evt);
@@ -218,23 +140,163 @@ public class Product extends javax.swing.JPanel {
                 txtSellingPriceKeyTyped(evt);
             }
         });
-        jPanel1.add(txtSellingPrice);
-        txtSellingPrice.setBounds(160, 340, 210, 40);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Selling Price :");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(40, 340, 130, 40);
+        txtBuyingPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBuyingPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuyingPriceActionPerformed(evt);
+            }
+        });
+        txtBuyingPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuyingPriceKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuyingPriceKeyTyped(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPname.setEnabled(false);
+        txtPname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPnameActionPerformed(evt);
+            }
+        });
+
+        txtItemcode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtItemcode.setEnabled(false);
+        txtItemcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtItemcodeActionPerformed(evt);
+            }
+        });
+        txtItemcode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtItemcodeKeyReleased(evt);
+            }
+        });
+
+        jComboBox3_Size.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox3_Size.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Size~" }));
+        jComboBox3_Size.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox3_Size.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBox3_SizeMousePressed(evt);
+            }
+        });
+        jComboBox3_Size.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3_SizeActionPerformed(evt);
+            }
+        });
+
+        jComboBox1_SubCat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox1_SubCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Sub Category~" }));
+        jComboBox1_SubCat.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox1_SubCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1_SubCatActionPerformed(evt);
+            }
+        });
+
+        jComboBox2_Cat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox2_Cat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Category~" }));
+        jComboBox2_Cat.setPreferredSize(new java.awt.Dimension(56, 50));
+        jComboBox2_Cat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2_CatActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
         jButton2.setText("Add");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(220, 440, 140, 40);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jComboBox1_SubCat, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jComboBox2_Cat, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jComboBox3_Size, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtItemcode, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSellingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtBuyingPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addComponent(txtPname, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2_Cat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1_SubCat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3_Size, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtItemcode, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuyingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSellingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 450, 670);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -555,95 +617,6 @@ public class Product extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSellingPriceActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        try {
-            int i = 0;
-            ////cheack Already available or Not
-            ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_name = '" + txtPname.getText() + "' ");
-            while (rs1.next()) {
-                i = 1;
-
-            }
-
-            if (i == 0) {
-
-                new Thread(() -> {
-
-                    try {
-
-                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM category WHERE category_name = '" + jComboBox2_Cat.getSelectedItem() + "' ");
-                        while (rs.next()) {
-                            CatidForsave = Integer.parseInt(rs.getString("category_id"));
-                        }
-                        /////////////////////////////////////////////////////////////////////////////////////                
-                        MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item(category_id,item_code,item_name,buying_price,selling_price,status)VALUES('" + CatidForsave + "' "
-                                + ", '" + txtItemcode.getText() + "' "
-                                + ", '" + txtPname.getText() + "' "
-                                + ", '" + Double.parseDouble(txtBuyingPrice.getText()) + "' "
-                                + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
-
-                        /////////////////////////data Save to item_has_size table ////////   
-                        // if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
-                        int itemid = 0;
-                        int Sizeid = 0;
-
-                        //Get Item Id
-                        ResultSet rss = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code= '" + txtItemcode.getText() + "' ");
-
-                        while (rss.next()) {
-                            itemid = Integer.parseInt(rss.getString("item_id"));
-                        }
-
-                        //Get Size Id
-                        if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
-                            ResultSet rss1 = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM size WHERE size= '" + jComboBox3_Size.getSelectedItem() + "' ");
-
-                            while (rss1.next()) {
-                                Sizeid = Integer.parseInt(rss1.getString("idsize"));
-                            }
-
-                            //Save item_has_size table
-                            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_size(item_id,idsize)VALUES('" + itemid + "', '" + Sizeid + "')");
-                        }
-
-                        ResultSet rss2 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM sub_category WHERE sub_category= '" + jComboBox1_SubCat.getSelectedItem() + "' ");
-
-                        while (rss2.next()) {
-                            Subid = Integer.parseInt(rss2.getString("sub_cat_id"));
-
-                            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_sub_category(item_id,sub_cat_id)VALUES('" + itemid + "','" + Subcatid + "')");
-                        }
-
-                        // }
-                        jComboBox2_Cat.setSelectedItem("~Select Category~");
-                        jComboBox1_SubCat.setSelectedItem("~Select Sub Category~");
-                        jComboBox3_Size.setSelectedItem("~Select Size~");
-                        txtItemcode.setText("");
-                        txtPname.setText("");
-                        txtBuyingPrice.setText("");
-                        txtSellingPrice.setText("");
-                        jButton2.setEnabled(false);
-
-                        JOptionPane.showMessageDialog(this, "Saved");
-                        load_All_data_to_table();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }).start();
-
-            } else if (i == 1) {
-                JOptionPane.showMessageDialog(this, "Sorry This Item is Already Available.!");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void txtBuyingPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuyingPriceKeyReleased
 
         try {
@@ -824,6 +797,94 @@ public class Product extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jComboBox3_SizeMousePressed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        try {
+            int i = 0;
+            ////cheack Already available or Not
+            ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_name = '" + txtPname.getText() + "' ");
+            while (rs1.next()) {
+                i = 1;
+
+            }
+
+            if (i == 0) {
+
+                new Thread(() -> {
+
+                    try {
+
+                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM category WHERE category_name = '" + jComboBox2_Cat.getSelectedItem() + "' ");
+                        while (rs.next()) {
+                            CatidForsave = Integer.parseInt(rs.getString("category_id"));
+                        }
+                        /////////////////////////////////////////////////////////////////////////////////////
+                        MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item(category_id,item_code,item_name,buying_price,selling_price,status)VALUES('" + CatidForsave + "' "
+                            + ", '" + txtItemcode.getText() + "' "
+                            + ", '" + txtPname.getText() + "' "
+                            + ", '" + Double.parseDouble(txtBuyingPrice.getText()) + "' "
+                            + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
+
+                        /////////////////////////data Save to item_has_size table ////////
+                        // if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                            int itemid = 0;
+                            int Sizeid = 0;
+
+                            //Get Item Id
+                            ResultSet rss = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code= '" + txtItemcode.getText() + "' ");
+
+                            while (rss.next()) {
+                                itemid = Integer.parseInt(rss.getString("item_id"));
+                            }
+
+                            //Get Size Id
+                            if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                                ResultSet rss1 = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM size WHERE size= '" + jComboBox3_Size.getSelectedItem() + "' ");
+
+                                while (rss1.next()) {
+                                    Sizeid = Integer.parseInt(rss1.getString("idsize"));
+                                }
+
+                                //Save item_has_size table
+                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_size(item_id,idsize)VALUES('" + itemid + "', '" + Sizeid + "')");
+                            }
+
+                            ResultSet rss2 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM sub_category WHERE sub_category= '" + jComboBox1_SubCat.getSelectedItem() + "' ");
+
+                            while (rss2.next()) {
+                                Subid = Integer.parseInt(rss2.getString("sub_cat_id"));
+
+                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_sub_category(item_id,sub_cat_id)VALUES('" + itemid + "','" + Subcatid + "')");
+                            }
+
+                            // }
+                        jComboBox2_Cat.setSelectedItem("~Select Category~");
+                        jComboBox1_SubCat.setSelectedItem("~Select Sub Category~");
+                        jComboBox3_Size.setSelectedItem("~Select Size~");
+                        txtItemcode.setText("");
+                        txtPname.setText("");
+                        txtBuyingPrice.setText("");
+                        txtSellingPrice.setText("");
+                        jButton2.setEnabled(false);
+
+                        JOptionPane.showMessageDialog(this, "Saved");
+                        load_All_data_to_table();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }).start();
+
+            } else if (i == 1) {
+                JOptionPane.showMessageDialog(this, "Sorry This Item is Already Available.!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
@@ -838,6 +899,7 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_product;
     private javax.swing.JTextField txtBuyingPrice;
