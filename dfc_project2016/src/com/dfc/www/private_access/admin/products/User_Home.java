@@ -52,13 +52,8 @@ public class User_Home extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
-//    public void loadInvestment() {
-//        add_investment ai = new add_investment();
-//        ai.setVisible(true);
-//    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
