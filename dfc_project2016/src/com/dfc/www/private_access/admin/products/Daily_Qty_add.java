@@ -45,66 +45,21 @@ public class Daily_Qty_add extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtPname = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtItemCode = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_product = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtItemCode = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtPname = new javax.swing.JTextField();
         txtQty = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         setDate_Label = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(255, 127, 0));
         jPanel1.setLayout(null);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Item Code :");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(60, 90, 100, 40);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Date :");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(60, 300, 120, 40);
-
-        txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtPname.setEnabled(false);
-        txtPname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPnameActionPerformed(evt);
-            }
-        });
-        txtPname.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPnameKeyReleased(evt);
-            }
-        });
-        jPanel1.add(txtPname);
-        txtPname.setBounds(180, 160, 390, 40);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Product Name :");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(60, 160, 130, 40);
-
-        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        txtItemCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtItemCodeActionPerformed(evt);
-            }
-        });
-        txtItemCode.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtItemCodeKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtItemCodeKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtItemCode);
-        txtItemCode.setBounds(180, 90, 390, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,23 +80,54 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(650, 60, 680, 400);
+        jScrollPane1.setBounds(360, 20, 990, 580);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Add Quantity");
-        jButton2.setPreferredSize(new java.awt.Dimension(73, 50));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(255, 87, 34));
+        jPanel2.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Item Code :");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(20, 40, 100, 40);
+
+        txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtItemCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                txtItemCodeActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(480, 390, 140, 50);
+        txtItemCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtItemCodeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtItemCodeKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtItemCode);
+        txtItemCode.setBounds(20, 90, 300, 40);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Quantity :");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(60, 230, 130, 40);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Product Name :");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(20, 150, 130, 40);
+
+        txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPname.setEnabled(false);
+        txtPname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPnameActionPerformed(evt);
+            }
+        });
+        txtPname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPnameKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtPname);
+        txtPname.setBounds(20, 200, 300, 40);
 
         txtQty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtQty.addActionListener(new java.awt.event.ActionListener() {
@@ -157,13 +143,45 @@ public class Daily_Qty_add extends javax.swing.JPanel {
                 txtQtyKeyTyped(evt);
             }
         });
-        jPanel1.add(txtQty);
-        txtQty.setBounds(180, 230, 390, 40);
+        jPanel2.add(txtQty);
+        txtQty.setBounds(20, 310, 300, 40);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Quantity :");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(20, 260, 130, 40);
 
         setDate_Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        setDate_Label.setText(" System Date");
-        jPanel1.add(setDate_Label);
-        setDate_Label.setBounds(180, 290, 390, 60);
+        setDate_Label.setForeground(new java.awt.Color(255, 255, 255));
+        setDate_Label.setText("2016-07-02");
+        jPanel2.add(setDate_Label);
+        setDate_Label.setBounds(20, 410, 300, 40);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Date :");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(20, 370, 120, 40);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
+        jButton2.setText("Add Quantity");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setPreferredSize(new java.awt.Dimension(73, 50));
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(20, 490, 300, 50);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 340, 620);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -173,7 +191,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -471,6 +489,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel setDate_Label;
     private javax.swing.JTable tbl_product;

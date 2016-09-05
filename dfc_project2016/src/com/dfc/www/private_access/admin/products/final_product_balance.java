@@ -34,23 +34,31 @@ public class final_product_balance extends javax.swing.JPanel {
         tbl_product = new javax.swing.JTable();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
+        setPreferredSize(new java.awt.Dimension(1366, 618));
+
+        jPanel1.setBackground(new java.awt.Color(230, 74, 25));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Date :");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 40, 100, 50);
+        jLabel1.setBounds(30, 20, 60, 17);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
         jButton1.setText("Search");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setPreferredSize(new java.awt.Dimension(73, 50));
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(420, 40, 120, 50);
+        jButton1.setBounds(350, 50, 300, 40);
 
         tbl_product.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,12 +79,12 @@ public class final_product_balance extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 200, 1310, 260);
+        jScrollPane1.setBounds(30, 100, 1310, 500);
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(91, 40, 320, 50);
+        jDateChooser1.setBounds(30, 50, 300, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

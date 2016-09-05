@@ -72,6 +72,8 @@ public class Product extends javax.swing.JPanel {
         jComboBox2_Cat = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(1366, 618));
+
         jPanel1.setBackground(new java.awt.Color(255, 127, 0));
         jPanel1.setLayout(null);
 
@@ -94,37 +96,53 @@ public class Product extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_product);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(460, 20, 900, 630);
+        jScrollPane1.setBounds(350, 20, 1000, 580);
 
         jPanel2.setBackground(new java.awt.Color(255, 87, 34));
+        jPanel2.setPreferredSize(new java.awt.Dimension(744, 618));
+        jPanel2.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Category :");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(20, 20, 100, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Sub Category :");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(20, 90, 130, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Size :");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(20, 170, 120, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Item Code :");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(20, 240, 100, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Item Name :");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(20, 320, 130, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buying Price :");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(20, 400, 130, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Selling Price :");
+        jPanel2.add(jLabel8);
+        jLabel8.setBounds(20, 470, 130, 30);
 
         txtSellingPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSellingPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +158,8 @@ public class Product extends javax.swing.JPanel {
                 txtSellingPriceKeyTyped(evt);
             }
         });
+        jPanel2.add(txtSellingPrice);
+        txtSellingPrice.setBounds(20, 500, 300, 40);
 
         txtBuyingPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtBuyingPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +175,8 @@ public class Product extends javax.swing.JPanel {
                 txtBuyingPriceKeyTyped(evt);
             }
         });
+        jPanel2.add(txtBuyingPrice);
+        txtBuyingPrice.setBounds(20, 430, 300, 40);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPname.setEnabled(false);
@@ -163,6 +185,8 @@ public class Product extends javax.swing.JPanel {
                 txtPnameActionPerformed(evt);
             }
         });
+        jPanel2.add(txtPname);
+        txtPname.setBounds(20, 360, 300, 40);
 
         txtItemcode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtItemcode.setEnabled(false);
@@ -176,6 +200,8 @@ public class Product extends javax.swing.JPanel {
                 txtItemcodeKeyReleased(evt);
             }
         });
+        jPanel2.add(txtItemcode);
+        txtItemcode.setBounds(20, 280, 300, 40);
 
         jComboBox3_Size.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox3_Size.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Size~" }));
@@ -190,6 +216,8 @@ public class Product extends javax.swing.JPanel {
                 jComboBox3_SizeActionPerformed(evt);
             }
         });
+        jPanel2.add(jComboBox3_Size);
+        jComboBox3_Size.setBounds(20, 200, 300, 40);
 
         jComboBox1_SubCat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox1_SubCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Sub Category~" }));
@@ -199,6 +227,8 @@ public class Product extends javax.swing.JPanel {
                 jComboBox1_SubCatActionPerformed(evt);
             }
         });
+        jPanel2.add(jComboBox1_SubCat);
+        jComboBox1_SubCat.setBounds(20, 130, 300, 40);
 
         jComboBox2_Cat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox2_Cat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "~Select Category~" }));
@@ -208,6 +238,8 @@ public class Product extends javax.swing.JPanel {
                 jComboBox2_CatActionPerformed(evt);
             }
         });
+        jPanel2.add(jComboBox2_Cat);
+        jComboBox2_Cat.setBounds(20, 50, 300, 40);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,83 +252,11 @@ public class Product extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox1_SubCat, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(jComboBox2_Cat, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jComboBox3_Size, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtItemcode, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSellingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtBuyingPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                .addComponent(txtPname, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2_Cat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1_SubCat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3_Size, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtItemcode, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuyingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSellingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
+        jPanel2.add(jButton2);
+        jButton2.setBounds(20, 560, 300, 40);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 450, 670);
+        jPanel2.setBounds(0, 0, 340, 620);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -306,7 +266,7 @@ public class Product extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
