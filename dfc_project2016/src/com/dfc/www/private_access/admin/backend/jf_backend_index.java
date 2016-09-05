@@ -294,6 +294,11 @@ public class jf_backend_index extends javax.swing.JFrame {
                 jButton2MouseExited(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel10.add(jButton2, "card2");
 
         jp_adminMainPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 240, 170));
@@ -702,6 +707,12 @@ public class jf_backend_index extends javax.swing.JFrame {
         jButton5.setForeground(new Color(255, 255, 255));
 
     }//GEN-LAST:event_jButton5MouseExited
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
