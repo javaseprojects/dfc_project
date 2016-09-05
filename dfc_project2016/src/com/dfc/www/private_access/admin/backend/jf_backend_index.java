@@ -1,6 +1,8 @@
 package com.dfc.www.private_access.admin.backend;
 
+import static com.dfc.www.private_access.admin.backend.jp_admin_posManagment_mainMenu.jp_adminPOSsubPanel;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
+import com.dfc.www.private_access.admin.products.Add_Cat_And_SubCat;
 import com.dfc.www.public_access.user.user_login;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
@@ -461,7 +463,7 @@ public class jf_backend_index extends javax.swing.JFrame {
 
         jp_adminMainPanel.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 240, 240, -1));
 
-        jPanel1.add(jp_adminMainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1366, 690));
+        jPanel1.add(jp_adminMainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1366, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -710,6 +712,19 @@ public class jf_backend_index extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
+        new Thread(() -> {
+            try {
+                jp_adminMainPanel.removeAll();
+                jp_adminMainPanel.setLayout(new FlowLayout());
+                jp_admin_posManagment_mainMenu ai = new jp_admin_posManagment_mainMenu();
+                ai.setVisible(true);
+                jp_adminMainPanel.add(ai);
+                jp_adminMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
