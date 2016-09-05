@@ -388,7 +388,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 //        } else if (cb_selectType.getSelectedIndex() == 1) {
 //            staus = "Deactive";
 //        }
-       // bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString() + " " + staus);
+        // bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString() + " " + staus);
 
     }//GEN-LAST:event_cb_selectTypeItemStateChanged
 
@@ -459,8 +459,9 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 
     private void pf_conpasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_conpasswordKeyReleased
 
-        if (pvc.validate(new String(pf_password.getPassword())) == true) {
+        if (new String(pf_password.getPassword()).equals(new String(pf_conpassword.getPassword()))) {
             lb_viewconPasswordStatus.setForeground(new Color(118, 255, 3));
+            
             //System.out.println("password check! : " + new String(pf_password.getPassword()));
         } else {
             lb_viewconPasswordStatus.setForeground(new Color(255, 0, 0));

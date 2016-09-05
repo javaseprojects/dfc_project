@@ -120,6 +120,7 @@ public class user_login extends javax.swing.JFrame {
         bt_loginaccess.setForeground(new java.awt.Color(255, 255, 255));
         bt_loginaccess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
         bt_loginaccess.setText("LOGIN HERE");
+        bt_loginaccess.setEnabled(false);
         bt_loginaccess.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_loginaccess.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
         bt_loginaccess.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,12 +218,55 @@ public class user_login extends javax.swing.JFrame {
 
     private void bt_loginaccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginaccessActionPerformed
 
-        new Thread(() -> {
-            bt_loginaccess.setText("Please Wait!");
-        }).start();
-        new Thread(() -> {
-            md_hi_login();
-        }).start();
+        boolean valed_password = pv.validate(new String(pf_password.getPassword()));
+        if (valed_password) {
+            pf_password.setBackground(new Color(0, 230, 118));
+            bt_loginaccess.setEnabled(true);
+            //System.out.println("password check! : " + new String(pf_password.getPassword()));
+            //=======================================================
+
+
+                pleaseWaitThred = new Thread(() -> {
+                    try {
+                        while (true) {
+                            bt_loginaccess.setText("Please Wait!");
+                            Thread.sleep(500);
+                            bt_loginaccess.setText("Please Wait!.");
+                            Thread.sleep(700);
+                            bt_loginaccess.setText("Please Wait!..");
+                            Thread.sleep(1000);
+                            bt_loginaccess.setText("Please Wait!..");
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                });
+                pleaseWaitThred.start();
+
+                new Thread(() -> {
+
+                    boolean validPassword = pv.validate(new String(pf_password.getPassword()));
+
+                    if (validPassword) {
+                        md_hi_login();
+                    }
+
+                }).start();
+            
+
+            //=======================================================
+        } else {
+            pf_password.setBackground(new Color(255, 0, 0));
+        }
+
+        
+//        new Thread(() -> {
+//            bt_loginaccess.setText("Please Wait!");
+//        }).start();
+//        new Thread(() -> {
+//            md_hi_login();
+//        }).start();
 
 
     }//GEN-LAST:event_bt_loginaccessActionPerformed
@@ -268,16 +312,19 @@ public class user_login extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_useremailKeyReleased
 
     PasswordValidator pv = new PasswordValidator();
+    Thread pleaseWaitThred;
     private void pf_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pf_passwordKeyReleased
 
-        if (pv.validate(new String(pf_password.getPassword())) == true) {
+        boolean valed_password = pv.validate(new String(pf_password.getPassword()));
+        if (valed_password) {
             pf_password.setBackground(new Color(0, 230, 118));
+            bt_loginaccess.setEnabled(true);
             //System.out.println("password check! : " + new String(pf_password.getPassword()));
             //=======================================================
 
             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-                new Thread(() -> {
+                pleaseWaitThred = new Thread(() -> {
                     try {
                         while (true) {
                             bt_loginaccess.setText("Please Wait!");
@@ -292,10 +339,14 @@ public class user_login extends javax.swing.JFrame {
                         Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                }).start();
+                });
+                pleaseWaitThred.start();
+
                 new Thread(() -> {
 
-                    if (pv.validate(new String(pf_password.getPassword()))) {
+                    boolean validPassword = pv.validate(new String(pf_password.getPassword()));
+
+                    if (validPassword) {
                         md_hi_login();
                     }
 
@@ -335,20 +386,19 @@ public class user_login extends javax.swing.JFrame {
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
 
-        int sty=JOptionPane.showConfirmDialog(this, "Are you sure?", "Conform", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-        
-        if (sty==JOptionPane.YES_OPTION) {
-           System.exit(0); 
+        int sty = JOptionPane.showConfirmDialog(this, "Are you sure?", "Conform", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+
+        if (sty == JOptionPane.YES_OPTION) {
+            System.exit(0);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
 
         new Thread(() -> {
-            
+
             try {
                 this.dispose();
                 Thread.sleep(10000);
@@ -356,9 +406,9 @@ public class user_login extends javax.swing.JFrame {
             } catch (InterruptedException ex) {
                 Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }).start();
-        
+
     }//GEN-LAST:event_jLabel9MouseClicked
 
     /**
@@ -492,6 +542,7 @@ public class user_login extends javax.swing.JFrame {
 
                 flag_p = true;
             } else {
+                pleaseWaitThred.stop();
                 JOptionPane.showMessageDialog(this, "You entered password is invalid");
                 bt_loginaccess.setText("LOGIN HERE");
             }
@@ -500,6 +551,7 @@ public class user_login extends javax.swing.JFrame {
 
                 flag_u = true;
             } else {
+                pleaseWaitThred.stop();
                 JOptionPane.showMessageDialog(this, "Your entered user email is invalied!");
                 bt_loginaccess.setText("LOGIN HERE");
             }
