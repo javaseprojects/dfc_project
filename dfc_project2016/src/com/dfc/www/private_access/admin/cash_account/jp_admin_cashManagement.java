@@ -18,6 +18,7 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
     public jp_admin_cashManagement() {
         initComponents();
         setCurrentDate();
+        loadAllCashData();
         loadInvestments();
         loadExpenses();
     }
@@ -28,6 +29,27 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
         dt_end.setDate(new Date());
     }
     //set current date---------------------------------------
+
+    public void loadAllCashData() {
+        DefaultTableModel dtm = (DefaultTableModel) tbl_cash_account.getModel();
+        dtm.setRowCount(0);
+        new Thread(() -> {
+            try {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM cash_account");
+                while (rs.next()) {
+                    Vector v = new Vector();
+                    v.add(rs.getDouble("cash_amount"));
+                    v.add(rs.getString("cash_date"));
+                    v.add(rs.getString("cash_type"));
+                    v.add(rs.getString("description"));
+                    dtm.addRow(v);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }).start();
+    }
 
     //load cash details by date selected---------------------
     public void loadCashData(String startDate, String endDate) {
