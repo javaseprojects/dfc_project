@@ -78,60 +78,66 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
 
     //load investments---------------------------------------
     public void loadInvestments() {
-        try {
-            double investment = 0;
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT cash_amount FROM cash_account WHERE cash_type='Investment'");
-            while (rs.next()) {
-                investment += Double.parseDouble(rs.getString("cash_amount"));
+        new Thread(() -> {
+            try {
+                double investment = 0;
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT cash_amount FROM cash_account WHERE cash_type='Investment'");
+                while (rs.next()) {
+                    investment += Double.parseDouble(rs.getString("cash_amount"));
+                }
+                lbl_investments.setText(investment + "0");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            lbl_investments.setText(investment + "0");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }).start();
+
     }
     //load investments--------------------------------------
 
     //load incomes------------------------------------------
     public void loadIncomes() {
-        try {
-            double income = 0;
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT cash_amount FROM cash_account WHERE cash_type='Income'");
-            while (rs.next()) {
-                income += Double.parseDouble(rs.getString("cash_amount"));
-
+        new Thread(() -> {
+            try {
+                double income = 0;
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT cash_amount FROM cash_account WHERE cash_type='Income'");
+                while (rs.next()) {
+                    income += Double.parseDouble(rs.getString("cash_amount"));
+                }
+                lbl_income.setText(income + "0");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            lbl_income.setText(income + "0");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }).start();
+
     }
     //load incomes------------------------------------------
 
     //load expenses
     public void loadExpenses() {
-        double expense = 0;
-        try {
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT cash_amount FROM cash_account WHERE cash_type='Expense'");
-            if (rs.next()) {
-                expense += Double.parseDouble(rs.getString("cash_amount"));
+        new Thread(() -> {
+            double expense = 0;
+            try {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT cash_amount FROM cash_account WHERE cash_type='Expense'");
+                if (rs.next()) {
+                    expense += Double.parseDouble(rs.getString("cash_amount"));
+                }
+                lbl_expenses.setText(expense + "0");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            lbl_expenses.setText(expense + "0");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }).start();
+
     }
    //load expenses-----------------------------------------
 
     //profit calculation-----------------------------------
     public void profitCalculator() {
-        try {
+        new Thread(() -> {
             double invest = Double.parseDouble(lbl_investments.getText());
             double income = Double.parseDouble(lbl_income.getText());
             double expense = Double.parseDouble(lbl_expenses.getText());
             lbl_profit.setText((income - (expense + invest)) + "0");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }).start();
     }
 
     //profit calculation-----------------------------------
