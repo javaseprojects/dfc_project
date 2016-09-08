@@ -281,16 +281,17 @@ public class Product extends javax.swing.JPanel {
     private void jComboBox1_SubCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_SubCatActionPerformed
 
         try {
-            jComboBox3_Size.setSelectedIndex(0);
-            txtItemcode.setText("");
-            txtPname.setText("");
-            txtBuyingPrice.setText("");
-            txtSellingPrice.setText("");
 
-            if (!jComboBox2_Cat.getSelectedItem().equals("~Select Category~")) {
+            new Thread(() -> {
+                jComboBox3_Size.setSelectedIndex(0);
+                txtItemcode.setText("");
+                txtPname.setText("");
+                txtBuyingPrice.setText("");
+                txtSellingPrice.setText("");
 
-                new Thread(() -> {
+                if (!jComboBox2_Cat.getSelectedItem().equals("~Select Category~")) {
 
+                    // new Thread(() -> {
                     try {
 
                         ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category WHERE sub_category ='" + jComboBox1_SubCat.getSelectedItem() + "' ");
@@ -312,58 +313,59 @@ public class Product extends javax.swing.JPanel {
                         e.printStackTrace();
                     }
 
-                }).start();
-
-            }
+                    //  }).start();
+                }
 
 ///////////////////////////////////////////////////////////
-            if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")
-                    && !jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")) {
-                txtPname.setText("");
-                String scat = jComboBox1_SubCat.getSelectedItem().toString();
-                String cat = jComboBox2_Cat.getSelectedItem().toString();
+                if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")
+                        && !jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")) {
+                    txtPname.setText("");
+                    String scat = jComboBox1_SubCat.getSelectedItem().toString();
+                    String cat = jComboBox2_Cat.getSelectedItem().toString();
 
-                txtPname.setText(scat + " " + cat);
+                    txtPname.setText(scat + " " + cat);
 
-            }
+                }
 
-            ///////////////////////////////Button Validation/////////////////////////////////////////////////////
-            if (jComboBox2_Cat.getSelectedItem().equals("Pastry")) {
+                ///////////////////////////////Button Validation/////////////////////////////////////////////////////
+                if (jComboBox2_Cat.getSelectedItem().equals("Pastry")) {
 
-                if (jComboBox1_SubCat.getSelectedIndex() == 0) {
-                    jButton2.setEnabled(false);
+                    if (jComboBox1_SubCat.getSelectedIndex() == 0) {
+                        jButton2.setEnabled(false);
+                    } else {
+
+                        if (jComboBox2_Cat.getSelectedIndex() != 0
+                                && jComboBox1_SubCat.getSelectedIndex() != 0
+                                && txtItemcode.getText().length() != 0
+                                && txtBuyingPrice.getText().length() != 0
+                                && txtSellingPrice.getText().length() != 0) {
+                            jButton2.setEnabled(true);
+
+                        }
+
+                    }
+
                 } else {
 
-                    if (jComboBox2_Cat.getSelectedIndex() != 0
-                            && jComboBox1_SubCat.getSelectedIndex() != 0
-                            && txtItemcode.getText().length() != 0
-                            && txtBuyingPrice.getText().length() != 0
-                            && txtSellingPrice.getText().length() != 0) {
-                        jButton2.setEnabled(true);
+                    if (jComboBox1_SubCat.getSelectedIndex() == 0) {
+                        jButton2.setEnabled(false);
+                    } else {
+
+                        if (jComboBox2_Cat.getSelectedIndex() != 0
+                                && jComboBox1_SubCat.getSelectedIndex() != 0
+                                && jComboBox3_Size.getSelectedIndex() != 0
+                                && txtItemcode.getText().length() != 0
+                                && txtBuyingPrice.getText().length() != 0
+                                && txtSellingPrice.getText().length() != 0) {
+                            jButton2.setEnabled(true);
+
+                        }
 
                     }
 
                 }
 
-            } else {
-
-                if (jComboBox1_SubCat.getSelectedIndex() == 0) {
-                    jButton2.setEnabled(false);
-                } else {
-
-                    if (jComboBox2_Cat.getSelectedIndex() != 0
-                            && jComboBox1_SubCat.getSelectedIndex() != 0
-                            && jComboBox3_Size.getSelectedIndex() != 0
-                            && txtItemcode.getText().length() != 0
-                            && txtBuyingPrice.getText().length() != 0
-                            && txtSellingPrice.getText().length() != 0) {
-                        jButton2.setEnabled(true);
-
-                    }
-
-                }
-
-            }
+            }).start();
 
         } catch (NullPointerException n) {
 
@@ -482,28 +484,29 @@ public class Product extends javax.swing.JPanel {
 
     private void jComboBox3_SizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3_SizeActionPerformed
         try {
-            txtItemcode.setText("");
-            txtPname.setText("");
-            txtBuyingPrice.setText("");
-            txtSellingPrice.setText("");
-
-            if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")
-                    && !jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")
-                    && !jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
-                txtPname.setText("");
-                String Size = jComboBox3_Size.getSelectedItem().toString();
-                String scat = jComboBox1_SubCat.getSelectedItem().toString();
-                String cat = jComboBox2_Cat.getSelectedItem().toString();
-
-                txtPname.setText(Size + " " + scat + " " + cat);
-
-            }
-/////////////////////////////////////////////////////////////////////////////////////////////
 
             new Thread(() -> {
+                txtItemcode.setText("");
+                txtPname.setText("");
+                txtBuyingPrice.setText("");
+                txtSellingPrice.setText("");
+
+                if (!jComboBox2_Cat.getSelectedItem().equals("~Select category~")
+                        && !jComboBox1_SubCat.getSelectedItem().equals("~Select Sub category~")
+                        && !jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                    txtPname.setText("");
+                    String Size = jComboBox3_Size.getSelectedItem().toString();
+                    String scat = jComboBox1_SubCat.getSelectedItem().toString();
+                    String cat = jComboBox2_Cat.getSelectedItem().toString();
+
+                    txtPname.setText(Size + " " + scat + " " + cat);
+
+                }
+/////////////////////////////////////////////////////////////////////////////////////////////
+
                 try {
 
-                    if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                    if (jComboBox3_Size.getSelectedIndex() != 0) {
 
                         ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM size WHERE size = '" + jComboBox3_Size.getSelectedItem() + "' ");
 
@@ -519,54 +522,51 @@ public class Product extends javax.swing.JPanel {
 
                         txtItemcode.setText(Id1 + "" + Id2 + "" + Id3);
 
-                    } else {
-
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
+                ///////////////////////////////Button Validation/////////////////////////////////////////////////////
+                if (jComboBox2_Cat.getSelectedItem().equals("Pastry")) {
+
+                    if (jComboBox1_SubCat.getSelectedIndex() == 0) {
+                        jButton2.setEnabled(false);
+                    } else {
+
+                        if (jComboBox2_Cat.getSelectedIndex() != 0
+                                && jComboBox1_SubCat.getSelectedIndex() != 0
+                                && txtItemcode.getText().length() != 0
+                                && txtBuyingPrice.getText().length() != 0
+                                && txtSellingPrice.getText().length() != 0) {
+                            jButton2.setEnabled(true);
+
+                        }
+
+                    }
+
+                } else {
+
+                    if (jComboBox3_Size.getSelectedIndex() == 0) {
+                        jButton2.setEnabled(false);
+                    } else {
+
+                        if (jComboBox2_Cat.getSelectedIndex() != 0
+                                && jComboBox1_SubCat.getSelectedIndex() != 0
+                                && jComboBox3_Size.getSelectedIndex() != 0
+                                && txtItemcode.getText().length() != 0
+                                && txtBuyingPrice.getText().length() != 0
+                                && txtSellingPrice.getText().length() != 0) {
+                            jButton2.setEnabled(true);
+
+                        }
+
+                    }
+
+                }
+
             }).start();
-            ///////////////////////////////Button Validation/////////////////////////////////////////////////////
-            if (jComboBox2_Cat.getSelectedItem().equals("Pastry")) {
-
-                if (jComboBox1_SubCat.getSelectedIndex() == 0) {
-                    jButton2.setEnabled(false);
-                } else {
-
-                    if (jComboBox2_Cat.getSelectedIndex() != 0
-                            && jComboBox1_SubCat.getSelectedIndex() != 0
-                            && txtItemcode.getText().length() != 0
-                            && txtBuyingPrice.getText().length() != 0
-                            && txtSellingPrice.getText().length() != 0) {
-                        jButton2.setEnabled(true);
-
-                    }
-
-                }
-
-            } else {
-
-                if (jComboBox3_Size.getSelectedIndex() == 0) {
-                    jButton2.setEnabled(false);
-                } else {
-
-                    if (jComboBox2_Cat.getSelectedIndex() != 0
-                            && jComboBox1_SubCat.getSelectedIndex() != 0
-                            && jComboBox3_Size.getSelectedIndex() != 0
-                            && txtItemcode.getText().length() != 0
-                            && txtBuyingPrice.getText().length() != 0
-                            && txtSellingPrice.getText().length() != 0) {
-                        jButton2.setEnabled(true);
-
-                    }
-
-                }
-
-            }
-
-        } catch (NullPointerException n) {
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -760,86 +760,107 @@ public class Product extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try {
-            int i = 0;
-            ////cheack Already available or Not
-            ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_name = '" + txtPname.getText() + "' ");
-            while (rs1.next()) {
-                i = 1;
 
-            }
+            new Thread(() -> {
 
-            if (i == 0) {
+                try {
 
-                new Thread(() -> {
+                    int Button = JOptionPane.showConfirmDialog(this, "Do you want to Add This Item?", "Choose",
+                            JOptionPane.YES_NO_OPTION);
 
-                    try {
-
-                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM category WHERE category_name = '" + jComboBox2_Cat.getSelectedItem() + "' ");
-                        while (rs.next()) {
-                            CatidForsave = Integer.parseInt(rs.getString("category_id"));
-                        }
-                        /////////////////////////////////////////////////////////////////////////////////////
-                        MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item(category_id,item_code,item_name,buying_price,selling_price,status)VALUES('" + CatidForsave + "' "
-                            + ", '" + txtItemcode.getText() + "' "
-                            + ", '" + txtPname.getText() + "' "
-                            + ", '" + Double.parseDouble(txtBuyingPrice.getText()) + "' "
-                            + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
-
-                        /////////////////////////data Save to item_has_size table ////////
-                        // if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
-                            int itemid = 0;
-                            int Sizeid = 0;
-
-                            //Get Item Id
-                            ResultSet rss = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code= '" + txtItemcode.getText() + "' ");
-
-                            while (rss.next()) {
-                                itemid = Integer.parseInt(rss.getString("item_id"));
-                            }
-
-                            //Get Size Id
-                            if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
-                                ResultSet rss1 = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM size WHERE size= '" + jComboBox3_Size.getSelectedItem() + "' ");
-
-                                while (rss1.next()) {
-                                    Sizeid = Integer.parseInt(rss1.getString("idsize"));
-                                }
-
-                                //Save item_has_size table
-                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_size(item_id,idsize)VALUES('" + itemid + "', '" + Sizeid + "')");
-                            }
-
-                            ResultSet rss2 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM sub_category WHERE sub_category= '" + jComboBox1_SubCat.getSelectedItem() + "' ");
-
-                            while (rss2.next()) {
-                                Subid = Integer.parseInt(rss2.getString("sub_cat_id"));
-
-                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_sub_category(item_id,sub_cat_id)VALUES('" + itemid + "','" + Subcatid + "')");
-                            }
-
-                            // }
-                        jComboBox2_Cat.setSelectedItem("~Select Category~");
-                        jComboBox1_SubCat.setSelectedItem("~Select Sub Category~");
-                        jComboBox3_Size.setSelectedItem("~Select Size~");
-                        txtItemcode.setText("");
-                        txtPname.setText("");
-                        txtBuyingPrice.setText("");
-                        txtSellingPrice.setText("");
+                    if (Button == 0) {
                         jButton2.setEnabled(false);
 
-                        JOptionPane.showMessageDialog(this, "Saved");
-                        load_All_data_to_table();
+                        int i = 0;
+                        ////cheack Already available or Not
+                        ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_name = '" + txtPname.getText() + "' ");
+                        while (rs1.next()) {
+                            i = 1;
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        }
+
+                        if (i == 0) {
+
+                            try {
+
+                                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM category WHERE category_name = '" + jComboBox2_Cat.getSelectedItem() + "' ");
+                                while (rs.next()) {
+                                    CatidForsave = Integer.parseInt(rs.getString("category_id"));
+                                }
+                                /////////////////////////////////////////////////////////////////////////////////////
+                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item(category_id,item_code,item_name,buying_price,selling_price,status)VALUES('" + CatidForsave + "' "
+                                        + ", '" + txtItemcode.getText() + "' "
+                                        + ", '" + txtPname.getText() + "' "
+                                        + ", '" + Double.parseDouble(txtBuyingPrice.getText()) + "' "
+                                        + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
+
+                            /////////////////////////data Save to item_has_size table ////////
+                                // if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                                int itemid = 0;
+                                int Sizeid = 0;
+
+                                //Get Item Id
+                                ResultSet rss = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code= '" + txtItemcode.getText() + "' ");
+
+                                while (rss.next()) {
+                                    itemid = Integer.parseInt(rss.getString("item_id"));
+                                }
+
+                                //Get Size Id
+                                if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
+                                    ResultSet rss1 = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM size WHERE size= '" + jComboBox3_Size.getSelectedItem() + "' ");
+
+                                    while (rss1.next()) {
+                                        Sizeid = Integer.parseInt(rss1.getString("idsize"));
+                                    }
+
+                                    //Save item_has_size table
+                                    MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_size(item_id,idsize)VALUES('" + itemid + "', '" + Sizeid + "')");
+                                }
+
+                                ResultSet rss2 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM sub_category WHERE sub_category= '" + jComboBox1_SubCat.getSelectedItem() + "' ");
+
+                                while (rss2.next()) {
+                                    Subid = Integer.parseInt(rss2.getString("sub_cat_id"));
+
+                                }
+                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO item_has_sub_category(item_id,sub_cat_id)VALUES('" + itemid + "','" + Subcatid + "')");
+
+                                // }
+                                jComboBox2_Cat.setSelectedItem("~Select Category~");
+                                jComboBox1_SubCat.setSelectedItem("~Select Sub Category~");
+                                jComboBox3_Size.setSelectedItem("~Select Size~");
+                                txtItemcode.setText("");
+                                txtPname.setText("");
+                                txtBuyingPrice.setText("");
+                                txtSellingPrice.setText("");
+                                jButton2.setEnabled(false);
+
+                                JOptionPane.showMessageDialog(this, "Saved");
+                                load_All_data_to_table();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else if (i == 1) {
+
+                            jComboBox2_Cat.setSelectedItem("~Select Category~");
+                            jComboBox1_SubCat.setSelectedItem("~Select Sub Category~");
+                            jComboBox3_Size.setSelectedItem("~Select Size~");
+                            txtItemcode.setText("");
+                            txtPname.setText("");
+                            txtBuyingPrice.setText("");
+                            txtSellingPrice.setText("");
+                            jButton2.setEnabled(false);
+                            JOptionPane.showMessageDialog(this, "Sorry This Item is Already Available.!");
+                        }
+
                     }
 
-                }).start();
-
-            } else if (i == 1) {
-                JOptionPane.showMessageDialog(this, "Sorry This Item is Already Available.!");
-            }
-
+                } catch (Exception e) {
+                }
+            }).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -936,7 +957,7 @@ public class Product extends javax.swing.JPanel {
         new Thread(() -> {
             try {
 
-                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item");
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item order by item_id desc");
                 DefaultTableModel dtm = (DefaultTableModel) tbl_product.getModel();
 //Load Category Name
                 dtm.setRowCount(0);
@@ -981,8 +1002,8 @@ public class Product extends javax.swing.JPanel {
 // Load Other Deatils
                     v.add(rs.getString("item_code"));
                     v.add(rs.getString("item_name"));
-                    v.add(rs.getString("buying_price"));
-                    v.add(rs.getString("selling_price"));
+                    v.add(rs.getString("buying_price") + ".00");
+                    v.add(rs.getString("selling_price") + ".00");
 
                     dtm.addRow(v);
 

@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.transform.Result;
 
@@ -110,11 +111,13 @@ public class final_product_balance extends javax.swing.JPanel {
                     int item_id = 0;
 
                     String df = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
-                    ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE stock_date = '" + df + "'  ");
+                    ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE stock_date = '" + df + "' order by stock_log_id desc ");
                     DefaultTableModel dtm = (DefaultTableModel) tbl_product.getModel();
                     dtm.setRowCount(0);
 
                     while (rs.next()) {
+                        
+                        i=10;
                         Vector v = new Vector();
                         item_id = Integer.parseInt(rs.getString("item_id"));
                         Added_qty = Integer.parseInt(rs.getString("qty"));
@@ -125,17 +128,27 @@ public class final_product_balance extends javax.swing.JPanel {
                             v.add(rs1.getString("item_code"));
                             v.add(rs1.getString("item_name"));
                             v.add(Added_qty);
+                            int g = 0;
+
+                            ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT qty FROM invoice_reg WHERE item_id= '" + item_id + "' ");
+                            while (rs2.next()) {
+                                int Sold_qty = Integer.parseInt(rs2.getString("qty"));
+                                v.add(Added_qty - Sold_qty);
+                                g = 10;
+                            }
+
+                            if (g == 0) {
+                                v.add("No item Sell");
+                            }
+
+                            dtm.addRow(v);
 
                         }
-
-                        ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT qty FROM invoice_reg WHERE item_id= '" + item_id + "' ");
-                        while (rs2.next()) {
-                            int Sold_qty = Integer.parseInt(rs2.getString("qty"));
-                            v.add(Added_qty - Sold_qty);
-                        }
-                        v.add("No item Sell");
-                        dtm.addRow(v);
-
+                    }
+                    
+                    
+                    if (i==0) {
+                        JOptionPane.showMessageDialog(this, "Sorry No Data Found");
                     }
 
                 } catch (Exception e) {

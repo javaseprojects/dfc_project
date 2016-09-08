@@ -30,7 +30,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
     public Add_Cat_And_SubCat() {
         initComponents();
         addData_to_List();
-        addData_to_SubCat_List();
+        // addData_to_SubCat_List();
         add_Tabel_cat();
         load_Categories_to_Subcat_combobox();
         add_Tabel_Subcat();
@@ -318,24 +318,49 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            new Thread(() -> {
 
-                try {
+            int Button = JOptionPane.showConfirmDialog(this, "Do you want to Add This Category ?", "Choose",
+                    JOptionPane.YES_NO_OPTION);
 
-                    MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO category(category_name,status)VALUES('" + txtCatName.getText() + "' , '0001')");
-                    JOptionPane.showMessageDialog(this, "Saved");
-                    txtCatName.setText("");
+            if (Button == 0) {
+                jButton1.setEnabled(false);
 
-                    addData_to_List();
-                    add_Tabel_cat();
-                    load_Categories_to_Subcat_combobox();
-                    jButton1.setEnabled(false);
+                new Thread(() -> {
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    try {
+                        String toLow = txtCatName.getText().toLowerCase();
+                        int i = 0;
 
-            }).start();
+                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category WHERE category_name = '" + txtCatName.getText() + "' ");
+                        while (rs.next()) {
+
+                            if (rs.getString("category_name").toLowerCase().equals(toLow)) {
+                                i = 1;
+                            }
+
+                        }
+
+                        if (i == 1) {
+                            JOptionPane.showMessageDialog(this, "This Category Already Available !");
+                        } else {
+                            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO category(category_name,status)VALUES('" + txtCatName.getText() + "' , '0001')");
+                            JOptionPane.showMessageDialog(this, "Saved");
+                            txtCatName.setText("");
+
+                            addData_to_List();
+                            add_Tabel_cat();
+                            load_Categories_to_Subcat_combobox();
+                            jButton1.setEnabled(false);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }).start();
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -411,11 +436,32 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                 jButton2.setEnabled(false);
             } else {
 
-                if (txtCatName.getText().length() != 0 && jComboBox1.getSelectedIndex() != 0) {
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_id FROM category WHERE category_name = '" + jComboBox1.getSelectedItem() + "' ");
+                while (rs.next()) {
+
+                    String catid = rs.getString("category_id");
+                    ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category WHERE category_id = '" + catid + "' ");
+                    Vector v = new Vector();
+                    jList2.removeAll();
+
+                    while (rs2.next()) {
+
+                        v.add(rs2.getString("sub_category"));
+                        jList2.setListData(v);
+
+                    }
+
+                }
+
+                if (txtCatName.getText().length() != 0 && jComboBox1.getSelectedItem().equals("~Category~")) {
                     jButton2.setEnabled(true);
+
                 }
 
             }
+
+        } catch (NullPointerException n) {
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -452,17 +498,47 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
 
-            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_id FROM category WHERE category_name = '" + jComboBox1.getSelectedItem() + "' ");
-            while (rs.next()) {
-                catid = Integer.parseInt(rs.getString("category_id"));
-            }
+            if (txtSubcatogery.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Subcategory Is Empty");
+            } else {
 
-            MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO sub_category(category_id,sub_category,status) VALUES('" + catid + "' , '" + txtSubcatogery.getText() + "','" + "0001" + "')");
-            txtSubcatogery.setText("");
-            jComboBox1.setSelectedIndex(0);
-            JOptionPane.showMessageDialog(this, "Saved");
-            addData_to_SubCat_List();
-            add_Tabel_Subcat();
+                int Button = JOptionPane.showConfirmDialog(this, "Do you want to Add This Sub Category ?", "Choose",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (Button == 0) {
+                    jButton2.setEnabled(false);
+
+                    new Thread(() -> {
+
+                        try {
+
+                            if (cheack_Sub_Cat()) {
+                                JOptionPane.showMessageDialog(this, "Sorry This " + txtSubcatogery.getText() + "  Sub Category Already Available");
+
+                            } else {
+
+                                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_id FROM category WHERE category_name = '" + jComboBox1.getSelectedItem() + "' ");
+                                while (rs.next()) {
+                                    catid = Integer.parseInt(rs.getString("category_id"));
+                                }
+
+                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO sub_category(category_id,sub_category,status) VALUES('" + catid + "' , '" + txtSubcatogery.getText() + "','" + "0001" + "')");
+                                txtSubcatogery.setText("");
+                                jComboBox1.setSelectedIndex(0);
+                                JOptionPane.showMessageDialog(this, "Saved");
+                                add_Tabel_Subcat();
+
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }).start();
+
+                }
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -470,39 +546,6 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtSubcatogeryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubcatogeryKeyReleased
-        new Thread(() -> {
-            try {
-                String s;
-                if (!txtSubcatogery.getText().equals("") && !txtSubcatogery.getText().equals(null)) {
-                    ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category WHERE sub_category LIKE '" + txtSubcatogery.getText() + "%' ");
-                    Vector v = new Vector();
-
-                    while (rs.next()) {
-                        s = rs.getString("sub_category");
-                        v.add(s);
-                        jList2.setListData(v);
-                        if (txtSubcatogery.getText().toLowerCase().equals(s.toLowerCase())) {
-                            System.out.println(txtSubcatogery.getText().toLowerCase().equals(s.toLowerCase()));
-                            jButton2.setEnabled(false);
-                        } else {
-
-                            System.out.println(txtSubcatogery.getText().toLowerCase().equals(s.toLowerCase()));
-                            jButton2.setEnabled(true);
-                            addData_to_SubCat_List();
-
-                        }
-                    }
-
-                } else {
-                    addData_to_List();
-                    jButton2.setEnabled(false);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }).start();
 
         try {
             ///////////////////////////////Check Text Fileds Values is empty?//////////////////////////////////////////////
@@ -517,7 +560,19 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             }
 
             if (evt.getKeyCode() == 10) {
-                jButton2.grabFocus();
+
+                if (jComboBox1.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(this, "Please Select the Category");
+                } else {
+
+                    if (cheack_Sub_Cat()) {
+                        JOptionPane.showMessageDialog(this, "Sorry This " + txtSubcatogery.getText() + "  Sub Category Already Available");
+                    } else {
+                        jButton2.grabFocus();
+                    }
+
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -526,7 +581,6 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
-       
 
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -609,18 +663,20 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             new Thread(() -> {
                 try {
                     rs_loadCat = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category");
+                    DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox1.getModel();
+                    dcm.removeAllElements();
+                    dcm.addElement("~Category~");
+                    while (rs_loadCat.next()) {
+
+                        dcm.addElement((rs_loadCat.getString("category_name")));
+                    }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }).start();
-            DefaultComboBoxModel dcm = (DefaultComboBoxModel) jComboBox1.getModel();
-            dcm.removeAllElements();
 
-            while (rs_loadCat.next()) {
-                dcm.addElement((rs_loadCat.getString("category_name")));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -640,7 +696,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
 //                dtm.addRow(v);
 //                
 //            }
-                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category");
+                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category order by sub_cat_id desc");
                 DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
                 dtm.setRowCount(0);
 
@@ -661,23 +717,22 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
 
     }
 
-    void addData_to_SubCat_List() {
-        new Thread(() -> {
-            try {
-                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category");
-                Vector v = new Vector();
-                jList2.removeAll();
-                while (rs.next()) {
-                    v.add(rs.getString("sub_category"));
-                    jList2.setListData(v);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-    }
-
+//    void addData_to_SubCat_List() {
+//        new Thread(() -> {
+//            try {
+//                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category");
+//                Vector v = new Vector();
+//                jList2.removeAll();
+//                while (rs.next()) {
+//                    v.add(rs.getString("sub_category"));
+//                    jList2.setListData(v);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//
+//    }
     //set sub category list
     private void setSubCategoryList(String Category) {
         new Thread(() -> {
@@ -689,11 +744,32 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                     v.add(rs.getString("sub_category"));
                     jList2.setListData(v);
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
     }
     //set sub category list
+
+    public boolean cheack_Sub_Cat() throws Exception {
+
+        boolean i = false;
+        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT category_id FROM category WHERE category_name = '" + jComboBox1.getSelectedItem() + "' ");
+        while (rs.next()) {
+            String catid = rs.getString("category_id");
+            ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM sub_category WHERE category_id = '" + catid + "' ");
+
+            while (rs2.next()) {
+                if (rs2.getString("sub_category").toLowerCase().equals(txtSubcatogery.getText().toLowerCase())) {
+                    i = true;
+                }
+
+            }
+
+        }
+
+        return i;
+
+    }
 
 }
