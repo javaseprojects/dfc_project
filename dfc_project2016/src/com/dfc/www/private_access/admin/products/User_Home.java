@@ -5,7 +5,7 @@ import static com.dfc.www.private_access.admin.backend.jf_backend_index.lb_main_
 import com.dfc.www.private_access.admin.cash_account.add_investment;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_withdrawManagement;
-import com.dfc.www.private_access.admin.invoice.jp_invoice;
+import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
 import java.awt.FlowLayout;
 
 public class User_Home extends javax.swing.JFrame {
@@ -16,7 +16,7 @@ public class User_Home extends javax.swing.JFrame {
             try {
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
-                jp_invoice ai = new jp_invoice();
+                jp_user_invoiceManagment ai = new jp_user_invoiceManagment();
                 ai.setVisible(true);
                 jp_userMainPanel.add(ai);
                 jp_userMainPanel.updateUI();
@@ -33,7 +33,7 @@ public class User_Home extends javax.swing.JFrame {
             try {
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
-                jp_invoice ai = new jp_invoice();
+                jp_user_invoiceManagment ai = new jp_user_invoiceManagment();
                 ai.setVisible(true);
                 jp_userMainPanel.add(ai);
                 jp_userMainPanel.updateUI();

@@ -377,7 +377,7 @@ public class jp_admin_privilageManagment extends javax.swing.JPanel {
 //        } else if (cb_selectType.getSelectedIndex() == 1) {
 //            staus = "Deactive";
 //        }
-        // bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString() + " " + staus);
+        bt_saveSystemUser.setText("Add " + cb_selectType.getSelectedItem().toString());
 
     }//GEN-LAST:event_cb_selectTypeItemStateChanged
 

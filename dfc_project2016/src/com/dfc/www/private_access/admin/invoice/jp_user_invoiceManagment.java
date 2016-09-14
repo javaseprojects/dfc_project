@@ -21,11 +21,11 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
-public class jp_invoice extends javax.swing.JPanel {
+public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
-    public jp_invoice() {
+    public jp_user_invoiceManagment() {
         initComponents();
         sp_itemname.setVisible(false);
         tf_invoice_no.grabFocus();
@@ -896,7 +896,7 @@ public class jp_invoice extends javax.swing.JPanel {
                 try {
                     rs_last_invoiceno = MC_DB.myConnection().createStatement().executeQuery("SELECT LAST(invoice_no) FROM invoice");
                 } catch (SQLException ex) {
-                    Logger.getLogger(jp_invoice.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(jp_user_invoiceManagment.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }).start();
 
