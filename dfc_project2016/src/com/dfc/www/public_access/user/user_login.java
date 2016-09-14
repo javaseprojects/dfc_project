@@ -7,7 +7,6 @@ package com.dfc.www.public_access.user;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.private_access.admin.cash_account.add_investment;
-import com.dfc.www.private_access.admin.products.User_Home;
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.EmailValidator;
 import com.javav.fsc.zone.PasswordValidator;
@@ -16,7 +15,6 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -64,6 +62,7 @@ public class user_login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         pf_password = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -173,6 +172,7 @@ public class user_login extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("POS SYSTEM");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 280, 70));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 280, 20));
 
         pf_password.setEditable(false);
         pf_password.setBackground(new java.awt.Color(250, 250, 250));
@@ -225,49 +225,45 @@ public class user_login extends javax.swing.JFrame {
             //System.out.println("password check! : " + new String(pf_password.getPassword()));
             //=======================================================
 
-
-                pleaseWaitThred = new Thread(() -> {
-                    try {
-                        while (true) {
-                            bt_loginaccess.setText("Please Wait!");
-                            Thread.sleep(500);
-                            bt_loginaccess.setText("Please Wait!.");
-                            Thread.sleep(700);
-                            bt_loginaccess.setText("Please Wait!..");
-                            Thread.sleep(1000);
-                            bt_loginaccess.setText("Please Wait!..");
-                        }
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+            pleaseWaitThred = new Thread(() -> {
+                try {
+                    while (true) {
+                        bt_loginaccess.setText("Please Wait!");
+                        Thread.sleep(500);
+                        bt_loginaccess.setText("Please Wait!.");
+                        Thread.sleep(700);
+                        bt_loginaccess.setText("Please Wait!..");
+                        Thread.sleep(1000);
+                        bt_loginaccess.setText("Please Wait!..");
                     }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-                });
-                pleaseWaitThred.start();
+            });
+            pleaseWaitThred.start();
 
-                new Thread(() -> {
+            new Thread(() -> {
 
-                    boolean validPassword = pv.validate(new String(pf_password.getPassword()));
+                boolean validPassword = pv.validate(new String(pf_password.getPassword()));
 
-                    if (validPassword) {
-                        md_hi_login();
-                    }
+                if (validPassword) {
+                    md_hi_login();
+                }
 
-                }).start();
-            
+            }).start();
 
             //=======================================================
         } else {
             pf_password.setBackground(new Color(255, 0, 0));
         }
 
-        
 //        new Thread(() -> {
 //            bt_loginaccess.setText("Please Wait!");
 //        }).start();
 //        new Thread(() -> {
 //            md_hi_login();
 //        }).start();
-
 
     }//GEN-LAST:event_bt_loginaccessActionPerformed
 
@@ -447,6 +443,7 @@ public class user_login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_loginaccess;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -488,7 +485,9 @@ public class user_login extends javax.swing.JFrame {
                     rs_status = MC_DB.search_dataQuery("SELECT `user_type` FROM `user_account` WHERE `username`='" + tf_useremail.getText().trim().toLowerCase() + "'");
 
                     if (rs_status.next()) {
+                        
                         stattus = rs_status.getString("user_type");
+                        jLabel10.setText("Active "+stattus);
                         //staus = Integer.parseInt(rs_status.getString("status"));
 
                     }
@@ -539,7 +538,7 @@ public class user_login extends javax.swing.JFrame {
             boolean flag_p = false;
 
             if (rs_password.next()) {
-
+                jLabel10.setText("User Password OK");
                 flag_p = true;
             } else {
                 pleaseWaitThred.stop();
@@ -548,7 +547,7 @@ public class user_login extends javax.swing.JFrame {
             }
 
             if (rs_username.next()) {
-
+                jLabel10.setText("User Email OK");
                 flag_u = true;
             } else {
                 pleaseWaitThred.stop();
@@ -557,6 +556,7 @@ public class user_login extends javax.swing.JFrame {
             }
 
             can_login(flag_u, flag_p);
+            jLabel10.setText("System Loggeding..");
             System.out.println("OK3");
             rs_password.close();
             rs_username.close();
