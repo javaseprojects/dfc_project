@@ -81,7 +81,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Category List :");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(20, 130, 110, 20);
+        jLabel1.setBounds(20, 110, 110, 20);
 
         txtCatName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCatName.addActionListener(new java.awt.event.ActionListener() {
@@ -98,12 +98,13 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             }
         });
         jPanel2.add(txtCatName);
-        txtCatName.setBounds(20, 80, 300, 40);
+        txtCatName.setBounds(20, 60, 300, 40);
 
+        jList1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(jList1);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 170, 300, 110);
+        jScrollPane1.setBounds(20, 140, 300, 410);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,13 +119,13 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(20, 300, 300, 40);
+        jButton1.setBounds(20, 560, 300, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Category Name :");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(20, 40, 110, 20);
+        jLabel4.setBounds(20, 30, 110, 20);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 340, 620);
@@ -192,7 +193,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Sub Category List :");
 
-        txtSubcatogery.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSubcatogery.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSubcatogery.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSubcatogeryKeyReleased(evt);
@@ -202,6 +203,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             }
         });
 
+        jList2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jScrollPane5.setViewportView(jList2);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -243,21 +245,21 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSubcatogery, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         jPanel1.add(jPanel4);
@@ -296,8 +298,8 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         jPanel1.add(jPanel5);
@@ -341,7 +343,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                         }
 
                         if (i == 1) {
-                            JOptionPane.showMessageDialog(this, "This Category Already Available !");
+                            JOptionPane.showMessageDialog(this, "This Category Already Available !","Warning Message",JOptionPane.WARNING_MESSAGE);
                         } else {
                             MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO category(category_name,status)VALUES('" + txtCatName.getText() + "' , '0001')");
                             JOptionPane.showMessageDialog(this, "Saved");
@@ -526,6 +528,7 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
                                 txtSubcatogery.setText("");
                                 jComboBox1.setSelectedIndex(0);
                                 JOptionPane.showMessageDialog(this, "Saved");
+                                jList2.removeAll();
                                 add_Tabel_Subcat();
 
                             }
@@ -555,6 +558,8 @@ public class Add_Cat_And_SubCat extends javax.swing.JPanel {
 
                 if (txtSubcatogery.getText().length() != 0 && jComboBox1.getSelectedIndex() != 0) {
                     jButton2.setEnabled(true);
+                }else{
+                    jButton2.setEnabled(false);
                 }
 
             }

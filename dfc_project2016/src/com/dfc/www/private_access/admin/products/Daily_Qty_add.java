@@ -66,11 +66,11 @@ public class Daily_Qty_add extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item Code", "Product name", "Category", "Sub Category", "Quantity"
+                "Item Code", "Product name", "Quantity"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -89,7 +89,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Item Code :");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(20, 40, 100, 40);
+        jLabel1.setBounds(20, 30, 100, 20);
 
         txtItemCode.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtItemCode.addActionListener(new java.awt.event.ActionListener() {
@@ -106,13 +106,13 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel2.add(txtItemCode);
-        txtItemCode.setBounds(20, 90, 300, 40);
+        txtItemCode.setBounds(20, 60, 300, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Product Name :");
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(20, 150, 130, 40);
+        jLabel4.setBounds(20, 110, 130, 20);
 
         txtPname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPname.setEnabled(false);
@@ -127,7 +127,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel2.add(txtPname);
-        txtPname.setBounds(20, 200, 300, 40);
+        txtPname.setBounds(20, 140, 300, 40);
 
         txtQty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtQty.addActionListener(new java.awt.event.ActionListener() {
@@ -144,25 +144,25 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel2.add(txtQty);
-        txtQty.setBounds(20, 310, 300, 40);
+        txtQty.setBounds(20, 220, 300, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Quantity :");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(20, 260, 130, 40);
+        jLabel3.setBounds(20, 190, 130, 20);
 
         setDate_Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         setDate_Label.setForeground(new java.awt.Color(255, 255, 255));
         setDate_Label.setText("2016-07-02");
         jPanel2.add(setDate_Label);
-        setDate_Label.setBounds(20, 410, 300, 40);
+        setDate_Label.setBounds(20, 300, 300, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Date :");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(20, 370, 120, 40);
+        jLabel2.setBounds(20, 270, 120, 20);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -178,7 +178,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(20, 490, 300, 50);
+        jButton2.setBounds(20, 350, 300, 40);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 340, 620);
