@@ -68,7 +68,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
         bt_adddailyquantity.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         bt_adddailyquantity.setForeground(new java.awt.Color(255, 255, 255));
         bt_adddailyquantity.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
-        bt_adddailyquantity.setText("Add Daily Quntity");
+        bt_adddailyquantity.setText("Add Daily Quantity");
         bt_adddailyquantity.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_adddailyquantity.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -110,7 +110,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
         bt_addcatandsub.setFont(new java.awt.Font("Microsoft JhengHei Light", 0, 18)); // NOI18N
         bt_addcatandsub.setForeground(new java.awt.Color(255, 255, 255));
         bt_addcatandsub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/backend/bt_background.png"))); // NOI18N
-        bt_addcatandsub.setText("Add Catagory & Sub Catgory");
+        bt_addcatandsub.setText("Add Category & Sub Category");
         bt_addcatandsub.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_addcatandsub.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -140,7 +140,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(bt_finalproductbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bt_addcatandsub, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bt_addcatandsub, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

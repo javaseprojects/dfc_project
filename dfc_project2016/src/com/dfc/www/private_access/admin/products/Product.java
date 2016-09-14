@@ -38,7 +38,10 @@ public class Product extends javax.swing.JPanel {
     public Product() {
         initComponents();
         load_Cat_to_Combobox();
-        load_All_data_to_table();
+
+        new Thread(() -> {
+            load_All_data_to_table();
+        }).start();
         jButton2.setEnabled(false);
 
     }
@@ -82,11 +85,11 @@ public class Product extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Category", "Sub Category", "Size", "Item Code", "Item name", "Buying Price", "Selling Price"
+                "No", "Item Code", "Item name", "Buying Price", "Selling Price", "Category", "Sub Category", "Size"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,6 +97,9 @@ public class Product extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tbl_product);
+        if (tbl_product.getColumnModel().getColumnCount() > 0) {
+            tbl_product.getColumnModel().getColumn(0).setPreferredWidth(6);
+        }
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(350, 20, 1000, 580);
@@ -794,7 +800,7 @@ public class Product extends javax.swing.JPanel {
                                         + ", '" + Double.parseDouble(txtBuyingPrice.getText()) + "' "
                                         + ", '" + Double.parseDouble(txtSellingPrice.getText()) + "' ,'" + "0001" + "')");
 
-                            /////////////////////////data Save to item_has_size table ////////
+                                /////////////////////////data Save to item_has_size table ////////
                                 // if (!jComboBox3_Size.getSelectedItem().equals("~Select Size~")) {
                                 int itemid = 0;
                                 int Sizeid = 0;
@@ -953,67 +959,31 @@ public class Product extends javax.swing.JPanel {
 /////////////////////////////////////////////////////
 
     void load_All_data_to_table() {
-
-        new Thread(() -> {
-            try {
-
-                ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item order by item_id desc");
-                DefaultTableModel dtm = (DefaultTableModel) tbl_product.getModel();
-//Load Category Name
-                dtm.setRowCount(0);
-                while (rs.next()) {
-                    Vector v = new Vector();
-                    ResultSet rs_For_cat = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category WHERE category_id = '" + Integer.parseInt(rs.getString("category_id")) + "' ");
-                    while (rs_For_cat.next()) {
-                        String category = rs_For_cat.getString("category_name");
-                        v.add(rs_For_cat.getString("category_name"));
-
-                    }
-
-///////////////////Load Category                
-                    ResultSet rs123 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM item_has_sub_category WHERE item_id = '" + rs.getString("Item_id") + "' ");
-                    while (rs123.next()) {
-
-                        ResultSet rs1234 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_category FROM sub_category WHERE sub_cat_id =  '" + rs123.getString("sub_cat_id") + "' ");
-                        while (rs1234.next()) {
-                            v.add(rs1234.getString("sub_category"));
-                        }
-
-                    }
-
-//////////////////////////////////////////Load Size
-                    ResultSet rs_For_Size = MC_DB.myConnection().createStatement().executeQuery("SELECT idsize FROM item_has_size WHERE item_id = '" + Integer.parseInt(rs.getString("item_id")) + "' ");
-
-                    if (rs_For_Size.next()) {
-
-                        ResultSet s = MC_DB.myConnection().createStatement().executeQuery("SELECT size FROM size WHERE idsize = '" + Integer.parseInt(rs_For_Size.getString("idsize")) + "' ");
-
-                        while (s.next()) {
-                            v.add(s.getString("size"));
-                        }
-
-                    } else {
-
-                        if (!rs_For_Size.next()) {
-                            v.add("No Size");
-                        }
-
-                    }
-// Load Other Deatils
-                    v.add(rs.getString("item_code"));
-                    v.add(rs.getString("item_name"));
-                    v.add(rs.getString("buying_price") + ".00");
-                    v.add(rs.getString("selling_price") + ".00");
-
-                    dtm.addRow(v);
-
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+        DefaultTableModel dtm = null;
+        ResultSet rs;
+        int rowNo = 1;
+        try {
+            dtm = (DefaultTableModel) tbl_product.getModel();
+            dtm.setRowCount(0);
+            String query = "SELECT i.`item_code`,i.`item_name`,i.`buying_price`,i.`selling_price`,c.`category_name`,sc.`sub_category`,s.`size` FROM `item` i LEFT JOIN `category` c ON i.`category_id`=c.`category_id` LEFT JOIN sub_category sc ON c.`category_id`=sc.`category_id` LEFT JOIN `item_has_size` ihs ON i.`item_id`=ihs.`item_id` LEFT JOIN `size` s ON s.`idsize`=ihs.`idsize` GROUP BY(i.`item_code`)";
+            rs = MC_DB.search_dataQuery(query);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rowNo);
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+                v.add(rs.getString(4) + ".00");
+                v.add(rs.getString(5) + ".00");
+                v.add(rs.getString(6));
+                v.add(rs.getString(7));
+                dtm.addRow(v);
+                rowNo++;
             }
 
-        }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

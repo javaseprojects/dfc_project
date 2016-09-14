@@ -93,7 +93,9 @@ public class add_investment extends javax.swing.JFrame {
         }
 
     }
+
     //administrator login checking
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -293,7 +295,7 @@ public class add_investment extends javax.swing.JFrame {
                 addInvestmentPayment();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Please Login as Administrator", "Warining Message", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please Login as Administrator", "Warning Message", JOptionPane.WARNING_MESSAGE);
         }
 
 
@@ -307,8 +309,14 @@ public class add_investment extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
 
-        this.dispose();
-        new User_Home(lbl_looged_user.getText()).setVisible(true);
+        if (checkDailyInvestment()) {
+            this.dispose();
+            new User_Home(lbl_looged_user.getText()).setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Please add Cash to Cash Account","Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_jLabel4MouseClicked
 
@@ -469,6 +477,23 @@ public class add_investment extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid Amount found,Please enter valid amount", "Warning Message", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private boolean checkDailyInvestment() {
+        try {
+            String thisDate = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
+            String query = "SELECT investment.`invest_amount` FROM investment WHERE investment.`invest_date`='" + thisDate + "'";
+            ResultSet rs = MC_DB.search_dataQuery(query);
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

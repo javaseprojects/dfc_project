@@ -49,7 +49,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="bt_finalproductbalance" min="-2" pref="240" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="bt_addcatandsub" min="-2" pref="280" max="-2" attributes="0"/>
+                  <Component id="bt_addcatandsub" min="-2" pref="295" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -101,7 +101,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/dfc/www/private_access/admin/backend/bt_background.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Add Daily Quntity"/>
+            <Property name="text" type="java.lang.String" value="Add Daily Quantity"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -141,7 +141,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/dfc/www/private_access/admin/backend/bt_background.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Add Catagory &amp; Sub Catgory"/>
+            <Property name="text" type="java.lang.String" value="Add Category &amp; Sub Category"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
