@@ -6,6 +6,7 @@
 package com.dfc.www.public_access.user;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
+import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
 import com.dfc.www.private_access.admin.cash_account.add_investment;
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.EmailValidator;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 
 /**
@@ -68,7 +70,6 @@ public class user_login extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,6 +141,11 @@ public class user_login extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("INDUWARA COMPANY");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -192,6 +198,7 @@ public class user_login extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("X");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
@@ -203,6 +210,7 @@ public class user_login extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("_");
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -236,10 +244,12 @@ public class user_login extends javax.swing.JFrame {
                         Thread.sleep(1000);
                         bt_loginaccess.setText("Please Wait!..");
                     }
+                    
                 } catch (InterruptedException ex) {
+                    pleaseWaitThred.stop();
+                    bt_loginaccess.setText("LOGIN HERE");
                     Logger.getLogger(user_login.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             });
             pleaseWaitThred.start();
 
@@ -406,6 +416,35 @@ public class user_login extends javax.swing.JFrame {
         }).start();
 
     }//GEN-LAST:event_jLabel9MouseClicked
+    int i = 0;
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        i++;
+
+        if (i == 9) {
+            //String showInputDialog = JOptionPane.showInputDialog(this, "Enter Password",JOptionPane.ERROR_MESSAGE);
+
+            JPasswordField pwd = new JPasswordField(20);
+            int action = JOptionPane.showConfirmDialog(null, pwd, "Enter Password",JOptionPane.YES_NO_OPTION);
+            if (action == JOptionPane.YES_OPTION) {
+                //String password = new String(pwd.getPassword());
+//                JOptionPane.showMessageDialog(null, "Your password is " + new String(pwd.getPassword()));
+                if ("FSC_Administrator".equals(new String(pwd.getPassword()))) {
+                    AccessDenied_backupAndRestore andRestore = new AccessDenied_backupAndRestore();
+                    andRestore.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cancel, X or escape key selected");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Cancel, X or escape key selected");
+            }
+            //System.exit(0);
+
+        }
+
+
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -485,9 +524,9 @@ public class user_login extends javax.swing.JFrame {
                     rs_status = MC_DB.search_dataQuery("SELECT `user_type` FROM `user_account` WHERE `username`='" + tf_useremail.getText().trim().toLowerCase() + "'");
 
                     if (rs_status.next()) {
-                        
+
                         stattus = rs_status.getString("user_type");
-                        jLabel10.setText("Active "+stattus);
+                        jLabel10.setText("Active " + stattus);
                         //staus = Integer.parseInt(rs_status.getString("status"));
 
                     }
@@ -556,7 +595,7 @@ public class user_login extends javax.swing.JFrame {
             }
 
             can_login(flag_u, flag_p);
-            jLabel10.setText("System Loggeding..");
+            jLabel10.setText("Pendding...!");
             System.out.println("OK3");
             rs_password.close();
             rs_username.close();

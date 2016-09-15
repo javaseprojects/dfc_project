@@ -5,11 +5,10 @@
  */
 package com.dfc.www.private_access.admin.invoice;
 
+import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
 import com.dfc.www.private_access.admin.products.User_Home;
 import com.fsc.www.db.MC_DB;
-import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -25,12 +24,15 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
+    KeyEvent mykeys;
+
     public jp_user_invoiceManagment() {
         initComponents();
         sp_itemname.setVisible(false);
         tf_invoice_no.grabFocus();
         viewDailyInvoices();
         viewDailyInvoiceDetails();
+
     }
     String invoice_no = "";
 
@@ -39,124 +41,67 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tf_invoice_no = new javax.swing.JTextField();
-        tf_item_code = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        sp_itemname = new javax.swing.JScrollPane();
-        li_itemname = new javax.swing.JList();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_item = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_invoice = new javax.swing.JTable();
-        tf_qty = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        lb_available_qty = new javax.swing.JLabel();
         lbl_tot_invoice = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         lbl_tot_invoice_qty = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        tf_invoice_no = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         lbl_tot_invoices_amount = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        sp_itemname = new javax.swing.JScrollPane();
+        li_itemname = new javax.swing.JList();
+        lb_available_qty = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        bt_number_7 = new javax.swing.JButton();
-        bt_number_8 = new javax.swing.JButton();
-        bt_number_9 = new javax.swing.JButton();
-        bt_divide = new javax.swing.JButton();
-        bt_multi = new javax.swing.JButton();
-        bt_number_6 = new javax.swing.JButton();
-        bt_number_5 = new javax.swing.JButton();
-        bt_number_4 = new javax.swing.JButton();
-        bt_number_1 = new javax.swing.JButton();
-        bt_number_2 = new javax.swing.JButton();
-        bt_number_3 = new javax.swing.JButton();
-        bt_substract = new javax.swing.JButton();
-        bt_plus = new javax.swing.JButton();
-        bt_enter = new javax.swing.JButton();
-        bt_number_0 = new javax.swing.JButton();
-        bt_space = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tf_item_code = new javax.swing.JTextField();
+        tf_qty = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_item = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
         lb_tot_item = new javax.swing.JLabel();
         lb_bil_total = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        tf_payment = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        tf_payment = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1366, 670));
-
-        jPanel1.setBackground(new java.awt.Color(255, 127, 0));
-        jPanel1.setLayout(null);
-
-        tf_invoice_no.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tf_invoice_no.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_invoice_noActionPerformed(evt);
-            }
-        });
-        tf_invoice_no.addKeyListener(new java.awt.event.KeyAdapter() {
+        addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_invoice_noKeyReleased(evt);
+                formKeyReleased(evt);
             }
         });
-        jPanel1.add(tf_invoice_no);
-        tf_invoice_no.setBounds(10, 50, 280, 40);
 
-        tf_item_code.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tf_item_code.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_item_codeActionPerformed(evt);
-            }
-        });
-        tf_item_code.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tf_item_codeKeyPressed(evt);
-            }
+        jPanel1.setBackground(new java.awt.Color(33, 33, 33));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_item_codeKeyReleased(evt);
+                jPanel1KeyReleased(evt);
             }
         });
-        jPanel1.add(tf_item_code);
-        tf_item_code.setBounds(310, 50, 260, 40);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Invoice No:");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 10, 270, 40);
+        jPanel3.setBackground(new java.awt.Color(32, 32, 32));
+        jPanel3.setMaximumSize(new java.awt.Dimension(310, 580));
+        jPanel3.setMinimumSize(new java.awt.Dimension(310, 580));
+        jPanel3.setPreferredSize(new java.awt.Dimension(310, 580));
+        jPanel3.setLayout(new java.awt.CardLayout());
 
-        li_itemname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        li_itemname.setToolTipText("");
-        li_itemname.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                li_itemnameMouseClicked(evt);
-            }
-        });
-        sp_itemname.setViewportView(li_itemname);
-
-        jPanel1.add(sp_itemname);
-        sp_itemname.setBounds(310, 90, 260, 90);
-
-        tbl_item.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "No", "Item Code", "Item Name", "Unit Price", "Qty", "Sub Total"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_item);
-        if (tbl_item.getColumnModel().getColumnCount() > 0) {
-            tbl_item.getColumnModel().getColumn(0).setPreferredWidth(6);
-            tbl_item.getColumnModel().getColumn(4).setPreferredWidth(15);
-        }
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(300, 100, 670, 560);
+        jPanel6.setBackground(new java.awt.Color(239, 108, 0));
 
         tbl_invoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,8 +129,166 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             tbl_invoice.getColumnModel().getColumn(3).setMaxWidth(35);
         }
 
-        jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 100, 280, 390);
+        lbl_tot_invoice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_tot_invoice.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_tot_invoice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_tot_invoice.setText("0");
+        lbl_tot_invoice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbl_tot_invoice.setMaximumSize(new java.awt.Dimension(150, 40));
+        lbl_tot_invoice.setMinimumSize(new java.awt.Dimension(150, 40));
+
+        lbl_tot_invoice_qty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_tot_invoice_qty.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_tot_invoice_qty.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_tot_invoice_qty.setText("0");
+        lbl_tot_invoice_qty.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbl_tot_invoice_qty.setMaximumSize(new java.awt.Dimension(150, 40));
+        lbl_tot_invoice_qty.setMinimumSize(new java.awt.Dimension(150, 40));
+
+        tf_invoice_no.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_invoice_no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_invoice_noActionPerformed(evt);
+            }
+        });
+        tf_invoice_no.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_invoice_noKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Invoice No:");
+
+        lbl_tot_invoices_amount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_tot_invoices_amount.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_tot_invoices_amount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_tot_invoices_amount.setText("0.00");
+        lbl_tot_invoices_amount.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbl_tot_invoices_amount.setMaximumSize(new java.awt.Dimension(150, 40));
+        lbl_tot_invoices_amount.setMinimumSize(new java.awt.Dimension(150, 40));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Amount:");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Total Invoice:");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Total Qty:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_tot_invoice_qty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(tf_invoice_no)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(0, 0, 0)
+                .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(lbl_tot_invoice_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 17, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3))
+        );
+
+        jPanel3.add(jPanel6, "card2");
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 310, 580));
+
+        jPanel2.setBackground(new java.awt.Color(66, 66, 66));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        li_itemname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        li_itemname.setToolTipText("");
+        li_itemname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                li_itemnameMouseClicked(evt);
+            }
+        });
+        li_itemname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                li_itemnameKeyReleased(evt);
+            }
+        });
+        sp_itemname.setViewportView(li_itemname);
+
+        jPanel2.add(sp_itemname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 250, 100));
+
+        lb_available_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_available_qty.setForeground(new java.awt.Color(255, 255, 255));
+        lb_available_qty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_available_qty.setText("00");
+        lb_available_qty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel2.add(lb_available_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 25, 200, 40));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Qty:");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 5, 250, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Available Qty:");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 5, 138, 20));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Item Code:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 260, 20));
+
+        tf_item_code.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_item_code.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_item_codeActionPerformed(evt);
+            }
+        });
+        tf_item_code.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_item_codeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_item_codeKeyReleased(evt);
+            }
+        });
+        jPanel2.add(tf_item_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 250, 40));
 
         tf_qty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tf_qty.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -193,361 +296,169 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 tf_qtyKeyReleased(evt);
             }
         });
-        jPanel1.add(tf_qty);
-        tf_qty.setBounds(750, 50, 220, 40);
+        jPanel2.add(tf_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 25, 250, 40));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Item Code:");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(310, 10, 260, 40);
+        tbl_item.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        lb_available_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lb_available_qty.setForeground(new java.awt.Color(255, 255, 255));
-        lb_available_qty.setText("00");
-        jPanel1.add(lb_available_qty);
-        lb_available_qty.setBounds(580, 50, 160, 40);
-
-        lbl_tot_invoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_tot_invoice.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_tot_invoice.setText("0");
-        jPanel1.add(lbl_tot_invoice);
-        lbl_tot_invoice.setBounds(140, 500, 150, 40);
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Total Qty:");
-        jPanel1.add(jLabel12);
-        jLabel12.setBounds(10, 550, 130, 40);
-
-        lbl_tot_invoice_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_tot_invoice_qty.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_tot_invoice_qty.setText("0");
-        jPanel1.add(lbl_tot_invoice_qty);
-        lbl_tot_invoice_qty.setBounds(140, 550, 150, 40);
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Amount:");
-        jPanel1.add(jLabel14);
-        jLabel14.setBounds(10, 600, 130, 40);
-
-        lbl_tot_invoices_amount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbl_tot_invoices_amount.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_tot_invoices_amount.setText("0.00");
-        jPanel1.add(lbl_tot_invoices_amount);
-        lbl_tot_invoices_amount.setBounds(140, 600, 150, 40);
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Total Invoice:");
-        jPanel1.add(jLabel16);
-        jLabel16.setBounds(10, 500, 130, 40);
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Qty:");
-        jPanel1.add(jLabel17);
-        jLabel17.setBounds(750, 10, 230, 40);
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Available Qty:");
-        jPanel1.add(jLabel18);
-        jLabel18.setBounds(580, 10, 160, 40);
-
-        jPanel2.setBackground(new java.awt.Color(255, 87, 34));
-
-        bt_number_7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_7.setText("7");
-        bt_number_7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_7ActionPerformed(evt);
+            },
+            new String [] {
+                "No", "Item Code", "Item Name", "Unit Price", "Qty", "Sub Total"
             }
-        });
+        ));
+        jScrollPane1.setViewportView(tbl_item);
+        if (tbl_item.getColumnModel().getColumnCount() > 0) {
+            tbl_item.getColumnModel().getColumn(0).setPreferredWidth(6);
+            tbl_item.getColumnModel().getColumn(4).setPreferredWidth(15);
+        }
 
-        bt_number_8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_8.setText("8");
-        bt_number_8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_8ActionPerformed(evt);
-            }
-        });
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, 1000, 460));
 
-        bt_number_9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_9.setText("9");
-        bt_number_9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_9ActionPerformed(evt);
-            }
-        });
-
-        bt_divide.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_divide.setText("/");
-        bt_divide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_divideActionPerformed(evt);
-            }
-        });
-
-        bt_multi.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_multi.setText("*");
-        bt_multi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_multiActionPerformed(evt);
-            }
-        });
-
-        bt_number_6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_6.setText("6");
-        bt_number_6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_6ActionPerformed(evt);
-            }
-        });
-
-        bt_number_5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_5.setText("5");
-        bt_number_5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_5ActionPerformed(evt);
-            }
-        });
-
-        bt_number_4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_4.setText("4");
-        bt_number_4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_4ActionPerformed(evt);
-            }
-        });
-
-        bt_number_1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_1.setText("1");
-        bt_number_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_1ActionPerformed(evt);
-            }
-        });
-
-        bt_number_2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_2.setText("2");
-        bt_number_2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_2ActionPerformed(evt);
-            }
-        });
-
-        bt_number_3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_3.setText("3");
-        bt_number_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_3ActionPerformed(evt);
-            }
-        });
-
-        bt_substract.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_substract.setText("-");
-        bt_substract.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_substractActionPerformed(evt);
-            }
-        });
-
-        bt_plus.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_plus.setText("+");
-        bt_plus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_plusActionPerformed(evt);
-            }
-        });
-
-        bt_enter.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_enter.setText("Enter");
-        bt_enter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_enterActionPerformed(evt);
-            }
-        });
-
-        bt_number_0.setBackground(new java.awt.Color(51, 51, 51));
-        bt_number_0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_number_0.setText("0");
-        bt_number_0.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_number_0ActionPerformed(evt);
-            }
-        });
-
-        bt_space.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bt_space.setText("Space");
-        bt_space.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_spaceActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Item Qty:");
+        jPanel4.setBackground(new java.awt.Color(66, 66, 66));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         lb_tot_item.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_tot_item.setForeground(new java.awt.Color(255, 255, 255));
+        lb_tot_item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_tot_item.setText("0");
+        lb_tot_item.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
         lb_bil_total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_bil_total.setForeground(new java.awt.Color(255, 255, 255));
+        lb_bil_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_bil_total.setText("0.00");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Bill Total:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Payment:");
-
-        tf_payment.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lb_bil_total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Balance:");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Payment:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Item Qty:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Bill Total:");
+
+        tf_payment.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("0.00");
+        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(bt_number_7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_number_8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_number_9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_divide, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(bt_number_4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_number_5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_number_6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_multi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(bt_number_1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_number_2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_number_3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_substract, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(bt_number_0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_enter, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_plus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bt_space, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(lb_tot_item, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(lb_bil_total, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(tf_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb_tot_item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb_bil_total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_payment)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_number_7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_number_8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_number_9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_divide, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_number_4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_number_5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_number_6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_multi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_number_1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_number_2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_number_3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_substract, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_number_0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_enter, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_plus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(bt_space, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_tot_item, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_bil_total, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lb_tot_item, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lb_bil_total, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addComponent(tf_payment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel11)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGap(21, 21, 21)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(980, 0, 390, 670);
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 87, 34));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 1020, 650));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel5.setBackground(new java.awt.Color(255, 153, 51));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/itemlist4040.png"))); // NOI18N
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/invoice4040.png"))); // NOI18N
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/keyboard.png"))); // NOI18N
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/redo-5124040.png"))); // NOI18N
+        jButton4.setBorderPainted(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 0, 300, 670);
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -556,18 +467,9 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     }//GEN-LAST:event_tf_invoice_noActionPerformed
 
     private void tf_item_codeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_item_codeActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_tf_item_codeActionPerformed
-
-    private void bt_divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_divideActionPerformed
-
-        try {
-            bt_divide.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_DIVIDE);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_divideActionPerformed
 
     private void tf_item_codeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_item_codeKeyPressed
 
@@ -576,11 +478,18 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     private void tf_item_codeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_item_codeKeyReleased
 
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            li_itemname.grabFocus();
+        }
+
         try {
             sp_itemname.setVisible(true);
             md_loadItemName();
             if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                md_setAvailableQty();
+                new Thread(() -> {
+                    md_setAvailableQty();
+                }).start();
+
                 tf_qty.grabFocus();
                 sp_itemname.setVisible(false);
                 tf_qty.selectAll();
@@ -612,200 +521,19 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private void li_itemnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_li_itemnameMouseClicked
 
         try {
-            tf_item_code.selectAll();
-            md_loadTF_Item();
-            sp_itemname.setVisible(false);
+
+            if (!tf_item_code.getText().isEmpty()) {
+                tf_item_code.selectAll();
+                md_loadTF_Item();
+                sp_itemname.setVisible(false);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }//GEN-LAST:event_li_itemnameMouseClicked
-
-    private void bt_number_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_1ActionPerformed
-
-//        tf_invoice_no.addFocusListener((FocusListener) this);
-//        tf_item_code.addFocusListener((FocusListener) this);
-//        focusGained(this);
-//        if (tf_invoice_no.hasFocus()) {
-//            tf_invoice_no.setText("1");
-//        } else if (tf_item_code.hasFocus()) {
-//            tf_item_code.setText("1");
-//        } else if (tf_qty.hasFocus()) {
-//            tf_qty.setText("1");
-//        } else if (tf_payment.hasFocus()) {
-//            tf_payment.setText("1");
-//        }
-//        Ext.get(document.activeElement).parent().parent().id;
-//        EX
-//        findFocus(this);
-//        Component.get
-//        
-//        if (true) {
-//            Component c = (Component).getSource();
-//            Cursor cur = c.getCursor();
-//            c.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//            
-//            c.setCursor(cur);
-//
-//        }
-//        System.out.println( KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner());
-//        KeyboardFocusManager=new Robot().mousePress(KeyEvent.VK_1);
-        try {
-            bt_number_1.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_1);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_1ActionPerformed
-
-    private void bt_number_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_0ActionPerformed
-
-//        if (tf_invoice_no.hasFocus()) {
-//            tf_invoice_no.setText("0");
-//        } else if (tf_item_code.hasFocus()) {
-//            tf_item_code.setText("0");
-//        } else if (tf_qty.hasFocus()) {
-//            tf_qty.setText("0");
-//        } else if (tf_payment.hasFocus()) {
-//            tf_payment.setText("0");
-//        }
-        try {
-            bt_number_0.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_0);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_0ActionPerformed
-
-    private void bt_number_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_2ActionPerformed
-
-        try {
-            bt_number_2.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_2);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_2ActionPerformed
-
-    private void bt_number_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_3ActionPerformed
-
-        try {
-            bt_number_3.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_3);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_3ActionPerformed
-
-    private void bt_number_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_4ActionPerformed
-
-        try {
-            bt_number_4.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_4);
-        } catch (Exception e) {
-        }
-
-
-    }//GEN-LAST:event_bt_number_4ActionPerformed
-
-    private void bt_number_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_5ActionPerformed
-
-        try {
-            bt_number_5.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_5);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_5ActionPerformed
-
-    private void bt_number_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_6ActionPerformed
-
-        try {
-            bt_number_6.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_6);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_6ActionPerformed
-
-    private void bt_number_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_7ActionPerformed
-
-        try {
-            bt_number_7.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_7);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_7ActionPerformed
-
-    private void bt_number_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_8ActionPerformed
-
-        try {
-            bt_number_8.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_8);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_8ActionPerformed
-
-    private void bt_number_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_9ActionPerformed
-
-        try {
-            bt_number_9.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_9);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_number_9ActionPerformed
-
-    private void bt_enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enterActionPerformed
-
-        try {
-            bt_enter.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_ENTER);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_enterActionPerformed
-
-    private void bt_spaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_spaceActionPerformed
-
-        try {
-            bt_space.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_SPACE);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_spaceActionPerformed
-
-    private void bt_multiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_multiActionPerformed
-
-        try {
-            bt_multi.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_MULTIPLY);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_multiActionPerformed
-
-    private void bt_substractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_substractActionPerformed
-
-        try {
-            bt_substract.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_SUBTRACT);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_substractActionPerformed
-
-    private void bt_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_plusActionPerformed
-
-        try {
-            bt_plus.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_ADD);
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_bt_plusActionPerformed
 
     private void tf_invoice_noKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_invoice_noKeyReleased
 
@@ -819,24 +547,39 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tf_invoice_noKeyReleased
 
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+
+
+    }//GEN-LAST:event_formKeyReleased
+
+    private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
+
+
+    }//GEN-LAST:event_jPanel1KeyReleased
+
+    private void li_itemnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_li_itemnameKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            new Thread(() -> {
+                md_setItemCodeToTextF();
+            }).start();
+
+        }
+
+    }//GEN-LAST:event_li_itemnameKeyReleased
+    jf_onScreenInvoiceKeyBoard invoiceKeyBoard = new jf_onScreenInvoiceKeyBoard();
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+
+        invoiceKeyBoard.setVisible(true);
+
+    }//GEN-LAST:event_jButton3MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_divide;
-    private javax.swing.JButton bt_enter;
-    private javax.swing.JButton bt_multi;
-    private javax.swing.JButton bt_number_0;
-    private javax.swing.JButton bt_number_1;
-    private javax.swing.JButton bt_number_2;
-    private javax.swing.JButton bt_number_3;
-    private javax.swing.JButton bt_number_4;
-    private javax.swing.JButton bt_number_5;
-    private javax.swing.JButton bt_number_6;
-    private javax.swing.JButton bt_number_7;
-    private javax.swing.JButton bt_number_8;
-    private javax.swing.JButton bt_number_9;
-    private javax.swing.JButton bt_plus;
-    private javax.swing.JButton bt_space;
-    private javax.swing.JButton bt_substract;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -852,6 +595,9 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_available_qty;
@@ -865,8 +611,8 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private javax.swing.JTable tbl_invoice;
     private javax.swing.JTable tbl_item;
     private javax.swing.JTextField tf_invoice_no;
-    private javax.swing.JTextField tf_item_code;
-    private javax.swing.JTextField tf_payment;
+    public static javax.swing.JTextField tf_item_code;
+    public static javax.swing.JTextField tf_payment;
     private javax.swing.JTextField tf_qty;
     // End of variables declaration//GEN-END:variables
 
@@ -1003,30 +749,28 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     ResultSet rs_load_tf_item;
 
     public void md_loadTF_Item() {
-        try {
-            new Thread(() -> {
-                rs_load_tf_item = MC_DB.search_dataOne("item", "item_name", li_itemname.getSelectedValue().toString());
-            }).start();
+        if (!tf_item_code.getText().isEmpty()) {
+            try {
+                new Thread(() -> {
+                    rs_load_tf_item = MC_DB.search_dataOne("item", "item_name", li_itemname.getSelectedValue().toString());
+                }).start();
 
-            while (rs_load_tf_item.next()) {
-                tf_item_code.setText(rs_load_tf_item.getInt("item_code") + "");
+                while (rs_load_tf_item.first()) {
+
+                    tf_item_code.setText(rs_load_tf_item.getInt("item_code") + "");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
     }
     //......................item code loade from tf_item - end.................................................
 
     //..............................Key pad - start............................................................
     public void md_keyPad(java.awt.event.KeyEvent evt) {
-        try {
-            if (evt.getKeyCode() == KeyEvent.VK_1) {
-                addKeyListener((KeyListener) bt_number_1);
-            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     //..............................Key pad - end................................................................
 
@@ -1038,7 +782,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             new Thread(() -> {
 
                 try {
-                    rs_setavailableqty = MC_DB.myConnection().createStatement().executeQuery("SELECT stock_log.qty FROM item INNER JOIN item.item_id = stock_log.item_id WHERE item.item_code='" + tf_item_code.getText() + "'");
+                    rs_setavailableqty = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item i INNER JOIN stock_log sg ON i.item_id = sg.item_id WHERE i.item_code='" + tf_item_code.getText() + "'");
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -1126,7 +870,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                         v.add(rs.getString("invoice_date"));
                         v.add(totQty);
                         dtm.addRow(v);
-                        
+
                     }
                 }
             } catch (Exception e) {
@@ -1157,25 +901,24 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     }
     //view invoice details
 
-    
     //set invoice details bill total and total qty
     public void setInvoiceDetails() {
         int bill_tot_qty = 0;
         double bill_tot_cost = 0;
-        DefaultTableModel dtm =(DefaultTableModel)tbl_item.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tbl_item.getModel();
 //        if (tbl_item.getRowCount() != 0) {
-            for (int x = 0; x < dtm.getRowCount(); x++) {
-               bill_tot_qty = Integer.parseInt(dtm.getValueAt(x, 4)+"");
-                        System.out.println("hkxz  zjsskkjk"+bill_tot_qty);
-                //bill_tot_cost += Double.parseDouble(dtm.getValueAt(x, 5)+"");
-            }
+        for (int x = 0; x < dtm.getRowCount(); x++) {
+            bill_tot_qty = Integer.parseInt(dtm.getValueAt(x, 4) + "");
+            System.out.println("hkxz  zjsskkjk" + bill_tot_qty);
+            //bill_tot_cost += Double.parseDouble(dtm.getValueAt(x, 5)+"");
+        }
 //        } else {
 //            lbl_tot_invoice_qty.setText("0");
 //            lb_bil_total.setText("00.00");
 //        }
 //        System.out.println(bill_tot_cost);
 //        System.out.println(bill_tot_qty);
-       
+
 //        if (bill_tot_qty != 0) {
 //            lbl_tot_invoice_qty.setText(bill_tot_qty + "");
 //        } else {
@@ -1188,4 +931,29 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 //        }
     }
     //set invoice details bill total and total qty
+
+    private void md_setItemCodeToTextF() {
+
+        new Thread(() -> {
+            try {
+                ResultSet rs_load_tf_itemID = MC_DB.search_dataOne("item", "item_name", li_itemname.getSelectedValue().toString().trim());
+
+                while (rs_load_tf_itemID.next()) {
+                    if (tf_item_code.getText().isEmpty()) {
+                        System.out.println("HEllo!");
+                        tf_item_code.setText(rs_load_tf_itemID.getInt("item_code") + "");
+                        tf_qty.grabFocus();
+                    } else {
+                        tf_item_code.setText("");
+                        tf_item_code.setText(rs_load_tf_itemID.getInt("item_code") + "");
+                        tf_qty.grabFocus();
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(jp_user_invoiceManagment.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
+        //li_itemname.setVisible(false);
+        sp_itemname.setVisible(false);
+    }
 }

@@ -35,7 +35,7 @@ public class MC_DB {
 
         try {
 
-            input = new FileInputStream("C:\\FSC\\db_pro.properties");
+            input = new FileInputStream(System.getProperty("user.home")+"\\FSC_Creation\\db_pro.properties");
 
             // load a properties file
             prop.load(input);
@@ -60,7 +60,9 @@ public class MC_DB {
                 try {
                     input.close();
                 } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "e: " + e);
+                    JOptionPane.showMessageDialog(null, "e: Propaty File Not load!");
+                    e.printStackTrace();
+                    
                 }
             }
         }
@@ -75,7 +77,8 @@ public class MC_DB {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException ex2) {
             System.out.println("Where is your MySQL JDBC Driver?");
-            JOptionPane.showMessageDialog(null, "ex2: " + ex2);
+            JOptionPane.showMessageDialog(null, "ex2: JDBC Problam!");
+            ex2.printStackTrace();
             return null;
         }
 
@@ -89,7 +92,7 @@ public class MC_DB {
         } catch (SQLException ex3) {
             System.out.println("Connection Failed! Check output console");
             JOptionPane.showMessageDialog(null, "Connection Failed!Please Check Your Internet Connection");
-            JOptionPane.showMessageDialog(null, "ex3: " + ex3);
+            ex3.printStackTrace();
             return connection;
         }
 
@@ -109,7 +112,8 @@ public class MC_DB {
             statement.executeUpdate(querySql);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "MC_database:add_data_NoColumns::" + ex);
+            JOptionPane.showMessageDialog(null, "MC_database:add_data_NoColumns::");
+            ex.printStackTrace();
         }
         return null;
     }
@@ -122,7 +126,8 @@ public class MC_DB {
             statement.executeUpdate(querySql);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "MC_database:add_data_WithColumns::" + ex);
+            JOptionPane.showMessageDialog(null, "MC_database:add_data_WithColumns::" );
+            ex.printStackTrace();
         }
         return null;
     }
@@ -165,7 +170,7 @@ public class MC_DB {
 
     }
 
-    public static ResultSet search_dataOne(String use_table1, String columName2, String use_where4) {
+    public static ResultSet search_dataOne(String use_table1, String columName2, String use_where4){
         Connection connection = MC_DB.myConnection();
         ResultSet resultSet = null;
         if (!(use_table1 == null && columName2 == null && use_where4 == null)) {
