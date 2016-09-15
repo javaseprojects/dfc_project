@@ -24,6 +24,19 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
      */
     public jp_admin_posManagment_mainMenu() {
         initComponents();
+        new Thread(() -> {
+            try {
+                jp_adminPOSsubPanel.removeAll();
+                jp_adminPOSsubPanel.setLayout(new FlowLayout());
+                Product ai = new Product();
+                ai.setVisible(true);
+                jp_adminPOSsubPanel.add(ai);
+                jp_adminPOSsubPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     /**

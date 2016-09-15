@@ -83,7 +83,7 @@ public class final_product_balance extends javax.swing.JPanel {
         jScrollPane1.setBounds(30, 100, 1310, 500);
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(jDateChooser1);
         jDateChooser1.setBounds(30, 50, 300, 40);
 

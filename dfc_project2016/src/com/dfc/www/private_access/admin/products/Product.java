@@ -40,11 +40,16 @@ public class Product extends javax.swing.JPanel {
         new Thread(() -> {
             load_Cat_to_Combobox();
         }).start();
-        load_Size_to_combobox();
 
         new Thread(() -> {
+
+            load_Size_to_combobox();
+        }).start();
+        new Thread(() -> {
+
             load_All_data_to_table();
         }).start();
+
         jButton2.setEnabled(false);
 
     }
@@ -494,7 +499,7 @@ public class Product extends javax.swing.JPanel {
             txtBuyingPrice.setText("");
             txtSellingPrice.setText("");
             if (!cb_size.isEnabled()) {
-                if (!cb_category.getSelectedItem().equals("~Select category~") && !cb_subCategory.getSelectedItem().equals("~Select Sub category~") ) {
+                if (!cb_category.getSelectedItem().equals("~Select category~") && !cb_subCategory.getSelectedItem().equals("~Select Sub category~")) {
                     txtPname.setText("");
                     String Size = "";
                     String scat = cb_subCategory.getSelectedItem().toString();
@@ -503,9 +508,9 @@ public class Product extends javax.swing.JPanel {
                     txtPname.setText(Size + " " + scat + " " + cat);
 
                 }
-            }else{
-            
-                if (cb_category.getSelectedIndex()!=0 && cb_subCategory.getSelectedIndex()!=0 && cb_size.getSelectedIndex()!=0) {
+            } else {
+
+                if (cb_category.getSelectedIndex() != 0 && cb_subCategory.getSelectedIndex() != 0 && cb_size.getSelectedIndex() != 0) {
                     txtPname.setText("");
                     String Size = cb_size.getSelectedItem().toString();
                     String scat = cb_subCategory.getSelectedItem().toString();
@@ -514,7 +519,7 @@ public class Product extends javax.swing.JPanel {
                     txtPname.setText(Size + " " + scat + " " + cat);
 
                 }
-                
+
             }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -971,16 +976,18 @@ public class Product extends javax.swing.JPanel {
 
     }
 /////////////////////////////////////////////////////
+    ResultSet rs2;
 
     public void load_All_data_to_table() {
         DefaultTableModel dtm = null;
-        ResultSet rs2;
         int rowNo = 1;
         try {
             dtm = (DefaultTableModel) tbl_product.getModel();
             dtm.setRowCount(0);
             String query = "SELECT i.`item_code`,i.`item_name`,i.`buying_price`,i.`selling_price`,c.`category_name`,sc.`sub_category`,s.`size` FROM `item` i LEFT JOIN `category` c ON i.`category_id`=c.`category_id` LEFT JOIN sub_category sc ON c.`category_id`=sc.`category_id` LEFT JOIN `item_has_size` ihs ON i.`item_id`=ihs.`item_id` LEFT JOIN `size` s ON s.`idsize`=ihs.`idsize` GROUP BY(i.`item_code`)";
+
             rs2 = MC_DB.search_dataQuery(query);
+
             while (rs2.next()) {
                 Vector v = new Vector();
                 v.add(rowNo);
@@ -990,7 +997,12 @@ public class Product extends javax.swing.JPanel {
                 v.add(rs2.getString(4) + ".00");
                 v.add(rs2.getString(5));
                 v.add(rs2.getString(6));
-                v.add(rs2.getString(7));
+                if(rs2.getString(7)!=null){
+                    v.add(rs2.getString(7));
+                }else{
+                    v.add("None");
+                }
+                
                 dtm.addRow(v);
                 rowNo++;
             }

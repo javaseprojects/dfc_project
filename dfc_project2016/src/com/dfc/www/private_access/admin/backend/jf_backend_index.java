@@ -2,6 +2,7 @@ package com.dfc.www.private_access.admin.backend;
 
 import static com.dfc.www.private_access.admin.backend.jp_admin_posManagment_mainMenu.jp_adminPOSsubPanel;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
+import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
 import com.dfc.www.private_access.admin.products.Add_Cat_And_SubCat;
 import com.dfc.www.public_access.user.user_login;
 import com.sun.awt.AWTUtilities;
@@ -327,6 +328,11 @@ public class jf_backend_index extends javax.swing.JFrame {
                 jButton3MouseExited(evt);
             }
         });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel11.add(jButton3, "card2");
 
         jp_adminMainPanel.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, 240, 170));
@@ -622,8 +628,6 @@ public class jf_backend_index extends javax.swing.JFrame {
             ul.setVisible(true);
             this.dispose();
         }
-
-
     }//GEN-LAST:event_jLabel2MouseReleased
 
     private void jPanel7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseReleased
@@ -725,9 +729,27 @@ public class jf_backend_index extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }).start();
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        new Thread(() -> {
+            try {
+                jp_adminMainPanel.removeAll();
+                jp_adminMainPanel.setLayout(new FlowLayout());
+                jp_user_invoiceManagment invoice =  new jp_user_invoiceManagment();
+                invoice.setVisible(true);
+                jp_adminMainPanel.add(invoice);
+                jp_adminMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
