@@ -15,6 +15,7 @@ public class MC_DB {
     public static Connection myCon;
 
     private MC_DB() {
+
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@ public class MC_DB {
 
         try {
 
-            input = new FileInputStream(System.getProperty("user.home")+"\\FSC_Creation\\db_pro.properties");
+            input = new FileInputStream(System.getProperty("user.home") + "\\FSC_Creation\\db_pro.properties");
 
             // load a properties file
             prop.load(input);
@@ -62,7 +63,7 @@ public class MC_DB {
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "e: Propaty File Not load!");
                     e.printStackTrace();
-                    
+
                 }
             }
         }
@@ -126,7 +127,7 @@ public class MC_DB {
             statement.executeUpdate(querySql);
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "MC_database:add_data_WithColumns::" );
+            JOptionPane.showMessageDialog(null, "MC_database:add_data_WithColumns::");
             ex.printStackTrace();
         }
         return null;
@@ -170,7 +171,7 @@ public class MC_DB {
 
     }
 
-    public static ResultSet search_dataOne(String use_table1, String columName2, String use_where4){
+    public static ResultSet search_dataOne(String use_table1, String columName2, String use_where4) {
         Connection connection = MC_DB.myConnection();
         ResultSet resultSet = null;
         if (!(use_table1 == null && columName2 == null && use_where4 == null)) {
