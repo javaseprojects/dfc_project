@@ -226,7 +226,7 @@ AccessDenied_backupAndRestore andBackup;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jp_userMainPanel;
+    public static javax.swing.JPanel jp_userMainPanel;
     private javax.swing.JLabel lb_close;
     public static javax.swing.JLabel lb_main_userNameLOAD;
     // End of variables declaration//GEN-END:variables

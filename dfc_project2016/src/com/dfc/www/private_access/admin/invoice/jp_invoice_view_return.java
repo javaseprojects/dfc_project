@@ -5,6 +5,8 @@
  */
 package com.dfc.www.private_access.admin.invoice;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author deepalsuranga
@@ -27,19 +29,153 @@ public class jp_invoice_view_return extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        tf_invoice_no = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        lbl_tot_invoice = new javax.swing.JLabel();
+        lbl_tot_invoices_amount = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_invoice = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(251, 140, 0));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Return Invoice No:");
+
+        tf_invoice_no.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_invoice_no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_invoice_noActionPerformed(evt);
+            }
+        });
+        tf_invoice_no.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_invoice_noKeyReleased(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Total Return Invoice:");
+
+        lbl_tot_invoice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_tot_invoice.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_tot_invoice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_tot_invoice.setText("0");
+        lbl_tot_invoice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbl_tot_invoice.setMaximumSize(new java.awt.Dimension(150, 40));
+        lbl_tot_invoice.setMinimumSize(new java.awt.Dimension(150, 40));
+
+        lbl_tot_invoices_amount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbl_tot_invoices_amount.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_tot_invoices_amount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_tot_invoices_amount.setText("0.00");
+        lbl_tot_invoices_amount.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbl_tot_invoices_amount.setMaximumSize(new java.awt.Dimension(150, 40));
+        lbl_tot_invoices_amount.setMinimumSize(new java.awt.Dimension(150, 40));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Total Return Amount:");
+
+        tbl_invoice.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Invoice No", "Cost", "Date", "Qty"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbl_invoice);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 20, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tf_invoice_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_invoice_noActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_invoice_noActionPerformed
+
+    private void tf_invoice_noKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_invoice_noKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!tf_invoice_no.getText().isEmpty()) {
+                searchReturnInvoice(tf_invoice_no.getText());
+            } else {
+                viewReturnDailyInvoices();
+            }
+        }
+    }//GEN-LAST:event_tf_invoice_noKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_tot_invoice;
+    private javax.swing.JLabel lbl_tot_invoices_amount;
+    private javax.swing.JTable tbl_invoice;
+    private javax.swing.JTextField tf_invoice_no;
     // End of variables declaration//GEN-END:variables
+
+    private void searchReturnInvoice(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void viewReturnDailyInvoices() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
