@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.transform.Result;
 
-public class final_product_balance extends javax.swing.JPanel {
+public class jp_final_product_balance extends javax.swing.JPanel {
 
     String date;
 
-    public final_product_balance() {
+    public jp_final_product_balance() {
         initComponents();
         CheckDate();
         JTextFieldDateEditor dt = (JTextFieldDateEditor) jDateChooser1.getDateEditor();

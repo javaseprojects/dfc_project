@@ -1,8 +1,8 @@
 package com.dfc.www.private_access.admin.cash_account;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
-import com.dfc.www.private_access.admin.products.User_Home;
-import static com.dfc.www.private_access.admin.products.User_Home.lb_main_userNameLOAD;
+import com.dfc.www.public_access.user_frontend.User_Home;
+import static com.dfc.www.public_access.user_frontend.User_Home.lb_main_userNameLOAD;
 import com.fsc.www.db.MC_DB;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,24 +16,24 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-public class add_investment extends javax.swing.JFrame {
+public class jf_add_investment extends javax.swing.JFrame {
 
     public static String us_fullname;
     String C_Time, C_Date;
     int ADMIN_USER_ID, MAX_INVSET_ID, MAX_CASH_ID;
     boolean ADMIN_LOGGED_STATUS;
 
-    public add_investment() {
+    public jf_add_investment() {
         initComponents();
         this.setAlwaysOnTop(true);
     }
 
-    public add_investment(String email) {
+    public jf_add_investment(String email) {
         initComponents();
         showTime();
         getCurrentDate();
         txt_username.grabFocus();
-        add_investment.us_fullname = email;
+        jf_add_investment.us_fullname = email;
         try {
 
             lbl_looged_user.setText("");
@@ -377,20 +377,23 @@ public class add_investment extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jf_add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jf_add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jf_add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jf_add_investment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new add_investment().setVisible(true);
+                new jf_add_investment().setVisible(true);
             }
         });
     }

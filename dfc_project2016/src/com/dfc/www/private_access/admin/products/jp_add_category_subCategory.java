@@ -20,14 +20,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Buwaneka
  */
-public class Add_Cat_And_SubCat extends javax.swing.JPanel {
+public class jp_add_category_subCategory extends javax.swing.JPanel {
 
     int catid;
 
     /**
      * Creates new form Add_Cat_And_SubCat
      */
-    public Add_Cat_And_SubCat() {
+    public jp_add_category_subCategory() {
         initComponents();
         addData_to_List();
         // addData_to_SubCat_List();

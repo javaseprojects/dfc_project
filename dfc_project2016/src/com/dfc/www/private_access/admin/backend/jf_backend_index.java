@@ -3,7 +3,7 @@ package com.dfc.www.private_access.admin.backend;
 import static com.dfc.www.private_access.admin.backend.jp_admin_posManagment_mainMenu.jp_adminPOSsubPanel;
 import com.dfc.www.private_access.admin.cash_account.jp_admin_cashManagement;
 import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
-import com.dfc.www.private_access.admin.products.Add_Cat_And_SubCat;
+import com.dfc.www.private_access.admin.products.jp_add_category_subCategory;
 import com.dfc.www.public_access.user.user_login;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;

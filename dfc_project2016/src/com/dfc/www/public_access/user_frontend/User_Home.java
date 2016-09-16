@@ -1,7 +1,6 @@
-package com.dfc.www.private_access.admin.products;
+package com.dfc.www.public_access.user_frontend;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
-import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
 import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
 import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
 import com.fsc.www.db.SendAttachmentInEmail;
@@ -90,7 +89,6 @@ public class User_Home extends javax.swing.JFrame {
         lb_main_userNameLOAD = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lb_close = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +112,7 @@ public class User_Home extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(239, 108, 0));
 
         lb_close.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lb_close.setForeground(new java.awt.Color(255, 255, 255));
         lb_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_close.setText("X");
         lb_close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -142,15 +141,6 @@ public class User_Home extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 1370, 22);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/products/keyboard.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 30, 40, 40);
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -173,14 +163,22 @@ public class User_Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 AccessDenied_backupAndRestore andBackup;
     private void lb_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_closeMouseClicked
+
         try {
             this.dispose();
             String[] split = lb_main_userNameLOAD.getText().split("@");
             andBackup = new AccessDenied_backupAndRestore();
+            
+                String subSequence = andBackup.md_createBackup(split[0]);
+            
+            if (User_Home.md_isReachableByPing("mail.google.com")) {
+                new Thread(() -> {
+                    SendAttachmentInEmail.sendSSLAttMail(subSequence, "systemdfc@gmail.com", "systemdfc@gmail.com");
 
-            String subSequence = andBackup.md_createBackup(split[0]);
-
-            SendAttachmentInEmail.sendSSLAttMail(subSequence, "systemdfc@gmail.com", "systemdfc@gmail.com");
+                }).start();
+            }else{
+                JOptionPane.showMessageDialog(this, "Internet Connection Not Reachable! \n Backup can't send system host \n Only localbackup Only!");
+            }
 
             Thread.sleep(1000);
             System.exit(0);
@@ -189,11 +187,6 @@ AccessDenied_backupAndRestore andBackup;
         }
 
     }//GEN-LAST:event_lb_closeMouseClicked
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
-
-    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -230,7 +223,6 @@ AccessDenied_backupAndRestore andBackup;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -238,4 +230,35 @@ AccessDenied_backupAndRestore andBackup;
     private javax.swing.JLabel lb_close;
     public static javax.swing.JLabel lb_main_userNameLOAD;
     // End of variables declaration//GEN-END:variables
+
+    public static boolean md_isReachableByPing(String host) {
+        try {
+            String cmd = "";
+            if (System.getProperty("os.name").startsWith("Windows")) {
+                // For Windows
+                cmd = "ping -n 1 " + host;
+                System.out.println("OK!");
+            } else {
+                // For Linux and OSX
+                cmd = "ping -c 1 " + host;
+            }
+
+            Process myProcess = Runtime.getRuntime().exec(cmd);
+            myProcess.waitFor();
+
+            if (myProcess.exitValue() == 0) {
+
+                return true;
+            } else {
+
+                return false;
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

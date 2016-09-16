@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Buwaneka
  */
-public class Product extends javax.swing.JPanel {
+public class jp_product extends javax.swing.JPanel {
 
     int catid;
     int Subcatid;
@@ -35,7 +35,7 @@ public class Product extends javax.swing.JPanel {
     /**
      * Creates new form Test_Pannel
      */
-    public Product() {
+    public jp_product() {
         initComponents();
         new Thread(() -> {
             load_Cat_to_Combobox();

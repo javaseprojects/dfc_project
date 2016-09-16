@@ -6,7 +6,7 @@
 package com.dfc.www.private_access.admin.invoice;
 
 import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
-import com.dfc.www.private_access.admin.products.User_Home;
+import com.dfc.www.public_access.user_frontend.User_Home;
 import com.fsc.www.db.MC_DB;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
@@ -102,6 +102,8 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jPanel3.setLayout(new java.awt.CardLayout());
 
         jPanel6.setBackground(new java.awt.Color(239, 108, 0));
+        jPanel6.setMaximumSize(new java.awt.Dimension(310, 562));
+        jPanel6.setMinimumSize(new java.awt.Dimension(310, 562));
 
         tbl_invoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -18,14 +18,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Buwaneka
  */
-public class Daily_Qty_add extends javax.swing.JPanel {
+public class jp_add_daily_qty extends javax.swing.JPanel {
 
     String date;
 
     int ItemId;
     int ItemId_set;
 
-    public Daily_Qty_add() {
+    public jp_add_daily_qty() {
         initComponents();
         CheckDate();
         new Thread(() -> {
@@ -627,7 +627,7 @@ public class Daily_Qty_add extends javax.swing.JPanel {
                         dtm.addRow(v);
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Daily_Qty_add.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(jp_add_daily_qty.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }).start();
         } catch (Exception e) {

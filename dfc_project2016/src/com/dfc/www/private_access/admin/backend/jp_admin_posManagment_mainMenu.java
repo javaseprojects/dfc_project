@@ -6,10 +6,10 @@
 package com.dfc.www.private_access.admin.backend;
 
 import static com.dfc.www.private_access.admin.backend.jf_backend_index.jp_adminMainPanel;
-import com.dfc.www.private_access.admin.products.Add_Cat_And_SubCat;
-import com.dfc.www.private_access.admin.products.Daily_Qty_add;
-import com.dfc.www.private_access.admin.products.Product;
-import com.dfc.www.private_access.admin.products.final_product_balance;
+import com.dfc.www.private_access.admin.products.jp_add_category_subCategory;
+import com.dfc.www.private_access.admin.products.jp_add_daily_qty;
+import com.dfc.www.private_access.admin.products.jp_product;
+import com.dfc.www.private_access.admin.products.jp_final_product_balance;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
@@ -28,7 +28,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                Product ai = new Product();
+                jp_product ai = new jp_product();
                 ai.setVisible(true);
                 jp_adminPOSsubPanel.add(ai);
                 jp_adminPOSsubPanel.updateUI();
@@ -215,7 +215,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                Add_Cat_And_SubCat ai = new Add_Cat_And_SubCat();
+                jp_add_category_subCategory ai = new jp_add_category_subCategory();
                 ai.setVisible(true);
                 jp_adminPOSsubPanel.add(ai);
                 jp_adminPOSsubPanel.updateUI();
@@ -240,7 +240,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                Product ai = new Product();
+                jp_product ai = new jp_product();
                 ai.setVisible(true);
                 jp_adminPOSsubPanel.add(ai);
                 jp_adminPOSsubPanel.updateUI();
@@ -266,7 +266,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                Daily_Qty_add ai = new Daily_Qty_add();
+                jp_add_daily_qty ai = new jp_add_daily_qty();
                 ai.setVisible(true);
                 jp_adminPOSsubPanel.add(ai);
                 jp_adminPOSsubPanel.updateUI();
@@ -292,7 +292,7 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                final_product_balance ai = new final_product_balance();
+                jp_final_product_balance ai = new jp_final_product_balance();
                 ai.setVisible(true);
                 jp_adminPOSsubPanel.add(ai);
                 jp_adminPOSsubPanel.updateUI();

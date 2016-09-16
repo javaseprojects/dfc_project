@@ -7,7 +7,7 @@ package com.dfc.www.public_access.user;
 
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
-import com.dfc.www.private_access.admin.cash_account.add_investment;
+import com.dfc.www.private_access.admin.cash_account.jf_add_investment;
 import com.fsc.www.db.MC_DB;
 import com.javav.fsc.zone.EmailValidator;
 import com.javav.fsc.zone.PasswordValidator;
@@ -537,7 +537,7 @@ public class user_login extends javax.swing.JFrame {
                 if ("User".equals(stattus)) {
 
                     //User_Home admin = new User_Home(tf_useremail.getText().toLowerCase().trim());
-                    add_investment user = new add_investment(tf_useremail.getText().toLowerCase());
+                    jf_add_investment user = new jf_add_investment(tf_useremail.getText().toLowerCase());
 
                     user.setVisible(true);
                     user.setAlwaysOnTop(true);

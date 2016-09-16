@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dfc.www.private_access.admin.backend;
+package com.dfc.www.private_access.admin.invoice;
 
-import java.awt.Color;
+import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -16,15 +16,13 @@ import java.util.logging.Logger;
  *
  * @author deepalsuranga
  */
-public class jf_onScreenInvoiceKeyBoard extends javax.swing.JFrame {
+public class jp_invoice_view_keyboard extends javax.swing.JPanel {
 
     /**
-     * Creates new form jf_onScreenInvoiceKeyBoard
+     * Creates new form jp_invoice_view_keyboard
      */
-    public jf_onScreenInvoiceKeyBoard() {
+    public jp_invoice_view_keyboard() {
         initComponents();
-        this.setAlwaysOnTop(true);
-        this.getContentPane().setBackground(new Color(91, 91, 91));
     }
 
     /**
@@ -55,11 +53,6 @@ public class jf_onScreenInvoiceKeyBoard extends javax.swing.JFrame {
         bt_space = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAutoRequestFocus(false);
-        setFocusCycleRoot(false);
-        setFocusableWindowState(false);
 
         jPanel2.setBackground(new java.awt.Color(251, 140, 0));
 
@@ -375,8 +368,8 @@ public class jf_onScreenInvoiceKeyBoard extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -390,195 +383,7 @@ public class jf_onScreenInvoiceKeyBoard extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-
-        jLabel2.setToolTipText("On Screen Keyboard!");
-
-    }//GEN-LAST:event_jLabel2MouseEntered
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
-        try {
-            Runtime.getRuntime().exec("c:\\windows\\system32\\osk.exe");
-        } catch (IOException ex) {
-            Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void bt_spaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_spaceActionPerformed
-
-        try {
-            bt_space.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_SPACE);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_spaceActionPerformed
-
-    private void bt_number_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_0ActionPerformed
-
-        //        if (tf_invoice_no.hasFocus()) {
-            //            tf_invoice_no.setText("0");
-            //        } else if (tf_item_code.hasFocus()) {
-            //            tf_item_code.setText("0");
-            //        } else if (tf_qty.hasFocus()) {
-            //            tf_qty.setText("0");
-            //        } else if (tf_payment.hasFocus()) {
-            //            tf_payment.setText("0");
-            //        }
-        try {
-            bt_number_0.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_0);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_0ActionPerformed
-
-    private void bt_enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enterActionPerformed
-
-        try {
-            bt_enter.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_ENTER);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_enterActionPerformed
-
-    private void bt_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_plusActionPerformed
-
-        try {
-            bt_plus.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_ADD);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_plusActionPerformed
-
-    private void bt_substractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_substractActionPerformed
-
-        try {
-            bt_substract.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_SUBTRACT);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_substractActionPerformed
-
-    private void bt_number_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_3ActionPerformed
-
-        try {
-            bt_number_3.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_3);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_3ActionPerformed
-
-    private void bt_number_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_2ActionPerformed
-
-        try {
-            bt_number_2.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_2);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_2ActionPerformed
-
-    private void bt_number_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_1ActionPerformed
-
-        //        tf_invoice_no.addFocusListener((FocusListener) this);
-        //        tf_item_code.addFocusListener((FocusListener) this);
-        //        focusGained(this);
-        //        if (tf_invoice_no.hasFocus()) {
-            //            tf_invoice_no.setText("1");
-            //        } else if (tf_item_code.hasFocus()) {
-            //            tf_item_code.setText("1");
-            //        } else if (tf_qty.hasFocus()) {
-            //            tf_qty.setText("1");
-            //        } else if (tf_payment.hasFocus()) {
-            //            tf_payment.setText("1");
-            //        }
-        //        Ext.get(document.activeElement).parent().parent().id;
-        //        EX
-        //        findFocus(this);
-        //        Component.get
-        //
-        //        if (true) {
-            //            Component c = (Component).getSource();
-            //            Cursor cur = c.getCursor();
-            //            c.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            //
-            //            c.setCursor(cur);
-            //
-            //        }
-        //        System.out.println( KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner());
-        //        KeyboardFocusManager=new Robot().mousePress(KeyEvent.VK_1);
-        try {
-            bt_number_1.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_1);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_1ActionPerformed
-
-    private void bt_number_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_4ActionPerformed
-
-        try {
-            bt_number_4.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_4);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_4ActionPerformed
-
-    private void bt_number_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_5ActionPerformed
-
-        try {
-            bt_number_5.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_5);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_5ActionPerformed
-
-    private void bt_number_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_6ActionPerformed
-
-        try {
-            bt_number_6.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_6);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_6ActionPerformed
-
-    private void bt_multiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_multiActionPerformed
-
-        try {
-            bt_multi.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_MULTIPLY);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_multiActionPerformed
-
-    private void bt_divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_divideActionPerformed
-
-        try {
-            bt_divide.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_DIVIDE);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_divideActionPerformed
-
-    private void bt_number_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_9ActionPerformed
-
-        try {
-            bt_number_9.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_9);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_9ActionPerformed
-
-    private void bt_number_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_8ActionPerformed
-
-        try {
-            bt_number_8.setFocusable(false);
-            new Robot().keyPress(KeyEvent.VK_8);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_bt_number_8ActionPerformed
 
     private void bt_number_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_7ActionPerformed
 
@@ -589,38 +394,192 @@ public class jf_onScreenInvoiceKeyBoard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_number_7ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void bt_number_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_8ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new jf_onScreenInvoiceKeyBoard().setVisible(true);
-        });
-    }
+        try {
+            bt_number_8.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_8);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_8ActionPerformed
+
+    private void bt_number_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_9ActionPerformed
+
+        try {
+            bt_number_9.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_9);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_9ActionPerformed
+
+    private void bt_divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_divideActionPerformed
+
+        try {
+            bt_divide.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_DIVIDE);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_divideActionPerformed
+
+    private void bt_multiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_multiActionPerformed
+
+        try {
+            bt_multi.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_MULTIPLY);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_multiActionPerformed
+
+    private void bt_number_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_6ActionPerformed
+
+        try {
+            bt_number_6.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_6);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_6ActionPerformed
+
+    private void bt_number_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_5ActionPerformed
+
+        try {
+            bt_number_5.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_5);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_5ActionPerformed
+
+    private void bt_number_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_4ActionPerformed
+
+        try {
+            bt_number_4.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_4);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_4ActionPerformed
+
+    private void bt_number_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_1ActionPerformed
+
+        //        tf_invoice_no.addFocusListener((FocusListener) this);
+        //        tf_item_code.addFocusListener((FocusListener) this);
+        //        focusGained(this);
+        //        if (tf_invoice_no.hasFocus()) {
+        //            tf_invoice_no.setText("1");
+        //        } else if (tf_item_code.hasFocus()) {
+        //            tf_item_code.setText("1");
+        //        } else if (tf_qty.hasFocus()) {
+        //            tf_qty.setText("1");
+        //        } else if (tf_payment.hasFocus()) {
+        //            tf_payment.setText("1");
+        //        }
+        //        Ext.get(document.activeElement).parent().parent().id;
+        //        EX
+        //        findFocus(this);
+        //        Component.get
+        //
+        //        if (true) {
+        //            Component c = (Component).getSource();
+        //            Cursor cur = c.getCursor();
+        //            c.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        //
+        //            c.setCursor(cur);
+        //
+        //        }
+        //        System.out.println( KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner());
+        //        KeyboardFocusManager=new Robot().mousePress(KeyEvent.VK_1);
+        try {
+            bt_number_1.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_1);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_1ActionPerformed
+
+    private void bt_number_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_2ActionPerformed
+
+        try {
+            bt_number_2.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_2);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_2ActionPerformed
+
+    private void bt_number_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_3ActionPerformed
+
+        try {
+            bt_number_3.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_3);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_3ActionPerformed
+
+    private void bt_substractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_substractActionPerformed
+
+        try {
+            bt_substract.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_SUBTRACT);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_substractActionPerformed
+
+    private void bt_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_plusActionPerformed
+
+        try {
+            bt_plus.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_ADD);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_plusActionPerformed
+
+    private void bt_enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enterActionPerformed
+
+        try {
+            bt_enter.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_ENTER);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_enterActionPerformed
+
+    private void bt_number_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_number_0ActionPerformed
+
+        //        if (tf_invoice_no.hasFocus()) {
+        //            tf_invoice_no.setText("0");
+        //        } else if (tf_item_code.hasFocus()) {
+        //            tf_item_code.setText("0");
+        //        } else if (tf_qty.hasFocus()) {
+        //            tf_qty.setText("0");
+        //        } else if (tf_payment.hasFocus()) {
+        //            tf_payment.setText("0");
+        //        }
+        try {
+            bt_number_0.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_0);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_number_0ActionPerformed
+
+    private void bt_spaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_spaceActionPerformed
+
+        try {
+            bt_space.setFocusable(false);
+            new Robot().keyPress(KeyEvent.VK_SPACE);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_bt_spaceActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+
+        try {
+            Runtime.getRuntime().exec("c:\\windows\\system32\\osk.exe");
+        } catch (IOException ex) {
+            Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+
+        jLabel2.setToolTipText("On Screen Keyboard!");
+
+    }//GEN-LAST:event_jLabel2MouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_divide;
