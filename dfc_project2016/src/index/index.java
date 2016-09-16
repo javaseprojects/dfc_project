@@ -9,6 +9,7 @@ import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.public_access.user.user_login;
 import com.sun.awt.AWTUtilities;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 
 /**
@@ -116,10 +117,20 @@ public class index extends javax.swing.JFrame {
 
         ii++;
         if (ii == 8) {
-            jf_backend_index ij = new jf_backend_index();
-            ij.setVisible(true);
-            this.dispose();
-            JOptionPane.showMessageDialog(this, "Safe Mode is On! Only Can Access First Administrator! only!");
+
+            JPasswordField pwd = new JPasswordField(20);
+            int action = JOptionPane.showConfirmDialog(null, pwd, "Only Can Access First Administrator:Enter Password", JOptionPane.YES_NO_OPTION);
+            if (action == JOptionPane.YES_OPTION) {
+                //String password = new String(pwd.getPassword());
+//                JOptionPane.showMessageDialog(null, "Your password is " + new String(pwd.getPassword()));
+                if ("RE_Administrator".equals(new String(pwd.getPassword()))) {
+                    JOptionPane.showMessageDialog(this, "Safe Mode is On! Only Can Access First Administrator! only!");
+                    jf_backend_index ij = new jf_backend_index();
+                    ij.setVisible(true);
+                    this.dispose();
+                }
+            }
+            
         }
 
     }//GEN-LAST:event_jLabel6MouseReleased

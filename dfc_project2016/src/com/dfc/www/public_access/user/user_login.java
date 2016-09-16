@@ -424,7 +424,7 @@ public class user_login extends javax.swing.JFrame {
             //String showInputDialog = JOptionPane.showInputDialog(this, "Enter Password",JOptionPane.ERROR_MESSAGE);
 
             JPasswordField pwd = new JPasswordField(20);
-            int action = JOptionPane.showConfirmDialog(null, pwd, "Enter Password",JOptionPane.YES_NO_OPTION);
+            int action = JOptionPane.showConfirmDialog(null, pwd, "Developer Mode:Enter Password",JOptionPane.YES_NO_OPTION);
             if (action == JOptionPane.YES_OPTION) {
                 //String password = new String(pwd.getPassword());
 //                JOptionPane.showMessageDialog(null, "Your password is " + new String(pwd.getPassword()));

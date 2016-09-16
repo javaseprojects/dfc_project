@@ -5,6 +5,9 @@
  */
 package com.dfc.www.private_access.admin.backup;
 
+import com.dfc.www.private_access.admin.products.User_Home;
+import com.fsc.www.db.Backup_SendMailSSL;
+import com.fsc.www.db.SendAttachmentInEmail;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.io.BufferedOutputStream;
@@ -79,7 +82,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_backupview = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -105,6 +108,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         tf_pathsetText = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -116,7 +120,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_backupview.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -132,9 +136,17 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(200);
+        tb_backupview.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_backupviewMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_backupview);
+        if (tb_backupview.getColumnModel().getColumnCount() > 0) {
+            tb_backupview.getColumnModel().getColumn(0).setMinWidth(300);
+            tb_backupview.getColumnModel().getColumn(1).setMinWidth(50);
+            tb_backupview.getColumnModel().getColumn(2).setMinWidth(50);
+            tb_backupview.getColumnModel().getColumn(3).setMinWidth(50);
         }
 
         jPanel3.setBackground(new java.awt.Color(255, 51, 51));
@@ -326,6 +338,13 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Email Send");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -335,12 +354,16 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_pathsetText)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(239, 239, 239))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(tf_pathsetText, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_pathsetText, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -353,7 +376,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -515,6 +538,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
                 lb_output.setText("");
                 lb_output.setText("SUCCESSFULLY: DATABASE FILE EMPTY!");
             });
+            //Backup_Data-2(BACKUP[Developer)-DFC_DATA-FSC-16%09%2016-04~05~33])	16-09-2016	04:05:33]
 
             trd_1.start();
             System.out.println("SUCCESSFULLY: DATABASE FILE EMPTY!");
@@ -532,6 +556,24 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+//        Backup_SendMailSSL sslsend = new Backup_SendMailSSL();
+//        //admin Alert
+//        sslsend.sendingSSL("Administrator", "Login Status:System Entered!\n\n" + "Username:" + "Deepal Suranga" + "\n\n" + "Time:" + "00:00" + "\n\n" + "Date:" + "00/00" + "\n\n\n \t Thank you for using FSC System.");
+        SendAttachmentInEmail.sendSSLAttMail(subSequence, "deepalsuranga@live.com", "systemdfc@gmail.com");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+    String subSequence;
+    private void tb_backupviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_backupviewMouseClicked
+
+        String Codes = (String) tb_backupview.getValueAt(tb_backupview.getSelectedRow(), 0);
+        subSequence = (String) Codes.subSequence(Codes.indexOf("[") + 1, Codes.indexOf("]"));
+        System.out.println(subSequence);
+
+
+    }//GEN-LAST:event_tb_backupviewMouseClicked
 
     /**
      * @param args the command line arguments
@@ -568,6 +610,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -591,9 +634,9 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lb_output;
     private javax.swing.JPasswordField pf_userPassword;
+    public static javax.swing.JTable tb_backupview;
     private javax.swing.JTextField tf_accessPort;
     private javax.swing.JTextField tf_databaseName;
     private javax.swing.JTextField tf_hostAddress;
@@ -826,7 +869,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
 
     private void md_loadBACKUP() {
 
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tb_backupview.getModel();
         dtm.setRowCount(0);
         FilenameFilter sqlFilter = (File file, String name) -> {
             return name.endsWith(".zip"); // filters files whose extension is .mp3
@@ -852,8 +895,9 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
                 String s2 = split[4];
                 String[] datePart = s.split("%");
                 String[] datePart2 = s.split("~");
-                v.add("Backup_Data-" + i + "(" + part.replaceAll(".zip", "") + ")");
-                //v.add();
+                //v.add("Backup_Data-" + i + "(" + part.replaceAll(".zip", "") + ")");
+                v.add("Backup_Data-" + i + "[" + part + "]");
+
                 v.add(datePart[0] + "-" + datePart[1] + "-" + datePart[2]);
                 v.add(s2.replaceAll(".zip", "").replaceAll("~", ":"));
 
@@ -866,8 +910,9 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
         }
 
     }
+    String nameGEN;
 
-    public void md_createBackup(String typeuser) {
+    public String md_createBackup(String typeuser) {
 
         try {
 
@@ -893,6 +938,9 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
 
                 byte[] data = b.getData(host, port, user, Password, Database).getBytes();
                 File filedst = new File(backuppath + "\\" + "BACKUP(" + typeuser + ")-" + Database.toUpperCase() + "-FSC-" + date + ".zip");
+
+                nameGEN = "BACKUP(" + typeuser + ")-" + Database.toUpperCase() + "-FSC-" + date + ".zip";
+
                 FileOutputStream dest = new FileOutputStream(filedst);
                 ZipOutputStream zip = new ZipOutputStream(
                         new BufferedOutputStream(dest));
@@ -912,7 +960,7 @@ public class AccessDenied_backupAndRestore extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(AccessDenied_backupAndRestore.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        return nameGEN;
     }
 
 }

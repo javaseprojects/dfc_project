@@ -4,6 +4,7 @@ import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
 import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
 import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
+import com.fsc.www.db.SendAttachmentInEmail;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -88,7 +89,7 @@ public class User_Home extends javax.swing.JFrame {
         jp_userMainPanel = new javax.swing.JPanel();
         lb_main_userNameLOAD = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lb_close = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -112,12 +113,13 @@ public class User_Home extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(239, 108, 0));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("X");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_close.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lb_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_close.setText("X");
+        lb_close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lb_closeMouseClicked(evt);
             }
         });
 
@@ -127,14 +129,14 @@ public class User_Home extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(1340, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_close, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+                .addComponent(lb_close))
         );
 
         jPanel1.add(jPanel2);
@@ -170,20 +172,23 @@ public class User_Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 AccessDenied_backupAndRestore andBackup;
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lb_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_closeMouseClicked
         try {
+            this.dispose();
             String[] split = lb_main_userNameLOAD.getText().split("@");
             andBackup = new AccessDenied_backupAndRestore();
 
-            andBackup.md_createBackup(split[0]);
-            this.dispose();
+            String subSequence = andBackup.md_createBackup(split[0]);
+
+            SendAttachmentInEmail.sendSSLAttMail(subSequence, "systemdfc@gmail.com", "systemdfc@gmail.com");
+
             Thread.sleep(1000);
             System.exit(0);
         } catch (InterruptedException ex) {
             Logger.getLogger(User_Home.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lb_closeMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
@@ -225,12 +230,12 @@ AccessDenied_backupAndRestore andBackup;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jp_userMainPanel;
+    private javax.swing.JLabel lb_close;
     public static javax.swing.JLabel lb_main_userNameLOAD;
     // End of variables declaration//GEN-END:variables
 }
