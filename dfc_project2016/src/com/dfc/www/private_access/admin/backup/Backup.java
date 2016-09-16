@@ -29,8 +29,6 @@ public class Backup {
 
     public String getData(String host, String port, String user, String password, String db) {
 
-        
-
         String Mysqlpath = getMysqlBinPath(host, port, user, password, db);
         try {
             Class.forName("com.mysql.jdbc.Driver");
