@@ -40,7 +40,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        jp_submainPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         sp_itemname = new javax.swing.JScrollPane();
         li_itemname = new javax.swing.JList();
@@ -89,22 +89,22 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jPanel3.setPreferredSize(new java.awt.Dimension(310, 580));
         jPanel3.setLayout(new java.awt.CardLayout());
 
-        jPanel6.setBackground(new java.awt.Color(239, 108, 0));
-        jPanel6.setMaximumSize(new java.awt.Dimension(310, 562));
-        jPanel6.setMinimumSize(new java.awt.Dimension(310, 562));
+        jp_submainPanel.setBackground(new java.awt.Color(239, 108, 0));
+        jp_submainPanel.setMaximumSize(new java.awt.Dimension(310, 562));
+        jp_submainPanel.setMinimumSize(new java.awt.Dimension(310, 562));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jp_submainPanelLayout = new javax.swing.GroupLayout(jp_submainPanel);
+        jp_submainPanel.setLayout(jp_submainPanelLayout);
+        jp_submainPanelLayout.setHorizontalGroup(
+            jp_submainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 310, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jp_submainPanelLayout.setVerticalGroup(
+            jp_submainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 580, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel6, "card2");
+        jPanel3.add(jp_submainPanel, "card2");
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 310, 580));
 
@@ -444,7 +444,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     jf_onScreenInvoiceKeyBoard invoiceKeyBoard = new jf_onScreenInvoiceKeyBoard();
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
 
-        
 
     }//GEN-LAST:event_jButton3MouseClicked
     jp_invoice_view_invoice invoiceLOAD = new jp_invoice_view_invoice();
@@ -452,12 +451,13 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         new Thread(() -> {
             try {
-                User_Home.jp_userMainPanel.removeAll();
-                User_Home.jp_userMainPanel.setLayout(new FlowLayout());
+                
+                jp_submainPanel.removeAll();
+                jp_submainPanel.setLayout(new FlowLayout());
 
                 invoiceLOAD.setVisible(true);
-                User_Home.jp_userMainPanel.add(invoiceLOAD);
-                User_Home.jp_userMainPanel.updateUI();
+                jp_submainPanel.add(invoiceLOAD);
+                jp_submainPanel.updateUI();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -470,12 +470,12 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         new Thread(() -> {
             try {
-                User_Home.jp_userMainPanel.removeAll();
-                User_Home.jp_userMainPanel.setLayout(new FlowLayout());
+                jp_submainPanel.removeAll();
+                jp_submainPanel.setLayout(new FlowLayout());
 
                 itemLOAD.setVisible(true);
-                User_Home.jp_userMainPanel.add(itemLOAD);
-                User_Home.jp_userMainPanel.updateUI();
+                jp_submainPanel.add(itemLOAD);
+                jp_submainPanel.updateUI();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -483,22 +483,22 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         }).start();
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    jp_invoice_view_keyboard keyboardLOAD=new jp_invoice_view_keyboard();
+    jp_invoice_view_keyboard keyboardLOAD = new jp_invoice_view_keyboard();
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    
+
         new Thread(() -> {
             try {
-                User_Home.jp_userMainPanel.removeAll();
-                User_Home.jp_userMainPanel.setLayout(new FlowLayout());
+                jp_submainPanel.removeAll();
+                jp_submainPanel.setLayout(new FlowLayout());
                 keyboardLOAD.setVisible(true);
-                User_Home.jp_userMainPanel.add(keyboardLOAD);
-                User_Home.jp_userMainPanel.updateUI();
+                jp_submainPanel.add(keyboardLOAD);
+                jp_submainPanel.updateUI();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -520,8 +520,8 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JPanel jp_submainPanel;
     private javax.swing.JLabel lb_available_qty;
     private javax.swing.JLabel lb_bil_total;
     private javax.swing.JLabel lb_tot_item;
