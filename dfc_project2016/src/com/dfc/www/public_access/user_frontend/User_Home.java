@@ -4,23 +4,33 @@ import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
 import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
 import com.dfc.www.private_access.admin.products.jp_add_daily_qty;
+import com.fsc.www.db.PB_MD;
 import com.fsc.www.db.SendAttachmentInEmail;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class User_Home extends javax.swing.JFrame {
 
     jp_user_invoiceManagment invoiceMng = new jp_user_invoiceManagment();
     jp_add_daily_qty add_daily = new jp_add_daily_qty();
+    jp_invoice_return_add returns = new jp_invoice_return_add();
 
     public User_Home() {
         initComponents();
+        showDate();
+        
+        
+        
         new Thread(() -> {
             try {
+                
                 Thread.sleep(3000);
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
@@ -34,8 +44,18 @@ public class User_Home extends javax.swing.JFrame {
         }).start();
     }
 
+    public void showDate() {
+        Date ds = new Date();
+        SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd");
+        String s = sdfs.format(ds);
+        lb_v_date.setText(s);
+        System.out.println(s);
+
+    }
+    
     public User_Home(String email) {
         initComponents();
+        showDate();
         new Thread(() -> {
             try {
                 Thread.sleep(3000);
@@ -52,8 +72,8 @@ public class User_Home extends javax.swing.JFrame {
 
         jf_backend_index.us_fullname = email;
         try {
-            lb_main_userNameLOAD.setText("");
-            lb_main_userNameLOAD.setText(email);
+            bt_main_userNameLOAD.setText("");
+            bt_main_userNameLOAD.setText(email);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,6 +109,8 @@ public class User_Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lb_v_date = new javax.swing.JLabel();
+        bt_main_userNameLOAD = new javax.swing.JButton();
         jp_userMainPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,7 +120,7 @@ public class User_Home extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        lb_main_userNameLOAD = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lb_close = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -106,12 +128,23 @@ public class User_Home extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(19, 20, 24));
+
+        lb_v_date.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_v_date.setForeground(new java.awt.Color(255, 255, 255));
+        lb_v_date.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_v_date.setText("Show Date");
+
+        bt_main_userNameLOAD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bt_main_userNameLOAD.setForeground(new java.awt.Color(255, 255, 255));
+        bt_main_userNameLOAD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
+        bt_main_userNameLOAD.setText("MY ACCOUNT");
+        bt_main_userNameLOAD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_main_userNameLOAD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jp_userMainPanel.setBackground(new java.awt.Color(51, 51, 51));
         jp_userMainPanel.setMaximumSize(new java.awt.Dimension(1366, 670));
@@ -120,14 +153,15 @@ public class User_Home extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 204));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("DELIGHT FOOD CORNER");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("POS SYSTEM");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Develop By :");
 
@@ -135,6 +169,7 @@ public class User_Home extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("INDUWARA COMPANY");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Authorized By :");
 
@@ -148,6 +183,9 @@ public class User_Home extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/index/INDUWARA backremove.png"))); // NOI18N
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/vt90.png"))); // NOI18N
 
         javax.swing.GroupLayout jp_userMainPanelLayout = new javax.swing.GroupLayout(jp_userMainPanel);
         jp_userMainPanel.setLayout(jp_userMainPanelLayout);
@@ -177,6 +215,9 @@ public class User_Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jp_userMainPanelLayout.createSequentialGroup()
+                .addComponent(jLabel11)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jp_userMainPanelLayout.setVerticalGroup(
             jp_userMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,13 +238,10 @@ public class User_Home extends javax.swing.JFrame {
                 .addGroup(jp_userMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-
-        lb_main_userNameLOAD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lb_main_userNameLOAD.setForeground(new java.awt.Color(255, 255, 255));
-        lb_main_userNameLOAD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lb_main_userNameLOAD.setText("Load User Email");
 
         jPanel2.setBackground(new java.awt.Color(239, 108, 0));
 
@@ -218,12 +256,19 @@ public class User_Home extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("System Login User");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(1340, Short.MAX_VALUE)
+                .addContainerGap(1090, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lb_close, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -231,13 +276,10 @@ public class User_Home extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lb_close))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_close)
+                    .addComponent(jLabel3)))
         );
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("System Login User");
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(250, 250, 250));
@@ -276,13 +318,11 @@ public class User_Home extends javax.swing.JFrame {
         jButton3.setText("ADD RETURN");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
-        jButton4.setText("MY ACCOUNT");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -290,7 +330,7 @@ public class User_Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,12 +338,11 @@ public class User_Home extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(272, 272, 272)
+                .addComponent(bt_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(1090, 1090, 1090)
+                .addComponent(lb_v_date, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jp_userMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -312,20 +351,21 @@ public class User_Home extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, 0)
-                        .addComponent(lb_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jp_userMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(669, 669, 669)
+                        .addComponent(lb_v_date, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jp_userMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -336,7 +376,7 @@ public class User_Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 774, Short.MAX_VALUE)
         );
 
         pack();
@@ -346,7 +386,7 @@ AccessDenied_backupAndRestore andBackup;
 
         try {
             this.dispose();
-            String[] split = lb_main_userNameLOAD.getText().split("@");
+            String[] split = bt_main_userNameLOAD.getText().split("@");
             andBackup = new AccessDenied_backupAndRestore();
 
             String subSequence = andBackup.md_createBackup(split[0]);
@@ -389,10 +429,9 @@ AccessDenied_backupAndRestore andBackup;
 
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
-
                 add_daily.setVisible(true);
                 jp_userMainPanel.add(add_daily);
                 jp_userMainPanel.updateUI();
@@ -403,6 +442,24 @@ AccessDenied_backupAndRestore andBackup;
         }).start();
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                jp_userMainPanel.removeAll();
+                jp_userMainPanel.setLayout(new FlowLayout());
+                returns.setVisible(true);
+                jp_userMainPanel.add(returns);
+                jp_userMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,12 +496,13 @@ AccessDenied_backupAndRestore andBackup;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton bt_main_userNameLOAD;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -457,7 +515,7 @@ AccessDenied_backupAndRestore andBackup;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JPanel jp_userMainPanel;
     private javax.swing.JLabel lb_close;
-    public static javax.swing.JLabel lb_main_userNameLOAD;
+    public static javax.swing.JLabel lb_v_date;
     // End of variables declaration//GEN-END:variables
 
     public static boolean md_isReachableByPing(String host) {

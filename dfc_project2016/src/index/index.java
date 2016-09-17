@@ -187,15 +187,15 @@ public class index extends javax.swing.JFrame {
                     for (int i = 0; i < 101; i++) {
 
                         lb_presant.setText(i + "%");
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                         if (i == 29) {
-                            Thread.sleep(200);
+                            Thread.sleep(100);
                         }
                         if (i == 50) {
-                            Thread.sleep(500);
+                            Thread.sleep(100);
                         }
                         if (i == 72) {
-                            Thread.sleep(100);
+                            Thread.sleep(50);
                         }
                         if (i == 100) {
                             user_login user = new user_login();

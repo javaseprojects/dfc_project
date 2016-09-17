@@ -9,6 +9,7 @@ import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
 import static com.dfc.www.private_access.admin.invoice.jp_invoice_view_item.li_searchSuggestions;
 import com.dfc.www.public_access.user_frontend.User_Home;
 import com.fsc.www.db.MC_DB;
+import com.fsc.www.db.PB_MD;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,6 +22,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class jp_user_invoiceManagment extends javax.swing.JPanel {
@@ -31,7 +33,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     public jp_user_invoiceManagment() {
         initComponents();
-
+        tf_item_code.grabFocus();
         new Thread(() -> {
             try {
                 jp_submainPanel.removeAll();
@@ -92,7 +94,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         tf_qty = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_item = new javax.swing.JTable();
+        tb_invoiceRegistor = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         lb_tot_item = new javax.swing.JLabel();
         lb_bil_total = new javax.swing.JLabel();
@@ -164,12 +166,20 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 tf_item_codeActionPerformed(evt);
             }
         });
+        tf_item_code.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tf_item_codePropertyChange(evt);
+            }
+        });
         tf_item_code.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tf_item_codeKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_item_codeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_item_codeKeyTyped(evt);
             }
         });
 
@@ -194,7 +204,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         lb_available_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_available_qty.setForeground(new java.awt.Color(255, 255, 255));
         lb_available_qty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_available_qty.setText("00");
         lb_available_qty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -209,6 +218,9 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         tf_qty.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_qtyKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_qtyKeyTyped(evt);
             }
         });
 
@@ -254,7 +266,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        tbl_item.setModel(new javax.swing.table.DefaultTableModel(
+        tb_invoiceRegistor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -262,10 +274,15 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 "No", "Item Code", "Item Name", "Unit Price", "Qty", "Sub Total"
             }
         ));
-        jScrollPane1.setViewportView(tbl_item);
-        if (tbl_item.getColumnModel().getColumnCount() > 0) {
-            tbl_item.getColumnModel().getColumn(0).setPreferredWidth(6);
-            tbl_item.getColumnModel().getColumn(4).setPreferredWidth(15);
+        tb_invoiceRegistor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tb_invoiceRegistorPropertyChange(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_invoiceRegistor);
+        if (tb_invoiceRegistor.getColumnModel().getColumnCount() > 0) {
+            tb_invoiceRegistor.getColumnModel().getColumn(0).setPreferredWidth(6);
+            tb_invoiceRegistor.getColumnModel().getColumn(4).setPreferredWidth(15);
         }
 
         jPanel4.setBackground(new java.awt.Color(66, 66, 66));
@@ -273,13 +290,13 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         lb_tot_item.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_tot_item.setForeground(new java.awt.Color(255, 255, 255));
-        lb_tot_item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_tot_item.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_tot_item.setText("0");
         lb_tot_item.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
         lb_bil_total.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_bil_total.setForeground(new java.awt.Color(255, 255, 255));
-        lb_bil_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_bil_total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_bil_total.setText("0.00");
         lb_bil_total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
@@ -300,10 +317,18 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jLabel7.setText("Bill Total:");
 
         tf_payment.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tf_payment.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_paymentKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_paymentKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("0.00");
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
 
@@ -398,6 +423,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jPanel5.setBackground(new java.awt.Color(255, 153, 51));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/itemlist4040.png"))); // NOI18N
+        jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,6 +432,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/invoice4040.png"))); // NOI18N
+        jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,6 +441,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/keyboard.png"))); // NOI18N
+        jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -428,6 +456,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fsczone/src/images/redo-5124040.png"))); // NOI18N
         jButton4.setBorderPainted(false);
+        jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -480,10 +509,10 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         ////////////////////////////////////////////////////////////////////////
         if (!tf_item_code.getText().isEmpty()) {
-            if (jp_invoice_view_item.isDNumeric(tf_item_code.getText().trim())) {
+            if (PB_MD.isNumbersOnly(tf_item_code.getText().trim())) {
                 try {
                     Vector v = new Vector();
-                    ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_code` LIKE '%" + tf_item_code.getText().trim().toLowerCase() + "%';");
+                    ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_code` LIKE '" + tf_item_code.getText().trim().toLowerCase() + "%';");
                     while (rs_itemCode.next()) {
                         String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
                         v.add(sug);
@@ -498,13 +527,11 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                             md_loadItemName();
 
-                        //    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                               
-
-                                tf_qty.grabFocus();
-                                tf_qty.setText("");
-                                //tf_qty.selectAll();
-                        //    }
+                            //    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                            tf_qty.grabFocus();
+                            tf_qty.setText("");
+                            //tf_qty.selectAll();
+                            //    }
                         } else {
 
                             lb_item_name.setText("");
@@ -519,23 +546,38 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                     Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                try {
-                    Vector v = new Vector();
-                    ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_name` LIKE '%" + tf_item_code.getText().trim().toLowerCase() + "%';");
-                    while (rs_itemCode.next()) {
-                        String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
-
-                        v.add(sug);
-                        li_searchSuggestions.setListData(v);
-                    }
-                    rs_itemCode.close();
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                evt.consume();
+//                try {
+//                    Vector v = new Vector();
+//                    try (ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_name` LIKE '%" + tf_item_code.getText().trim().toLowerCase() + "%';")) {
+//                        
+//                        
+//                        while (rs_itemCode.next()) {
+//                           
+//                            String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
+//                            
+//                            v.add(sug);
+//                            li_searchSuggestions.setListData(v);
+//                        }
+//                        rs_itemCode.close();
+//                        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+//                            
+//                            
+//                            
+//                        }
+//                    }
+//
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
+//                }
             }
         } else {
             lb_item_name.setText("");
+            lb_available_qty.setText("");
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                tf_payment.grabFocus();
+                lb_tot_item.setText(tb_invoiceRegistor.getRowCount() + "");
+            }
             jp_invoice_view_item.md_loadITEM();
         }
 
@@ -546,15 +588,28 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_tf_item_codeKeyReleased
-
+    int qty, avb_qty;
     private void tf_qtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_qtyKeyReleased
 
         try {
-            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                md_setItemTable();
-                setInvoiceDetails();
-                tf_item_code.grabFocus();
-                tf_item_code.selectAll();
+            if (!tf_qty.getText().isEmpty() && !lb_available_qty.getText().isEmpty()) {
+                qty = Integer.parseInt(tf_qty.getText());
+                avb_qty = Integer.parseInt(lb_available_qty.getText());
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (qty <= avb_qty) {
+                        md_setItemTable();
+                        setInvoiceDetails();
+                        tf_item_code.grabFocus();
+
+                        lb_item_name.setText("");
+                        lb_available_qty.setText("");
+                        jp_invoice_view_item.md_loadITEM();
+                        if (!tf_item_code.getText().isEmpty()) {
+                            tf_item_code.selectAll();
+                        }
+                    }
+
+                }
 
             }
 
@@ -630,14 +685,129 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 e.printStackTrace();
             }
         }).start();
-
+        tf_item_code.grabFocus();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void lb_item_namePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lb_item_namePropertyChange
-    
-        
-        
+
+
     }//GEN-LAST:event_lb_item_namePropertyChange
+
+    private void tb_invoiceRegistorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tb_invoiceRegistorPropertyChange
+
+
+    }//GEN-LAST:event_tb_invoiceRegistorPropertyChange
+
+    private void tf_paymentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_paymentKeyReleased
+
+
+    }//GEN-LAST:event_tf_paymentKeyReleased
+
+    private void tf_item_codePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tf_item_codePropertyChange
+
+        if (!tf_item_code.getText().isEmpty()) {
+            if (PB_MD.isNumbersOnly(tf_item_code.getText().trim())) {
+                if (tf_item_code.getText().length() == 5) {
+
+                    try {
+                        Vector v = new Vector();
+                        ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_code` LIKE '" + tf_item_code.getText().trim().toLowerCase() + "%';");
+                        while (rs_itemCode.next()) {
+                            String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
+                            v.add(sug);
+                            jp_invoice_view_item.li_searchSuggestions.setListData(v);
+                        }
+                        rs_itemCode.close();
+
+                        ///////////////////////////////////////////////////////////////////////////////////////
+                        try {
+
+                            if (tf_item_code.getText().length() == 5) {
+
+                                md_loadItemName();
+
+                                //    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                                tf_qty.grabFocus();
+                                tf_qty.setText("");
+                                //tf_qty.selectAll();
+                                //    }
+                            } else {
+
+                                lb_item_name.setText("");
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        ////////////////////////////////////////////////////////////////////////////////////////
+                    } catch (SQLException ex) {
+                        Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+
+//                try {
+//                    Vector v = new Vector();
+//                    try (ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_name` LIKE '%" + tf_item_code.getText().trim().toLowerCase() + "%';")) {
+//                        
+//                        
+//                        while (rs_itemCode.next()) {
+//                           
+//                            String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
+//                            
+//                            v.add(sug);
+//                            li_searchSuggestions.setListData(v);
+//                        }
+//                        rs_itemCode.close();
+//                        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+//                            
+//                            
+//                            
+//                        }
+//                    }
+//
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+            }
+        } else {
+            lb_item_name.setText("");
+            lb_available_qty.setText("");
+//            if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+//                tf_payment.grabFocus();
+//            }
+            jp_invoice_view_item.md_loadITEM();
+        }
+
+    }//GEN-LAST:event_tf_item_codePropertyChange
+
+    private void tf_paymentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_paymentKeyTyped
+
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE))) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_tf_paymentKeyTyped
+
+    private void tf_qtyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_qtyKeyTyped
+
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_ENTER))) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_tf_qtyKeyTyped
+
+    private void tf_item_codeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_item_codeKeyTyped
+
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_ENTER))) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_tf_item_codeKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -667,7 +837,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private javax.swing.JLabel lb_bil_total;
     private javax.swing.JLabel lb_item_name;
     private javax.swing.JLabel lb_tot_item;
-    private javax.swing.JTable tbl_item;
+    private javax.swing.JTable tb_invoiceRegistor;
     public static javax.swing.JTextField tf_item_code;
     public static javax.swing.JTextField tf_payment;
     private javax.swing.JTextField tf_qty;
@@ -688,7 +858,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             String df_2 = dft.format(date);
 
             new Thread(() -> {
-                rs_getuserid = MC_DB.search_dataOne("user_account", "username", User_Home.lb_main_userNameLOAD.getText());
+                rs_getuserid = MC_DB.search_dataOne("user_account", "username", User_Home.bt_main_userNameLOAD.getText());
             }).start();
 
             while (rs_getuserid.next()) {
@@ -731,30 +901,37 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             new Thread(() -> {
                 try {
                     try {
-                        rs_itemtable = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code='" + Integer.parseInt(tf_item_code.getText()) + "'");
+                        if (!tf_item_code.getText().isEmpty()) {
+                            rs_itemtable = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code='" + Integer.parseInt(tf_item_code.getText()) + "'");
+
+                        }
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    DefaultTableModel dt = (DefaultTableModel) tbl_item.getModel();
-                    if (rs_itemtable.next()) {
-                        try {
-                            Vector v = new Vector();
-                            v.add(dt.getRowCount() + 1);
-                            v.add(tf_item_code.getText());
-                            v.add(rs_itemtable.getString("item_name"));
-                            v.add(rs_itemtable.getDouble("selling_price") + "0");
-                            v.add(tf_qty.getText());
-                            v.add(Double.parseDouble(rs_itemtable.getString("selling_price")) * Double.parseDouble(tf_qty.getText()) + "0");
-                            dt.addRow(v);
-                            tf_item_code.setText("");
-                            tf_qty.setText("");
+                    DefaultTableModel dt = (DefaultTableModel) tb_invoiceRegistor.getModel();
 
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
+                    if (!tf_qty.getText().isEmpty()) {
+                        if (rs_itemtable.next()) {
+                            try {
+                                Vector v = new Vector();
+                                v.add(dt.getRowCount() + 1);
+                                v.add(tf_item_code.getText());
+                                v.add(rs_itemtable.getString("item_name"));
+                                v.add(rs_itemtable.getDouble("selling_price") + "0");
+                                v.add(tf_qty.getText());
+                                v.add(Double.parseDouble(rs_itemtable.getString("selling_price")) * Double.parseDouble(tf_qty.getText()) + "0");
+                                dt.addRow(v);
+                                tf_item_code.setText("");
+                                tf_qty.setText("");
+
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+
                         }
-
                     }
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -767,7 +944,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     //..................set table item qty - start.................................................
     public void md_setTableItemQty() {
-        DefaultTableModel dt = (DefaultTableModel) tbl_item.getModel();
+        DefaultTableModel dt = (DefaultTableModel) tb_invoiceRegistor.getModel();
 
     }
     //..................set table item qty - end.................................................
@@ -780,15 +957,19 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             new Thread(() -> {
                 try {
                     try {
-                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_code LIKE '%" + tf_item_code.getText() + "%'");
+                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `item` i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE i.`item_code`='" + tf_item_code.getText() + "' AND s.`stock_date`='" + User_Home.lb_v_date.getText() + "'");
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                    DefaultListModel dlm = new DefaultListModel();
 
                     if (rs_load_item_name.first()) {
                         //dlm.addElement(rs_load_item_name.getString("item_name"));
-                        lb_item_name.setText(rs_load_item_name.getString("item_name"));
+                        lb_item_name.setText(rs_load_item_name.getString("i.item_name"));
+                        lb_available_qty.setText("");
+                        lb_available_qty.setText(rs_load_item_name.getString("s.qty"));
+
+                    } else {
+                        //JOptionPane.showMessageDialog(this, "No Daily Product Quantity");
                     }
                     //jp_invoice_view_item.li_searchSuggestions.setModel(dlm);
 
@@ -866,7 +1047,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     public void setInvoiceDetails() {
         int bill_tot_qty = 0;
         double bill_tot_cost = 0;
-        DefaultTableModel dtm = (DefaultTableModel) tbl_item.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tb_invoiceRegistor.getModel();
 //        if (tbl_item.getRowCount() != 0) {
         for (int x = 0; x < dtm.getRowCount(); x++) {
             bill_tot_qty = Integer.parseInt(dtm.getValueAt(x, 4) + "");
