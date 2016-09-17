@@ -121,14 +121,14 @@ public class User_Home extends javax.swing.JFrame {
         jLabel4.setText("POS SYSTEM");
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Develop By:");
+        jLabel5.setText("Develop By :");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("INDUWARA COMPANY");
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Develop Form:");
+        jLabel7.setText("Authorized By :");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
