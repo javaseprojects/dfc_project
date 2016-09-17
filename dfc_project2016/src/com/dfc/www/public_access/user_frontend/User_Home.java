@@ -35,6 +35,7 @@ public class User_Home extends javax.swing.JFrame {
         initComponents();
         new Thread(() -> {
             try {
+                Thread.sleep(5000);
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
                 jp_user_invoiceManagment ai = new jp_user_invoiceManagment();
