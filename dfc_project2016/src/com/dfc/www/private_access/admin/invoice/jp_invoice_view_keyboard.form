@@ -38,6 +38,7 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="8c" red="fb" type="rgb"/>
         </Property>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
 
       <Layout>
@@ -162,6 +163,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="7"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -189,6 +191,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="8"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -216,6 +219,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="9"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -243,6 +247,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="/"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -270,6 +275,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="*"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -297,6 +303,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="6"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -324,6 +331,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="5"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -342,6 +350,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="4"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -369,6 +378,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="1"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -396,6 +406,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="2"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -450,6 +461,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="-"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -477,6 +489,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard_space.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="+"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -491,6 +504,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard_enter.png"/>
             </Property>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 150]"/>
@@ -515,6 +529,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 70]"/>
@@ -542,6 +557,7 @@
               <Image iconType="3" name="/com/dfc/www/private_access/admin/images/versualKeyboard_space.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Space"/>
+            <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>

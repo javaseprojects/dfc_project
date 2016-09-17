@@ -10,6 +10,7 @@ import com.dfc.www.public_access.user_frontend.User_Home;
 import com.fsc.www.db.MC_DB;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -30,6 +31,44 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     public jp_user_invoiceManagment() {
         initComponents();
         sp_itemname.setVisible(false);
+
+        new Thread(() -> {
+            try {
+                jp_submainPanel.removeAll();
+                jp_submainPanel.setLayout(new FlowLayout());
+
+                itemLOAD.setVisible(true);
+                jp_submainPanel.add(itemLOAD);
+                jp_submainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent ke) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                if (ke.getKeyCode() == KeyEvent.VK_F1) {
+                    jp_user_invoiceManagment.tf_item_code.grabFocus();
+                    //JOptionPane.showMessageDialog(null, "F1 is pressed!");
+                }
+                if (ke.getKeyCode() == KeyEvent.VK_F3) {
+                    jp_user_invoiceManagment.tf_payment.grabFocus();
+                    //JOptionPane.showMessageDialog(null, "F1 is pressed!");
+                }
+            }
+        });
 
     }
     String invoice_no = "";
@@ -451,7 +490,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         new Thread(() -> {
             try {
-                
+
                 jp_submainPanel.removeAll();
                 jp_submainPanel.setLayout(new FlowLayout());
 
@@ -465,7 +504,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         }).start();
 
     }//GEN-LAST:event_jButton2ActionPerformed
-    jp_invoice_view_invoice itemLOAD = new jp_invoice_view_invoice();
+    jp_invoice_view_item itemLOAD = new jp_invoice_view_item();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         new Thread(() -> {

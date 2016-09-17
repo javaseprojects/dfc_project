@@ -26,6 +26,7 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
      */
     public jp_invoice_view_invoice() {
         initComponents();
+        md_loadDailyInvoice();
     }
 
     /**
@@ -46,7 +47,7 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
         lbl_tot_invoices_amount = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_invoice = new javax.swing.JTable();
+        tb_invoice = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(251, 140, 0));
 
@@ -102,7 +103,7 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Amount:");
 
-        tbl_invoice.setModel(new javax.swing.table.DefaultTableModel(
+        tb_invoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -118,7 +119,7 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbl_invoice);
+        jScrollPane2.setViewportView(tb_invoice);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,14 +195,14 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_tot_invoice;
     private javax.swing.JLabel lbl_tot_invoice_qty;
     private javax.swing.JLabel lbl_tot_invoices_amount;
-    private javax.swing.JTable tbl_invoice;
+    private javax.swing.JTable tb_invoice;
     private javax.swing.JTextField tf_invoice_no;
     // End of variables declaration//GEN-END:variables
 
     //search Custom Invoice
     private void searchCustomInvoice(String invoiceNo) {
 
-        DefaultTableModel dtm = (DefaultTableModel) tbl_invoice.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tb_invoice.getModel();
         dtm.setRowCount(0);
 
         new Thread(() -> {
@@ -246,7 +247,7 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
 
     //view all daily invoices
     private void viewDailyInvoices() {
-        DefaultTableModel dtm = (DefaultTableModel) tbl_invoice.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tb_invoice.getModel();
         dtm.setRowCount(0);
         new Thread(() -> {
             try {
@@ -272,14 +273,14 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
 
     //view invoice details
     private void viewDailyInvoiceDetails() {
-        if (tbl_invoice.getRowCount() != 0) {
+        if (tb_invoice.getRowCount() != 0) {
             int totQty = 0;
             double totCost = 0;
-            for (int x = 0; x < tbl_invoice.getRowCount(); x++) {
-                totQty += Integer.parseInt((String) tbl_invoice.getValueAt(x, 3));
-                totCost += Double.parseDouble((String) tbl_invoice.getValueAt(x, 1));
+            for (int x = 0; x < tb_invoice.getRowCount(); x++) {
+                totQty += Integer.parseInt((String) tb_invoice.getValueAt(x, 3));
+                totCost += Double.parseDouble((String) tb_invoice.getValueAt(x, 1));
             }
-            lbl_tot_invoice.setText(tbl_invoice.getRowCount() + "");
+            lbl_tot_invoice.setText(tb_invoice.getRowCount() + "");
             lbl_tot_invoice_qty.setText(totQty + "");
             lbl_tot_invoices_amount.setText(totCost + "0");
         } else {
@@ -290,5 +291,31 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
 
     }
     //view invoice details
+
+    private void md_loadDailyInvoice() {
+        try {
+            Date d=new Date();
+            SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+            String today_date = sdf.format(d);
+            ResultSet rs_invoice = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `invoice` WHERE invoice_date='"+today_date+"'");
+            DefaultTableModel dtm_inv = (DefaultTableModel) tb_invoice.getModel();
+            dtm_inv.setRowCount(0);
+            while (rs_invoice.next()) {
+                Vector v = new Vector();
+                v.add(rs_invoice.getString("invoice_no"));
+                v.add(rs_invoice.getString("total_amount"));
+                v.add(rs_invoice.getString("user_account_id"));
+                dtm_inv.addRow(v);
+            }
+            if (!rs_invoice.next()) {
+                dtm_inv.setRowCount(0);
+                Vector v = new Vector();
+                v.add("No Invoice!");
+                dtm_inv.addRow(v);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

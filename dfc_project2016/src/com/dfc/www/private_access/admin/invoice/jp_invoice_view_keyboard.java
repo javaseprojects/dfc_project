@@ -8,6 +8,7 @@ package com.dfc.www.private_access.admin.invoice;
 import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,11 +56,13 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(251, 140, 0));
+        jPanel2.setFocusable(false);
 
         bt_number_7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         bt_number_7.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_7.setText("7");
+        bt_number_7.setFocusable(false);
         bt_number_7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_7.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_7.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -74,6 +77,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_8.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_8.setText("8");
+        bt_number_8.setFocusable(false);
         bt_number_8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_8.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_8.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -88,6 +92,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_9.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_9.setText("9");
+        bt_number_9.setFocusable(false);
         bt_number_9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_9.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_9.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -102,6 +107,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_divide.setForeground(new java.awt.Color(255, 87, 34));
         bt_divide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_divide.setText("/");
+        bt_divide.setFocusable(false);
         bt_divide.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_divide.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_divide.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -116,6 +122,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_multi.setForeground(new java.awt.Color(255, 87, 34));
         bt_multi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_multi.setText("*");
+        bt_multi.setFocusable(false);
         bt_multi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_multi.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_multi.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -130,6 +137,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_6.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_6.setText("6");
+        bt_number_6.setFocusable(false);
         bt_number_6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_6.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_6.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -144,6 +152,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_5.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_5.setText("5");
+        bt_number_5.setFocusable(false);
         bt_number_5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +164,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_4.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_4.setText("4");
+        bt_number_4.setFocusable(false);
         bt_number_4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_4.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_4.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -169,6 +179,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_1.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_1.setText("1");
+        bt_number_1.setFocusable(false);
         bt_number_1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_1.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_1.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -183,6 +194,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_2.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_2.setText("2");
+        bt_number_2.setFocusable(false);
         bt_number_2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_2.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_2.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -211,6 +223,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_substract.setForeground(new java.awt.Color(255, 87, 34));
         bt_substract.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_substract.setText("-");
+        bt_substract.setFocusable(false);
         bt_substract.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_substract.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_substract.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -225,6 +238,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_plus.setForeground(new java.awt.Color(255, 87, 34));
         bt_plus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard_space.png"))); // NOI18N
         bt_plus.setText("+");
+        bt_plus.setFocusable(false);
         bt_plus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_plus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,6 +248,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
 
         bt_enter.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         bt_enter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard_enter.png"))); // NOI18N
+        bt_enter.setFocusable(false);
         bt_enter.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_enter.setMinimumSize(new java.awt.Dimension(70, 150));
         bt_enter.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +262,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_number_0.setForeground(new java.awt.Color(255, 87, 34));
         bt_number_0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard.png"))); // NOI18N
         bt_number_0.setText("0");
+        bt_number_0.setFocusable(false);
         bt_number_0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_number_0.setMaximumSize(new java.awt.Dimension(70, 70));
         bt_number_0.setMinimumSize(new java.awt.Dimension(70, 70));
@@ -261,6 +277,7 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
         bt_space.setForeground(new java.awt.Color(255, 87, 34));
         bt_space.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/private_access/admin/images/versualKeyboard_space.png"))); // NOI18N
         bt_space.setText("Space");
+        bt_space.setFocusable(false);
         bt_space.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_space.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -568,7 +585,8 @@ public class jp_invoice_view_keyboard extends javax.swing.JPanel {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
         try {
-            Runtime.getRuntime().exec("c:\\windows\\system32\\osk.exe");
+            
+            Runtime.getRuntime().exec("C:\\windows\\system32\\osk.exe", null, new File("C:\\program files\\FSC\\"));
         } catch (IOException ex) {
             Logger.getLogger(jf_onScreenInvoiceKeyBoard.class.getName()).log(Level.SEVERE, null, ex);
         }

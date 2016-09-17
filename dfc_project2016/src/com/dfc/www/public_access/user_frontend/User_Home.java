@@ -174,17 +174,14 @@ AccessDenied_backupAndRestore andBackup;
             if (User_Home.md_isReachableByPing("mail.google.com")) {
                 new Thread(() -> {
                     SendAttachmentInEmail.sendSSLAttMail(subSequence, "systemdfc@gmail.com", "systemdfc@gmail.com");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(User_Home.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    System.exit(0);
+
                 }).start();
             } else {
                 JOptionPane.showMessageDialog(this, "Internet Connection Not Reachable! \n Backup can't send system host \n Only localbackup Only!");
+                System.exit(0);
             }
 
+            
         } catch (Exception ex) {
             Logger.getLogger(User_Home.class.getName()).log(Level.SEVERE, null, ex);
         }

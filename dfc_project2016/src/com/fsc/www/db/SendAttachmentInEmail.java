@@ -97,7 +97,13 @@ public class SendAttachmentInEmail {
             Transport.send(message);
 
             System.out.println("Sent email " + from + " successfully....");
-            JOptionPane.showMessageDialog(null, "Backup Uploaded & Send Email Successfully!");
+            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Backup Uploaded & Send Email Successfully! \n You Can Close This Application Now! ","Conform",JOptionPane.YES_OPTION);
+            if (showConfirmDialog==JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+            if (showConfirmDialog==JOptionPane.NO_OPTION) {
+                System.exit(0);
+            }
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
