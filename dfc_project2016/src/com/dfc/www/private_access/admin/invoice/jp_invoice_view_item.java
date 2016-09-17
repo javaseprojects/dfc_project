@@ -156,7 +156,7 @@ public class jp_invoice_view_item extends javax.swing.JPanel {
         return true;
     }
 
-    private void md_loadITEM() {
+    public static void md_loadITEM() {
 
         try {
             Vector v = new Vector();

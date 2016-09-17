@@ -3,6 +3,7 @@ package com.dfc.www.public_access.user_frontend;
 import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
 import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
+import com.dfc.www.private_access.admin.products.jp_add_daily_qty;
 import com.fsc.www.db.SendAttachmentInEmail;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
@@ -13,16 +14,18 @@ import javax.swing.JOptionPane;
 
 public class User_Home extends javax.swing.JFrame {
 
+    jp_user_invoiceManagment invoiceMng = new jp_user_invoiceManagment();
+    jp_add_daily_qty add_daily = new jp_add_daily_qty();
+
     public User_Home() {
         initComponents();
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
-                jp_user_invoiceManagment ai = new jp_user_invoiceManagment();
-                ai.setVisible(true);
-                jp_userMainPanel.add(ai);
+                invoiceMng.setVisible(true);
+                jp_userMainPanel.add(invoiceMng);
                 jp_userMainPanel.updateUI();
 
             } catch (Exception e) {
@@ -35,12 +38,11 @@ public class User_Home extends javax.swing.JFrame {
         initComponents();
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
-                jp_user_invoiceManagment ai = new jp_user_invoiceManagment();
-                ai.setVisible(true);
-                jp_userMainPanel.add(ai);
+                invoiceMng.setVisible(true);
+                jp_userMainPanel.add(invoiceMng);
                 jp_userMainPanel.updateUI();
 
             } catch (Exception e) {
@@ -101,14 +103,20 @@ public class User_Home extends javax.swing.JFrame {
         lb_close = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(19, 20, 24));
-        jPanel1.setLayout(null);
 
         jp_userMainPanel.setBackground(new java.awt.Color(51, 51, 51));
+        jp_userMainPanel.setMaximumSize(new java.awt.Dimension(1366, 670));
+        jp_userMainPanel.setMinimumSize(new java.awt.Dimension(1366, 670));
+        jp_userMainPanel.setPreferredSize(new java.awt.Dimension(1366, 670));
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 204));
@@ -192,15 +200,10 @@ public class User_Home extends javax.swing.JFrame {
                 .addContainerGap(215, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jp_userMainPanel);
-        jp_userMainPanel.setBounds(0, 70, 1366, 670);
-
         lb_main_userNameLOAD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_main_userNameLOAD.setForeground(new java.awt.Color(255, 255, 255));
         lb_main_userNameLOAD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_main_userNameLOAD.setText("Load User Email");
-        jPanel1.add(lb_main_userNameLOAD);
-        lb_main_userNameLOAD.setBounds(1030, 40, 320, 30);
 
         jPanel2.setBackground(new java.awt.Color(239, 108, 0));
 
@@ -231,21 +234,99 @@ public class User_Home extends javax.swing.JFrame {
                 .addComponent(lb_close))
         );
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 1370, 22);
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("System Login User");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(1110, 30, 240, 15);
 
-        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(250, 250, 250));
         jLabel1.setText("DELIGHT FOOD CORNER-POS SYSTEM");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 30, 450, 30);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
+        jButton1.setText("INVOICE");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
+        jButton2.setText("ADD DAILY PRODUCTS");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMaximumSize(new java.awt.Dimension(183, 40));
+        jButton2.setMinimumSize(new java.awt.Dimension(183, 40));
+        jButton2.setPreferredSize(new java.awt.Dimension(183, 40));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
+        jButton3.setText("ADD RETURN");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
+        jButton4.setText("MY ACCOUNT");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jp_userMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, 0)
+                        .addComponent(lb_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jp_userMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,7 +336,7 @@ public class User_Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -280,12 +361,48 @@ AccessDenied_backupAndRestore andBackup;
                 System.exit(0);
             }
 
-            
         } catch (Exception ex) {
             Logger.getLogger(User_Home.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_lb_closeMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        new Thread(() -> {
+            try {
+
+                jp_userMainPanel.removeAll();
+                jp_userMainPanel.setLayout(new FlowLayout());
+                invoiceMng.setVisible(true);
+                jp_userMainPanel.add(invoiceMng);
+                jp_userMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                jp_userMainPanel.removeAll();
+                jp_userMainPanel.setLayout(new FlowLayout());
+
+                add_daily.setVisible(true);
+                jp_userMainPanel.add(add_daily);
+                jp_userMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,6 +439,10 @@ AccessDenied_backupAndRestore andBackup;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

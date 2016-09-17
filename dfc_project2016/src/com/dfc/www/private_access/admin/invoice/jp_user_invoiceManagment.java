@@ -6,6 +6,7 @@
 package com.dfc.www.private_access.admin.invoice;
 
 import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
+import static com.dfc.www.private_access.admin.invoice.jp_invoice_view_item.li_searchSuggestions;
 import com.dfc.www.public_access.user_frontend.User_Home;
 import com.fsc.www.db.MC_DB;
 import java.awt.FlowLayout;
@@ -30,7 +31,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     public jp_user_invoiceManagment() {
         initComponents();
-        
 
         new Thread(() -> {
             try {
@@ -81,11 +81,15 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jp_submainPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        lb_available_qty = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         tf_item_code = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lb_item_name = new javax.swing.JLabel();
+        lb_available_qty = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         tf_qty = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_item = new javax.swing.JTable();
@@ -98,8 +102,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         tf_payment = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        lb_available_qty1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -151,29 +153,10 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jPanel2.setMaximumSize(new java.awt.Dimension(1020, 650));
         jPanel2.setMinimumSize(new java.awt.Dimension(1020, 650));
         jPanel2.setPreferredSize(new java.awt.Dimension(1020, 650));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lb_available_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lb_available_qty.setForeground(new java.awt.Color(255, 255, 255));
-        lb_available_qty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_available_qty.setText("00");
-        lb_available_qty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel2.add(lb_available_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 25, 200, 40));
+        jPanel7.setBackground(new java.awt.Color(219, 122, 39));
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Qty:");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 5, 250, -1));
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Available Qty:");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 5, 138, 20));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Item Code:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, 260, 20));
+        jPanel6.setBackground(new java.awt.Color(81, 81, 81));
 
         tf_item_code.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tf_item_code.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +172,38 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 tf_item_codeKeyReleased(evt);
             }
         });
-        jPanel2.add(tf_item_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, 250, 40));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Item Code:");
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Item Name:");
+
+        lb_item_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_item_name.setForeground(new java.awt.Color(255, 255, 255));
+        lb_item_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_item_name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lb_item_name.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                lb_item_namePropertyChange(evt);
+            }
+        });
+
+        lb_available_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_available_qty.setForeground(new java.awt.Color(255, 255, 255));
+        lb_available_qty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_available_qty.setText("00");
+        lb_available_qty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Available Qty:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Qty:");
 
         tf_qty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tf_qty.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -197,7 +211,48 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 tf_qtyKeyReleased(evt);
             }
         });
-        jPanel2.add(tf_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 25, 250, 40));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_item_name, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lb_available_qty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_qty)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_item_name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tf_item_code, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addComponent(tf_qty, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lb_available_qty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         tbl_item.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,8 +267,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             tbl_item.getColumnModel().getColumn(0).setPreferredWidth(6);
             tbl_item.getColumnModel().getColumn(4).setPreferredWidth(15);
         }
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, 1000, 460));
 
         jPanel4.setBackground(new java.awt.Color(66, 66, 66));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -303,19 +356,42 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 1000, -1));
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Available Qty:");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 138, 20));
-
-        lb_available_qty1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lb_available_qty1.setForeground(new java.awt.Color(255, 255, 255));
-        lb_available_qty1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_available_qty1.setText("00");
-        lb_available_qty1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel2.add(lb_available_qty1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 200, 40));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 1020, 650));
 
@@ -402,29 +478,72 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     private void tf_item_codeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_item_codeKeyReleased
 
+        ////////////////////////////////////////////////////////////////////////
+        if (!tf_item_code.getText().isEmpty()) {
+            if (jp_invoice_view_item.isDNumeric(tf_item_code.getText().trim())) {
+                try {
+                    Vector v = new Vector();
+                    ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_code` LIKE '%" + tf_item_code.getText().trim().toLowerCase() + "%';");
+                    while (rs_itemCode.next()) {
+                        String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
+                        v.add(sug);
+                        jp_invoice_view_item.li_searchSuggestions.setListData(v);
+                    }
+                    rs_itemCode.close();
+
+                    ///////////////////////////////////////////////////////////////////////////////////////
+                    try {
+
+                        if (tf_item_code.getText().length() == 5) {
+
+                            md_loadItemName();
+
+                        //    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                               
+
+                                tf_qty.grabFocus();
+                                tf_qty.setText("");
+                                //tf_qty.selectAll();
+                        //    }
+                        } else {
+
+                            lb_item_name.setText("");
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    ////////////////////////////////////////////////////////////////////////////////////////
+                } catch (SQLException ex) {
+                    Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                try {
+                    Vector v = new Vector();
+                    ResultSet rs_itemCode = MC_DB.search_dataQuery("SELECT * FROM `item` WHERE `item_name` LIKE '%" + tf_item_code.getText().trim().toLowerCase() + "%';");
+                    while (rs_itemCode.next()) {
+                        String sug = rs_itemCode.getString("item_code") + "-" + rs_itemCode.getString("item_name");
+
+                        v.add(sug);
+                        li_searchSuggestions.setListData(v);
+                    }
+                    rs_itemCode.close();
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(jp_invoice_view_item.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            lb_item_name.setText("");
+            jp_invoice_view_item.md_loadITEM();
+        }
+
+        ////////////////////////////////////////////////////////////////////////
         if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
             jp_invoice_view_item.li_searchSuggestions.grabFocus();
         }
 
-        try {
-            
-            md_loadItemName();
-
-            if (tf_item_code.getText().length() == 5) {
-
-                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                    new Thread(() -> {
-                        md_setAvailableQty();
-                    }).start();
-
-                    tf_qty.grabFocus();
-                    
-                    tf_qty.selectAll();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }//GEN-LAST:event_tf_item_codeKeyReleased
 
@@ -514,6 +633,12 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void lb_item_namePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lb_item_namePropertyChange
+    
+        
+        
+    }//GEN-LAST:event_lb_item_namePropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -534,11 +659,13 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JPanel jp_submainPanel;
     private javax.swing.JLabel lb_available_qty;
-    private javax.swing.JLabel lb_available_qty1;
     private javax.swing.JLabel lb_bil_total;
+    private javax.swing.JLabel lb_item_name;
     private javax.swing.JLabel lb_tot_item;
     private javax.swing.JTable tbl_item;
     public static javax.swing.JTextField tf_item_code;
@@ -622,7 +749,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                             dt.addRow(v);
                             tf_item_code.setText("");
                             tf_qty.setText("");
-                            
 
                         } catch (SQLException ex) {
                             ex.printStackTrace();
@@ -660,10 +786,11 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                     }
                     DefaultListModel dlm = new DefaultListModel();
 
-                    while (rs_load_item_name.next()) {
-                        dlm.addElement(rs_load_item_name.getString("item_name"));
+                    if (rs_load_item_name.first()) {
+                        //dlm.addElement(rs_load_item_name.getString("item_name"));
+                        lb_item_name.setText(rs_load_item_name.getString("item_name"));
                     }
-                    jp_invoice_view_item.li_searchSuggestions.setModel(dlm);
+                    //jp_invoice_view_item.li_searchSuggestions.setModel(dlm);
 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -707,13 +834,14 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     //................................set available qty from label - start................................................
     ResultSet rs_setavailableqty;
 //li_searchSuggestions
+
     public void md_setAvailableQty() {
         try {
             new Thread(() -> {
 
                 try {
                     rs_setavailableqty = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item i INNER JOIN stock_log sg ON i.item_id = sg.item_id WHERE i.item_code='" + tf_item_code.getText() + "'");
-                
+
                     while (rs_setavailableqty.next()) {
                         lb_available_qty.setText(rs_setavailableqty.getInt("qty") + "");
                     }
@@ -787,6 +915,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             }
         }).start();
         //jp_invoice_view_item.li_searchSuggestions.setVisible(false);
-        
+
     }
 }

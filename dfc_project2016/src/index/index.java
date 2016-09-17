@@ -163,10 +163,8 @@ public class index extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new index().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new index().setVisible(true);
         });
     }
 
@@ -191,13 +189,13 @@ public class index extends javax.swing.JFrame {
                         lb_presant.setText(i + "%");
                         Thread.sleep(100);
                         if (i == 29) {
-                            Thread.sleep(500);
+                            Thread.sleep(200);
                         }
                         if (i == 50) {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         }
                         if (i == 72) {
-                            Thread.sleep(500);
+                            Thread.sleep(100);
                         }
                         if (i == 100) {
                             user_login user = new user_login();

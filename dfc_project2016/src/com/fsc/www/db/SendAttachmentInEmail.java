@@ -9,7 +9,15 @@ package com.fsc.www.db;
  *
  * @author deepalsuranga
  */
+import com.dfc.www.public_access.user.user_login;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -97,16 +105,66 @@ public class SendAttachmentInEmail {
             Transport.send(message);
 
             System.out.println("Sent email " + from + " successfully....");
-            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Backup Uploaded & Send Email Successfully! \n You Can Close This Application Now! ","Confirm",JOptionPane.YES_OPTION);
-            if (showConfirmDialog==JOptionPane.YES_OPTION) {
+            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Backup Uploaded & Send Email Successfully! \n You Can Close This Application Now! ", "Confirm", JOptionPane.YES_OPTION);
+            if (showConfirmDialog == JOptionPane.YES_OPTION) {
+                Object obj = new Object();
+                // use obj
+                obj = null;
+
+                // test run #1
+                System.gc();
+                for (int i = 0; i < 10; i++) {
+                    // calling clean
+                    System.gc();
+                }
+                // test run #2
+                System.gc();
+
+                ///////////////////////////
+                File tempFile = File.createTempFile("Temp", null);
+                tempFile.deleteOnExit();
+                RandomAccessFile raTempFile = new RandomAccessFile(tempFile, "rw");
+                FileChannel fChannel = raTempFile.getChannel();
+
+                MappedByteBuffer mappedBuffer = fChannel.map(FileChannel.MapMode.READ_WRITE, 0, 512);
+
+                fChannel.close();
+                raTempFile.close();
+                mappedBuffer = null;
+
+                System.gc();
+
+                if (tempFile.delete()) {
+                    System.out.println("Successfully deleted: " + tempFile);
+                } else {
+                    System.out.println("Unable to delete: " + tempFile);
+                }
+
+                ///////////////////////////////
                 System.exit(0);
             }
-            if (showConfirmDialog==JOptionPane.NO_OPTION) {
-                System.exit(0);
+            if (showConfirmDialog == JOptionPane.NO_OPTION) {
+                Object obj = new Object();
+                // use obj
+                obj = null;
+
+                // test run #1
+                System.gc();
+                for (int i = 0; i < 10; i++) {
+                    // calling clean
+                    System.gc();
+                }
+                // test run #2
+                System.gc();
+                user_login ul = new user_login();
+                ul.setVisible(true);
+
             }
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
+        } catch (IOException ex) {
+            Logger.getLogger(SendAttachmentInEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
