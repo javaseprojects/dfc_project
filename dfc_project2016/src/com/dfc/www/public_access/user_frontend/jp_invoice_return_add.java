@@ -5,7 +5,11 @@
  */
 package com.dfc.www.public_access.user_frontend;
 
-import com.dfc.www.private_access.admin.invoice.*;
+import com.fsc.www.db.MC_DB;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,22 +34,27 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_invoice_no = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_invoice = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        tbl_return = new javax.swing.JTable();
+        tf_item_code = new javax.swing.JTextField();
+        tf_qty = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(251, 140, 0));
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_invoice_no.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_invoice_no.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_invoice_noKeyReleased(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_invoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -61,9 +70,9 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_invoice);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_return.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -79,11 +88,11 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbl_return);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_item_code.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,19 +114,19 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -129,7 +138,7 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
                         .addGap(14, 14, 14)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,8 +146,8 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tf_item_code, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
@@ -158,6 +167,16 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tf_invoice_noKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_invoice_noKeyReleased
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!tf_invoice_no.getText().isEmpty()) {
+                viewInvoiceData(tf_invoice_no.getText());
+            }
+        }
+
+    }//GEN-LAST:event_tf_invoice_noKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -166,10 +185,35 @@ public class jp_invoice_return_add extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbl_invoice;
+    private javax.swing.JTable tbl_return;
+    private javax.swing.JTextField tf_invoice_no;
+    private javax.swing.JTextField tf_item_code;
+    private javax.swing.JTextField tf_qty;
     // End of variables declaration//GEN-END:variables
+
+    //view Invoice Data
+    ResultSet rs_viewInvoices;
+    private void viewInvoiceData(String invoiceNo) {
+        DefaultTableModel dtm = (DefaultTableModel) tbl_invoice.getModel();
+        dtm.setRowCount(0);
+        try {
+            String dataQuery = "SELECT * FROM invoice_reg ir LEFT JOIN invoice i ON r.invoice_id=i.`invoice_id` WHERE i.`invoice_no`='" + invoiceNo + "'";
+            new Thread(() -> {
+                rs_viewInvoices = MC_DB.search_dataQuery(dataQuery);
+            }).start();
+            while (rs_viewInvoices.next()) {
+                Vector v = new Vector();
+                v.add(rs_viewInvoices.getString("i.item_code"));
+                v.add(rs_viewInvoices.getString("i.item_name"));
+                v.add(rs_viewInvoices.getInt("ir.qty"));
+                v.add(rs_viewInvoices.getDouble("ir.selling_price"));
+                v.add(rs_viewInvoices.getDouble("ir.total_price"));
+                dtm.addRow(v);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //view Invoice Data
 }

@@ -22,6 +22,7 @@ public class jp_final_product_balance extends javax.swing.JPanel {
         CheckDate();
         JTextFieldDateEditor dt = (JTextFieldDateEditor) jDateChooser1.getDateEditor();
         dt.setEditable(false);
+//        loadStockData();
     }
 
     @SuppressWarnings("unchecked")
@@ -102,7 +103,6 @@ public class jp_final_product_balance extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-
             new Thread(() -> {
                 try {
 
@@ -116,8 +116,8 @@ public class jp_final_product_balance extends javax.swing.JPanel {
                     dtm.setRowCount(0);
 
                     while (rs.next()) {
-                        
-                        i=10;
+
+                        i = 10;
                         Vector v = new Vector();
                         item_id = Integer.parseInt(rs.getString("item_id"));
                         Added_qty = Integer.parseInt(rs.getString("qty"));
@@ -136,21 +136,15 @@ public class jp_final_product_balance extends javax.swing.JPanel {
                                 v.add(Added_qty - Sold_qty);
                                 g = 10;
                             }
-
                             if (g == 0) {
                                 v.add("No item Sell");
                             }
-
                             dtm.addRow(v);
-
                         }
                     }
-                    
-                    
-                    if (i==0) {
+                    if (i == 0) {
                         JOptionPane.showMessageDialog(this, "Sorry No Data Found");
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -173,7 +167,19 @@ public class jp_final_product_balance extends javax.swing.JPanel {
     private javax.swing.JTable tbl_product;
     // End of variables declaration//GEN-END:variables
 
-    void CheckDate() {
+    //load stock data
+    private void loadStockData() {
+        try {
+            String dataQuery = "SELECT * FROM invoice_reg ir LEFT JOIN stock_log sl ON ir.`item_id`=sl.`item_id` WHERE sl.`stock_date`='';";
+            ResultSet rs_load_stock = MC_DB.search_dataQuery(dataQuery);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //load stock data
+
+    public void CheckDate() {
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         jDateChooser1.setDate(new Date());
     }
