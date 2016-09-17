@@ -86,6 +86,10 @@ public class User_Home extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jp_userMainPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         lb_main_userNameLOAD = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lb_close = new javax.swing.JLabel();
@@ -99,7 +103,52 @@ public class User_Home extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jp_userMainPanel.setBackground(new java.awt.Color(51, 51, 51));
-        jp_userMainPanel.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("DELIGHT FOOD CORNER");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("POS SYSTEM");
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Develop By:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("INDUWARA COMPANY");
+
+        javax.swing.GroupLayout jp_userMainPanelLayout = new javax.swing.GroupLayout(jp_userMainPanel);
+        jp_userMainPanel.setLayout(jp_userMainPanelLayout);
+        jp_userMainPanelLayout.setHorizontalGroup(
+            jp_userMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_userMainPanelLayout.createSequentialGroup()
+                .addGap(459, 459, 459)
+                .addGroup(jp_userMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jp_userMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)))
+                .addContainerGap(402, Short.MAX_VALUE))
+        );
+        jp_userMainPanelLayout.setVerticalGroup(
+            jp_userMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_userMainPanelLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(366, Short.MAX_VALUE))
+        );
+
         jPanel1.add(jp_userMainPanel);
         jp_userMainPanel.setBounds(0, 70, 1366, 670);
 
@@ -231,7 +280,11 @@ AccessDenied_backupAndRestore andBackup;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JPanel jp_userMainPanel;

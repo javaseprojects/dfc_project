@@ -148,6 +148,9 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 310, 580));
 
         jPanel2.setBackground(new java.awt.Color(66, 66, 66));
+        jPanel2.setMaximumSize(new java.awt.Dimension(1020, 650));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1020, 650));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1020, 650));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         li_itemname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

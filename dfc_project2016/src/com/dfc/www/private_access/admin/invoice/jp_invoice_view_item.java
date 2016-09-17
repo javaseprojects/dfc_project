@@ -65,6 +65,7 @@ public class jp_invoice_view_item extends javax.swing.JPanel {
 
         li_search.setBackground(new java.awt.Color(250, 250, 250));
         li_search.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        li_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(li_search);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
