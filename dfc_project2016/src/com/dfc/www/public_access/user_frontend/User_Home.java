@@ -90,6 +90,7 @@ public class User_Home extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lb_close = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -107,7 +108,7 @@ public class User_Home extends javax.swing.JFrame {
         lb_main_userNameLOAD.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_main_userNameLOAD.setText("Load User Email");
         jPanel1.add(lb_main_userNameLOAD);
-        lb_main_userNameLOAD.setBounds(1040, 40, 320, 30);
+        lb_main_userNameLOAD.setBounds(1030, 40, 320, 30);
 
         jPanel2.setBackground(new java.awt.Color(239, 108, 0));
 
@@ -146,7 +147,13 @@ public class User_Home extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("System Login User:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(1114, 30, 250, 15);
+        jLabel3.setBounds(1110, 30, 240, 15);
+
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(250, 250, 250));
+        jLabel1.setText("DELIGHT FOOD CORNER-POS SYSTEM");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 30, 450, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,6 +230,7 @@ AccessDenied_backupAndRestore andBackup;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
