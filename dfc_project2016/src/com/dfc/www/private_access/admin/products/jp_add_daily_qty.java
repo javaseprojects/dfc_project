@@ -233,13 +233,13 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
 
         if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
             if (this.ItemId != 0) {
-                if (checkDailyQtyAdded() == 0 && Integer.parseInt(txtQty.getText())!=0) {
+                if (checkDailyQtyAdded() == 0 && Integer.parseInt(txtQty.getText()) != 0) {
                     try {
                         int itemid = this.ItemId;
                         String dataQuery = "INSERT INTO `safenets_dfcdata`.`stock_log`(`item_id`,`qty`,`stock_date`)VALUES ('" + itemid + "','" + Integer.parseInt(txtQty.getText()) + "','" + setDate_Label.getText() + "')";
                         MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
                         JOptionPane.showMessageDialog(this, "Quantity Successfully Added to Stock");
-
+                        ClearAndLoadData();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -420,7 +420,34 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
     private void txtQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyReleased
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-
+            if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
+                if (this.ItemId != 0) {
+                    if (checkDailyQtyAdded() == 0 && Integer.parseInt(txtQty.getText()) != 0) {
+                        try {
+                            int itemid = this.ItemId;
+                            String dataQuery = "INSERT INTO `safenets_dfcdata`.`stock_log`(`item_id`,`qty`,`stock_date`)VALUES ('" + itemid + "','" + Integer.parseInt(txtQty.getText()) + "','" + setDate_Label.getText() + "')";
+                            MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+                            JOptionPane.showMessageDialog(this, "Quantity Successfully Added to Stock");
+                            ClearAndLoadData();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else if (checkDailyQtyAdded() != 0) {
+                        if (getCurrentStock(checkDailyQtyAdded()) != 0) {
+                            try {
+                                int currentQty = getCurrentStock(checkDailyQtyAdded());
+                                int new_qty = currentQty + Integer.parseInt(txtQty.getText());
+                                String dataQuery = "UPDATE `stock_log` SET `qty` = '" + new_qty + "' WHERE `stock_log_id` = '" + checkDailyQtyAdded() + "' AND stock_date='" + setDate_Label.getText() + "'";
+                                MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+                                JOptionPane.showMessageDialog(this, "Quantity Successfully Updated in Stock");
+                                ClearAndLoadData();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 //       
