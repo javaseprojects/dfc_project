@@ -719,14 +719,16 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tb_invoiceRegistorPropertyChange
 
-    Double toBalance,toPayment,toBillTotal;
+    Double toBalance, toPayment, toBillTotal;
     private void tf_paymentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_paymentKeyReleased
+        if (!tf_payment.getText().isEmpty()) {
+            toPayment = Double.parseDouble(lb_bil_total.getText());
+            toBillTotal = Double.parseDouble(tf_payment.getText().trim());
 
-         toPayment=Double.parseDouble(lb_bil_total.getText());
-         toBillTotal=Double.parseDouble(tf_payment.getText().trim());
-         
-         toBalance=toPayment-toBillTotal;
-         lb_balance.setText(toBalance+"0");
+            toBalance = toPayment - toBillTotal;
+            lb_balance.setText(toBalance + "0");
+        }
+
 
     }//GEN-LAST:event_tf_paymentKeyReleased
 
@@ -943,7 +945,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                             try {
                                 //qty = Integer.parseInt(tf_qty.getText());
                                 //avb_qty = Integer.parseInt(lb_available_qty.getText());
-                                
+
                                 Vector v = new Vector();
                                 v.add(dt.getRowCount() + 1);
                                 v.add(tf_item_code.getText());
@@ -951,7 +953,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                                 v.add(rs_itemtable.getDouble("selling_price") + "0");
                                 v.add(tf_qty.getText());
                                 v.add(Double.parseDouble(rs_itemtable.getString("selling_price")) * Double.parseDouble(tf_qty.getText()) + "0");
-                                v.add(avb_qty-qty);
+                                v.add(avb_qty - qty);
                                 dt.addRow(v);
                                 tf_item_code.setText("");
                                 tf_qty.setText("");
