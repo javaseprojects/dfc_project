@@ -613,7 +613,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (qty <= avb_qty) {
-
+                        
                         md_setItemTable();
 
                         tf_item_code.grabFocus();
@@ -1137,4 +1137,5 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         //jp_invoice_view_item.li_searchSuggestions.setVisible(false);
 
     }
+    
 }
