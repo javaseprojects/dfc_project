@@ -29,11 +29,8 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
         initComponents();
         CheckDate();
         load_Stock_Log();
-        new Thread(() -> {
-            loadAllItems();
-        }).start();
+        loadAllItems();
 
-        jButton2.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -234,31 +231,33 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to add quantity for this item?", "Confirm",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.NO_OPTION) {
-
-        } else if (response == JOptionPane.YES_OPTION) {
-
-            if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
-                try {
-                    new Thread(() -> {
-                        MC_DB.insert_data("INSERT INTO stock_log (item_id,qty,stock_date) VALUES ('" + this.ItemId + "','" + Integer.parseInt(txtQty.getText()) + "','" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "')");
+        if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
+            if (this.ItemId != 0) {
+                if (checkDailyQtyAdded() == 0 && Integer.parseInt(txtQty.getText())!=0) {
+                    try {
+                        int itemid = this.ItemId;
+                        String dataQuery = "INSERT INTO `safenets_dfcdata`.`stock_log`(`item_id`,`qty`,`stock_date`)VALUES ('" + itemid + "','" + Integer.parseInt(txtQty.getText()) + "','" + setDate_Label.getText() + "')";
+                        MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
                         JOptionPane.showMessageDialog(this, "Quantity Successfully Added to Stock");
-                        txtItemCode.setText("");
-                        txtPname.setText("");
-                        txtQty.setText("");
-                        this.ItemId = 0;
-                        txtItemCode.grabFocus();
-                        load_Stock_Log();
-                    }).start();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (checkDailyQtyAdded() != 0) {
+                    if (getCurrentStock(checkDailyQtyAdded()) != 0) {
+                        try {
+                            int currentQty = getCurrentStock(checkDailyQtyAdded());
+                            int new_qty = currentQty + Integer.parseInt(txtQty.getText());
+                            String dataQuery = "UPDATE `stock_log` SET `qty` = '" + new_qty + "' WHERE `stock_log_id` = '" + checkDailyQtyAdded() + "' AND stock_date='" + setDate_Label.getText() + "'";
+                            MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+                            JOptionPane.showMessageDialog(this, "Quantity Successfully Updated in Stock");
+                            ClearAndLoadData();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
-
-        } else if (response == JOptionPane.CLOSED_OPTION) {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -420,34 +419,8 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
 
     private void txtQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyReleased
 
-        
-        System.out.println(this.ItemId);
-        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to add quantity for this item?", "Confirm",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.NO_OPTION) {
 
-            } else if (response == JOptionPane.YES_OPTION) {
-                if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
-                    try {
-                        new Thread(() -> {
-                            if (this.ItemId != 0) {
-                                MC_DB.insert_data("INSERT INTO stock_log (item_id,qty,stock_date) VALUES ('" + this.ItemId + "','" + Integer.parseInt(txtQty.getText()) + "','" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "')");
-                                JOptionPane.showMessageDialog(this, "Quantity Successfully Added to Stock");
-                                txtItemCode.setText("");
-                                txtPname.setText("");
-                                txtQty.setText("");
-                                txtItemCode.grabFocus();
-                                load_Stock_Log();
-                            }
-                        }).start();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
         }
 
 //       
@@ -483,7 +456,7 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
         try {
             new Thread(() -> {
                 try {
-                    load_Stock_Log = MC_DB.search_dataQuery("SELECT i.`item_code`,i.`item_name`,s.`qty` FROM item i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE stock_date='2016-09-15'");
+                    load_Stock_Log = MC_DB.search_dataQuery("SELECT i.`item_code`,i.`item_name`,s.`qty` FROM item i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE stock_date='" + setDate_Label.getText() + "'");
                     while (load_Stock_Log.next()) {
                         Vector v = new Vector();
                         v.add(load_Stock_Log.getString(1));
@@ -584,6 +557,46 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
+    }
+
+    public int checkDailyQtyAdded() {
+        System.out.println("checkDailyQtyAdded()");
+        try {
+            int itemid = this.ItemId;
+            ResultSet rs = MC_DB.search_dataQuery("SELECT * FROM stock_log WHERE stock_date='" + setDate_Label.getText() + "' AND item_id='" + itemid + "'");
+            if (rs.next()) {
+                return rs.getInt("stock_log_id");
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    private void ClearAndLoadData() {
+        txtItemCode.setText("");
+        txtPname.setText("");
+        txtQty.setText("");
+        txtItemCode.grabFocus();
+        load_Stock_Log();
+        this.ItemId = 0;
+    }
+
+    private int getCurrentStock(int stock_id) {
+        try {
+            ResultSet rs = MC_DB.search_dataQuery("SELECT qty FROM stock_log WHERE stock_log_id='" + stock_id + "'");
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
 }
