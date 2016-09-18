@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.dfc.www.private_access.admin.invoice;
 
 import com.dfc.www.private_access.admin.backend.jf_onScreenInvoiceKeyBoard;
@@ -33,6 +28,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     public jp_user_invoiceManagment() {
         initComponents();
+        getInvoiceNo();
         tf_item_code.grabFocus();
         new Thread(() -> {
             try {
@@ -613,7 +609,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (qty <= avb_qty) {
-                        
+
                         md_setItemTable();
 
                         tf_item_code.grabFocus();
@@ -727,6 +723,16 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
             toBalance = toPayment - toBillTotal;
             lb_balance.setText(toBalance + "0");
+
+//            update daily product
+//            invoice save
+//                    reg save
+//                            cash account save
+            updateDailyStock();
+//            saveInvoice();
+            saveInvoiceReg();
+            saveInvoiceCash();
+
         }
 
 
@@ -1137,5 +1143,77 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         //jp_invoice_view_item.li_searchSuggestions.setVisible(false);
 
     }
-    
+
+    private void updateDailyStock() {
+        try {
+            for (int i = 0; i < tb_invoiceRegistor.getRowCount(); i++) {
+                String item_code = tb_invoiceRegistor.getValueAt(i, 0).toString();
+                int qty = Integer.parseInt(tb_invoiceRegistor.getValueAt(i, 3).toString());
+                String dataQuery = "UPDATE stock_log sl LEFT JOIN item i ON sl.`item_id`=i.`item_id` SET sl.qty='" + qty + "' WHERE i.`item_code`='" + item_code + "'";
+                MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+                System.out.println("daily stock updated");
+                saveInvoice(item_code);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getInvoiceNo() {
+        try {
+            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery(("SELECT MAX(invoice_id) AS maxInvoiceId FROM invoice"));
+            int max_id = 1;
+            if (rs.next()) {
+                max_id = (rs.getInt("maxInvoiceId"));
+                System.out.println("KKKKKKKKK" + max_id);
+
+                max_id++;
+
+            } else {
+                max_id = 1;
+                System.out.println("no invoice found");
+            }
+
+            String InvoiceNumberNEW = "";
+            String preFix = "IN-";
+            if (max_id > 0) {
+
+                String max_ids = max_id + "";
+
+                if (max_ids.length() == 1) {
+                    max_ids = "0000" + max_id;
+                } else if (max_ids.length() == 2) {
+                    max_ids = "000" + max_id;
+                } else if (max_ids.length() == 3) {
+                    max_ids = "00" + max_id;
+                } else if (max_ids.length() == 4) {
+                    max_ids = "0" + max_id;
+                } else if (max_ids.length() == 5) {
+                    InvoiceNumberNEW = preFix + max_ids;
+                }
+                InvoiceNumberNEW = preFix + max_ids;
+            }
+            System.out.println(InvoiceNumberNEW);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveInvoice(String icode) {
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveInvoiceReg() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void saveInvoiceCash() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
