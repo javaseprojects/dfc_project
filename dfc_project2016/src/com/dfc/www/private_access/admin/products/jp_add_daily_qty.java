@@ -2,6 +2,7 @@ package com.dfc.www.private_access.admin.products;
 
 import com.fsc.www.db.MC_DB;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -23,21 +24,17 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
     String date;
 
     int ItemId;
-    int ItemId_set;
 
     public jp_add_daily_qty() {
         initComponents();
         CheckDate();
-        new Thread(() -> {
-            load_Stock_Log();
-        }).start();
+        load_Stock_Log();
         new Thread(() -> {
             loadAllItems();
         }).start();
 
         jButton2.setEnabled(false);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -237,209 +234,167 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        try {
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to add quantity for this item?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
 
-            int Button = JOptionPane.showConfirmDialog(this, "Do you want to Add Quantity For This Item?", "Choose",
-                    JOptionPane.YES_NO_OPTION);
+        } else if (response == JOptionPane.YES_OPTION) {
 
-            if (Button == 0) {
-                jButton2.setEnabled(false);
-                new Thread(() -> {
+            if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
+                try {
+                    new Thread(() -> {
+                        MC_DB.insert_data("INSERT INTO stock_log (item_id,qty,stock_date) VALUES ('" + this.ItemId + "','" + Integer.parseInt(txtQty.getText()) + "','" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "')");
+                        JOptionPane.showMessageDialog(this, "Quantity Successfully Added to Stock");
+                        txtItemCode.setText("");
+                        txtPname.setText("");
+                        txtQty.setText("");
+                        this.ItemId = 0;
+                        txtItemCode.grabFocus();
+                        load_Stock_Log();
+                    }).start();
 
-                    try {
-
-                        int x = 0;
-                        int y = 0;
-                        //Load Item Id
-
-                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
-                        while (rs.next()) {
-                            x = 1;
-                            ItemId = Integer.parseInt(rs.getString("item_id"));
-                        }
-
-                        if (x == 1) {
-
-                            int c = 0;
-                            ResultSet RS23 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE item_id = '" + ItemId + "' && stock_date = '" + setDate_Label.getText() + "' ");
-                            while (RS23.next()) {
-                                c = 10;
-                                String s = RS23.getString("qty");
-                            }
-
-                            if (c == 10) {
-
-                                int qty = 0;
-                                ResultSet rs3 = MC_DB.myConnection().createStatement().executeQuery(" SELECT qty FROM stock_log WHERE item_id = '" + ItemId + "'  ");
-
-                                while (rs3.next()) {
-                                    qty = Integer.parseInt(rs3.getString("qty"));
-                                }
-
-                                MC_DB.myConnection().createStatement().executeUpdate("UPDATE stock_log  SET qty =  '" + (qty + Integer.parseInt(txtQty.getText())) + "'  WHERE item_id = '" + ItemId + "'");
-                                txtItemCode.setText("");
-                                txtPname.setText("");
-                                txtQty.setText("");
-                                jButton2.setEnabled(false);
-                                JOptionPane.showMessageDialog(this, "Update Stock...!!");
-                                load_Stock_Log();
-                            } else {
-                                MC_DB.myConnection().createStatement().executeUpdate("INSERT INTO stock_log(item_id,qty,stock_date)VALUES('" + ItemId + "' "
-                                        + ", '" + Integer.parseInt(txtQty.getText()) + "'"
-                                        + ", '" + setDate_Label.getText() + "' )");
-
-                                jButton2.setEnabled(false);
-                                txtItemCode.setText("");
-                                txtPname.setText("");
-                                txtQty.setText("");
-
-                                JOptionPane.showMessageDialog(this, "Save Sucess...!!");
-                                load_Stock_Log();
-
-                            }
-
-                        } else {
-                            jButton2.setEnabled(false);
-                            txtPname.setText("");
-                            txtQty.setText("");
-                            txtItemCode.setText("");
-                            JOptionPane.showMessageDialog(this, "Sorry Item Code Inavlide...!!");
-
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }).start();
-
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else if (response == JOptionPane.CLOSED_OPTION) {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtItemCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtItemCodeKeyTyped
 
-        try {
-            char c = evt.getKeyChar();
-            if (!Character.isDigit(c)) {
-                evt.consume();
-                Toolkit.getDefaultToolkit().beep();
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }//GEN-LAST:event_txtItemCodeKeyTyped
 
     private void txtItemCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtItemCodeKeyReleased
 
-        try {
-
-            //Button Validation
-            if (txtItemCode.getText().length() == 0) {
-                jButton2.setEnabled(false);
-            } else {
-                if (txtItemCode.getText().length() != 0
-                        && txtPname.getText().length() != 0
-                        && txtQty.getText().length() != 0) {
-
-                    jButton2.setEnabled(true);
-                }
-
-            }
-
-            new Thread(() -> {
-
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!txtItemCode.getText().isEmpty()) {
                 try {
-
-                    String Item_Name = "";
-                    int i = 0;
-
-                    if (evt.getKeyCode() == 10) {
-                        String catid;
-
-/// Load Item Name to item Name Text Filed
-                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
-                        while (rs.next()) {
-                            i = 1;
-                            Item_Name = rs.getString("item_name");
-                        }
-
-                        if (i == 1) {
-                            txtPname.setText(Item_Name);
-
-                            ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
-
-                            while (rs2.next()) {
-
-                                ItemId_set = Integer.parseInt(rs2.getString("item_id"));
+                    new Thread(() -> {
+                        try {
+                            ResultSet rs = MC_DB.search_dataQuery("SELECT item_name,item_id FROM item WHERE item_code='" + txtItemCode.getText() + "'");
+                            if (rs.next()) {
+                                txtPname.setText(rs.getString(1));
+                                this.ItemId = rs.getInt(2);
+                                txtQty.grabFocus();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "No item Found for this Number,Please check again", "Invalid Data", JOptionPane.ERROR_MESSAGE);
                             }
-
-                            ResultSet cheack_date_Id = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE stock_date = '" + setDate_Label.getText() + "' && item_id =  '" + ItemId_set + "'  ");
-                            DefaultTableModel dtm = (DefaultTableModel) tbl_product.getModel();
-                            dtm.setRowCount(0);
-                            while (cheack_date_Id.next()) {
-                                Vector v = new Vector();
-                                String IID = cheack_date_Id.getString("Item_id");
-                                System.out.println(IID);
-
-                                String catid3 = "";
-                                //////
-                                ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_id = '" + IID + "' ");
-                                while (rs1.next()) {
-
-                                    v.add(rs1.getString("item_code"));
-                                    v.add(rs1.getString("item_name"));
-                                    catid3 = rs1.getString("category_id");
-//
-                                }
-
-                                ResultSet rs12 = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category WHERE category_id = '" + catid3 + "' ");
-                                while (rs12.next()) {
-                                    v.add(rs12.getString("category_name"));
-                                }
-
-                                ResultSet rs13 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM item_has_sub_category WHERE item_id = '" + IID + "' ");
-                                while (rs13.next()) {
-                                    ///Get Sub cat name By Using Loaded Sub cat id   
-                                    ResultSet rs14 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_category FROM sub_category WHERE sub_cat_id= '" + rs13.getString("sub_cat_id") + "' ");
-                                    while (rs14.next()) {
-                                        v.add(rs14.getString("sub_category"));
-                                    }
-
-                                }
-
-                                v.add(cheack_date_Id.getString("qty"));
-                                dtm.addRow(v);
-
-                            }
-
-                        } else {
-
-                            jButton2.setEnabled(false);
-                            txtPname.setText("");
-                            txtQty.setText("");
-                            txtItemCode.setText("");
-                            JOptionPane.showMessageDialog(this, "Sorry Item Code Is Invalide");
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
                         }
-                        txtQty.grabFocus();
-                    }
+                    }).start();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-            }).start();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            }
         }
+
+//        try {
+//
+//            //Button Validation
+//            if (txtItemCode.getText().length() == 0) {
+//                jButton2.setEnabled(false);
+//            } else {
+//                if (txtItemCode.getText().length() != 0
+//                        && txtPname.getText().length() != 0
+//                        && txtQty.getText().length() != 0) {
+//
+//                    jButton2.setEnabled(true);
+//                }
+//
+//            }
+//
+//            new Thread(() -> {
+//
+//                try {
+//
+//                    String Item_Name = "";
+//                    int i = 0;
+//
+//                    if (evt.getKeyCode() == 10) {
+//                        String catid;
+//
+///// Load Item Name to item Name Text Filed
+//                        ResultSet rs = MC_DB.myConnection().createStatement().executeQuery("SELECT item_name FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
+//                        while (rs.next()) {
+//                            i = 1;
+//                            Item_Name = rs.getString("item_name");
+//                        }
+//
+//                        if (i == 1) {
+//                            txtPname.setText(Item_Name);
+//
+//                            ResultSet rs2 = MC_DB.myConnection().createStatement().executeQuery("SELECT item_id FROM item WHERE item_code = '" + txtItemCode.getText() + "' ");
+//
+//                            while (rs2.next()) {
+//
+//                                ItemId_set = Integer.parseInt(rs2.getString("item_id"));
+//                            }
+//
+//                            ResultSet cheack_date_Id = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM stock_log WHERE stock_date = '" + setDate_Label.getText() + "' && item_id =  '" + ItemId_set + "'  ");
+//                            DefaultTableModel dtm = (DefaultTableModel) tbl_product.getModel();
+//                            dtm.setRowCount(0);
+//                            while (cheack_date_Id.next()) {
+//                                Vector v = new Vector();
+//                                String IID = cheack_date_Id.getString("Item_id");
+//                                System.out.println(IID);
+//
+//                                String catid3 = "";
+//                                //////
+//                                ResultSet rs1 = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM item WHERE item_id = '" + IID + "' ");
+//                                while (rs1.next()) {
+//
+//                                    v.add(rs1.getString("item_code"));
+//                                    v.add(rs1.getString("item_name"));
+//                                    catid3 = rs1.getString("category_id");
+////
+//                                }
+//
+//                                ResultSet rs12 = MC_DB.myConnection().createStatement().executeQuery("SELECT category_name FROM category WHERE category_id = '" + catid3 + "' ");
+//                                while (rs12.next()) {
+//                                    v.add(rs12.getString("category_name"));
+//                                }
+//
+//                                ResultSet rs13 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_cat_id FROM item_has_sub_category WHERE item_id = '" + IID + "' ");
+//                                while (rs13.next()) {
+//                                    ///Get Sub cat name By Using Loaded Sub cat id   
+//                                    ResultSet rs14 = MC_DB.myConnection().createStatement().executeQuery("SELECT sub_category FROM sub_category WHERE sub_cat_id= '" + rs13.getString("sub_cat_id") + "' ");
+//                                    while (rs14.next()) {
+//                                        v.add(rs14.getString("sub_category"));
+//                                    }
+//
+//                                }
+//
+//                                v.add(cheack_date_Id.getString("qty"));
+//                                dtm.addRow(v);
+//
+//                            }
+//
+//                        } else {
+//
+//                            jButton2.setEnabled(false);
+//                            txtPname.setText("");
+//                            txtQty.setText("");
+//                            txtItemCode.setText("");
+//                            JOptionPane.showMessageDialog(this, "Sorry Item Code Is Invalide");
+//                        }
+//                        txtQty.grabFocus();
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }).start();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }//GEN-LAST:event_txtItemCodeKeyReleased
 
@@ -449,7 +404,6 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
             char c = evt.getKeyChar();
             if (!Character.isDigit(c)) {
                 evt.consume();
-                Toolkit.getDefaultToolkit().beep();
 
             }
 
@@ -461,51 +415,42 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
 
     private void txtPnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPnameKeyReleased
 
-        try {
-            //Button Validation
-            if (txtPname.getText().length() == 0) {
-                jButton2.setEnabled(false);
-            } else {
-                if (txtItemCode.getText().length() != 0
-                        && txtPname.getText().length() != 0
-                        && txtQty.getText().length() != 0) {
-
-                    jButton2.setEnabled(true);
-                }
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
     }//GEN-LAST:event_txtPnameKeyReleased
 
     private void txtQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtyKeyReleased
 
-        try {
-            //Button Validation
-            if (txtQty.getText().length() == 0) {
-                jButton2.setEnabled(false);
-            } else {
-                if (txtItemCode.getText().length() != 0
-                        && txtPname.getText().length() != 0
-                        && txtQty.getText().length() != 0) {
+        
+        System.out.println(this.ItemId);
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to add quantity for this item?", "Confirm",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.NO_OPTION) {
 
-                    jButton2.setEnabled(true);
+            } else if (response == JOptionPane.YES_OPTION) {
+                if (!(txtItemCode.getText().isEmpty() && txtPname.getText().isEmpty() && txtQty.getText().isEmpty())) {
+                    try {
+                        new Thread(() -> {
+                            if (this.ItemId != 0) {
+                                MC_DB.insert_data("INSERT INTO stock_log (item_id,qty,stock_date) VALUES ('" + this.ItemId + "','" + Integer.parseInt(txtQty.getText()) + "','" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "')");
+                                JOptionPane.showMessageDialog(this, "Quantity Successfully Added to Stock");
+                                txtItemCode.setText("");
+                                txtPname.setText("");
+                                txtQty.setText("");
+                                txtItemCode.grabFocus();
+                                load_Stock_Log();
+                            }
+                        }).start();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-
             }
-
-            if (evt.getKeyCode() == 10) {
-                jButton2.grabFocus();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
+//       
 
     }//GEN-LAST:event_txtQtyKeyReleased
 
@@ -536,16 +481,21 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
         dtm.setRowCount(0);
 
         try {
-            
-            load_Stock_Log = MC_DB.search_dataQuery("SELECT i.`item_code`,i.`item_name`,s.`qty` FROM item i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE stock_date='2016-09-15'");
-            
-            while (load_Stock_Log.next()) {
-                Vector v = new Vector();
-                v.add(load_Stock_Log.getString(1));
-                v.add(load_Stock_Log.getString(2));
-                v.add(load_Stock_Log.getString(3));
-                dtm.addRow(v);
-            }
+            new Thread(() -> {
+                try {
+                    load_Stock_Log = MC_DB.search_dataQuery("SELECT i.`item_code`,i.`item_name`,s.`qty` FROM item i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE stock_date='2016-09-15'");
+                    while (load_Stock_Log.next()) {
+                        Vector v = new Vector();
+                        v.add(load_Stock_Log.getString(1));
+                        v.add(load_Stock_Log.getString(2));
+                        v.add(load_Stock_Log.getString(3));
+                        dtm.addRow(v);
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }).start();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
