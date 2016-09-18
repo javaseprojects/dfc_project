@@ -449,7 +449,6 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
                 }
             }
         }
-
 //       
 
     }//GEN-LAST:event_txtQtyKeyReleased
