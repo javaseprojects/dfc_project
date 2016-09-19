@@ -751,13 +751,12 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                     updateDailyStock();
                     JOptionPane.showMessageDialog(this, "Invoice Saved Successfully");
 //                    clearFieldsandLoadInitialData();
-                    
-                    String path="C:\\FSC\\dfc_invoicefinal.jrxml";
+
+                    String path = "C:\\FSC\\dfc_invoicefinal.jrxml";
                     //passing parmeter
                     invoice_reportView(path, this.Invoice_No);
-                    
+
                     //passing parmeter
-                    
                 }
 
             }
@@ -980,7 +979,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                     if (!tf_qty.getText().isEmpty()) {
                         if (rs_itemtable.next()) {
-                            
+
                             try {
                                 //qty = Integer.parseInt(tf_qty.getText());
                                 //avb_qty = Integer.parseInt(lb_available_qty.getText());
@@ -1025,28 +1024,28 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     ResultSet rs_load_item_name;
 
     public void md_loadItemName() {
-        
-                try {
-                    try {
-                        rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `item` i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE i.`item_code`='" + tf_item_code.getText() + "' AND s.`stock_date`='" + User_Home.lb_v_date.getText() + "'");
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
 
-                    if (rs_load_item_name.first()) {
-                        //dlm.addElement(rs_load_item_name.getString("item_name"));
-                        lb_item_name.setText(rs_load_item_name.getString("i.item_name"));
-                        lb_available_qty.setText("");
-                        lb_available_qty.setText(rs_load_item_name.getString("s.qty"));
+        try {
+            try {
+                rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `item` i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE i.`item_code`='" + tf_item_code.getText() + "' AND s.`stock_date`='" + User_Home.lb_v_date.getText() + "'");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
 
-                    } else {
-                        //JOptionPane.showMessageDialog(this, "No Daily Product Quantity");
-                    }
-                    //jp_invoice_view_item.li_searchSuggestions.setModel(dlm);
+            if (rs_load_item_name.first()) {
+                //dlm.addElement(rs_load_item_name.getString("item_name"));
+                lb_item_name.setText(rs_load_item_name.getString("i.item_name"));
+                lb_available_qty.setText("");
+                lb_available_qty.setText(rs_load_item_name.getString("s.qty"));
 
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+            } else {
+                //JOptionPane.showMessageDialog(this, "No Daily Product Quantity");
+            }
+            //jp_invoice_view_item.li_searchSuggestions.setModel(dlm);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     //......................item name loade from jlist - end.................................................
 
@@ -1337,6 +1336,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         this.Invoice_No = "";
         getInvoiceNo();
     }
+
     private void invoice_reportView(String rp_parth, String invoice_no) {
 
         try {
@@ -1344,8 +1344,9 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             System.out.println("===========jasper report compiled successfully==========");
             Map<String, Object> map = new HashMap<String, Object>();
 
+            System.out.println("INVOICE Noooooooooooooooooooooo" + invoice_no);
             map.put("para_invoiceNumber", invoice_no);
-            
+            System.out.println("INVOICE Noooooooooooooooooooooo" + invoice_no);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jp, map, MC_DB.myConnection());
             JasperViewer.viewReport(jasperPrint, false);
