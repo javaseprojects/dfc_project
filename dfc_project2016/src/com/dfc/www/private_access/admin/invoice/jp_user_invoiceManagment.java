@@ -748,15 +748,12 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 int response = JOptionPane.showConfirmDialog(null, "Do you want to Continue?", "Confirm",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
+
                     updateDailyStock();
+
                     JOptionPane.showMessageDialog(this, "Invoice Saved Successfully");
 //                    clearFieldsandLoadInitialData();
 
-                    String path = "C:\\FSC\\dfc_invoicefinal.jrxml";
-                    //passing parmeter
-                    invoice_reportView(path, this.Invoice_No);
-
-                    //passing parmeter
                 }
 
             }
@@ -1302,6 +1299,12 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             }
 
         }
+
+        String path = "C:\\FSC\\dfc_invoicefinal.jrxml";
+        //passing parmeter
+        invoice_reportView(path, this.Invoice_No);
+
+            //passing parmeter
         //save cash to cash account
         saveInvoiceCash();
         //save cash to cash account
@@ -1314,6 +1317,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             String dataQuery = "INSERT INTO cash_account(`cash_amount`,`cash_type`,`status`,`cash_date`,`description`) VALUES ('" + Double.parseDouble(lb_bil_total.getText()) + "','Invoice','1','" + cashDate + "','" + des + "')";
             MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
             System.out.println("cash saved");
+
             clearFieldsandLoadInitialData();
             tf_item_code.grabFocus();
         } catch (Exception e) {
