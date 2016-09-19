@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
@@ -168,7 +169,7 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
         }
 
     }
-   //load expenses-----------------------------------------
+    //load expenses-----------------------------------------
 
     //profit calculation-----------------------------------
     public void profitCalculator() {
@@ -436,11 +437,11 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-        String path="C:\\FSC\\report_cashAccount.jrxml";
-        String sDate= new SimpleDateFormat("yyyy-MM-dd").format(dt_start.getDate());
-        String eDate= new SimpleDateFormat("yyyy-MM-dd").format(dt_end.getDate());
-       
+
+        String path = "C:\\FSC\\report_cashAccount.jrxml";
+        String sDate = new SimpleDateFormat("yyyy-MM-dd").format(dt_start.getDate());
+        String eDate = new SimpleDateFormat("yyyy-MM-dd").format(dt_end.getDate());
+
         cash_reportView(path, sDate, eDate, lbl_investments.getText(), lbl_income.getText(), lbl_expenses.getText(), lbl_profit.getText(), lbl_profitwithoutinvest.getText());
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -476,7 +477,7 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_profitwithoutinvest;
     private javax.swing.JTable tbl_cash_account;
     // End of variables declaration//GEN-END:variables
-private void cash_reportView(String rp_parth, String sDate,String eDate,String investment,String income,String expense,String profit_with_investment,String profit_without_investment) {
+private void cash_reportView(String rp_parth, String sDate, String eDate, String investment, String income, String expense, String profit_with_investment, String profit_without_investment) {
 
         try {
             JasperReport jp = JasperCompileManager.compileReport(rp_parth);
@@ -490,11 +491,11 @@ private void cash_reportView(String rp_parth, String sDate,String eDate,String i
             map.put("parameter3", expense);
             map.put("parameter5", profit_with_investment);
             map.put("parameter4", profit_without_investment);
-            
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jp, map, MC_DB.myConnection());
-            JasperViewer.viewReport(jasperPrint, false);
-            JRViewer v = new JRViewer(jasperPrint);
+//            JasperViewer.viewReport(jasperPrint, false);
+//            JRViewer v = new JRViewer(jasperPrint);
+            JasperPrintManager.printReport(jasperPrint, false);
 
         } catch (Exception e) {
             e.printStackTrace();
