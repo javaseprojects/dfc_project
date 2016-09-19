@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
@@ -1304,7 +1305,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         //passing parmeter
         invoice_reportView(path, this.Invoice_No);
 
-            //passing parmeter
+        //passing parmeter
         //save cash to cash account
         saveInvoiceCash();
         //save cash to cash account
@@ -1353,8 +1354,9 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             System.out.println("INVOICE Noooooooooooooooooooooo" + invoice_no);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jp, map, MC_DB.myConnection());
-            JasperViewer.viewReport(jasperPrint, false);
-            JRViewer v = new JRViewer(jasperPrint);
+            //JasperViewer.viewReport(jasperPrint, true);
+            //JRViewer v = new JRViewer(jasperPrint);
+            JasperPrintManager.printReport(jasperPrint, false);
 
         } catch (Exception e) {
             e.printStackTrace();
