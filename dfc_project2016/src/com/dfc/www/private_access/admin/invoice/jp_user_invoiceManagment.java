@@ -752,7 +752,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                     updateDailyStock();
 
-                    JOptionPane.showMessageDialog(this, "Invoice Saved Successfully");
+                    JOptionPane.showMessageDialog(this, "Invoice Saved Successfully\n Invoice Balance is :"+lb_balance.getText());
 //                    clearFieldsandLoadInitialData();
 
                 }

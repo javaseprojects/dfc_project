@@ -244,7 +244,6 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
                         e.printStackTrace();
                     }
                 } else if (checkDailyQtyAdded() != 0) {
-                    if (getCurrentStock(checkDailyQtyAdded()) != 0) {
                         try {
                             int currentQty = getCurrentStock(checkDailyQtyAdded());
                             int new_qty = currentQty + Integer.parseInt(txtQty.getText());
@@ -255,7 +254,7 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    }
+                    
                 }
             }
         }
@@ -433,7 +432,6 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
                             e.printStackTrace();
                         }
                     } else if (checkDailyQtyAdded() != 0) {
-                        if (getCurrentStock(checkDailyQtyAdded()) != 0) {
                             try {
                                 int currentQty = getCurrentStock(checkDailyQtyAdded());
                                 int new_qty = currentQty + Integer.parseInt(txtQty.getText());
@@ -444,7 +442,7 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        }
+                        
                     }
                 }
             }
@@ -615,7 +613,7 @@ public class jp_add_daily_qty extends javax.swing.JPanel {
         try {
             ResultSet rs = MC_DB.search_dataQuery("SELECT qty FROM stock_log WHERE stock_log_id='" + stock_id + "'");
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt("qty");
             } else {
                 return 0;
             }
