@@ -6,6 +6,8 @@ import com.dfc.www.public_access.user_frontend.User_Home;
 import com.fsc.www.db.MC_DB;
 import com.fsc.www.db.PB_MD;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
@@ -18,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 public class jp_user_invoiceManagment extends javax.swing.JPanel {
@@ -25,9 +28,13 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     KeyEvent mykeys;
+    String Invoice_No;
+    DefaultTableModel dtm_invoice_reg_local_table;
 
     public jp_user_invoiceManagment() {
+
         initComponents();
+        dtm_invoice_reg_local_table = (DefaultTableModel) tb_invoiceRegistor.getModel();
         getInvoiceNo();
         tf_item_code.grabFocus();
         new Thread(() -> {
@@ -601,6 +608,10 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     int down_qty;
     private void tf_qtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_qtyKeyReleased
 
+        if (evt.getKeyCode() == KeyEvent.VK_PLUS) {
+            tf_item_code.grabFocus();
+        }
+
         try {
             if (!tf_qty.getText().isEmpty() && !lb_available_qty.getText().isEmpty()) {
                 qty = Integer.parseInt(tf_qty.getText());
@@ -724,15 +735,21 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             toBalance = toPayment - toBillTotal;
             lb_balance.setText(toBalance + "0");
 
-//            update daily product
-//            invoice save
-//                    reg save
-//                            cash account save
-            updateDailyStock();
-//            saveInvoice();
-            saveInvoiceReg();
-            saveInvoiceCash();
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
+                int response = JOptionPane.showConfirmDialog(null, "Do you want to Continue?", "Confirm",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    updateDailyStock();
+                    JOptionPane.showMessageDialog(this, "Invoice Saved Successfully");
+//                    clearFieldsandLoadInitialData();
+                }
+
+            }
+
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_PLUS) {
+            tf_item_code.grabFocus();
         }
 
 
@@ -869,10 +886,10 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     public static javax.swing.JPanel jp_submainPanel;
     private javax.swing.JLabel lb_available_qty;
     private javax.swing.JLabel lb_balance;
-    private javax.swing.JLabel lb_bil_total;
+    public static javax.swing.JLabel lb_bil_total;
     private javax.swing.JLabel lb_item_name;
     private javax.swing.JLabel lb_tot_item;
-    private javax.swing.JTable tb_invoiceRegistor;
+    public static javax.swing.JTable tb_invoiceRegistor;
     public static javax.swing.JTextField tf_item_code;
     public static javax.swing.JTextField tf_payment;
     private javax.swing.JTextField tf_qty;
@@ -1146,14 +1163,18 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
     private void updateDailyStock() {
         try {
-            for (int i = 0; i < tb_invoiceRegistor.getRowCount(); i++) {
-                String item_code = tb_invoiceRegistor.getValueAt(i, 0).toString();
-                int qty = Integer.parseInt(tb_invoiceRegistor.getValueAt(i, 3).toString());
-                String dataQuery = "UPDATE stock_log sl LEFT JOIN item i ON sl.`item_id`=i.`item_id` SET sl.qty='" + qty + "' WHERE i.`item_code`='" + item_code + "'";
+            for (int i = 0; i < dtm_invoice_reg_local_table.getRowCount(); i++) {
+                String item_code = dtm_invoice_reg_local_table.getValueAt(i, 1).toString();
+                int qty = Integer.parseInt(dtm_invoice_reg_local_table.getValueAt(i, 6).toString());
+                System.out.println(item_code + "-----" + qty);
+
+                String stockDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                String dataQuery = "UPDATE stock_log sl LEFT JOIN item i ON sl.`item_id`=i.`item_id` SET sl.qty='" + qty + "' WHERE i.`item_code`='" + item_code + "' AND sl.stock_date='" + stockDate + "'";
                 MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
                 System.out.println("daily stock updated");
-                saveInvoice(item_code);
+
             }
+            saveInvoice();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1194,26 +1215,116 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 InvoiceNumberNEW = preFix + max_ids;
             }
             System.out.println(InvoiceNumberNEW);
+            this.Invoice_No = InvoiceNumberNEW;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void saveInvoice(String icode) {
-        try {
+    private int getUserID() {
+        String username = User_Home.bt_main_userNameLOAD.getText();
+        if (!username.isEmpty()) {
+            try {
+                ResultSet rs = MC_DB.search_dataQuery("SELECT user_account_id FROM user_account WHERE username='" + username + "'");
+                if (rs.next()) {
+                    return rs.getInt("user_account_id");
+                } else {
+                    return 0;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void saveInvoice() {
+        if (getUserID() != 0) {
+            if (this.Invoice_No != null) {
+                try {
+
+                    String invoiceDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    String invoiceTime = User_Home.lb_v_time.getText();
+
+                    String dataQuery = "INSERT INTO invoice(invoice_no,user_account_id,total_amount,invoice_date,invoice_time,status) VALUES ('" + this.Invoice_No + "','" + getUserID() + "','" + Double.parseDouble(lb_bil_total.getText()) + "','" + invoiceDate + "','" + invoiceTime + "','Active')";
+                    MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+                    System.out.println("invoice saved");
+
+                    //saving invoice reg
+                    saveInvoiceReg();
+                    //saving invoice reg
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     private void saveInvoiceReg() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < tb_invoiceRegistor.getRowCount(); i++) {
+            String item_code = tb_invoiceRegistor.getValueAt(i, 1).toString();
+            int qty = Integer.parseInt(tb_invoiceRegistor.getValueAt(i, 4).toString());
+            double up = Double.parseDouble(tb_invoiceRegistor.getValueAt(i, 3).toString());
+            double sub_tot = Double.parseDouble(tb_invoiceRegistor.getValueAt(i, 5).toString());
+            int item_id = 0;
+            int invoice_id = 0;
+            try {
+                ResultSet rs = MC_DB.search_dataQuery("SELECT item_id FROM item WHERE item_code='" + item_code + "'");
+                if (rs.next()) {
+                    item_id = rs.getInt("item_id");
+                }
+                ResultSet rs_invoice_id = MC_DB.search_dataQuery("SELECT invoice_id FROM invoice WHERE invoice_no='" + this.Invoice_No + "'");
+                if (rs_invoice_id.next()) {
+                    invoice_id = rs_invoice_id.getInt("invoice_id");
+                }
+                if (qty != 0 && up != 0 && sub_tot != 0 && item_id != 0 && invoice_id != 0 && (!item_code.isEmpty())) {
+                    String dataQuery = "INSERT INTO `safenets_dfcdata`.`invoice_reg`(`invoice_id`,`item_id`,`qty`,`total_price`,`status`,`selling_price`) VALUES ('" + invoice_id + "','" + item_id + "','" + qty + "','" + sub_tot + "','Active','" + up + "')";
+                    MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+                    System.out.println("invoice reg saved");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        //save cash to cash account
+        saveInvoiceCash();
+        //save cash to cash account
     }
 
     private void saveInvoiceCash() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String cashDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String des = this.Invoice_No + " credited cash-" + User_Home.bt_main_userNameLOAD.getText();
+        try {
+            String dataQuery = "INSERT INTO cash_account(`cash_amount`,`cash_type`,`status`,`cash_date`,`description`) VALUES ('" + Double.parseDouble(lb_bil_total.getText()) + "','Invoice','1','" + cashDate + "','" + des + "')";
+            MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
+            System.out.println("cash saved");
+            clearFieldsandLoadInitialData();
+            tf_item_code.grabFocus();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void clearFieldsandLoadInitialData() {
+        tf_item_code.setText("");
+        lb_item_name.setText("");
+        lb_available_qty.setText("");
+        tf_qty.setText("");
+        DefaultTableModel dtm = (DefaultTableModel) tb_invoiceRegistor.getModel();
+        dtm.setRowCount(0);
+        lb_tot_item.setText("");
+        lb_bil_total.setText("");
+        tf_payment.setText("");
+        lb_balance.setText("");
+        this.Invoice_No = "";
+        getInvoiceNo();
     }
 
 }

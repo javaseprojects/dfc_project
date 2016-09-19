@@ -25,7 +25,7 @@ public class delete extends javax.swing.JFrame {
     private void getInvoiceNo() {
         try {
             ResultSet rs = MC_DB.myConnection().createStatement().executeQuery(("SELECT MAX(invoice_id) AS maxInvoiceId FROM invoice"));
-            int max_id = 1;
+            int max_id = 0;
             if (rs.next()) {
                 max_id = (rs.getInt("maxInvoiceId"));
                 System.out.println("KKKKKKKKK" + max_id);
