@@ -752,7 +752,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                     updateDailyStock();
 
-                    JOptionPane.showMessageDialog(this, "Invoice Saved Successfully\n Invoice Balance is :"+lb_balance.getText());
+                    
 //                    clearFieldsandLoadInitialData();
 
                 }
@@ -1318,7 +1318,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
             String dataQuery = "INSERT INTO cash_account(`cash_amount`,`cash_type`,`status`,`cash_date`,`description`) VALUES ('" + Double.parseDouble(lb_bil_total.getText()) + "','Invoice','1','" + cashDate + "','" + des + "')";
             MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
             System.out.println("cash saved");
-
+            JOptionPane.showMessageDialog(this, "Invoice Saved Successfully\n Invoice Balance is :"+lb_balance.getText());
             clearFieldsandLoadInitialData();
             tf_item_code.grabFocus();
         } catch (Exception e) {
