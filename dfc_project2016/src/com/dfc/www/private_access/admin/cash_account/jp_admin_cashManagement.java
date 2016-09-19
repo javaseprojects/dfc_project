@@ -438,7 +438,7 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        String path = "C:\\FSC\\report_cashAccount.jrxml";
+        String path = "src\\reports\\report_cashAccount.jrxml";
         String sDate = new SimpleDateFormat("yyyy-MM-dd").format(dt_start.getDate());
         String eDate = new SimpleDateFormat("yyyy-MM-dd").format(dt_end.getDate());
 

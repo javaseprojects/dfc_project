@@ -1301,7 +1301,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
         }
 
-        String path = "C:\\FSC\\dfc_invoicefinal.jrxml";
+        String path = "src\\reports\\dfc_invoicefinal.jrxml";
         //passing parmeter
         invoice_reportView(path, this.Invoice_No);
 
