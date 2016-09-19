@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.input.KeyCode;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -134,7 +135,6 @@ public class User_Home extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lb_v_time = new javax.swing.JLabel();
-        tf_return_invoice_no = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -150,6 +150,8 @@ public class User_Home extends javax.swing.JFrame {
         bt_main_userNameLOAD.setForeground(new java.awt.Color(255, 255, 255));
         bt_main_userNameLOAD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/user_frontend/userLOG_btnBACK.png"))); // NOI18N
         bt_main_userNameLOAD.setText("MY ACCOUNT");
+        bt_main_userNameLOAD.setBorderPainted(false);
+        bt_main_userNameLOAD.setContentAreaFilled(false);
         bt_main_userNameLOAD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bt_main_userNameLOAD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -334,12 +336,6 @@ public class User_Home extends javax.swing.JFrame {
         lb_v_time.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         lb_v_time.setForeground(new java.awt.Color(255, 255, 255));
 
-        tf_return_invoice_no.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_return_invoice_noKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -354,10 +350,8 @@ public class User_Home extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tf_return_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(bt_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(266, 266, 266)
+                .addComponent(bt_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lb_v_time, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,11 +369,10 @@ public class User_Home extends javax.swing.JFrame {
                     .addComponent(bt_main_userNameLOAD, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_return_invoice_no))))
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -469,34 +462,22 @@ AccessDenied_backupAndRestore andBackup;
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if (checkInvoiceNo(tf_return_invoice_no.getText())) {
-            returnInvoice(tf_return_invoice_no.getText());
-        }
 
-//        new Thread(() -> {
-//            try {
-//                Thread.sleep(3000);
-//                jp_userMainPanel.removeAll();
-//                jp_userMainPanel.setLayout(new FlowLayout());
-//                returns.setVisible(true);
-//                jp_userMainPanel.add(returns);
-//                jp_userMainPanel.updateUI();
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }).start();
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                jp_userMainPanel.removeAll();
+                jp_userMainPanel.setLayout(new FlowLayout());
+                returns.setVisible(true);
+                jp_userMainPanel.add(returns);
+                jp_userMainPanel.updateUI();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
 
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void tf_return_invoice_noKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_return_invoice_noKeyReleased
-
-        if (checkInvoiceNo(tf_return_invoice_no.getText())) {
-            loadInvoiceData(tf_return_invoice_no.getText());
-        }
-
-
-    }//GEN-LAST:event_tf_return_invoice_noKeyReleased
 
     /**
      * @param args the command line arguments
@@ -554,7 +535,6 @@ AccessDenied_backupAndRestore andBackup;
     private javax.swing.JLabel lb_close;
     public static javax.swing.JLabel lb_v_date;
     public static javax.swing.JLabel lb_v_time;
-    private javax.swing.JTextField tf_return_invoice_no;
     // End of variables declaration//GEN-END:variables
 
     public static boolean md_isReachableByPing(String host) {
@@ -602,76 +582,7 @@ AccessDenied_backupAndRestore andBackup;
         }).start();
     }
 
-    private boolean checkInvoiceNo(String invoiceNo) {
 
-        try {
-            ResultSet rs = MC_DB.search_dataQuery("SELECT invoice_no FROM invoice WHERE invoice_no='" + invoiceNo + "'");
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
-    private void returnInvoice(String invoiceNo) {
-        if (checkInvoiceNo(invoiceNo)) {
-            try {
-                String dataQuery = "UPDATE invoice SET status='Deactive' WHERE invoice_no='" + invoiceNo + "'";
-                MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
-                System.out.println("invoice status changed");
-                InvoicecashBack(invoiceNo);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void InvoicecashBack(String invoiceNo) {
-        String cashDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String des = invoiceNo + "  Invoice cash refund by-" + User_Home.bt_main_userNameLOAD.getText();
-        double bill_tot = Double.parseDouble(jp_user_invoiceManagment.lb_bil_total.getText());
-        bill_tot = bill_tot * (-1);
-        try {
-            String dataQuery = "INSERT INTO cash_account(`cash_amount`,`cash_type`,`status`,`cash_date`,`description`) VALUES ('" + bill_tot + "','Invoice','1','" + cashDate + "','" + des + "')";
-            MC_DB.myConnection().createStatement().executeUpdate(dataQuery);
-            JOptionPane.showMessageDialog(null, "Invoice Cash Refunded Successfully");
-            DefaultTableModel dtm = (DefaultTableModel) jp_user_invoiceManagment.tb_invoiceRegistor.getModel();
-            dtm.setRowCount(0);
-            tf_return_invoice_no.setText("");
-            jp_user_invoiceManagment.lb_bil_total.setText("00.00");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadInvoiceData(String invoiceNo) {
-        DefaultTableModel dtm = (DefaultTableModel) jp_user_invoiceManagment.tb_invoiceRegistor.getModel();
-        dtm.setRowCount(0);
-        try {
-            String dataQuery = "SELECT * FROM invoice_reg ir LEFT JOIN invoice i ON ir.invoice_id=i.`invoice_id` LEFT JOIN item it ON it.`item_id`=ir.`item_id` WHERE i.`invoice_no`='" + invoiceNo + "'";
-            ResultSet rs_viewInvoices = MC_DB.search_dataQuery(dataQuery);
-            while (rs_viewInvoices.next()) {
-                Vector v = new Vector();
-                v.add(rs_viewInvoices.getString("it.item_code"));
-                v.add(rs_viewInvoices.getString("it.item_name"));
-                v.add(rs_viewInvoices.getInt("ir.qty"));
-                v.add(rs_viewInvoices.getDouble("ir.selling_price") + "0");
-                v.add(rs_viewInvoices.getDouble("ir.total_price") + "0");
-                v.add("None");
-                dtm.addRow(v);
-            }
-            for (int i = 0; i < dtm.getRowCount(); i++) {
-                double bill_tot = Double.parseDouble((jp_user_invoiceManagment.tb_invoiceRegistor.getValueAt(i, 5).toString()));
-                jp_user_invoiceManagment.lb_bil_total.setText(bill_tot + "0");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }
