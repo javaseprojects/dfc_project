@@ -5,11 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class jp_admin_cashManagement extends javax.swing.JPanel {
 
@@ -199,6 +207,8 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 670));
 
@@ -346,19 +356,51 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(239, 108, 0));
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
+        jButton3.setText("Print Report");
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1350, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(1110, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 0, 1350, 90);
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button.png"))); // NOI18N
+        jButton4.setText("Search");
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/com/dfc/www/public_access/images/fdc_button_hover.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4);
+        jButton4.setBounds(870, 30, 230, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -385,19 +427,35 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
             loadExpenses(sDate, eDate);
             loadIncomes(sDate, eDate);
             profitCalculator();
-        }else{
-            JOptionPane.showMessageDialog(this, "End Date should be less than Start Date","Invalid Date Rage Found",JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "End Date should be less than Start Date", "Invalid Date Rage Found", JOptionPane.WARNING_MESSAGE);
             dt_end.setDate(new Date());
         }
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        String path="C:\\FSC\\report_cashAccount.jrxml";
+        String sDate= new SimpleDateFormat("yyyy-MM-dd").format(dt_start.getDate());
+        String eDate= new SimpleDateFormat("yyyy-MM-dd").format(dt_end.getDate());
+       
+        cash_reportView(path, sDate, eDate, lbl_investments.getText(), lbl_income.getText(), lbl_expenses.getText(), lbl_profit.getText(), lbl_profitwithoutinvest.getText());
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dt_end;
     private com.toedter.calendar.JDateChooser dt_start;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -418,4 +476,29 @@ public class jp_admin_cashManagement extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_profitwithoutinvest;
     private javax.swing.JTable tbl_cash_account;
     // End of variables declaration//GEN-END:variables
+private void cash_reportView(String rp_parth, String sDate,String eDate,String investment,String income,String expense,String profit_with_investment,String profit_without_investment) {
+
+        try {
+            JasperReport jp = JasperCompileManager.compileReport(rp_parth);
+            System.out.println("===========jasper report compiled successfully==========");
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            map.put("para_start_date", sDate);
+            map.put("para_end_date", eDate);
+            map.put("parameter1", investment);
+            map.put("parameter2", income);
+            map.put("parameter3", expense);
+            map.put("parameter5", profit_with_investment);
+            map.put("parameter4", profit_without_investment);
+            
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jp, map, MC_DB.myConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+            JRViewer v = new JRViewer(jasperPrint);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

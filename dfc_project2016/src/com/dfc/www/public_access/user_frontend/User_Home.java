@@ -4,23 +4,18 @@ import com.dfc.www.private_access.admin.backend.jf_backend_index;
 import com.dfc.www.private_access.admin.backup.AccessDenied_backupAndRestore;
 import com.dfc.www.private_access.admin.invoice.jp_user_invoiceManagment;
 import com.dfc.www.private_access.admin.products.jp_add_daily_qty;
-import com.fsc.www.db.MC_DB;
 import com.fsc.www.db.SendAttachmentInEmail;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.input.KeyCode;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
 public class User_Home extends javax.swing.JFrame {
 
@@ -154,6 +149,11 @@ public class User_Home extends javax.swing.JFrame {
         bt_main_userNameLOAD.setContentAreaFilled(false);
         bt_main_userNameLOAD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bt_main_userNameLOAD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bt_main_userNameLOAD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_main_userNameLOADActionPerformed(evt);
+            }
+        });
 
         jp_userMainPanel.setBackground(new java.awt.Color(51, 51, 51));
         jp_userMainPanel.setMaximumSize(new java.awt.Dimension(1366, 670));
@@ -431,8 +431,9 @@ AccessDenied_backupAndRestore andBackup;
 
                 jp_userMainPanel.removeAll();
                 jp_userMainPanel.setLayout(new FlowLayout());
-                invoiceMng.setVisible(true);
-                jp_userMainPanel.add(invoiceMng);
+                jp_user_invoiceManagment invoiceMngs = new jp_user_invoiceManagment();
+                invoiceMngs.setVisible(true);
+                jp_userMainPanel.add(invoiceMngs);
                 jp_userMainPanel.updateUI();
 
             } catch (Exception e) {
@@ -478,6 +479,12 @@ AccessDenied_backupAndRestore andBackup;
         }).start();
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void bt_main_userNameLOADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_main_userNameLOADActionPerformed
+       
+        
+        
+    }//GEN-LAST:event_bt_main_userNameLOADActionPerformed
 
     /**
      * @param args the command line arguments

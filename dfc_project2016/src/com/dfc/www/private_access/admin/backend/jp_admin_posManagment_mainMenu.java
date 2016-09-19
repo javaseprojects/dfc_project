@@ -146,13 +146,13 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(20, 20, 20)
                 .addComponent(bt_addcatandsub, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_addproduct, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_adddailyquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_finalproductbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -208,16 +208,16 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
 
         bt_addcatandsub.setForeground(new Color(255, 255, 255));
     }//GEN-LAST:event_bt_addcatandsubMouseExited
-
+    jp_add_category_subCategory add_cat_and_sub_cat = new jp_add_category_subCategory();
     private void bt_addcatandsubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addcatandsubActionPerformed
 
         new Thread(() -> {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                jp_add_category_subCategory ai = new jp_add_category_subCategory();
-                ai.setVisible(true);
-                jp_adminPOSsubPanel.add(ai);
+
+                add_cat_and_sub_cat.setVisible(true);
+                jp_adminPOSsubPanel.add(add_cat_and_sub_cat);
                 jp_adminPOSsubPanel.updateUI();
 
             } catch (Exception e) {
@@ -227,22 +227,24 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_bt_addcatandsubActionPerformed
 
     private void bt_addproductMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_addproductMouseMoved
-        // TODO add your handling code here:
+       
+         bt_addproduct.setForeground(new Color(255, 87, 34));
+        
     }//GEN-LAST:event_bt_addproductMouseMoved
 
     private void bt_addproductMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_addproductMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_addproductMouseExited
-
+    jp_product add_product = new jp_product();
     private void bt_addproductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addproductActionPerformed
 
         new Thread(() -> {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                jp_product ai = new jp_product();
-                ai.setVisible(true);
-                jp_adminPOSsubPanel.add(ai);
+
+                add_product.setVisible(true);
+                jp_adminPOSsubPanel.add(add_product);
                 jp_adminPOSsubPanel.updateUI();
 
             } catch (Exception e) {
@@ -253,22 +255,24 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_bt_addproductActionPerformed
 
     private void bt_adddailyquantityMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adddailyquantityMouseMoved
-        // TODO add your handling code here:
+      
+         bt_adddailyquantity.setForeground(new Color(255, 87, 34));
+        
     }//GEN-LAST:event_bt_adddailyquantityMouseMoved
 
     private void bt_adddailyquantityMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_adddailyquantityMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_adddailyquantityMouseExited
-
+    jp_add_daily_qty add_daily_product = new jp_add_daily_qty();
     private void bt_adddailyquantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_adddailyquantityActionPerformed
 
         new Thread(() -> {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                jp_add_daily_qty ai = new jp_add_daily_qty();
-                ai.setVisible(true);
-                jp_adminPOSsubPanel.add(ai);
+
+                add_daily_product.setVisible(true);
+                jp_adminPOSsubPanel.add(add_daily_product);
                 jp_adminPOSsubPanel.updateUI();
 
             } catch (Exception e) {
@@ -279,22 +283,24 @@ public class jp_admin_posManagment_mainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_bt_adddailyquantityActionPerformed
 
     private void bt_finalproductbalanceMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_finalproductbalanceMouseMoved
-        // TODO add your handling code here:
+       
+         bt_finalproductbalance.setForeground(new Color(255, 87, 34));
+        
     }//GEN-LAST:event_bt_finalproductbalanceMouseMoved
 
     private void bt_finalproductbalanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_finalproductbalanceMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_finalproductbalanceMouseExited
-
+    jp_final_product_balance priduct_balance = new jp_final_product_balance();
     private void bt_finalproductbalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_finalproductbalanceActionPerformed
 
         new Thread(() -> {
             try {
                 jp_adminPOSsubPanel.removeAll();
                 jp_adminPOSsubPanel.setLayout(new FlowLayout());
-                jp_final_product_balance ai = new jp_final_product_balance();
-                ai.setVisible(true);
-                jp_adminPOSsubPanel.add(ai);
+
+                priduct_balance.setVisible(true);
+                jp_adminPOSsubPanel.add(priduct_balance);
                 jp_adminPOSsubPanel.updateUI();
 
             } catch (Exception e) {

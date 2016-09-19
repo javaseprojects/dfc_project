@@ -42,8 +42,6 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
         tf_invoice_no = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         lbl_tot_invoice = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        lbl_tot_invoice_qty = new javax.swing.JLabel();
         lbl_tot_invoices_amount = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -79,18 +77,6 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
         lbl_tot_invoice.setMaximumSize(new java.awt.Dimension(150, 40));
         lbl_tot_invoice.setMinimumSize(new java.awt.Dimension(150, 40));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Total Qty:");
-
-        lbl_tot_invoice_qty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbl_tot_invoice_qty.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_tot_invoice_qty.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_tot_invoice_qty.setText("0");
-        lbl_tot_invoice_qty.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lbl_tot_invoice_qty.setMaximumSize(new java.awt.Dimension(150, 40));
-        lbl_tot_invoice_qty.setMinimumSize(new java.awt.Dimension(150, 40));
-
         lbl_tot_invoices_amount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbl_tot_invoices_amount.setForeground(new java.awt.Color(255, 255, 255));
         lbl_tot_invoices_amount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -101,14 +87,14 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Amount:");
+        jLabel14.setText("Total Cost :");
 
         tb_invoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Invoice No", "Cost", "Date", "Qty"
+                "Invoice No", "Total", "Qty", "User"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -120,6 +106,12 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tb_invoice);
+        if (tb_invoice.getColumnModel().getColumnCount() > 0) {
+            tb_invoice.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tb_invoice.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tb_invoice.getColumnModel().getColumn(2).setPreferredWidth(20);
+            tb_invoice.getColumnModel().getColumn(3).setPreferredWidth(130);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -130,19 +122,17 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_tot_invoice_qty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -154,19 +144,15 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
                 .addComponent(tf_invoice_no, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(lbl_tot_invoice_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 17, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
+                    .addComponent(jLabel16)
+                    .addComponent(lbl_tot_invoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_tot_invoices_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,13 +173,11 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_tot_invoice;
-    private javax.swing.JLabel lbl_tot_invoice_qty;
     private javax.swing.JLabel lbl_tot_invoices_amount;
     private javax.swing.JTable tb_invoice;
     private javax.swing.JTextField tf_invoice_no;
@@ -271,48 +255,38 @@ public class jp_invoice_view_invoice extends javax.swing.JPanel {
     }
     //view all daily invoices
 
-    //view invoice details
-    private void viewDailyInvoiceDetails() {
-        if (tb_invoice.getRowCount() != 0) {
-            int totQty = 0;
-            double totCost = 0;
-            for (int x = 0; x < tb_invoice.getRowCount(); x++) {
-                totQty += Integer.parseInt((String) tb_invoice.getValueAt(x, 3));
-                totCost += Double.parseDouble((String) tb_invoice.getValueAt(x, 1));
-            }
-            lbl_tot_invoice.setText(tb_invoice.getRowCount() + "");
-            lbl_tot_invoice_qty.setText(totQty + "");
-            lbl_tot_invoices_amount.setText(totCost + "0");
-        } else {
-            lbl_tot_invoice.setText("0");
-            lbl_tot_invoice_qty.setText("0");
-            lbl_tot_invoices_amount.setText("00.00");
-        }
-
-    }
-    //view invoice details
-
     private void md_loadDailyInvoice() {
         try {
-            Date d=new Date();
-            SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-            String today_date = sdf.format(d);
-            ResultSet rs_invoice = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `invoice` WHERE invoice_date='"+today_date+"'");
+            String today_date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            ResultSet rs_invoice = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `invoice` WHERE invoice_date='" + today_date + "'");
             DefaultTableModel dtm_inv = (DefaultTableModel) tb_invoice.getModel();
             dtm_inv.setRowCount(0);
-            while (rs_invoice.next()) {
-                Vector v = new Vector();
-                v.add(rs_invoice.getString("invoice_no"));
-                v.add(rs_invoice.getString("total_amount"));
-                v.add(rs_invoice.getString("user_account_id"));
-                dtm_inv.addRow(v);
+            if (rs_invoice != null) {
+                while (rs_invoice.next()) {
+                    Vector v = new Vector();
+                    String invoiceNo=rs_invoice.getString("invoice_id");
+                    v.add(rs_invoice.getString("invoice_no"));
+                    v.add(rs_invoice.getDouble("total_amount") + "0");
+
+                    ResultSet getQty = MC_DB.search_dataQuery("SELECT SUM(qty) AS totQty FROM invoice_reg WHERE invoice_id='" + invoiceNo+ "'");
+                    if (getQty.next()) {
+                        v.add(getQty.getInt("totQty"));
+                    }
+                    ResultSet rs_user = MC_DB.search_dataQuery("SELECT username FROM user_account WHERE user_account_id='"+rs_invoice.getInt("user_account_id")+"'");
+                    if(rs_user.next()){
+                        v.add(rs_user.getString("username"));
+                    }
+
+                    dtm_inv.addRow(v);
+                }
+                lbl_tot_invoice.setText(dtm_inv.getRowCount() + "");
+                double cost = 0;
+                for (int i = 0; i < dtm_inv.getRowCount(); i++) {
+                    cost += Double.parseDouble(dtm_inv.getValueAt(i, 1).toString());
+                }
+                lbl_tot_invoices_amount.setText(cost + "0");
             }
-            if (!rs_invoice.next()) {
-                dtm_inv.setRowCount(0);
-                Vector v = new Vector();
-                v.add("No Invoice!");
-                dtm_inv.addRow(v);
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

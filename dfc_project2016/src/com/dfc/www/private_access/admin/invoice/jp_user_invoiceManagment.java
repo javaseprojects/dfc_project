@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
@@ -743,6 +751,13 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                     updateDailyStock();
                     JOptionPane.showMessageDialog(this, "Invoice Saved Successfully");
 //                    clearFieldsandLoadInitialData();
+                    
+                    String path="C:\\FSC\\dfc_invoicefinal.jrxml";
+                    //passing parmeter
+                    invoice_reportView(path, this.Invoice_No);
+                    
+                    //passing parmeter
+                    
                 }
 
             }
@@ -965,6 +980,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
 
                     if (!tf_qty.getText().isEmpty()) {
                         if (rs_itemtable.next()) {
+                            
                             try {
                                 //qty = Integer.parseInt(tf_qty.getText());
                                 //avb_qty = Integer.parseInt(lb_available_qty.getText());
@@ -1009,8 +1025,7 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
     ResultSet rs_load_item_name;
 
     public void md_loadItemName() {
-        try {
-            new Thread(() -> {
+        
                 try {
                     try {
                         rs_load_item_name = MC_DB.myConnection().createStatement().executeQuery("SELECT * FROM `item` i LEFT JOIN `stock_log` s ON i.`item_id`=s.`item_id` WHERE i.`item_code`='" + tf_item_code.getText() + "' AND s.`stock_date`='" + User_Home.lb_v_date.getText() + "'");
@@ -1032,10 +1047,6 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
-            }).start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     //......................item name loade from jlist - end.................................................
 
@@ -1325,6 +1336,25 @@ public class jp_user_invoiceManagment extends javax.swing.JPanel {
         lb_balance.setText("");
         this.Invoice_No = "";
         getInvoiceNo();
+    }
+    private void invoice_reportView(String rp_parth, String invoice_no) {
+
+        try {
+            JasperReport jp = JasperCompileManager.compileReport(rp_parth);
+            System.out.println("===========jasper report compiled successfully==========");
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            map.put("para_invoiceNumber", invoice_no);
+            
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jp, map, MC_DB.myConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+            JRViewer v = new JRViewer(jasperPrint);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
