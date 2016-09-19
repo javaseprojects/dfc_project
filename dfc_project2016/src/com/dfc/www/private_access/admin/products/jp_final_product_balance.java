@@ -18,6 +18,7 @@ import javax.xml.transform.Result;
 public class jp_final_product_balance extends javax.swing.JPanel {
 
     String date;
+    DefaultTableModel dtm;
 
     public jp_final_product_balance() {
         initComponents();
@@ -81,11 +82,11 @@ public class jp_final_product_balance extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item Code", "Product name", "Quantity Added", "Balance"
+                "Item Code", "Product name", "Unit Price", "Quantity Added", "Balance"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -99,6 +100,11 @@ public class jp_final_product_balance extends javax.swing.JPanel {
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
         jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
         jPanel1.add(jDateChooser1);
         jDateChooser1.setBounds(30, 50, 300, 40);
 
@@ -228,7 +234,27 @@ public class jp_final_product_balance extends javax.swing.JPanel {
     }//GEN-LAST:event_btnupdate_piceActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
+        DefaultTableModel dtm_qty = (DefaultTableModel) tbl_product.getModel();
+        dtm_qty.setRowCount(0);
+        try {
+            String dataQuery = "SELECT * FROM stock_log sl LEFT JOIN invoice_reg ir ON sl.`item_id`=ir.`item_id` LEFT JOIN item i ON i.`item_id`=ir.`item_id` WHERE sl.`stock_date`='" + today + "'";
+            ResultSet rs = MC_DB.search_dataQuery(dataQuery);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("i.item_code"));
+                v.add(rs.getString("i.item_name"));
+                v.add(rs.getString("i.selling_price"));
+                v.add(getSoldQty(rs.getString("i.item_code")) + getStockLogQty(rs.getString("i.item_code")));
+                v.add(getStockLogQty(rs.getString("i.item_code")));
+                dtm_qty.addRow(v);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txt_itemcodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemcodeKeyReleased
@@ -308,6 +334,30 @@ public class jp_final_product_balance extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txt_new_selling_priceKeyReleased
 
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
+        DefaultTableModel dtm_qty = (DefaultTableModel) tbl_product.getModel();
+        dtm_qty.setRowCount(0);
+        try {
+            String dataQuery = "SELECT * FROM stock_log sl LEFT JOIN invoice_reg ir ON sl.`item_id`=ir.`item_id` LEFT JOIN item i ON i.`item_id`=ir.`item_id` WHERE sl.`stock_date`='" + today + "'";
+            ResultSet rs = MC_DB.search_dataQuery(dataQuery);
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("i.item_code"));
+                v.add(rs.getString("i.item_name"));
+                v.add(rs.getString("i.selling_price"));
+                v.add(getSoldQty(rs.getString("i.item_code")) + getStockLogQty(rs.getString("i.item_code")));
+                v.add(getStockLogQty(rs.getString("i.item_code")));
+                dtm_qty.addRow(v);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnupdate_pice;
@@ -376,6 +426,38 @@ public class jp_final_product_balance extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private int getSoldQty(String itemCode) {
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
+        try {
+            String dataQuery = "SELECT SUM(ir.qty) AS sumSOLD FROM invoice i LEFT JOIN `invoice_reg` ir ON i.`invoice_id`=ir.`invoice_id` LEFT JOIN item it ON it.`item_id`=ir.`item_id` WHERE i.`invoice_date`='" + today + "' AND it.`item_code`='" + itemCode + "'";
+            ResultSet rs = MC_DB.myConnection().createStatement().executeQuery(dataQuery);
+            if (rs.next()) {
+                return rs.getInt("sumSOLD");
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    private int getStockLogQty(String ItemCode) {
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
+        try {
+            String dataQuery = "SELECT sl.qty FROM stock_log sl LEFT JOIN item i ON sl.`item_id`=i.`item_id` WHERE sl.`stock_date`='" + today + "' AND i.`item_code`='" + ItemCode + "'";
+            ResultSet rs = MC_DB.search_dataQuery(dataQuery);
+            if (rs.next()) {
+                return rs.getInt("sl.qty");
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
